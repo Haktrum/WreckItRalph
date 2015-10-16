@@ -1,26 +1,14 @@
 package juego;
 
-import juego.Contexto.Direccion;
+import juego.Direccion;
 
 public class Posicion {
 	private int x;
 	private int y;
 	
 	public void go(Direccion dir){
-		switch(dir){
-			case UP:
-				y++;
-			break;
-			case LEFT:
-				x--;
-			break;
-			case DOWN:
-				y--;
-			break;
-			case RIGHT:
-				x++;
-			break;
-		}
+		this.x += dir.getX();
+		this.y += dir.getY();
 	}
 	
 	public int getX() {
@@ -42,5 +30,9 @@ public class Posicion {
 	public Posicion(int x, int y){
 		this.x = x;
 		this.y = y;
+	}
+	
+	public Posicion potencial(Direccion dir) {
+		return new Posicion(x + dir.getX(), y + dir.getY());
 	}
 }
