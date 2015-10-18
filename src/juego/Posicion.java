@@ -15,24 +15,30 @@ public class Posicion {
 		return x;
 	}
 
-	public void setX(int x) {
-		this.x = x;
-	}
-
 	public int getY() {
 		return y;
 	}
 
-	public void setY(int y) {
-		this.y = y;
-	}
-	
 	public Posicion(int x, int y){
 		this.x = x;
 		this.y = y;
 	}
 	
+	public Posicion(Posicion pos) {
+		this(pos.x, pos.y);
+	}
+	
 	public Posicion potencial(Direccion dir) {
 		return new Posicion(x + dir.getX(), y + dir.getY());
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Posicion) {
+			Posicion p = (Posicion) o;
+			return x == p.x && y == p.y;
+		}
+		return false;
+	}
+
 }

@@ -2,6 +2,7 @@ package juego;
 
 import java.util.Random;
 
+import personajes.Chocable;
 import personajes.Felix;
 import personajes.Ralph;
 import ambiente.Seccion;
@@ -11,23 +12,27 @@ public class Contexto {
 	private Seccion seccionActual;
 	private Felix felix;
 	private int puntaje = 0;
-	private Actualizable[] actualizables = new Actualizable[50];
+	private Lista<Actualizable> actualizables = new Lista<>(80);
 	private int cantActualizables = 0;
 	private Ralph ralph;
-	public static int NIVEL = 10;
+	public static int NIVEL = 1;
 	public static Contexto ctx;
 	
 	public Contexto(){
 		ctx = this;
-		felix = new Felix(this);
-		ralph = new Ralph(this);
+	}
+	public void empezarJuego() {
 		reiniciarNivel();
+		felix = new Felix();
+		ralph = new Ralph();
 	}
 	public void ganarSeccion() {
 		int parte = this.seccionActual.getParte();
 		if (parte < 2) {
+			System.out.println("Ganaste la seccion!");
 			this.seccionActual = new Seccion(parte + 1);
 		} else {
+			System.out.println("Ganaste el nivel!");
 			ganarNivel();
 		}
 	}
@@ -45,6 +50,9 @@ public class Contexto {
 	}
 	public void agregarPuntos(int puntaje) {
 		this.puntaje += puntaje;
+		if (puntaje > 0) {
+			System.out.println("Puntaje: " + this.puntaje);
+		}
 	}
 	public static boolean randomBoolean(int p) { //probabilidad de true
 		Random gen = new Random();
@@ -85,30 +93,17 @@ public class Contexto {
 		return puntaje;
 	}
 	public void agregarActualizable(Actualizable a) {
-		if (cantActualizables < actualizables.length) {
-			actualizables[cantActualizables++] = a;
-		}
+		actualizables.agregar(a);
 	}
 	public void eliminarActualizable(Actualizable a) {
-		int i = 0;
-		while (i < cantActualizables && i < actualizables.length) {
-			if (actualizables[i] == a) {
-				break;
-			}
-		}
-		while (i < cantActualizables && i < actualizables.length) {
-			actualizables[i] = actualizables[i + 1];
-			i++;
-		}
-		if (i == actualizables.length) {
-			actualizables[i] = null;
-		}
+		actualizables.eliminar(a);
 	}
 	public void actualizar() {
-		for (int i = 0; i < cantActualizables; i++) {
-			actualizables[i].actualizar();
-			if (actualizables[i] instanceof Chocable) {
-				((Chocable) actualizables[i]).chequearChoque(felix);
+		for (Actualizable a : actualizables) {
+			if (a == null) continue;
+			a.actualizar();
+			if (a instanceof Chocable) {
+				((Chocable) a).chequearChoque(felix);
 			}
 		}
 	}

@@ -47,7 +47,11 @@ public class Seccion implements Actualizable{
 		return parte;
 	}
 	public int arreglarVentana(Posicion pos){
-		return VentanaEn(pos).arreglar();
+		int puntos = VentanaEn(pos).arreglar();
+		if (puntos == 500) {
+			ventRotas--;
+		}
+		return puntos;
 	}
 	public Ventana VentanaEn(Posicion pos){
 		return VentanaEn(pos.getX(), pos.getY());
@@ -66,7 +70,7 @@ public class Seccion implements Actualizable{
 	public void romperTodas(){
 		for(int j = 0;j<ROWS;j++){
 			for(int i = 0;i<COLS;i++){
-				VentanaEn(i,j).romper();	
+				ventRotas += VentanaEn(i,j).romper();	
 			}
 		}
 	}
@@ -75,12 +79,8 @@ public class Seccion implements Actualizable{
 	}
 	@Override
 	public void actualizar(){
-		int aux = 0;
-		for(int j = 0;j<=ROWS;j++){
-			for(int i = 0;i<=COLS;i++){
-				if(VentanaEn(i,j).getRoto()>0) aux++;
-			}
+		if (ventRotas == 0) {
+			Contexto.ctx.ganarSeccion();
 		}
-		this.ventRotas = aux;
 	}
 }

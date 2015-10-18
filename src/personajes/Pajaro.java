@@ -1,14 +1,11 @@
 package personajes;
 
-import juego.Chocable;
-import juego.Contexto;
 import juego.Direccion;
 import juego.Posicion;
 
 public class Pajaro extends Chocable {
-	public Pajaro(Posicion pos, Contexto ctx) {
-		super(pos, ctx);
-		// TODO Auto-generated constructor stub
+	public Pajaro(Posicion pos) {
+		super(pos);
 	}
 
 	private Direccion dir;

@@ -1,40 +1,41 @@
 package personajes;
 
 import juego.Actualizable;
-import juego.Chocable;
 import juego.Direccion;
 import juego.Posicion;
 import juego.Contexto;
 
 public class Felix implements Actualizable {
-	private Contexto ctx;
 	private int timerInvulnerable;
 	private Posicion pos;
 	private int vidas = 3;
 	
-	public Felix(Contexto juego){
-		this.ctx = juego;
+	public Felix(){
 		this.pos = new Posicion(0,0);
 	}
 	
 	public void mover(Direccion dir){
-		if(ctx.getSeccionActual().puedoIr(pos, dir)){
-			ctx.getSeccionActual().VentanaEn(pos).felixesta=false;
+		if(Contexto.ctx.getSeccionActual().puedoIr(pos, dir)){
+			Contexto.ctx.getSeccionActual().VentanaEn(pos).felixesta=false;
 			pos.go(dir);
+			System.out.println("Felix se mueve hacia " + dir.getNombre());
+		} else {
+			System.out.println("Camino bloqueado hacia " + dir.getNombre());
 		}
-		ctx.getSeccionActual().VentanaEn(pos).felixesta=true;
+		Contexto.ctx.getSeccionActual().VentanaEn(pos).felixesta=true;
 	}
 	
 	public void arreglarVentana(){
-		int p = ctx.getSeccionActual().arreglarVentana(pos);
-		ctx.agregarPuntos(p);
+		System.out.println("Felix martilla la ventana");
+		int p = Contexto.ctx.getSeccionActual().arreglarVentana(pos);
+		Contexto.ctx.agregarPuntos(p);
 	}
 	@Override
 	public void actualizar() {
 		if (timerInvulnerable > 0) {
 			timerInvulnerable--;
 		}
-		if (ctx.getSeccionActual().VentanaEn(pos).comerPastel()) {
+		if (Contexto.ctx.getSeccionActual().VentanaEn(pos).comerPastel()) {
 			hacerInvulnerable();
 		}
 	}
@@ -48,7 +49,8 @@ public class Felix implements Actualizable {
 	public void chocar(Chocable c) {
 		if (c.getClass() == Ladrillo.class) {
 			vidas--;
-			ctx.reiniciarNivel();
+			Contexto.ctx.reiniciarNivel();
+			System.out.println("A Felix le cae un ladrillo");
 		}
 		pos = new Posicion(0, 0);
 	}

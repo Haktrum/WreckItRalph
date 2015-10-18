@@ -38,11 +38,17 @@ public class Ventana implements Actualizable {
 		return this.roto; 
 	}
 	public int arreglar(){
+		if (this.roto == 0) return 0;
+		System.out.println("Arreglando ventana");
 		this.roto--;
-		if(this.roto==0)
+		if(this.roto==0) {
+			System.out.println("Ventana arreglada");
 			return 500;
-		if((this.roto % 2)==0)
+		}
+		if((this.roto % 2)==0) {
+			System.out.println("Panel arreglado");
 			return 100;
+		}
 		return 0;
 	}
 	public boolean puedoMoverHacia(Direccion dir) {
@@ -58,17 +64,21 @@ public class Ventana implements Actualizable {
 		}
 		return false;
 	}
-	public void romper() {
+	public int romper() {
 		Random random = new Random();
 		int r = random.nextInt(100);
 		double sum = 0;
-		for (int i = 0; i < tipo.paneles; i++) {
-			sum += 100D / Math.pow(2, i + 1) * (1 - (Contexto.NIVEL - 1) * .15);
+		int i;
+		for (i = 0; i <= tipo.paneles; i++) {
+			sum += 100D / Math.pow(2, i + 1) * (1 - (Math.min(Contexto.NIVEL, 7) - 1) * .15);
 			if (r < sum) {
 				this.roto = i * 2;
 				break;
 			}
 		}
+		if (i == tipo.paneles) roto = i * 2;
+		//System.out.println("Ventana con roto = " + roto);
+		return roto > 0 ? 1 : 0;
 	}
 	@Override
 	public String toString(){

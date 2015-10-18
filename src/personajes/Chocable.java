@@ -1,14 +1,15 @@
-package juego;
+package personajes;
 
-import personajes.Felix;
+import juego.Actualizable;
+import juego.Contexto;
+import juego.Direccion;
+import juego.Posicion;
 
 public abstract class Chocable implements Actualizable {
 	private Posicion pos;
-	Contexto ctx;
-	public Chocable(Posicion pos, Contexto ctx) {
+	public Chocable(Posicion pos) {
 		this.pos = pos;
-		this.ctx = ctx;
-		ctx.agregarActualizable(this);
+		Contexto.ctx.agregarActualizable(this);
 	}
 	public void chequearChoque(Felix felix) {
 		if (pos.equals(felix.getPos())) {
@@ -18,7 +19,7 @@ public abstract class Chocable implements Actualizable {
 	protected void mover(Direccion dir) {
 		pos.go(dir);
 		if (dir == Direccion.ABAJO && pos.getY() < 0) {
-			ctx.eliminarActualizable(this);
+			Contexto.ctx.eliminarActualizable(this);
 		}
 	}
 	public Posicion getPos() {
