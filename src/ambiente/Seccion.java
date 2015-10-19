@@ -1,8 +1,10 @@
 package ambiente;
 
 
+import ambiente.Ventana.Tipo;
 import juego.Actualizable;
 import juego.Contexto;
+import juego.Direccion;
 import juego.Posicion;
 
 public class Seccion implements Actualizable{
@@ -19,49 +21,56 @@ public class Seccion implements Actualizable{
 		mapa = new Ventana[ROWS][COLS];
 		for(int j = 0;j<ROWS;j++){
 			for(int i = 0;i<COLS;i++){
+				if (i == 2 && (j == 0 || j == 1)) continue;
 				if(Contexto.randomBoolean(5)){
-					mapa[j][i] = new DobleHoja();
+					mapa[j][i] = new Ventana(Tipo.DOSHOJAS);
 				}else{
-					mapa[j][i] = new Comun();
+					mapa[j][i] = new Ventana(Tipo.COMUN);
 				}
 			}
 		}
 		if(parte==1){
-			mapa[0][2] = new Puerta();	
-			mapa[1][2] = new SemiCircular();
+			mapa[0][2] = new Ventana(Tipo.PUERTA);
+			mapa[1][2] = new Ventana(Tipo.SEMICIRCULAR);
 		}
 	}
 	public void imprimir(){
 		for(int j = ROWS-1;j>=0;j--){
 			System.out.println("---------------------------------------------");
 			for(int i = COLS-1;i>=0;i--){
-				System.out.print(mapa[j][i].toString());
+				System.out.print(VentanaEn(i, j).toString());
 			}
 			System.out.println();
 		}
 	}
+	public int getParte() {
+		return parte;
+	}
 	public int arreglarVentana(Posicion pos){
-		return VentanaEn(pos).arreglar();
+		int puntos = VentanaEn(pos).arreglar();
+		if (puntos == 500) {
+			ventRotas--;
+		}
+		return puntos;
 	}
 	public Ventana VentanaEn(Posicion pos){
-		return mapa[pos.getY()][pos.getX()];
+		return VentanaEn(pos.getX(), pos.getY());
 	}
-	public boolean puedoIr(Posicion pos, Posicion nueva){
+	private Ventana VentanaEn(int x, int y) {
+		return mapa[y][x];
+	}
+	public boolean puedoIr(Posicion pos, Direccion dir) {
+		Posicion nueva = pos.potencial(dir);
+		Direccion opuesta = dir.opuesta();
 		if(nueva.getX()<0 || nueva.getX()>COLS) return false;
 		if(nueva.getY()<0 || nueva.getY()>ROWS) return false;
-		int dir_y = nueva.getY()-pos.getY();
-		if(dir_y==1 && VentanaEn(pos).tieneMoldura()) return false;
-		if(dir_y==-1 && VentanaEn(pos).tieneMacetero()) return false;
-		int dir_x = nueva.getX() - pos.getX();
-		if(dir_x==1 && (VentanaEn(pos).tieneHojaDer() || VentanaEn(nueva).tieneHojaIzq())) return false;
-		if(dir_x==-1 && (VentanaEn(pos).tieneHojaIzq() || VentanaEn(nueva).tieneHojaDer())) return false;
-		
-		return true;
+		return VentanaEn(pos).puedoMoverHacia(dir) &&
+				VentanaEn(nueva).puedoMoverHacia(opuesta);
 	}
 	public void romperTodas(){
 		for(int j = 0;j<ROWS;j++){
 			for(int i = 0;i<COLS;i++){
-				VentanaEn(new Posicion(i,j)).romper();	
+				ventRotas += VentanaEn(i,j).romper();	
 			}
 		}
 	}
@@ -70,12 +79,8 @@ public class Seccion implements Actualizable{
 	}
 	@Override
 	public void actualizar(){
-		int aux = 0;
-		for(int j = 0;j<=ROWS;j++){
-			for(int i = 0;i<=COLS;i++){
-				if(VentanaEn(new Posicion(i,j)).getRoto()>0) aux++;
-			}
+		if (ventRotas == 0) {
+			Contexto.ctx.ganarSeccion();
 		}
-		this.ventRotas = aux;
 	}
 }
