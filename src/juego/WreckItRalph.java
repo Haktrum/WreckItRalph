@@ -5,7 +5,7 @@ import personajes.Ladrillo;
 
 public class WreckItRalph {
 	private Highscore highscore = new Highscore();
-	private Contexto contexto = new Contexto();
+	private Contexto contexto = Contexto.getContexto();
 	private Jugador jugador;
 	private static WreckItRalph wreckItRalph;
 	
@@ -14,34 +14,12 @@ public class WreckItRalph {
 	}
 
 	private WreckItRalph() {
-		//jugador = new Jugador();
 		contexto.empezarJuego();
-		bucleConsola();
 	}
 	
-	private void bucleConsola() {
-		Direccion movimiento[] = {
-				Direccion.DERECHA, Direccion.DERECHA, Direccion.DERECHA, Direccion.DERECHA,
-				Direccion.ARRIBA,
-				Direccion.IZQUIERDA, Direccion.IZQUIERDA, Direccion.IZQUIERDA, Direccion.IZQUIERDA,
-				Direccion.ARRIBA,
-				Direccion.DERECHA, Direccion.DERECHA, Direccion.DERECHA, Direccion.DERECHA
-		};
-		Felix felix = contexto.getFelix();
-		for (Direccion d : movimiento) {
-			contexto.actualizar();
-			if (felix.getVidas() == 0) {
-				break;
-			}
-			felix.mover(d);
-			felix.arreglarVentana();
-			felix.arreglarVentana();
-			felix.arreglarVentana();
-			felix.arreglarVentana();
-		}
-		new Ladrillo(felix.getPos());
-		contexto.actualizar();
-		System.out.println("Puntaje final: " + contexto.getPuntaje());
+	public static void guardarPuntaje(int p){
+		wreckItRalph.jugador = new Jugador();
+		wreckItRalph.jugador.setPuntaje(p);
+		wreckItRalph.highscore.agregarJugador(wreckItRalph.jugador);
 	}
-
 }

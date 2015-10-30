@@ -1,7 +1,10 @@
 package juego;
 
 import java.util.Scanner;
-
+/**
+ * Modela un jugador del juego
+ *
+ */
 public class Jugador implements Comparable<Jugador> {
 	private final String nombre;
 	private int puntaje;
@@ -12,7 +15,9 @@ public class Jugador implements Comparable<Jugador> {
 		nombre = scanner.nextLine();
 		scanner.close();
 	}
-
+	/**
+	 * Compara dos jugadores por su puntaje
+	 */
 	@Override
 	public int compareTo(Jugador o) {
 		return puntaje - o.puntaje;

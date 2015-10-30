@@ -1,7 +1,10 @@
 package juego;
 
 import juego.Direccion;
-
+/**
+ * Modela una posici&oacute; dentro del juego
+ *
+ */
 public class Posicion {
 	private int x;
 	private int y;
@@ -27,7 +30,12 @@ public class Posicion {
 	public Posicion(Posicion pos) {
 		this(pos.x, pos.y);
 	}
-	
+	/**
+	 * Da la posici&oacute;n resultante de moverse
+	 * en una dada direcci&oacute;
+	 * @param dir Direcci&oacute;on de movimiento
+	 * @return	Posici&oacute;n siguiente
+	 */
 	public Posicion potencial(Direccion dir) {
 		return new Posicion(x + dir.getX(), y + dir.getY());
 	}
