@@ -1,4 +1,6 @@
-package juego;
+package control;
+
+import utils.Utils;
 
 	/**
 	 * Maneja los 10 puntajes m&aacute;s

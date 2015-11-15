@@ -1,4 +1,4 @@
-package juego;
+package control;
 
 import java.util.Scanner;
 /**
@@ -9,7 +9,7 @@ public class Jugador implements Comparable<Jugador> {
 	private final String nombre;
 	private int puntaje;
 	
-	Jugador() {
+	public Jugador() {
 		System.out.print("Ingrese su nombre: ");
 		Scanner scanner = new Scanner(System.in);
 		nombre = scanner.nextLine();

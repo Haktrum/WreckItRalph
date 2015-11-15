@@ -1,9 +1,10 @@
 package personajes;
 
-import juego.Direccion;
 import juego.Nivel;
-import juego.Posicion;
-import juego.Utils;
+import utils.Direccion;
+import utils.Evento;
+import utils.Posicion;
+import utils.Utils;
 /**
  * Modela un ladrillo del juego
  *
@@ -17,7 +18,7 @@ public class Ladrillo extends Chocable {
 	 * El ladrillo cae
 	 */
 	@Override
-	public void actualizar() {
+	public void actualizar() throws Evento{
 		super.mover(Direccion.ABAJO);
 	}
 }

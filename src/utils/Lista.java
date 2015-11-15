@@ -1,4 +1,4 @@
-package juego;
+package utils;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -19,7 +19,7 @@ public class Lista<T> implements Iterable<T> {
 	 * @param max m&aacute;xima cantidad de elementos
 	 */
 	@SuppressWarnings("unchecked")
-	Lista(int max) {
+	public Lista(int max) {
 		arr = (T[]) new Object[max];
 		cant = 0;
 	}

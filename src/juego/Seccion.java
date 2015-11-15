@@ -1,19 +1,19 @@
-package ambiente;
+package juego;
 
 
-import ambiente.Ventana.Tipo;
-import juego.Actualizable;
-import juego.Contexto;
-import juego.Direccion;
-import juego.Nivel;
-import juego.Posicion;
-import juego.Utils;
+import utils.Actualizable;
+import utils.Direccion;
+import utils.Evento;
+import utils.Evento.EventoID;
+import utils.Posicion;
+import utils.Utils;
+import juego.Ventana.Tipo;
 
 /**
  * Modela una secci&oacute;n del juego
  *
  */
-public class Seccion implements Actualizable{
+public class Seccion{
 	
 	/** N&uacute;mero de ventanas en un piso */
 	private final int COLS = Utils.numCols;
@@ -30,19 +30,24 @@ public class Seccion implements Actualizable{
 	/**
 	 * Crea una secci&oacute;n de ROWS pisos y COLS ventanas por piso
 	 */
-	public Seccion(){
+	
+	private int nroSeccion;
+	
+	public Seccion(int nro){
 		mapa = new Ventana[ROWS][COLS];
+		this.nroSeccion = nro;
 		int medio = (int) ((COLS-1) / 2);
 		for(int j = 0;j<ROWS;j++){
 			for(int i = 0;i<COLS;i++){
 				if (i == medio && (j == 0 || j == 1)) continue;
-				if(Contexto.getContexto().randomBoolean(Utils.probDosHojas)){
+				if(Utils.randomBoolean(Utils.probDosHojas)){
 					mapa[j][i] = new Ventana(Tipo.DOSHOJAS);
 				}else{
 					mapa[j][i] = new Ventana(Tipo.COMUN);
 				}
 			}
 		}
+		romperTodas();
 	}
 	/**
 	 * Crea ventanas semicirculares en​
@@ -50,8 +55,9 @@ public class Seccion implements Actualizable{
 	 * del primer piso
 	 */
 	public void puertaYBalcon(){
-		mapa[0][2] = new Ventana(Tipo.PUERTA);
-		mapa[1][2] = new Ventana(Tipo.SEMICIRCULAR);
+		int medio = (int) ((COLS-1) / 2);
+		mapa[0][medio] = new Ventana(Tipo.PUERTA);
+		mapa[1][medio] = new Ventana(Tipo.SEMICIRCULAR);
 	}
 	public void imprimir(){
 		for(int j = ROWS-1;j>=0;j--){
@@ -111,10 +117,10 @@ public class Seccion implements Actualizable{
 	/**
 	 * Rompe o no, los paneles de cada ventana de la secci&oacute;n 
 	 */
-	public void romperTodas(){
+	private void romperTodas(){
 		for(int j = 0;j<ROWS;j++){
 			for(int i = 0;i<COLS;i++){
-				ventRotas += ventanaEn(i,j).romper();	
+				//ventRotas += ventanaEn(i,j).romper();	
 			}
 		}
 	}
@@ -126,14 +132,15 @@ public class Seccion implements Actualizable{
 	public int getVentanasRotas(){
 		return ventRotas;
 	}
-	/**
-	 * Gana la secci&oacute;n en caso de que est&eacute;n
-	 * todas las ventanas arregladas
-	 */
-	@Override
-	public void actualizar(){
-		if (ventRotas == 0) {
-			Nivel.getNivel().ganarSeccion();
+	public void ganarSeccion() throws Evento{
+		if(this.nroSeccion==Utils.maxSeccion){
+			throw new Evento(EventoID.GANANIVEL);
+		}else{
+			this.nroSeccion++;
+			throw new Evento(EventoID.GANASECCION);
 		}
+	}
+	public int getNro(){
+		return this.nroSeccion;
 	}
 }

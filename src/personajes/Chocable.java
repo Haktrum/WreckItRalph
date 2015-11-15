@@ -1,10 +1,20 @@
 package personajes;
 
-import juego.Actualizable;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import juego.Contexto;
-import juego.Direccion;
 import juego.Nivel;
-import juego.Posicion;
+
+import utils.Actualizable;
+import utils.Direccion;
+import utils.Evento;
+import utils.Evento.EventoID;
+import utils.Posicion;
+import utils.Utils;
 
 /**
  * Modela los atributos y comportamientos
@@ -12,20 +22,23 @@ import juego.Posicion;
  *
  */
 public abstract class Chocable implements Actualizable {
-	private Posicion pos;
+	protected Posicion pos;
 	
 	private int subPos = 1;
 	private int subGrillas;
+	
+	private Image img;
+	private boolean toogle = false;
+	
 	public Chocable(Posicion pos,int v) {
 		this.pos = pos;
-		this.subGrillas = Nivel.dificultar(v, false);
-		Contexto.getContexto().agregarActualizable(this);
+		this.subGrillas = Utils.dificultar(v, false);
 	}
 	/**
 	 * Verifica el choque de dos elementos
 	 * @param felix objeto a chocar
 	 */
-	public void chequearChoque(Felix felix) {
+	public void chequearChoque(Felix felix) throws Evento{
 		if (pos.equals(felix.getPos())) {
 			felix.chocar(this);
 		}
@@ -36,11 +49,11 @@ public abstract class Chocable implements Actualizable {
 	 * para variar la velocidad de los objetos
 	 * @param dir Direcci&oacute;n a moverse
 	 */
-	protected void mover(Direccion dir) {
+	protected void mover(Direccion dir) throws Evento{
 		if(subPos==subGrillas){
 			pos.go(dir);
 			if (dir == Direccion.ABAJO && pos.getY() < 0) {
-				Contexto.getContexto().eliminarActualizable(this);
+				throw new Evento(EventoID.OFF_SCREEN,this);
 			}
 			subPos=1;
 		}else{
@@ -49,5 +62,25 @@ public abstract class Chocable implements Actualizable {
 	}
 	public Posicion getPos() {
 		return pos;
+	}
+	public void setPos(Posicion pos){
+		this.pos = new Posicion(pos);
+	}
+	protected void setImage(String url1,String url2){
+		String res;
+		if(toogle){
+			res =url1;
+		}else{
+			res=url2;
+		}
+		toogle = !toogle;
+		try {
+			img = ImageIO.read(new File(res));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public Image getImage(){
+		return this.img;
 	}
 }

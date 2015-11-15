@@ -1,6 +1,5 @@
-package juego;
+package utils;
 
-import juego.Direccion;
 /**
  * Modela una posici&oacute; dentro del juego
  *
@@ -47,6 +46,10 @@ public class Posicion {
 			return x == p.x && y == p.y;
 		}
 		return false;
+	}
+	
+	public Posicion inPx(){
+		return new Posicion(x*20,600+y*20);
 	}
 
 }

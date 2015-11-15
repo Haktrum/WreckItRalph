@@ -1,4 +1,4 @@
-package juego;
+package utils;
 
 	/**
 	 * Modela las direcciones

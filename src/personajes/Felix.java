@@ -1,65 +1,50 @@
 package personajes;
 
-import juego.Actualizable;
-import juego.Direccion;
-import juego.Nivel;
-import juego.Posicion;
 import juego.Contexto;
-import juego.Utils;
+import juego.Nivel;
+import utils.Actualizable;
+import utils.Direccion;
+import utils.Evento;
+import utils.Evento.EventoID;
+import utils.Posicion;
+import utils.Utils;
 
 /**
  * Modela al personaje F&eacute;lix del juego
  *
  */
-public class Felix implements Actualizable {
+public class Felix extends Chocable{
 	/** Tiempo de invulnerabilidad restante */
 	private int timerInvulnerable;
 	/** Posici&oacute; de F&eacute;lix */
-	private Posicion pos;
 	/** Vidas restantes */
 	private int vidas = Utils.vidasPorNivel;
 	
 	public Felix(){
-		this.pos = new Posicion(0,0);
+		super(new Posicion(0,0),0);
+		//super.setImage("res/img/felix/slice_65_65.png", "res/img/felix/slice_67_67.png");
 	}
 	/**
 	 * Se mueve dentro de la secci&oacute;n si es posible
 	 * @param dir Direcci&oacute; de movimiento
 	 */
+	@Override
 	public void mover(Direccion dir){
-		if(Nivel.getNivel().getSeccion().puedoIr(pos, dir)){
-			Nivel.getNivel().getSeccion().ventanaEn(pos).felixEsta(false);
-			pos.go(dir);
-			System.out.println("Felix se mueve hacia " + dir.getNombre());
-		} else {
-			System.out.println("Camino bloqueado hacia " + dir.getNombre());
-		}
-		Nivel.getNivel().getSeccion().ventanaEn(pos).felixEsta(true);
-	}
-	/**
-	 * Martilla la ventana
-	 */
-	public void arreglarVentana(){
-		System.out.println("Felix martilla la ventana");
-		int p = Nivel.getNivel().getSeccion().arreglarVentana(pos);
-		Contexto.getContexto().agregarPuntos(p);
+		super.pos.go(dir);
 	}
 	/**
 	 * Actualiza el tiempo de invulnerabilidad
 	 */
 	@Override
-	public void actualizar() {
+	public void actualizar(){
 		if (timerInvulnerable > 0) {
 			timerInvulnerable--;
-		}
-		if (Nivel.getNivel().getSeccion().ventanaEn(pos).comerPastel()) {
-			hacerInvulnerable();
 		}
 	}
 	/**
 	 * Lo hace invulnerable
 	 */
-	public void hacerInvulnerable() {
+	private void hacerInvulnerable() {
 		timerInvulnerable = Utils.tiempoInvulnerable;
 	}
 	/**
@@ -73,27 +58,24 @@ public class Felix implements Actualizable {
 	 * Simula un choque con un objeto
 	 * @param c Objeto a chocar
 	 */
-	public void chocar(Chocable c) {
-		if (c.getClass() == Ladrillo.class) {
-			Nivel.getNivel().reiniciar();		
-			pos = new Posicion(0, 0);
-			System.out.println("A Felix le cae un ladrillo");
+	public void chocar(Chocable c) throws Evento{
+		if(!this.esInvulnerable()){
+			if (c.getClass() == Ladrillo.class) {
+				vidas--;
+				if(vidas==0){
+					throw new Evento(EventoID.TERMINAJUEGO);
+				}
+				this.setPos(new Posicion(0,0));
+			}
+			if (c.getClass() == Pajaro.class) {
+				vidas--;
+				if(vidas==0){
+					throw new Evento(EventoID.TERMINAJUEGO);
+				}
+			}
 		}
-		if (c.getClass() == Pajaro.class) {
-			//un pajaro
+		if(c.getClass() == Pastel.class){
+			this.hacerInvulnerable();
 		}
-		perderVida();
-	}
-	/**
-	 * Pierde una vida. En caso de ser la &uacute;ltima, termina el juego
-	 */
-	private void perderVida(){
-		vidas--;
-		if(vidas==0){
-			Contexto.getContexto().terminarJuego();
-		}
-	}
-	public Posicion getPos() {
-		return pos;
 	}
 }

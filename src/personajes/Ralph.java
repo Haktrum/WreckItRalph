@@ -1,70 +1,63 @@
 package personajes;
 
-import juego.Posicion;
 
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
+import javax.imageio.ImageIO;
 
-import juego.Actualizable;
 import juego.Contexto;
-import juego.Direccion;
 import juego.Nivel;
-import juego.Utils;
+
+import utils.Actualizable;
+import utils.Direccion;
+import utils.Evento;
+import utils.Evento.EventoID;
+import utils.Posicion;
+import utils.Utils;
+
+
+
 /**
  * Modela al personaje Ralph del juego
  */
-public class Ralph implements Actualizable {
+public class Ralph extends Chocable {
 	
-	/** Posici&oacute;n de Ralph */
-	private Posicion pos;
 	/** Ladrillos iniciales que posee Ralph */
 	private int ladrillosRestantes = Utils.ladrillosRalph;
 	
+	
 	public Ralph(){
-		this.ladrillosRestantes = Nivel.dificultar(this.ladrillosRestantes,true);
-		Contexto.getContexto().agregarActualizable(this);
-		empezar();
+		super(new Posicion(0,Utils.numPisos),0);
+		this.ladrillosRestantes = Utils.dificultar(this.ladrillosRestantes,true);
 	}
-	/** Posiciona a Ralph y rompe las ventanas */
-	private void empezar() {
-		pos = new Posicion(0, Utils.numPisos);
-		romperVentanas();
-	}
-	/**
-	 * Rompe las ventanas
-	 */
-	public void romperVentanas(){
-		Nivel.getNivel().getSeccion().romperTodas();
-		//Contexto.getContexto().romper();
-	}
+	
 	/**
 	 *  Actualiza su posici&oacute;n y tira ladrillos
 	 */
 	@Override
-	public void actualizar() {
-		if (Contexto.getContexto().randomBoolean(Utils.probTirar)) {
+	public void actualizar() throws Evento{
+		if (Utils.randomBoolean(Utils.probTirar)) {
 			mover();
 		}
-		if (Contexto.getContexto().randomBoolean(Utils.probTirar)) {
-			saltar();
+		if (Utils.randomBoolean(Utils.probTirar)) {
+			super.setImage("res/img/ralph/slice167_@.png", "res/img/ralph/slice168_@.png");			
+			throw new Evento (EventoID.SALTA,saltar());
 		}
 	}
 	/**
 	 * Tira ladrillos
 	 */
-	private void saltar() {
-		System.out.print("Ralph salta... ");
+	private int saltar() {
 		Random rand = new Random();
 		if (ladrillosRestantes > 0) {
-			int ladrillos = rand.nextInt(ladrillosRestantes)+1;
+			int ladrillos = rand.nextInt(Math.min(ladrillosRestantes,3))+1;
 			ladrillosRestantes -= ladrillos;
-			System.out.println("y tira " + ladrillos + " ladrillos");
-			while (ladrillos-- > 0) {
-				Contexto.getContexto().agregarActualizable(new Ladrillo(pos));
-			}
-		} else {
-			System.out.println("pero no tiene mas ladrillos");
+			return ladrillos;
 		}
+		return 0;
 	}
 	/**
 	 * Se mueve
@@ -73,15 +66,17 @@ public class Ralph implements Actualizable {
 		Random random = new Random();
 		Direccion dir;
 		if (random.nextBoolean()) {
+			super.setImage("res/img/ralph/slice177_@.png", "res/img/ralph/slice177_@.png");
 			dir = Direccion.IZQUIERDA;
 		} else {
+			super.setImage("res/img/ralph/slice147_@.png", "res/img/ralph/slice148_@.png");
 			dir = Direccion.DERECHA;
 		}
-		Posicion nueva = pos.potencial(dir);
+		Posicion nueva = super.pos.potencial(dir);
 		int x = nueva.getX();
 		int y = nueva.getY();
 		if (x >= 0 && x < Utils.numCols && y >= 0 && y < Utils.numPisos) {
-			pos.go(dir);
+			super.pos.go(dir);
 		}
 	}
 }

@@ -1,9 +1,10 @@
 package personajes;
 
-import juego.Direccion;
 import juego.Nivel;
-import juego.Posicion;
-import juego.Utils;
+import utils.Direccion;
+import utils.Evento;
+import utils.Posicion;
+import utils.Utils;
 /**
  * Modela un p&aacute;jaro del juego
  *
@@ -18,9 +19,10 @@ public class Pajaro extends Chocable {
 	
 	/**
 	 * Actualiza su posici&oacute;n
+	 * @throws Evento 
 	 */
 	@Override
-	public void actualizar() {
+	public void actualizar() throws Evento {
 		Posicion pos = super.getPos().potencial(dir);
 		int x = pos.getX();
 		int y = pos.getY();

@@ -1,17 +1,17 @@
-package ambiente;
+package juego;
 
 import java.util.Random;
 
-import juego.Actualizable;
-import juego.Contexto;
-import juego.Direccion;
-import juego.Nivel;
-import juego.Utils;
+import utils.Actualizable;
+import utils.Direccion;
+import utils.Utils;
+
+
 /**
  * Modela una Ventana del juego
  * 
  */
-public class Ventana implements Actualizable {
+public class Ventana{
 	
 	/** N&uacute;mero de golpes restantes para arreglar la ventana */
 	private int roto;
@@ -41,7 +41,6 @@ public class Ventana implements Actualizable {
 		this.MACETERO = tipo.arribaAbajo && random.nextBoolean();
 		this.HOJA_IZQ = tipo.izq && random.nextBoolean();
 		this.HOJA_DER = tipo.der && random.nextBoolean();
-		Contexto.getContexto().agregarActualizable(this);
 	}
 	/**
 	 * Pone un pastel sobre la ventana
@@ -120,7 +119,7 @@ public class Ventana implements Actualizable {
 		double sum = 0;
 		int i;
 		for (i = 0; i <= tipo.paneles; i++) {
-			sum += 100D / Math.pow(2, i + 1) * (Math.min(Nivel.getNivel().getNroNivel(), Utils.maxNivel*0.7) * Utils.incDif);
+			sum += 100D / Math.pow(2, i + 1) * (Math.min(Utils.nivelActual, Utils.maxNivel*0.7) * Utils.incDif);
 			if (r < sum) {
 				this.roto = i * 2;
 				break;
@@ -129,44 +128,6 @@ public class Ventana implements Actualizable {
 		if (i == tipo.paneles) roto = i * 2;
 		//System.out.println("Ventana con roto = " + roto);
 		return roto > 0 ? 1 : 0;
-	}
-	@Override
-	public String toString(){
-		int rotas = this.getRoto();
-		String i = "N";
-		String d = "N";
-		if(felixesta){
-			return "| FELIX |";
-		}
-		switch (tipo) {
-		case DOSHOJAS:
-			if(HOJA_IZQ){
-				i = "I";
-			}
-			if(HOJA_DER){
-				d = "D";
-			}
-			return "| "+i+"H"+d+" "+rotas+" |";
-
-		case COMUN:
-			if(MOLDURA){
-				i = "M";
-			}
-			if(MACETERO){
-				d = "M";
-			}
-			return "| C"+i+d+" "+rotas+" |";
-			
-		case PUERTA:
-			return "| P   "+rotas+" |";
-			
-		case SEMICIRCULAR:
-			return "| SC  "+rotas+" |";
-			
-		default:
-			break;
-		}
-		return "| asda |";
 	}
 	
 	/**
@@ -192,14 +153,5 @@ public class Ventana implements Actualizable {
 			this.arribaAbajo = arribaAbajo;
 		}
 	}
-	/**
-	 * Actualiza el tiempo restante del
-	 * pastel en la ventana si hay
-	 */
-	@Override
-	public void actualizar() {
-		if (timerPastel > 0) {
-			timerPastel--;
-		}
-	}
+
 }
