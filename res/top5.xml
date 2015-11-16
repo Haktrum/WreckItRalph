@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listado>
+    <jugador pos="1">
+        <nombre></nombre>
+        <puntaje></puntaje>
+    </jugador>
+    <jugador pos="2">
+        <nombre></nombre>
+        <puntaje></puntaje>
+    </jugador>
+    <jugador pos="3">
+        <nombre></nombre>
+        <puntaje></puntaje>
+    </jugador>
+    <jugador pos="4">
+        <nombre></nombre>
+        <puntaje></puntaje>
+    </jugador>
+    <jugador pos="5">
+        <nombre></nombre>
+        <puntaje></puntaje>
+    </jugador>
+</listado>
