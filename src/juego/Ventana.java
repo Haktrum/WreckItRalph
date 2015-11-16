@@ -1,8 +1,12 @@
 package juego;
 
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
-import utils.Actualizable;
+import javax.imageio.ImageIO;
+
 import utils.Direccion;
 import utils.Utils;
 
@@ -30,6 +34,7 @@ public class Ventana{
 	/** Tiempo que estar&aacute; el pastel sobre la ventana*/
 	private int timerPastel = 0;
 
+	private Image img;
 	/**
 	 * Crea una ventana del Tipo tipo
 	 * @param tipo Tipo de Ventana
@@ -41,6 +46,7 @@ public class Ventana{
 		this.MACETERO = tipo.arribaAbajo && random.nextBoolean();
 		this.HOJA_IZQ = tipo.izq && random.nextBoolean();
 		this.HOJA_DER = tipo.der && random.nextBoolean();
+		this.setImage(tipo.url);
 	}
 	/**
 	 * Pone un pastel sobre la ventana
@@ -70,6 +76,16 @@ public class Ventana{
 	}
 	public void felixEsta(boolean b){
 		this.felixesta = b;
+	}
+	private void setImage(String url){
+		try {
+			img = ImageIO.read(new File(url));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public Image getImage(){
+		return img;
 	}
 	/**
 	 * Simula un martillazo a la ventana
@@ -137,20 +153,22 @@ public class Ventana{
 	 *
 	 */
 	enum Tipo {
-		DOSHOJAS(0, true, true, true),
-		COMUN(2, false, false, true),
-		PUERTA(4, false, false, false),
-		SEMICIRCULAR(8, false, false, false);
+		DOSHOJAS(0, true, true, true,"res/img/ventanas_y_panel/slice105_@.png"),
+		COMUN(2, false, false, true,"res/img/ventanas_y_panel/slice100_@.png"),
+		PUERTA(4, false, false, false,"res/img/semicirculares/slice600_@.png"),
+		SEMICIRCULAR(8, false, false, false,"res/img/semicirculares/slice602_@.png");
 		private int paneles;
 		private boolean izq;
 		private boolean der;
 		private boolean arribaAbajo;
+		private String url;
 		
-		Tipo(int paneles, boolean izq, boolean der, boolean arribaAbajo) {
+		Tipo(int paneles, boolean izq, boolean der, boolean arribaAbajo,String url) {
 			this.paneles = paneles;
 			this.izq = izq;
 			this.der = der;
 			this.arribaAbajo = arribaAbajo;
+			this.url = url;
 		}
 	}
 

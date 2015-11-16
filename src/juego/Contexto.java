@@ -1,10 +1,6 @@
 package juego;
 
-import java.awt.event.KeyEvent;
-import java.util.Random;
-
-
-
+import java.util.ArrayList;
 
 import personajes.Chocable;
 import personajes.Felix;
@@ -13,8 +9,6 @@ import personajes.Ralph;
 import utils.Actualizable;
 import utils.Direccion;
 import utils.Evento;
-import utils.Lista;
-import utils.Posicion;
 import utils.Utils;
 import utils.Evento.EventoID;
 /**
@@ -32,7 +26,7 @@ public class Contexto implements Actualizable{
 	private int puntaje = 0;
 	/** Lista de objetos de car&acute;cter actualizable */
 	
-	private Lista<Chocable> chocables = new Lista<Chocable>(Utils.maxLista);
+	private ArrayList<Chocable> chocables = new ArrayList<Chocable>(Utils.maxLista);
 	
 	/** Nivel */
 	private Nivel nivel = null;
@@ -41,8 +35,8 @@ public class Contexto implements Actualizable{
 		felix = new Felix();
 		ralph = new Ralph();
 		nivel = new Nivel(lvl);
-		chocables.agregar(felix);
-		chocables.agregar(ralph);
+		chocables.add(felix);
+		chocables.add(ralph);
 	}
 	
 	/**
@@ -89,14 +83,15 @@ public class Contexto implements Actualizable{
 	}
 	public void moverFelix(Direccion dir){
 		if(nivel.getSeccion().puedoIr(felix.getPos(), dir)){
-			nivel.getSeccion().ventanaEn(felix.getPos()).felixEsta(false);
+			//nivel.getSeccion().ventanaEn(felix.getPos()).felixEsta(false);
 			felix.mover(dir);
 		}
-		nivel.getSeccion().ventanaEn(felix.getPos()).felixEsta(true);
+		//nivel.getSeccion().ventanaEn(felix.getPos()).felixEsta(true);
 	}
 	//tira termina juego
 	@Override
 	public void actualizar() throws Evento{
+		//System.out.println("felix = "+felix.getPos().getX()+","+felix.getPos().getY());
 		try {
 			nivel.actualizar();
 		} catch (Evento e) {
@@ -108,22 +103,23 @@ public class Contexto implements Actualizable{
 		}
 		for(Chocable chocable: chocables){
 			try{
-				chocable.actualizar();
+				if(chocable!=null)
+					chocable.actualizar();
 			}catch(Evento e){
 				switch(e.getId()){
 				case CHAU_PASTEL:
-					chocables.agregar((Chocable) e.getParam());
+					chocables.add((Chocable) e.getParam());
 					break;
 				case TERMINAJUEGO:
 					this.terminarJuego();
 					break;
 				case OFF_SCREEN:
-					chocables.eliminar((Chocable) e.getParam());
+					chocables.remove((Chocable) e.getParam());
 					break;
 				case SALTA:
 					Integer ladrillos = (Integer) e.getParam();
 					while(ladrillos-- >0){
-						chocables.agregar(new Ladrillo(ralph.getPos()));
+						chocables.add(new Ladrillo(ralph.getPos()));
 					}
 					break;
 				default:
@@ -132,10 +128,13 @@ public class Contexto implements Actualizable{
 			}
 		}
 	}
-	public Lista<Chocable> getChocables(){
+	public ArrayList<Chocable> getChocables(){
 		return chocables;
 	}
 	public void setNivel(int n){
 		this.nivel.setNivel(n);
+	}
+	public Ventana[][] getMapa(){
+		return nivel.getMapa();
 	}
 }

@@ -1,6 +1,5 @@
 package personajes;
 
-import juego.Nivel;
 import utils.Direccion;
 import utils.Evento;
 import utils.Posicion;

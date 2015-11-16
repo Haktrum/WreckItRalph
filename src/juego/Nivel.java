@@ -1,8 +1,5 @@
 package juego;
 
-import java.util.Random;
-
-import utils.Actualizable;
 import utils.Evento;
 import utils.Utils;
 import utils.Evento.EventoID;
@@ -22,7 +19,6 @@ public class Nivel{
 	
 	public Nivel(int lvl){
 		this.setSeccion(new Seccion(1));
-		this.seccion.puertaYBalcon();
 		this.nroNivel = lvl;
 		Utils.nivelActual = lvl;
 	}
@@ -80,6 +76,9 @@ public class Nivel{
 				}
 			}
 		}
+	}
+	public Ventana[][] getMapa(){
+		return seccion.getMapa();
 	}
 	
 

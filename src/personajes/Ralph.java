@@ -1,17 +1,7 @@
 package personajes;
 
 
-import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
 import java.util.Random;
-
-import javax.imageio.ImageIO;
-
-import juego.Contexto;
-import juego.Nivel;
-
-import utils.Actualizable;
 import utils.Direccion;
 import utils.Evento;
 import utils.Evento.EventoID;
@@ -32,6 +22,7 @@ public class Ralph extends Chocable {
 	public Ralph(){
 		super(new Posicion(0,Utils.numPisos),0);
 		this.ladrillosRestantes = Utils.dificultar(this.ladrillosRestantes,true);
+		super.setImage("res/img/ralph/slice146_@.png", "res/img/ralph/slice501_@.png");
 	}
 	
 	/**

@@ -1,11 +1,6 @@
 package utils;
 
-import java.awt.event.KeyEvent;
 import java.util.Random;
-
-import juego.Nivel;
-
-import utils.Evento.EventoID;
 
 
 public class Utils {
@@ -100,25 +95,6 @@ public class Utils {
 		Random gen = new Random();
 		int t = gen.nextInt(100); 
 		return t <= (p * (1 + (Utils.nivelActual - 1) * Utils.incDif));
-	}
-	
-	public static Evento getEvento(int k_id,Object param){
-		Evento event = null;
-		switch(k_id){
-			case KeyEvent.VK_ESCAPE:
-				event = new Evento(EventoID.IR_MENU);
-			break;
-			case KeyEvent.VK_LEFT:
-				
-			break;
-			case KeyEvent.VK_RIGHT:
-				event = new Evento(EventoID.IR_CONFIG);
-			break;
-			case KeyEvent.VK_ENTER:
-				event = new Evento(EventoID.IR_CONFIG,param);
-			break;
-		}
-		return event;
 	}
 
 }

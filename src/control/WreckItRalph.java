@@ -1,8 +1,6 @@
 package control;
 
-import graficos.MainWindow;
-import personajes.Felix;
-import personajes.Ladrillo;
+import javax.swing.Timer;
 
 public class WreckItRalph {
 	private Highscore highscore = new Highscore();
@@ -13,8 +11,9 @@ public class WreckItRalph {
 		//wreckItRalph = new WreckItRalph();
 		//Controlador.getCtrl().init();
 		Controlador c = new Controlador();
-		c.setCorriendo(true);
-		new Thread(c).start();
+		Timer timer = new Timer(40, c);
+		timer.setInitialDelay(0);
+		timer.start(); 
 	}
 	
 	public static void guardarPuntaje(int p){

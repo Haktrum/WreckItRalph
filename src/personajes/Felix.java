@@ -1,8 +1,5 @@
 package personajes;
 
-import juego.Contexto;
-import juego.Nivel;
-import utils.Actualizable;
 import utils.Direccion;
 import utils.Evento;
 import utils.Evento.EventoID;
@@ -22,7 +19,7 @@ public class Felix extends Chocable{
 	
 	public Felix(){
 		super(new Posicion(0,0),0);
-		//super.setImage("res/img/felix/slice_65_65.png", "res/img/felix/slice_67_67.png");
+		super.setImage("res/img/felix/slice65_65.png", "res/img/felix/slice67_67.png");
 	}
 	/**
 	 * Se mueve dentro de la secci&oacute;n si es posible

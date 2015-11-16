@@ -49,7 +49,7 @@ public class Posicion {
 	}
 	
 	public Posicion inPx(){
-		return new Posicion(x*20,600+y*20);
+		return new Posicion(x*20,340-y*20);
 	}
 
 }

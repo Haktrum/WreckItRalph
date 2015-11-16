@@ -6,8 +6,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import juego.Contexto;
-import juego.Nivel;
 
 import utils.Actualizable;
 import utils.Direccion;

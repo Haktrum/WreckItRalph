@@ -1,7 +1,6 @@
 package juego;
 
 
-import utils.Actualizable;
 import utils.Direccion;
 import utils.Evento;
 import utils.Evento.EventoID;
@@ -47,6 +46,7 @@ public class Seccion{
 				}
 			}
 		}
+		puertaYBalcon();
 		romperTodas();
 	}
 	/**
@@ -54,7 +54,7 @@ public class Seccion{
 	 * en la entrada de planta baja y ​
 	 * del primer piso
 	 */
-	public void puertaYBalcon(){
+	private void puertaYBalcon(){
 		int medio = (int) ((COLS-1) / 2);
 		mapa[0][medio] = new Ventana(Tipo.PUERTA);
 		mapa[1][medio] = new Ventana(Tipo.SEMICIRCULAR);
@@ -109,8 +109,8 @@ public class Seccion{
 	public boolean puedoIr(Posicion pos, Direccion dir) {
 		Posicion nueva = pos.potencial(dir);
 		Direccion opuesta = dir.opuesta();
-		if(nueva.getX()<0 || nueva.getX()>COLS) return false;
-		if(nueva.getY()<0 || nueva.getY()>ROWS) return false;
+		if(nueva.getX()<0 || nueva.getX()>=COLS) return false;
+		if(nueva.getY()<0 || nueva.getY()>=ROWS) return false;
 		return ventanaEn(pos).puedoMoverHacia(dir) &&
 				ventanaEn(nueva).puedoMoverHacia(opuesta);
 	}
@@ -120,7 +120,7 @@ public class Seccion{
 	private void romperTodas(){
 		for(int j = 0;j<ROWS;j++){
 			for(int i = 0;i<COLS;i++){
-				//ventRotas += ventanaEn(i,j).romper();	
+				ventRotas += ventanaEn(i,j).romper();	
 			}
 		}
 	}
@@ -142,5 +142,8 @@ public class Seccion{
 	}
 	public int getNro(){
 		return this.nroSeccion;
+	}
+	public Ventana[][] getMapa(){
+		return this.mapa;
 	}
 }
