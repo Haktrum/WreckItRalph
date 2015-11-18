@@ -19,15 +19,15 @@ import utils.Utils;
 
 public class ContainerJuego extends JPanel implements Actualizable{
 	private ArrayList<Chocable> lista;
-	private Ventana[][] mapa;
-	public ContainerJuego(ArrayList<Chocable> lista,Ventana[][] mapa){
+	private Ventana[][][] mapas;
+	public ContainerJuego(ArrayList<Chocable> lista,Ventana[][][] mapas){
 		super();
-		pasarInfo(lista,mapa);
-		this.setBounds(0,0,800,340);
+		pasarInfo(lista,mapas);
+		this.setBounds(0,0,800,640);
 	}
-	public void pasarInfo(ArrayList<Chocable> lista,Ventana[][] mapa){
+	public void pasarInfo(ArrayList<Chocable> lista,Ventana[][][] mapas){
 		this.lista = lista;
-		this.mapa = mapa;
+		this.mapas = mapas;
 	}
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -39,11 +39,13 @@ public class ContainerJuego extends JPanel implements Actualizable{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		for(int j = 0;j<Utils.numPisos;j++){
-			for(int i = 0;i<Utils.numCols;i++){
-				Posicion aux = new Posicion(i,j);
-				if(mapa[j][i]==null){ System.out.println("null"); continue;}
-				g.drawImage(mapa[j][i].getImage(), inPx(aux).getX(), inPx(aux).getY(), null);
+		for(int k = 0;k<mapas.length;k++){
+			for(int j = 0;j<Utils.numPisos;j++){
+				for(int i = 0;i<Utils.numCols;i++){
+					Posicion aux = new Posicion(i,k*Utils.numPisos+j);
+					if(mapas[k][j][i]==null){ System.out.println("null"); continue;}
+					g.drawImage(mapas[k][j][i].getImage(), inPx(aux).getX(), inPx(aux).getY(), null);
+				}
 			}
 		}
 		for(Chocable c: lista){
@@ -58,7 +60,7 @@ public class ContainerJuego extends JPanel implements Actualizable{
 	private Posicion inPx(Posicion pos){
 		int x = pos.getX();
 		int y = pos.getY();
-		return new Posicion(242+30+50*x,340-78-100*y);
+		return new Posicion(242+30+50*x,640-78-100*y);
 	}
 	@Override
 	public void actualizar() {

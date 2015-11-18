@@ -81,9 +81,9 @@ public class MainWindow implements Actualizable{
 	public void escape(){
 		this.setContentPane(new ContainerMenu());
 	}
-	public void pasarInfo(ArrayList<Chocable> l,Ventana[][] mapa){
+	public void pasarInfo(ArrayList<Chocable> l,Ventana[][][] mapas){
 		Container p = frame.getContentPane();
-		((ContainerJuego) p).pasarInfo(l,mapa);
+		((ContainerJuego) p).pasarInfo(l,mapas);
 	}
 
 }

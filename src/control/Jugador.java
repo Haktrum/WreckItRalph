@@ -9,11 +9,12 @@ public class Jugador implements Comparable<Jugador> {
 	private final String nombre;
 	private int puntaje;
 	
-	public Jugador() {
-		System.out.print("Ingrese su nombre: ");
-		Scanner scanner = new Scanner(System.in);
-		nombre = scanner.nextLine();
-		scanner.close();
+	public Jugador(String nombre) {
+		this.nombre = nombre;
+	}
+	public Jugador(String nombre,int puntaje) {
+		this(nombre);
+		this.puntaje = puntaje;
 	}
 	/**
 	 * Compara dos jugadores por su puntaje
@@ -30,5 +31,11 @@ public class Jugador implements Comparable<Jugador> {
 	
 	public void setPuntaje(int puntaje) {
 		this.puntaje = puntaje;
+	}
+	public int getPuntaje(){
+		return this.puntaje;
+	}
+	public String getNombre(){
+		return this.nombre;
 	}
 }

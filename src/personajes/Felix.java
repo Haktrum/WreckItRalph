@@ -19,7 +19,7 @@ public class Felix extends Chocable{
 	
 	public Felix(){
 		super(new Posicion(0,0),0);
-		super.setImage("res/img/felix/slice65_65.png", "res/img/felix/slice67_67.png");
+		super.setImage("res/img/felix/felix.png", "res/img/felix/felix.png");
 	}
 	/**
 	 * Se mueve dentro de la secci&oacute;n si es posible
@@ -27,6 +27,12 @@ public class Felix extends Chocable{
 	 */
 	@Override
 	public void mover(Direccion dir){
+		if(dir==Direccion.IZQUIERDA || dir==Direccion.ABAJO){
+			super.setImage("res/img/felix/felix_izq.png", "res/img/felix/felix.png");
+		}
+		if(dir==Direccion.DERECHA || dir==Direccion.ARRIBA){
+			super.setImage("res/img/felix/felix_der.png", "res/img/felix/felix.png");
+		}
 		super.pos.go(dir);
 	}
 	/**
@@ -75,4 +81,8 @@ public class Felix extends Chocable{
 			this.hacerInvulnerable();
 		}
 	}
+	public void martillar(){
+		this.setImage("res/img/felix/felix_martilla.png", "res/img/felix/felix.png");
+	}
+	
 }

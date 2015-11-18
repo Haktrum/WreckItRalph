@@ -38,7 +38,6 @@ public class Seccion{
 		int medio = (int) ((COLS-1) / 2);
 		for(int j = 0;j<ROWS;j++){
 			for(int i = 0;i<COLS;i++){
-				if (i == medio && (j == 0 || j == 1)) continue;
 				if(Utils.randomBoolean(Utils.probDosHojas)){
 					mapa[j][i] = new Ventana(Tipo.DOSHOJAS);
 				}else{
@@ -46,18 +45,16 @@ public class Seccion{
 				}
 			}
 		}
-		puertaYBalcon();
-		romperTodas();
 	}
 	/**
 	 * Crea ventanas semicirculares en​
 	 * en la entrada de planta baja y ​
 	 * del primer piso
 	 */
-	private void puertaYBalcon(){
+	public void puertaYBalcon(){
 		int medio = (int) ((COLS-1) / 2);
 		mapa[0][medio] = new Ventana(Tipo.PUERTA);
-		mapa[1][medio] = new Ventana(Tipo.SEMICIRCULAR);
+		mapa[1][medio] = new Ventana(Tipo.PUERTA);
 	}
 	public void imprimir(){
 		for(int j = ROWS-1;j>=0;j--){
@@ -75,7 +72,9 @@ public class Seccion{
 	 * @return puntaje obtenido por martillar la ventana
 	 */
 	public int arreglarVentana(Posicion pos){
-		int puntos = ventanaEn(pos).arreglar();
+		Ventana v = ventanaEn(pos);
+		int puntos = v.arreglar();
+		v.actualizar();
 		if (puntos == Utils.puntajeArreglar) {
 			ventRotas--;
 		}
@@ -117,7 +116,7 @@ public class Seccion{
 	/**
 	 * Rompe o no, los paneles de cada ventana de la secci&oacute;n 
 	 */
-	private void romperTodas(){
+	public void romperTodas(){
 		for(int j = 0;j<ROWS;j++){
 			for(int i = 0;i<COLS;i++){
 				ventRotas += ventanaEn(i,j).romper();	

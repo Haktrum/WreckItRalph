@@ -3,6 +3,7 @@ package utils;
 import java.util.Random;
 
 
+
 public class Utils {
 	/** Veolocidad inicial del pajaro */
 	public static final int vPajaro = 10;
@@ -38,6 +39,8 @@ public class Utils {
 	public static final int tiempoInvulnerable = 100;
 	/** Probabilidad de que Ralph tire ladrillos */
 	public static final int probTirar = 30;
+	
+	public static final String BASE_IMG = "res/img/";
 	
 	public static int nivelActual = 1;
 	
@@ -95,6 +98,19 @@ public class Utils {
 		Random gen = new Random();
 		int t = gen.nextInt(100); 
 		return t <= (p * (1 + (Utils.nivelActual - 1) * Utils.incDif));
+	}
+	
+	public static String urlVentanaComun(int i){
+		return BASE_IMG+"ventanas_y_panel/roto"+i+".png";
+	}
+	public static String urlVentanaDobleHoja(boolean izq,boolean der){
+		if(izq & der) return BASE_IMG+"ventanas_y_panel/doblehoja_abierta.png";
+		if(izq) return BASE_IMG+"ventanas_y_panel/doblehoja_izq.png";
+		if(der) return BASE_IMG+"ventanas_y_panel/doblehoja_der.png";
+		return BASE_IMG+"ventanas_y_panel/doblehoja_cerrada.png";	
+	}
+	public static String urlPuerta(int i){
+		return BASE_IMG+"semicirculares/puerta_roto"+i+".png";
 	}
 
 }

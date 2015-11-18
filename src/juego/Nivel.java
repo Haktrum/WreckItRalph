@@ -13,12 +13,20 @@ public class Nivel{
 	
 
 	/** Secci&oacute;n del nivel */
-	private Seccion seccion;
+	//private Seccion seccion;
 	/** N&uacute;mero de nivel */
 	private int nroNivel;
+	/** La secci&oacute;n pr&oacute;xima a la actual */
+	private Seccion[] secciones = new Seccion[Utils.maxSeccion];
+	
+	private int nroSeccion = 0;
 	
 	public Nivel(int lvl){
-		this.setSeccion(new Seccion(1));
+		for(int i = 0;i<secciones.length;i++){
+			secciones[i] = new Seccion(i+1);
+		}
+		this.secciones[nroSeccion].puertaYBalcon();
+		this.secciones[nroSeccion].romperTodas();
 		this.nroNivel = lvl;
 		Utils.nivelActual = lvl;
 	}
@@ -34,13 +42,13 @@ public class Nivel{
 	 * Reinicia el nivel
 	 */
 	public void reiniciar() {
-		this.seccion = new Seccion(1);
+		this.nroSeccion = 0;
 	}
 	public Seccion getSeccion() {
-		return seccion;
+		return secciones[nroSeccion];
 	}
-	public void setSeccion(Seccion seccion) {
-		this.seccion = seccion;
+	public void setSeccion(int nro) {
+		this.nroSeccion = nro;
 	}
 	/**
 	 * Gana el nivel y pasa al siguiente. En caso de ser el &uacute;ltimo nivel,
@@ -65,20 +73,22 @@ public class Nivel{
 	}
 
 	public void actualizar() throws Evento{
-		if(this.seccion.getVentanasRotas()==0){
-			try {
-				this.seccion.ganarSeccion();
-			} catch (Evento e) {
-				if(e.getId()==EventoID.GANANIVEL){
-					this.ganarNivel();
-				}else if(e.getId()==EventoID.GANASECCION){
-					this.seccion = new Seccion(seccion.getNro());
-				}
+		if(this.secciones[nroSeccion].getVentanasRotas()==0){
+			if(this.nroSeccion==Utils.maxSeccion-1){
+				throw new Evento(EventoID.GANANIVEL);
+			}else{
+				this.nroSeccion++;
+				this.secciones[nroSeccion].romperTodas();
+				throw new Evento(EventoID.GANASECCION);
 			}
 		}
 	}
-	public Ventana[][] getMapa(){
-		return seccion.getMapa();
+	public Ventana[][][] getMapas(){
+		Ventana[][][] mapas = new Ventana[Utils.maxSeccion][][];
+		for(int i = 0;i<mapas.length;i++){
+			mapas[i] = secciones[i].getMapa();
+		}
+		return mapas;
 	}
 	
 

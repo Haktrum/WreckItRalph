@@ -49,6 +49,8 @@ public class Controlador implements ActionListener{
 						break;
 					case KeyEvent.VK_ESCAPE:
 						escape();
+					case KeyEvent.VK_SPACE:
+						space();
 						break;
 				}
 			}
@@ -104,7 +106,7 @@ public class Controlador implements ActionListener{
 				break;
 			case JUGAR:
 				ctx = new Contexto(nivelInicial);
-				window.setContentPane(new ContainerJuego(ctx.getChocables(),ctx.getMapa()));
+				window.setContentPane(new ContainerJuego(ctx.getChocables(),ctx.getMapas()));
 				break;
 			case REGLAS:
 				window.setContentPane(new ContainerReglas());
@@ -126,11 +128,13 @@ public class Controlador implements ActionListener{
 		if(ctx!=null){
 			try {
 				ctx.actualizar();
-				window.pasarInfo(ctx.getChocables(),ctx.getMapa());
+				window.pasarInfo(ctx.getChocables(),ctx.getMapas());
 			} catch (Evento excep) {
 				//e.printStackTrace();
 			}
 		}
 	}
-	
+	private void space(){
+		ctx.martillar();
+	}
 }

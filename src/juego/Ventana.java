@@ -7,7 +7,9 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
+import utils.Actualizable;
 import utils.Direccion;
+import utils.Evento;
 import utils.Utils;
 
 
@@ -15,7 +17,7 @@ import utils.Utils;
  * Modela una Ventana del juego
  * 
  */
-public class Ventana{
+public class Ventana implements Actualizable{
 	
 	/** N&uacute;mero de golpes restantes para arreglar la ventana */
 	private int roto;
@@ -42,11 +44,13 @@ public class Ventana{
 	public Ventana (Tipo tipo) {
 		this.tipo = tipo;
 		Random random = new Random();
-		this.MOLDURA = tipo.arribaAbajo && random.nextBoolean();
-		this.MACETERO = tipo.arribaAbajo && random.nextBoolean();
+		//this.MOLDURA = tipo.arribaAbajo && random.nextBoolean();
+		this.MOLDURA = false;
+		this.MACETERO = false;
+		//this.MACETERO = tipo.arribaAbajo && random.nextBoolean();
 		this.HOJA_IZQ = tipo.izq && random.nextBoolean();
 		this.HOJA_DER = tipo.der && random.nextBoolean();
-		this.setImage(tipo.url);
+		this.actualizar();
 	}
 	/**
 	 * Pone un pastel sobre la ventana
@@ -94,14 +98,11 @@ public class Ventana{
 	 */
 	public int arreglar(){
 		if (this.roto == 0) return 0;
-		System.out.println("Arreglando ventana");
 		this.roto--;
 		if(this.roto==0) {
-			System.out.println("Ventana arreglada");
 			return Utils.puntajeArreglar;
 		}
 		if((this.roto % 2)==0) {
-			System.out.println("Panel arreglado");
 			return Utils.puntajeArreglarPanel;
 		}
 		return 0;
@@ -142,7 +143,7 @@ public class Ventana{
 			}
 		}
 		if (i == tipo.paneles) roto = i * 2;
-		//System.out.println("Ventana con roto = " + roto);
+		this.actualizar();
 		return roto > 0 ? 1 : 0;
 	}
 	
@@ -153,23 +154,41 @@ public class Ventana{
 	 *
 	 */
 	enum Tipo {
-		DOSHOJAS(0, true, true, true,"res/img/ventanas_y_panel/slice105_@.png"),
-		COMUN(2, false, false, true,"res/img/ventanas_y_panel/slice100_@.png"),
-		PUERTA(4, false, false, false,"res/img/semicirculares/slice600_@.png"),
-		SEMICIRCULAR(8, false, false, false,"res/img/semicirculares/slice602_@.png");
+		DOSHOJAS(0, true, true, false),
+		COMUN(2, false, false, true),
+		PUERTA(4, false, false, false),
+		SEMICIRCULAR(8, false, false, false);
 		private int paneles;
 		private boolean izq;
 		private boolean der;
 		private boolean arribaAbajo;
-		private String url;
 		
-		Tipo(int paneles, boolean izq, boolean der, boolean arribaAbajo,String url) {
+		Tipo(int paneles, boolean izq, boolean der, boolean arribaAbajo) {
 			this.paneles = paneles;
 			this.izq = izq;
 			this.der = der;
 			this.arribaAbajo = arribaAbajo;
-			this.url = url;
 		}
+	}
+
+	@Override
+	public void actualizar() {
+		String url = "";
+		switch(tipo){
+		case COMUN:
+			url = Utils.urlVentanaComun(roto);
+			break;
+		case DOSHOJAS:
+			url = Utils.urlVentanaDobleHoja(HOJA_IZQ,HOJA_DER);
+			break;
+		case PUERTA:
+			url = Utils.urlPuerta(roto);
+			break;
+		default:
+			url = Utils.urlPuerta(roto);
+			break;
+		}
+		this.setImage(url);
 	}
 
 }

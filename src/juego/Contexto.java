@@ -36,7 +36,7 @@ public class Contexto implements Actualizable{
 		ralph = new Ralph();
 		nivel = new Nivel(lvl);
 		chocables.add(felix);
-		chocables.add(ralph);
+		//chocables.add(ralph);
 	}
 	
 	/**
@@ -79,14 +79,15 @@ public class Contexto implements Actualizable{
 	 * Revisa tambi&eacute; los posibles choques de F&eacute;lix
 	 */
 	public void martillar(){
+		felix.martillar();
 		this.agregarPuntos(this.nivel.getSeccion().arreglarVentana(felix.getPos()));
 	}
 	public void moverFelix(Direccion dir){
 		if(nivel.getSeccion().puedoIr(felix.getPos(), dir)){
-			//nivel.getSeccion().ventanaEn(felix.getPos()).felixEsta(false);
+			nivel.getSeccion().ventanaEn(felix.getPos()).felixEsta(false);
 			felix.mover(dir);
 		}
-		//nivel.getSeccion().ventanaEn(felix.getPos()).felixEsta(true);
+		nivel.getSeccion().ventanaEn(felix.getPos()).felixEsta(true);
 	}
 	//tira termina juego
 	@Override
@@ -134,7 +135,7 @@ public class Contexto implements Actualizable{
 	public void setNivel(int n){
 		this.nivel.setNivel(n);
 	}
-	public Ventana[][] getMapa(){
-		return nivel.getMapa();
+	public Ventana[][][] getMapas(){
+		return nivel.getMapas();
 	}
 }

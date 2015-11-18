@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <listado>
-    <jugador pos="1">
-        <nombre></nombre>
-        <puntaje></puntaje>
+    <jugador>
+        <nombre>Augusto</nombre>
+        <puntaje>1600</puntaje>
     </jugador>
-    <jugador pos="2">
-        <nombre></nombre>
-        <puntaje></puntaje>
+    <jugador>
+        <nombre>Esteban</nombre>
+        <puntaje>1400</puntaje>
     </jugador>
-    <jugador pos="3">
-        <nombre></nombre>
-        <puntaje></puntaje>
+    <jugador>
+        <nombre>Cristian</nombre>
+        <puntaje>200</puntaje>
     </jugador>
-    <jugador pos="4">
-        <nombre></nombre>
-        <puntaje></puntaje>
+    <jugador>
+        <nombre>Otro</nombre>
+        <puntaje>100</puntaje>
     </jugador>
-    <jugador pos="5">
-        <nombre></nombre>
-        <puntaje></puntaje>
+    <jugador>
+        <nombre>Gato</nombre>
+        <puntaje>10</puntaje>
     </jugador>
 </listado>
