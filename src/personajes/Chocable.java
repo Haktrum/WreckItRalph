@@ -23,17 +23,21 @@ import utils.Utils;
 public abstract class Chocable implements Actualizable {
 	protected Posicion pos;
 	
-	private int subPos = 1;
-	private int subGrillas;
-	
+	private int subPos = 0;
+	private int subGrillas = 100;
+	private int velocidad;
 	private BufferedImage img;
 	private BufferedImage auxImg;
 	
 	protected int timerImagen = 0;
 	
+	public Chocable(Posicion pos) {
+		this.pos = pos;
+		this.velocidad = 0;
+	}
 	public Chocable(Posicion pos,int v) {
 		this.pos = pos;
-		this.subGrillas = Utils.dificultar(v, false);
+		this.velocidad = v;
 	}
 	/**
 	 * Verifica el choque de dos elementos
@@ -56,9 +60,9 @@ public abstract class Chocable implements Actualizable {
 			if (dir == Direccion.ABAJO && pos.getY() < 0) {
 				throw new Evento(EventoID.OFF_SCREEN,this);
 			}
-			subPos=1;
+			subPos=0;
 		}else{
-			subPos++;
+			subPos+=velocidad;
 		}
 	}
 	public Posicion getPos() {
@@ -91,5 +95,8 @@ public abstract class Chocable implements Actualizable {
 	}
 	protected void refresh(){
 		if(this.timerImagen>0) timerImagen--;
+	}
+	public int getSubPos(){
+		return this.subPos;
 	}
 }

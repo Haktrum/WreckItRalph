@@ -45,11 +45,10 @@ public class Ventana implements Actualizable{
 	 */
 	public Ventana (Tipo tipo) {
 		this.tipo = tipo;
-		Random random = new Random();
-		this.MOLDURA = tipo.arribaAbajo && random.nextBoolean();
-		this.MACETERO = tipo.arribaAbajo && random.nextBoolean();
-		this.HOJA_IZQ = tipo.izq && random.nextBoolean();
-		this.HOJA_DER = tipo.der && random.nextBoolean();
+		this.MOLDURA = tipo.arribaAbajo && Utils.randomBoolean(10);
+		this.MACETERO = tipo.arribaAbajo && Utils.randomBoolean(10);
+		this.HOJA_IZQ = tipo.izq && Utils.randomBoolean(60);
+		this.HOJA_DER = tipo.der && Utils.randomBoolean(60);
 		this.actualizar();
 	}
 	/**

@@ -9,7 +9,7 @@ public class Pastel extends Chocable{
 
 	private int timer = Utils.tiempoPastel;
 	public Pastel(Posicion pos) {
-		super(pos, 0);
+		super(pos);
 	}
 
 	@Override

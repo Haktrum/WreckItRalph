@@ -1,6 +1,7 @@
 package juego;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import personajes.Chocable;
 import personajes.Felix;
@@ -37,7 +38,7 @@ public class Contexto implements Actualizable{
 		ralph = new Ralph();
 		nivel = new Nivel(lvl);
 		chocables.add(felix);
-		//chocables.add(ralph);
+		chocables.add(ralph);
 	}
 	
 	/**
@@ -111,6 +112,8 @@ public class Contexto implements Actualizable{
 				throw new Evento(EventoID.GANASECCION);
 			}
 		}
+		ArrayList<Chocable> paraAgregar = new ArrayList<Chocable>();
+		ArrayList<Chocable> paraEliminar = new ArrayList<Chocable>();
 		for(Chocable chocable: chocables){
 			try{
 				if(chocable!=null)
@@ -118,24 +121,31 @@ public class Contexto implements Actualizable{
 			}catch(Evento e){
 				switch(e.getId()){
 				case CHAU_PASTEL:
-					chocables.add((Chocable) e.getParam());
+					paraAgregar.add((Chocable) e.getParam());
 					break;
 				case TERMINAJUEGO:
 					this.terminarJuego();
 					break;
 				case OFF_SCREEN:
-					chocables.remove((Chocable) e.getParam());
+					paraEliminar.add((Chocable) e.getParam());
 					break;
 				case SALTA:
 					Integer ladrillos = (Integer) e.getParam();
 					while(ladrillos-- >0){
-						chocables.add(new Ladrillo(ralph.getPos()));
+						Random r = new Random();
+						paraAgregar.add(new Ladrillo(new Posicion(r.nextInt(Utils.numCols),3)));
 					}
 					break;
 				default:
 					break;
 				}
 			}
+		}
+		for(Chocable nuevo : paraAgregar){
+			chocables.add(nuevo);
+		}
+		for(Chocable nuevo : paraEliminar){
+			chocables.remove(nuevo);
 		}
 	}
 	public ArrayList<Chocable> getChocables(){

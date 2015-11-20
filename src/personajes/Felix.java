@@ -18,7 +18,7 @@ public class Felix extends Chocable{
 	private int vidas = Utils.vidasPorNivel;
 	
 	public Felix(){
-		super(new Posicion(0,0),0);
+		super(new Posicion(0,0));
 		super.setBaseImage("res/img/felix/felix.png");
 	}
 	/**

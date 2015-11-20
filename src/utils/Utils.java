@@ -6,9 +6,11 @@ import java.util.Random;
 
 public class Utils {
 	/** Veolocidad inicial del pajaro */
-	public static final int vPajaro = 10;
+	public static final int vPajaro = 5;
 	/** Veolocidad inicial del ladrillo */
-	public static final int vLadrillo = 20;
+	public static final int vLadrillo = 2;
+	/** Veolocidad inicial del ladrillo */
+	public static final int vRalph = 5;
 	/** Cantidad inicial de ladrillos que tiene Ralph */
 	public static final int ladrillosRalph = 40;
 	/** Tama&ntilde;o de la lista de actualizables */
@@ -38,7 +40,7 @@ public class Utils {
 	/** Tiempo de invulnerabilidad de F&eacute;lix */
 	public static final int tiempoInvulnerable = 100;
 	/** Probabilidad de que Ralph tire ladrillos */
-	public static final int probTirar = 30;
+	public static final int probTirar = 2;
 	
 	public static final String BASE_IMG = "res/img/";
 	
@@ -53,10 +55,9 @@ public class Utils {
 	 */
 	
 	public static int dificultar(int n,boolean inc){
-		return 0;
-		//if(inc)
-			//return (int) (n*Math.floor(Math.pow(1+Utils.incDif,nivelActual-1)));
-		//return (int) (n*Math.floor(Math.pow(1-Utils.incDif,nivel.nivelActual-1)));
+		if(inc)
+			return (int) (n*Math.floor(Math.pow(1+Utils.incDif,nivelActual-1)));
+		return (int) (n*Math.floor(Math.pow(1-Utils.incDif,nivelActual-1)));
 	}
 	/**
 	 * Sabra dios que carajo hace esto
@@ -94,6 +95,7 @@ public class Utils {
 		if(t <= p1 + p2) return 2;
 		return 4;
 	}
+	// p = probabiliadad de true
 	public static boolean randomBoolean(int p) {
 		Random gen = new Random();
 		int t = gen.nextInt(100); 

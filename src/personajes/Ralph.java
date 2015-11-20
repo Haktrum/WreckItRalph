@@ -20,9 +20,10 @@ public class Ralph extends Chocable {
 	
 	
 	public Ralph(){
-		super(new Posicion(0,Utils.numPisos),0);
+		super(new Posicion(0,Utils.numPisos),Utils.vRalph);
 		this.ladrillosRestantes = Utils.dificultar(this.ladrillosRestantes,true);
-		super.setBaseImage("res/img/ralph/slice146_@.png");
+		//this.ladrillosRestantes = 30;
+		super.setBaseImage("res/img/ralph/ralph.png");
 	}
 	
 	/**
@@ -31,12 +32,14 @@ public class Ralph extends Chocable {
 	@Override
 	public void actualizar() throws Evento{
 		super.refresh();
-		if (Utils.randomBoolean(Utils.probTirar)) {
+		if (Utils.randomBoolean(80)) {
 			mover();
-		}
-		if (Utils.randomBoolean(Utils.probTirar)) {
-			super.setAuxImage("res/img/ralph/slice168_@.png");			
-			throw new Evento (EventoID.SALTA,saltar());
+		}else{
+			super.setBaseImage("res/img/ralph/ralph.png");
+			if (Utils.randomBoolean(Utils.probTirar)) {
+				super.setAuxImage("res/img/ralph/ralph_salta.png");
+				throw new Evento (EventoID.SALTA,saltar());
+			}
 		}
 	}
 	/**
@@ -57,18 +60,23 @@ public class Ralph extends Chocable {
 	private void mover() {
 		Random random = new Random();
 		Direccion dir;
+		super.setBaseImage("res/img/ralph/ralph_izq1.png");
 		if (random.nextBoolean()) {
-			super.setAuxImage("res/img/ralph/slice177_@.png");
+			super.setAuxImage("res/img/ralph/ralph_izq2.png");
 			dir = Direccion.IZQUIERDA;
 		} else {
-			super.setAuxImage("res/img/ralph/slice148_@.png");
+			super.setAuxImage("res/img/ralph/ralph_izq2.png");
 			dir = Direccion.DERECHA;
 		}
 		Posicion nueva = super.pos.potencial(dir);
 		int x = nueva.getX();
 		int y = nueva.getY();
-		if (x >= 0 && x < Utils.numCols && y >= 0 && y < Utils.numPisos) {
-			super.pos.go(dir);
+		if (x >= 0 && x < Utils.numCols && y >= 0 && y <= Utils.numPisos) {
+			try {
+				super.mover(dir);
+			} catch (Evento e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

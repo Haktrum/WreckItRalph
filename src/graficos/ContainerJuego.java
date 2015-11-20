@@ -13,6 +13,8 @@ import javax.swing.border.EmptyBorder;
 import juego.Ventana;
 
 import personajes.Chocable;
+import personajes.Felix;
+import personajes.Ladrillo;
 
 import utils.Actualizable;
 import utils.Posicion;
@@ -59,7 +61,13 @@ public class ContainerJuego extends JPanel implements Actualizable{
 		for(Chocable c: lista){
 			if(c!=null){
 				int y = c.getPos().inPx(c.getImage()).getY();
-				g.drawImage(c.getImage(), c.getPos().inPx(c.getImage()).getX(), y, null);
+				int x = c.getPos().inPx(c.getImage()).getX();
+				if(c instanceof Ladrillo){
+					y += c.getSubPos();
+				}else{
+					x +=c.getSubPos();
+				}
+				g.drawImage(c.getImage(),x, y, null);
 			}
 		}
 	}
