@@ -4,12 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
-import javax.swing.Timer;
-
 import utils.Direccion;
 import utils.Evento;
-
+import utils.Evento.EventoID;
+import utils.Posicion;
 import graficos.ContainerConfig;
 import graficos.ContainerJuego;
 import graficos.ContainerMenu;
@@ -24,42 +22,11 @@ public class Controlador implements ActionListener{
 	private MainWindow window =null;
 	private boolean corriendo = false;
 	private Contexto ctx = null;
+	private ContainerJuego panelJuego = null; 
 	private int nivelInicial = 1;
 	public Controlador(){
 		//this.irMenu();
-		KeyListener kl = new KeyListener(){
-
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				switch(arg0.getKeyCode()){
-					case KeyEvent.VK_LEFT:
-						flechaIzq();
-						break;
-					case KeyEvent.VK_RIGHT:
-						flechaDer();
-						break;
-					case KeyEvent.VK_UP:
-						flechaArriba();
-						break;
-					case KeyEvent.VK_DOWN:
-						flechaAbajo();
-						break;
-					case KeyEvent.VK_ENTER:
-						enter();
-						break;
-					case KeyEvent.VK_ESCAPE:
-						escape();
-					case KeyEvent.VK_SPACE:
-						space();
-						break;
-				}
-			}
-			@Override
-			public void keyReleased(KeyEvent arg0) {}
-			
-			@Override
-			public void keyTyped(KeyEvent arg0) {}
-		};
+		KeyListener kl = new MiKeyListener();
 		window = new MainWindow(kl);
 	}
 	public void setCorriendo(boolean b){
@@ -106,7 +73,8 @@ public class Controlador implements ActionListener{
 				break;
 			case JUGAR:
 				ctx = new Contexto(nivelInicial);
-				window.setContentPane(new ContainerJuego(ctx.getChocables(),ctx.getMapas()));
+				panelJuego = new ContainerJuego(ctx.getChocables(),ctx.getMapas());
+				window.setContentPane(panelJuego);
 				break;
 			case REGLAS:
 				window.setContentPane(new ContainerReglas());
@@ -124,17 +92,55 @@ public class Controlador implements ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		window.actualizar();
+		if(panelJuego!=null){
+			panelJuego.actualizar();
+		}
 		if(ctx!=null){
 			try {
 				ctx.actualizar();
-				window.pasarInfo(ctx.getChocables(),ctx.getMapas());
-			} catch (Evento excep) {
-				//e.printStackTrace();
+				panelJuego.pasarInfo(ctx.getChocables(), ctx.getMapas());
+			} catch (Evento ex) {
+				if(ex.getId()==EventoID.GANASECCION){
+					panelJuego.incOffset();
+				}else if(ex.getId()==EventoID.GANANIVEL){
+					panelJuego.reset();
+				}
 			}
 		}
 	}
 	private void space(){
 		ctx.martillar();
+	}
+	private class MiKeyListener implements KeyListener{
+		@Override
+		public void keyPressed(KeyEvent arg0) {
+			switch(arg0.getKeyCode()){
+				case KeyEvent.VK_LEFT:
+					flechaIzq();
+					break;
+				case KeyEvent.VK_RIGHT:
+					flechaDer();
+					break;
+				case KeyEvent.VK_UP:
+					flechaArriba();
+					break;
+				case KeyEvent.VK_DOWN:
+					flechaAbajo();
+					break;
+				case KeyEvent.VK_ENTER:
+					enter();
+					break;
+				case KeyEvent.VK_ESCAPE:
+					escape();
+				case KeyEvent.VK_SPACE:
+					space();
+					break;
+			}
+		}
+		@Override
+		public void keyReleased(KeyEvent arg0) {}
+		
+		@Override
+		public void keyTyped(KeyEvent arg0) {}
 	}
 }

@@ -26,7 +26,9 @@ public class Nivel{
 			secciones[i] = new Seccion(i+1);
 		}
 		this.secciones[nroSeccion].puertaYBalcon();
-		this.secciones[nroSeccion].romperTodas();
+		while(this.secciones[nroSeccion].getVentanasRotas()==0){
+			this.secciones[nroSeccion].romperTodas();
+		}
 		this.nroNivel = lvl;
 		Utils.nivelActual = lvl;
 	}
@@ -78,7 +80,9 @@ public class Nivel{
 				throw new Evento(EventoID.GANANIVEL);
 			}else{
 				this.nroSeccion++;
-				this.secciones[nroSeccion].romperTodas();
+				while(this.secciones[nroSeccion].getVentanasRotas()==0){
+					this.secciones[nroSeccion].romperTodas();
+				}
 				throw new Evento(EventoID.GANASECCION);
 			}
 		}

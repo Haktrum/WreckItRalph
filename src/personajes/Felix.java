@@ -19,7 +19,7 @@ public class Felix extends Chocable{
 	
 	public Felix(){
 		super(new Posicion(0,0),0);
-		super.setImage("res/img/felix/felix.png", "res/img/felix/felix.png");
+		super.setBaseImage("res/img/felix/felix.png");
 	}
 	/**
 	 * Se mueve dentro de la secci&oacute;n si es posible
@@ -28,10 +28,10 @@ public class Felix extends Chocable{
 	@Override
 	public void mover(Direccion dir){
 		if(dir==Direccion.IZQUIERDA || dir==Direccion.ABAJO){
-			super.setImage("res/img/felix/felix_izq.png", "res/img/felix/felix.png");
+			super.setAuxImage("res/img/felix/felix_izq.png");
 		}
 		if(dir==Direccion.DERECHA || dir==Direccion.ARRIBA){
-			super.setImage("res/img/felix/felix_der.png", "res/img/felix/felix.png");
+			super.setAuxImage("res/img/felix/felix_der.png");
 		}
 		super.pos.go(dir);
 	}
@@ -40,6 +40,7 @@ public class Felix extends Chocable{
 	 */
 	@Override
 	public void actualizar(){
+		super.refresh();
 		if (timerInvulnerable > 0) {
 			timerInvulnerable--;
 		}
@@ -56,6 +57,9 @@ public class Felix extends Chocable{
 	 */
 	public boolean esInvulnerable() {
 		return timerInvulnerable > 0;
+	}
+	public void martillar(){
+		super.setAuxImage("res/img/felix/felix_martilla.png");
 	}
 	/**
 	 * Simula un choque con un objeto
@@ -80,9 +84,6 @@ public class Felix extends Chocable{
 		if(c.getClass() == Pastel.class){
 			this.hacerInvulnerable();
 		}
-	}
-	public void martillar(){
-		this.setImage("res/img/felix/felix_martilla.png", "res/img/felix/felix.png");
 	}
 	
 }

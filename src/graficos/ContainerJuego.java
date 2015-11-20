@@ -1,13 +1,17 @@
 package graficos;
 
 import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import juego.Ventana;
 
@@ -20,10 +24,13 @@ import utils.Utils;
 public class ContainerJuego extends JPanel implements Actualizable{
 	private ArrayList<Chocable> lista;
 	private Ventana[][][] mapas;
+	private int offset = 0;
+	private int visualOffset = 0;
 	public ContainerJuego(ArrayList<Chocable> lista,Ventana[][][] mapas){
 		super();
-		pasarInfo(lista,mapas);
-		this.setBounds(0,0,800,640);
+		pasarInfo(lista,mapas);		
+		this.setBounds(100,20,360,380);
+		this.setBorder(new EmptyBorder(0,0,0,0));
 	}
 	public void pasarInfo(ArrayList<Chocable> lista,Ventana[][][] mapas){
 		this.lista = lista;
@@ -32,10 +39,11 @@ public class ContainerJuego extends JPanel implements Actualizable{
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		File archivo = new File("res/img/edificio/edificio_150_seccion1.png");
+		File archivo = new File("res/img/edificio/edificio.png");
 		try {
-			Image fondo = ImageIO.read(archivo);
-			g.drawImage(fondo, 242, 0, null);
+			BufferedImage fondo = ImageIO.read(archivo);
+			int y = visualOffset-648;
+			g.drawImage(fondo, 0, y, null);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -43,8 +51,12 @@ public class ContainerJuego extends JPanel implements Actualizable{
 			for(int j = 0;j<Utils.numPisos;j++){
 				for(int i = 0;i<Utils.numCols;i++){
 					Posicion aux = new Posicion(i,k*Utils.numPisos+j);
-					if(mapas[k][j][i]==null){ System.out.println("null"); continue;}
-					g.drawImage(mapas[k][j][i].getImage(), inPx(aux).getX(), inPx(aux).getY(), null);
+					BufferedImage imagen = mapas[k][j][i].getImage();
+					int y = aux.inPx(imagen).getY()+visualOffset;
+					if(k==0 && i==2 && j!=2)
+						y+=15;
+					g.drawImage(imagen,aux.inPx(imagen).getX(),y, null);
+					//System.out.println(aux.inPx(imagen).getY()+" - "+imagen.getHeight()+aux.toString());
 				}
 			}
 		}
@@ -52,18 +64,29 @@ public class ContainerJuego extends JPanel implements Actualizable{
 			if(c!=null){
 				//System.out.println(c.toString() +" = "+ inPx(c.getPos()).getX() +","+ inPx(c.getPos()).getY());
 				//System.out.println(c.getImage());
-				g.drawImage(c.getImage(), inPx(c.getPos()).getX(), inPx(c.getPos()).getY(), null);
+				int y = c.getPos().inPx(c.getImage()).getY();
+				g.drawImage(c.getImage(), c.getPos().inPx(c.getImage()).getX(), y, null);
 			}
 		}
 	}
 	
-	private Posicion inPx(Posicion pos){
+	private Posicion inPx(Posicion pos,int oWidth, int oHeight){
 		int x = pos.getX();
 		int y = pos.getY();
 		return new Posicion(242+30+50*x,640-78-100*y);
 	}
+	
 	@Override
 	public void actualizar() {
 		this.repaint();
+		if(this.offset>this.visualOffset){
+			this.visualOffset+=10;
+		}
+	}
+	public void incOffset(){
+		offset+=210;
+	}
+	public void reset(){
+		offset=0;
 	}
 }

@@ -1,6 +1,7 @@
 package personajes;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -25,8 +26,10 @@ public abstract class Chocable implements Actualizable {
 	private int subPos = 1;
 	private int subGrillas;
 	
-	private Image img;
-	private boolean toogle = false;
+	private BufferedImage img;
+	private BufferedImage auxImg;
+	
+	protected int timerImagen = 0;
 	
 	public Chocable(Posicion pos,int v) {
 		this.pos = pos;
@@ -64,21 +67,29 @@ public abstract class Chocable implements Actualizable {
 	public void setPos(Posicion pos){
 		this.pos = new Posicion(pos);
 	}
-	protected void setImage(String url1,String url2){
-		String res;
-		if(toogle){
-			res =url1;
-		}else{
-			res=url2;
-		}
-		toogle = !toogle;
+	private BufferedImage setImage(String url){
 		try {
-			img = ImageIO.read(new File(res));
+			BufferedImage i = ImageIO.read(new File(url));
+			return i;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
-	public Image getImage(){
-		return this.img;
+	public BufferedImage getImage(){
+		if(this.timerImagen==0) {
+			return this.img;
+		}
+		return this.auxImg;
+	}
+	protected void setAuxImage(String url){
+		auxImg = setImage(url);
+		timerImagen=5;
+	}
+	protected void setBaseImage(String url){
+		img = setImage(url);
+	}
+	protected void refresh(){
+		if(this.timerImagen>0) timerImagen--;
 	}
 }

@@ -9,6 +9,7 @@ import personajes.Ralph;
 import utils.Actualizable;
 import utils.Direccion;
 import utils.Evento;
+import utils.Posicion;
 import utils.Utils;
 import utils.Evento.EventoID;
 /**
@@ -44,6 +45,7 @@ public class Contexto implements Actualizable{
 	 * @throws Evento 
 	 */
 	public void terminarJuego() throws Evento{
+		System.out.println("lo diste vuelta");
 		throw new Evento(EventoID.TERMINAJUEGO,new Integer(puntaje));
 	}
 	/**
@@ -53,7 +55,6 @@ public class Contexto implements Actualizable{
 	public void agregarPuntos(int puntaje) {
 		this.puntaje += puntaje;
 	}
-	
 	
 	/**
 	 * Devuelve a F&eacute;lix
@@ -99,7 +100,16 @@ public class Contexto implements Actualizable{
 			if(e.getId()==EventoID.TERMINAJUEGO){
 				this.terminarJuego();
 			}else if(e.getId()==EventoID.GANANIVEL){
-				this.nivel = new Nivel(nivel.getNro());
+				if(this.nivel.getNro()<10){
+					this.nivel = new Nivel(nivel.getNro()+1);
+					System.out.println("nivel= "+nivel.getNro());
+				}else{
+					this.terminarJuego();
+				}
+				throw new Evento(EventoID.GANANIVEL);
+			}else if(e.getId()==EventoID.GANASECCION){
+				felix.setPos(new Posicion(felix.getPos().getX(),0));
+				throw new Evento(EventoID.GANASECCION);
 			}
 		}
 		for(Chocable chocable: chocables){

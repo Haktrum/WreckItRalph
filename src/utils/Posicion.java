@@ -1,5 +1,7 @@
 package utils;
 
+import java.awt.image.BufferedImage;
+
 /**
  * Modela una posici&oacute; dentro del juego
  *
@@ -48,8 +50,14 @@ public class Posicion {
 		return false;
 	}
 	
-	public Posicion inPx(){
-		return new Posicion(x*20,340-y*20);
+	public Posicion inPx(BufferedImage im){
+		int izq = (int) im.getWidth()/2;
+		int sup = im.getHeight();
+		// (padding edificio-mitad del ancho+x*60,altotoal-60-alto-y*70)
+		return new Posicion(60-izq+x*60,360-sup-y*78);
 	}
-
+	@Override
+	public String toString(){
+		return " - ("+x+","+y+")";
+	}
 }

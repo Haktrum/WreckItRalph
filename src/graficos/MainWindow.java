@@ -14,13 +14,13 @@ import personajes.Chocable;
 
 
 
-public class MainWindow implements Actualizable{
+public class MainWindow{
 	private JFrame frame;
 	
 	public MainWindow(KeyListener kl) {
 		this.frame = new JFrame();
 		this.frame.setVisible(true);
-		this.frame.setResizable(false);
+		this.frame.setResizable(true);
 		this.frame.setFocusable(true);
 		this.frame.requestFocusInWindow();
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -35,12 +35,6 @@ public class MainWindow implements Actualizable{
 	
 	//tira ir menu o ir juego
 	
-	@Override
-	public void actualizar(){
-		Container p = frame.getContentPane();
-		if(p instanceof ContainerJuego)
-			((ContainerJuego) p).actualizar();
-	}
 	public void flechaIzq(){
 		Container p = frame.getContentPane();
 		if(p instanceof ContainerMenu){
@@ -81,9 +75,4 @@ public class MainWindow implements Actualizable{
 	public void escape(){
 		this.setContentPane(new ContainerMenu());
 	}
-	public void pasarInfo(ArrayList<Chocable> l,Ventana[][][] mapas){
-		Container p = frame.getContentPane();
-		((ContainerJuego) p).pasarInfo(l,mapas);
-	}
-
 }

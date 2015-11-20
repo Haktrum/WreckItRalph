@@ -1,6 +1,7 @@
 package juego;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
@@ -36,7 +37,7 @@ public class Ventana implements Actualizable{
 	/** Tiempo que estar&aacute; el pastel sobre la ventana*/
 	private int timerPastel = 0;
 
-	private Image img;
+	private BufferedImage img;
 	/**
 	 * Crea una ventana del Tipo tipo
 	 * @param tipo Tipo de Ventana
@@ -88,7 +89,7 @@ public class Ventana implements Actualizable{
 			e.printStackTrace();
 		}
 	}
-	public Image getImage(){
+	public BufferedImage getImage(){
 		return img;
 	}
 	/**
@@ -144,6 +145,9 @@ public class Ventana implements Actualizable{
 		}
 		if (i == tipo.paneles) roto = i * 2;
 		this.actualizar();
+		if(tipo==Tipo.SEMICIRCULAR){
+			roto = 0;
+		}
 		return roto > 0 ? 1 : 0;
 	}
 	
@@ -183,6 +187,9 @@ public class Ventana implements Actualizable{
 			break;
 		case PUERTA:
 			url = Utils.urlPuerta(roto);
+			break;
+		case SEMICIRCULAR:
+			url = "res/img/semicirculares/semicircular.png";
 			break;
 		default:
 			url = Utils.urlPuerta(roto);

@@ -54,7 +54,7 @@ public class Seccion{
 	public void puertaYBalcon(){
 		int medio = (int) ((COLS-1) / 2);
 		mapa[0][medio] = new Ventana(Tipo.PUERTA);
-		mapa[1][medio] = new Ventana(Tipo.PUERTA);
+		mapa[1][medio] = new Ventana(Tipo.SEMICIRCULAR);
 	}
 	public void imprimir(){
 		for(int j = ROWS-1;j>=0;j--){
