@@ -7,7 +7,6 @@ import java.awt.event.KeyListener;
 import utils.Direccion;
 import utils.Evento;
 import utils.Evento.EventoID;
-import utils.Posicion;
 import graficos.ContainerConfig;
 import graficos.ContainerJuego;
 import graficos.ContainerMenu;

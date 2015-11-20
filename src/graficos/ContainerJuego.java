@@ -1,9 +1,6 @@
 package graficos;
 
 import java.awt.Graphics;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -56,14 +53,11 @@ public class ContainerJuego extends JPanel implements Actualizable{
 					if(k==0 && i==2 && j!=2)
 						y+=15;
 					g.drawImage(imagen,aux.inPx(imagen).getX(),y, null);
-					//System.out.println(aux.inPx(imagen).getY()+" - "+imagen.getHeight()+aux.toString());
 				}
 			}
 		}
 		for(Chocable c: lista){
 			if(c!=null){
-				//System.out.println(c.toString() +" = "+ inPx(c.getPos()).getX() +","+ inPx(c.getPos()).getY());
-				//System.out.println(c.getImage());
 				int y = c.getPos().inPx(c.getImage()).getY();
 				g.drawImage(c.getImage(), c.getPos().inPx(c.getImage()).getX(), y, null);
 			}
@@ -84,9 +78,10 @@ public class ContainerJuego extends JPanel implements Actualizable{
 		}
 	}
 	public void incOffset(){
-		offset+=210;
+		offset+=235;
 	}
 	public void reset(){
 		offset=0;
+		visualOffset=0;
 	}
 }

@@ -1,5 +1,6 @@
 package juego;
 
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -45,10 +46,8 @@ public class Ventana implements Actualizable{
 	public Ventana (Tipo tipo) {
 		this.tipo = tipo;
 		Random random = new Random();
-		//this.MOLDURA = tipo.arribaAbajo && random.nextBoolean();
-		this.MOLDURA = false;
-		this.MACETERO = false;
-		//this.MACETERO = tipo.arribaAbajo && random.nextBoolean();
+		this.MOLDURA = tipo.arribaAbajo && random.nextBoolean();
+		this.MACETERO = tipo.arribaAbajo && random.nextBoolean();
 		this.HOJA_IZQ = tipo.izq && random.nextBoolean();
 		this.HOJA_DER = tipo.der && random.nextBoolean();
 		this.actualizar();
@@ -83,11 +82,22 @@ public class Ventana implements Actualizable{
 		this.felixesta = b;
 	}
 	private void setImage(String url){
+		Image moldura = null;
+		Image macetero = null;
 		try {
 			img = ImageIO.read(new File(url));
+			moldura = ImageIO.read(new File("res/img/obstaculos/moldura.png"));
+			macetero = ImageIO.read(new File("res/img/obstaculos/macetero.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		Graphics2D g =(Graphics2D) img.getGraphics();
+		g.drawImage(img, 0, 0, null);
+		if(this.MOLDURA)
+			g.drawImage(moldura, 0, 0, null);
+		if(this.MACETERO)
+			g.drawImage(macetero, 5, img.getWidth(), null);
+		
 	}
 	public BufferedImage getImage(){
 		return img;

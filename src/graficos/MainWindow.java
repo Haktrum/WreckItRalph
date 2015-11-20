@@ -2,16 +2,7 @@ package graficos;
 
 import java.awt.Container;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
-
-import utils.Actualizable;
-
 import javax.swing.JFrame;
-
-import juego.Ventana;
-
-import personajes.Chocable;
-
 
 
 public class MainWindow{

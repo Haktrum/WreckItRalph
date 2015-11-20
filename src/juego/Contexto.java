@@ -93,7 +93,6 @@ public class Contexto implements Actualizable{
 	//tira termina juego
 	@Override
 	public void actualizar() throws Evento{
-		//System.out.println("felix = "+felix.getPos().getX()+","+felix.getPos().getY());
 		try {
 			nivel.actualizar();
 		} catch (Evento e) {
@@ -102,7 +101,7 @@ public class Contexto implements Actualizable{
 			}else if(e.getId()==EventoID.GANANIVEL){
 				if(this.nivel.getNro()<10){
 					this.nivel = new Nivel(nivel.getNro()+1);
-					System.out.println("nivel= "+nivel.getNro());
+					this.felix.setPos(new Posicion(0,0));
 				}else{
 					this.terminarJuego();
 				}
