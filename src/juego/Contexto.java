@@ -132,8 +132,7 @@ public class Contexto implements Actualizable{
 				case SALTA:
 					Integer ladrillos = (Integer) e.getParam();
 					while(ladrillos-- >0){
-						Random r = new Random();
-						paraAgregar.add(new Ladrillo(new Posicion(r.nextInt(Utils.numCols),3)));
+						paraAgregar.add(new Ladrillo(new Posicion(ralph.getPos().getX(),2)));
 					}
 					break;
 				default:

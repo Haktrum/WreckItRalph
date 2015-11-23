@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import utils.Direccion;
 import utils.Evento;
+import utils.Utils;
 import utils.Evento.EventoID;
 import graficos.ContainerConfig;
 import graficos.ContainerJuego;
@@ -27,6 +28,7 @@ public class Controlador implements ActionListener{
 		//this.irMenu();
 		KeyListener kl = new MiKeyListener();
 		window = new MainWindow(kl);
+		window.setTitulo("Wreck It Ralph");
 	}
 	public void setCorriendo(boolean b){
 		corriendo = b;
@@ -103,6 +105,7 @@ public class Controlador implements ActionListener{
 					panelJuego.incOffset();
 				}else if(ex.getId()==EventoID.GANANIVEL){
 					panelJuego.reset();
+					window.setTitulo("Wreck It Ralph - Nivel "+Utils.nivelActual);
 				}
 			}
 		}

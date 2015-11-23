@@ -4,6 +4,9 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import javax.imageio.ImageIO;
 
@@ -22,15 +25,15 @@ import utils.Utils;
  */
 public abstract class Chocable implements Actualizable {
 	protected Posicion pos;
-	
-	private int subPos = 0;
-	private int subGrillas = 100;
+	protected int subPosX = 0;
+	protected int subPosY = 0;
+	private int subGrillas = Utils.cellWidth;
 	private int velocidad;
-	private BufferedImage img;
-	private BufferedImage auxImg;
+	private int timerImagen = 0;
 	
-	protected int timerImagen = 0;
-	
+	protected ArrayList<BufferedImage> imagenes = new ArrayList<BufferedImage>();
+	protected Queue<REQ> requests = new LinkedList<REQ>();
+	private int imagenActual = 0;
 	public Chocable(Posicion pos) {
 		this.pos = pos;
 		this.velocidad = 0;
@@ -38,6 +41,9 @@ public abstract class Chocable implements Actualizable {
 	public Chocable(Posicion pos,int v) {
 		this.pos = pos;
 		this.velocidad = v;
+	}
+	protected void agregarImagen(String url){
+		imagenes.add(setImage(url));
 	}
 	/**
 	 * Verifica el choque de dos elementos
@@ -55,14 +61,30 @@ public abstract class Chocable implements Actualizable {
 	 * @param dir Direcci&oacute;n a moverse
 	 */
 	protected void mover(Direccion dir) throws Evento{
-		if(subPos==subGrillas){
-			pos.go(dir);
-			if (dir == Direccion.ABAJO && pos.getY() < 0) {
-				throw new Evento(EventoID.OFF_SCREEN,this);
+		if(dir==Direccion.DERECHA){
+			if(subPosX>=subGrillas){
+				pos.go(dir);
+				subPosX= subPosX+velocidad-subGrillas;
+			}else{
+				subPosX+=velocidad;
 			}
-			subPos=0;
+		}else if(dir==Direccion.IZQUIERDA){
+			if(subPosX<=0){
+				pos.go(dir);
+				subPosX=subGrillas+subPosX-velocidad;
+			}else{
+				subPosX-=velocidad;
+			}
 		}else{
-			subPos+=velocidad;
+			if(subPosY>=subGrillas){
+				pos.go(dir);
+				subPosY+=subPosY+velocidad-subGrillas;
+			}else{
+				subPosY+=velocidad;
+			}
+		}
+		if (dir == Direccion.ABAJO && pos.getY() < 0) {
+			throw new Evento(EventoID.OFF_SCREEN,this);
 		}
 	}
 	public Posicion getPos() {
@@ -81,22 +103,57 @@ public abstract class Chocable implements Actualizable {
 		return null;
 	}
 	public BufferedImage getImage(){
-		if(this.timerImagen==0) {
-			return this.img;
+		return imagenes.get(imagenActual);
+	}
+	
+	protected void toggleREQ(REQ r1, REQ r2){
+		if(!requests.isEmpty()){
+			if(requests.element().equals(r1)){
+				requests.add(r2);
+			}else{
+				requests.add(r1);
+			}
 		}
-		return this.auxImg;
 	}
-	protected void setAuxImage(String url){
-		auxImg = setImage(url);
-		timerImagen=5;
-	}
-	protected void setBaseImage(String url){
-		img = setImage(url);
-	}
+	
 	protected void refresh(){
-		if(this.timerImagen>0) timerImagen--;
+		if(timerImagen==0){
+			REQ r = requests.poll();
+			if(r!=null){
+				imagenActual = r.getP();
+				timerImagen = r.getT();
+			}else{
+				imagenActual=0;
+			}
+		}else{
+			timerImagen--;
+		}
 	}
-	public int getSubPos(){
-		return this.subPos;
+	public int getSubX(){
+		return this.subPosX;
+	}
+	public int getSubY(){
+		return this.subPosY;
+	}
+	protected class REQ{
+		private int pos;
+		private int tiempo;
+		
+		public REQ(int pos,int tiempo){
+			this.pos=pos;
+			this.tiempo=tiempo;
+		}
+		public int getT(){
+			return this.tiempo;
+		}
+		public int getP(){
+			return this.pos;
+		}
+		@Override
+		public boolean equals(Object otro){
+			if(otro instanceof REQ)
+				return this.pos==((REQ) otro).pos;
+			return false;
+		}
 	}
 }

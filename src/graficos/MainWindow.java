@@ -66,4 +66,7 @@ public class MainWindow{
 	public void escape(){
 		this.setContentPane(new ContainerMenu());
 	}
+	public void setTitulo(String titulo){
+		frame.setTitle(titulo);
+	}
 }

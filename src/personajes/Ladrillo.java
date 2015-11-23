@@ -1,6 +1,7 @@
 package personajes;
 
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 import utils.Direccion;
 import utils.Evento;
@@ -12,11 +13,11 @@ import utils.Evento.EventoID;
  *
  */
 public class Ladrillo extends Chocable {
-
 	public Ladrillo(Posicion pos) {
 		super(pos,Utils.vLadrillo);
-		super.setBaseImage("res/img/rocas/ladrillo1.png");
-		super.setAuxImage("res/img/rocas/ladrillo2.png");
+		super.agregarImagen("res/img/rocas/ladrillo1.png");
+		super.agregarImagen("res/img/rocas/ladrillo2.png");
+		super.subPosX = Utils.RANDOM.nextInt(21)-10;
 	}
 	/**
 	 * El ladrillo cae
@@ -24,7 +25,7 @@ public class Ladrillo extends Chocable {
 	@Override
 	public void actualizar() throws Evento{
 		super.refresh();
+		super.toggleREQ(new REQ(0,5),new REQ(1,5));
 		super.mover(Direccion.ABAJO);
-		
 	}
 }

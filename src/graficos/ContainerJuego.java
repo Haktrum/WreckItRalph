@@ -15,6 +15,7 @@ import juego.Ventana;
 import personajes.Chocable;
 import personajes.Felix;
 import personajes.Ladrillo;
+import personajes.Ralph;
 
 import utils.Actualizable;
 import utils.Posicion;
@@ -51,22 +52,17 @@ public class ContainerJuego extends JPanel implements Actualizable{
 				for(int i = 0;i<Utils.numCols;i++){
 					Posicion aux = new Posicion(i,k*Utils.numPisos+j);
 					BufferedImage imagen = mapas[k][j][i].getImage();
-					int y = aux.inPx(imagen).getY()+visualOffset;
-					if(k==0 && i==2 && j!=2)
-						y+=15;
-					g.drawImage(imagen,aux.inPx(imagen).getX(),y, null);
+					int y = aux.inPx().getY()+visualOffset;
+					//if(k==0 && i==2 && j!=2)
+						//y+=15;
+					g.drawImage(imagen,aux.inPx().getX(),y, null);
 				}
 			}
 		}
 		for(Chocable c: lista){
 			if(c!=null){
-				int y = c.getPos().inPx(c.getImage()).getY();
-				int x = c.getPos().inPx(c.getImage()).getX();
-				if(c instanceof Ladrillo){
-					y += c.getSubPos();
-				}else{
-					x +=c.getSubPos();
-				}
+				int y = c.getPos().inPx().getY()+c.getSubY();
+				int x = c.getPos().inPx().getX()+c.getSubX();
 				g.drawImage(c.getImage(),x, y, null);
 			}
 		}
@@ -86,7 +82,7 @@ public class ContainerJuego extends JPanel implements Actualizable{
 		}
 	}
 	public void incOffset(){
-		offset+=235;
+		offset+=252;
 	}
 	public void reset(){
 		offset=0;

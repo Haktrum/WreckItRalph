@@ -6,11 +6,11 @@ import java.util.Random;
 
 public class Utils {
 	/** Veolocidad inicial del pajaro */
-	public static final int vPajaro = 5;
+	public static final int vPajaro = 4;
 	/** Veolocidad inicial del ladrillo */
-	public static final int vLadrillo = 2;
+	public static final int vLadrillo = 4;
 	/** Veolocidad inicial del ladrillo */
-	public static final int vRalph = 5;
+	public static final int vRalph = 4;
 	/** Cantidad inicial de ladrillos que tiene Ralph */
 	public static final int ladrillosRalph = 40;
 	/** Tama&ntilde;o de la lista de actualizables */
@@ -44,6 +44,10 @@ public class Utils {
 	
 	public static final String BASE_IMG = "res/img/";
 	
+	public static final int cellWidth = 62;
+	
+	public static final int cellHeight = 84;
+	
 	public static int nivelActual = 1;
 	
 	/**
@@ -53,6 +57,7 @@ public class Utils {
 	 * @param p probabilidad de true en el nivel 1
 	 * @return boolean al azar
 	 */
+	public static Random RANDOM = new Random();
 	
 	public static int dificultar(int n,boolean inc){
 		if(inc)
@@ -64,9 +69,8 @@ public class Utils {
 	 * @param paneles
 	 * @return
 	 */
-	public int randomInt(int paneles) {
-		Random random = new Random();
-		int r = random.nextInt(100);
+	public static int randomInt(int paneles) {
+		int r = RANDOM.nextInt(100);
 		double sum = 0;
 		for (int i = 0; i < paneles; i++) {
 			sum += 100D / Math.pow(2, i + 1) * (1 - (Utils.nivelActual - 1) * Utils.incDif);
@@ -84,9 +88,8 @@ public class Utils {
 	 * @param p2 probabilidad de 2 en el nivel 1
 	 * @return 0, 2 o 4. Al azar
 	 */
-	public int ponderar(int p1, int p2) {
-		Random gen = new Random();
-		int t = gen.nextInt(100);
+	public static int ponderar(int p1, int p2) {
+		int t = RANDOM.nextInt(100);
 		p1 = Utils.dificultar(p1,true);
 		p2 = Utils.dificultar(p2,true);
 		//p1 *= (1 + (this.nivelActual() - 1) * .15);
@@ -97,8 +100,7 @@ public class Utils {
 	}
 	// p = probabiliadad de true
 	public static boolean randomBoolean(int p) {
-		Random gen = new Random();
-		int t = gen.nextInt(100); 
+		int t = RANDOM.nextInt(100); 
 		return t <= (p * (1 + (Utils.nivelActual - 1) * Utils.incDif));
 	}
 	

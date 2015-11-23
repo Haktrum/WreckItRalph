@@ -50,11 +50,9 @@ public class Posicion {
 		return false;
 	}
 	
-	public Posicion inPx(BufferedImage im){
-		int izq = (int) im.getWidth()/2;
-		int sup = im.getHeight();
+	public Posicion inPx(){
 		// (padding edificio-mitad del ancho+x*60,altotoal-60-alto-y*70)
-		return new Posicion(60-izq+x*60,360-sup-y*78);
+		return new Posicion(25+x*Utils.cellWidth,360-Utils.cellHeight*(y+1));
 	}
 	@Override
 	public String toString(){

@@ -17,9 +17,16 @@ public class Felix extends Chocable{
 	/** Vidas restantes */
 	private int vidas = Utils.vidasPorNivel;
 	
+	private final int FELIX = 0;
+	private final int FELIX_IZQ = 1;
+	private final int FELIX_DER = 2;
+	private final int FELIX_MARTILLA = 3;
 	public Felix(){
 		super(new Posicion(0,0));
-		super.setBaseImage("res/img/felix/felix.png");
+		super.agregarImagen("res/img/felix/felix.png");
+		super.agregarImagen("res/img/felix/felix_izq.png");
+		super.agregarImagen("res/img/felix/felix_der.png");
+		super.agregarImagen("res/img/felix/felix_martilla.png");
 	}
 	/**
 	 * Se mueve dentro de la secci&oacute;n si es posible
@@ -28,10 +35,10 @@ public class Felix extends Chocable{
 	@Override
 	public void mover(Direccion dir){
 		if(dir==Direccion.IZQUIERDA || dir==Direccion.ABAJO){
-			super.setAuxImage("res/img/felix/felix_izq.png");
+			super.requests.add(new REQ(FELIX_IZQ,5));
 		}
 		if(dir==Direccion.DERECHA || dir==Direccion.ARRIBA){
-			super.setAuxImage("res/img/felix/felix_der.png");
+			super.requests.add(new REQ(FELIX_DER,5));
 		}
 		super.pos.go(dir);
 	}
@@ -59,7 +66,7 @@ public class Felix extends Chocable{
 		return timerInvulnerable > 0;
 	}
 	public void martillar(){
-		super.setAuxImage("res/img/felix/felix_martilla.png");
+		super.requests.add(new REQ(FELIX_MARTILLA,5));
 	}
 	/**
 	 * Simula un choque con un objeto

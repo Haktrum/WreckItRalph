@@ -95,7 +95,7 @@ public class Ventana implements Actualizable{
 		if(this.MOLDURA)
 			g.drawImage(moldura, 0, 0, null);
 		if(this.MACETERO)
-			g.drawImage(macetero, 5, img.getWidth(), null);
+			g.drawImage(macetero, 0, img.getWidth(), null);
 		
 	}
 	public BufferedImage getImage(){
