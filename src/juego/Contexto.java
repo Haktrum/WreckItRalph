@@ -46,7 +46,6 @@ public class Contexto implements Actualizable{
 	 * @throws Evento 
 	 */
 	public void terminarJuego() throws Evento{
-		System.out.println("lo diste vuelta");
 		throw new Evento(EventoID.TERMINAJUEGO,new Integer(puntaje));
 	}
 	/**
@@ -106,6 +105,8 @@ public class Contexto implements Actualizable{
 				}else{
 					this.terminarJuego();
 				}
+				felix = new Felix();
+				ralph = new Ralph();
 				throw new Evento(EventoID.GANANIVEL);
 			}else if(e.getId()==EventoID.GANASECCION){
 				felix.setPos(new Posicion(felix.getPos().getX(),0));
@@ -116,8 +117,12 @@ public class Contexto implements Actualizable{
 		ArrayList<Chocable> paraEliminar = new ArrayList<Chocable>();
 		for(Chocable chocable: chocables){
 			try{
-				if(chocable!=null)
+				if(chocable!=null){
 					chocable.actualizar();
+					if(!(chocable instanceof Felix)){
+						felix.chequearChoque(chocable);
+					}
+				}
 			}catch(Evento e){
 				switch(e.getId()){
 				case CHAU_PASTEL:

@@ -40,7 +40,7 @@ public class Utils {
 	/** Tiempo de invulnerabilidad de F&eacute;lix */
 	public static final int tiempoInvulnerable = 100;
 	/** Probabilidad de que Ralph tire ladrillos */
-	public static final int probTirar = 4;
+	public static final int probTirar = 60;
 	
 	public static final String BASE_IMG = "res/img/";
 	

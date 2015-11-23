@@ -42,7 +42,7 @@ public class ContainerJuego extends JPanel implements Actualizable{
 		File archivo = new File("res/img/edificio/edificio.png");
 		try {
 			BufferedImage fondo = ImageIO.read(archivo);
-			int y = visualOffset-648;
+			int y = visualOffset-548;
 			g.drawImage(fondo, 0, y, null);
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -45,15 +45,6 @@ public abstract class Chocable implements Actualizable {
 		imagenes.add(setImage(url));
 	}
 	/**
-	 * Verifica el choque de dos elementos
-	 * @param felix objeto a chocar
-	 */
-	public void chequearChoque(Felix felix) throws Evento{
-		if (pos.equals(felix.getPos())) {
-			felix.chocar(this);
-		}
-	}
-	/**
 	 * Mueve el objeto en cierta direcci&oacute;n.
 	 * Se divide cada posici&oacute; en subposiciones
 	 * para variar la velocidad de los objetos

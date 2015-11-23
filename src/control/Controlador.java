@@ -106,6 +106,9 @@ public class Controlador implements ActionListener{
 				}else if(ex.getId()==EventoID.GANANIVEL){
 					panelJuego.reset();
 					window.setTitulo("Wreck It Ralph - Nivel "+Utils.nivelActual);
+				}else if(ex.getId()==EventoID.TERMINAJUEGO){
+					ctx=null;
+					window.setContentPane(new ContainerMenu());
 				}
 			}
 		}

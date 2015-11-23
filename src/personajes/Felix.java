@@ -70,10 +70,19 @@ public class Felix extends Chocable{
 		super.requests.add(new REQ(FELIX,1));
 	}
 	/**
+	 * Verifica el choque de dos elementos
+	 * @param felix objeto a chocar
+	 */
+	public void chequearChoque(Chocable c) throws Evento{
+		if (pos.equals(c.getPos())) {
+			this.chocar(c);
+		}
+	}
+	/**
 	 * Simula un choque con un objeto
 	 * @param c Objeto a chocar
 	 */
-	public void chocar(Chocable c) throws Evento{
+	private void chocar(Chocable c) throws Evento{
 		if(!this.esInvulnerable()){
 			if (c.getClass() == Ladrillo.class) {
 				vidas--;
@@ -81,12 +90,16 @@ public class Felix extends Chocable{
 					throw new Evento(EventoID.TERMINAJUEGO);
 				}
 				this.setPos(new Posicion(0,0));
+				timerInvulnerable = 20;
+				throw new Evento(EventoID.OFF_SCREEN,c);
 			}
 			if (c.getClass() == Pajaro.class) {
 				vidas--;
 				if(vidas==0){
 					throw new Evento(EventoID.TERMINAJUEGO);
 				}
+				timerInvulnerable = 20;
+				throw new Evento(EventoID.OFF_SCREEN,c);
 			}
 		}
 		if(c.getClass() == Pastel.class){
