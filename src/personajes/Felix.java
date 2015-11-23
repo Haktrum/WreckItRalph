@@ -35,10 +35,10 @@ public class Felix extends Chocable{
 	@Override
 	public void mover(Direccion dir){
 		if(dir==Direccion.IZQUIERDA || dir==Direccion.ABAJO){
-			super.requests.add(new REQ(FELIX_IZQ,5));
+			super.requests.add(new REQ(FELIX_IZQ,3));
 		}
 		if(dir==Direccion.DERECHA || dir==Direccion.ARRIBA){
-			super.requests.add(new REQ(FELIX_DER,5));
+			super.requests.add(new REQ(FELIX_DER,3));
 		}
 		super.pos.go(dir);
 	}
@@ -66,7 +66,8 @@ public class Felix extends Chocable{
 		return timerInvulnerable > 0;
 	}
 	public void martillar(){
-		super.requests.add(new REQ(FELIX_MARTILLA,5));
+		super.requests.add(new REQ(FELIX_MARTILLA,3));
+		super.requests.add(new REQ(FELIX,1));
 	}
 	/**
 	 * Simula un choque con un objeto

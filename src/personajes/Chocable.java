@@ -27,7 +27,6 @@ public abstract class Chocable implements Actualizable {
 	protected Posicion pos;
 	protected int subPosX = 0;
 	protected int subPosY = 0;
-	private int subGrillas = Utils.cellWidth;
 	private int velocidad;
 	private int timerImagen = 0;
 	
@@ -62,29 +61,30 @@ public abstract class Chocable implements Actualizable {
 	 */
 	protected void mover(Direccion dir) throws Evento{
 		if(dir==Direccion.DERECHA){
-			if(subPosX>=subGrillas){
+			if(subPosX>=Utils.cellWidth){
 				pos.go(dir);
-				subPosX= subPosX+velocidad-subGrillas;
+				subPosX= subPosX-Utils.cellWidth;
 			}else{
 				subPosX+=velocidad;
 			}
 		}else if(dir==Direccion.IZQUIERDA){
 			if(subPosX<=0){
 				pos.go(dir);
-				subPosX=subGrillas+subPosX-velocidad;
+				subPosX=Utils.cellWidth+subPosX;
 			}else{
 				subPosX-=velocidad;
 			}
-		}else{
-			if(subPosY>=subGrillas){
+		}else if(dir==Direccion.ABAJO){
+			if(subPosY>=Utils.cellHeight){
 				pos.go(dir);
-				subPosY+=subPosY+velocidad-subGrillas;
+				subPosY=subPosY-Utils.cellHeight;
 			}else{
 				subPosY+=velocidad;
 			}
-		}
-		if (dir == Direccion.ABAJO && pos.getY() < 0) {
-			throw new Evento(EventoID.OFF_SCREEN,this);
+			if(pos.getY()<0){
+				this.requests.removeAll(requests);
+				throw new Evento(EventoID.OFF_SCREEN,this);
+			}
 		}
 	}
 	public Posicion getPos() {

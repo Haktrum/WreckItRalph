@@ -22,7 +22,7 @@ public class Ralph extends Chocable {
 	private final REQ RALPH_IZQ1 = new REQ(1,5);
 	private final REQ RALPH_IZQ2 = new REQ(2,5);
 	private final REQ RALPH_SALTA = new REQ(3,10);
-	private int timerAccion = 50;
+	private int timerAccion = 0;
 	private int movs=0;
 	public Ralph(){
 		super(new Posicion(0,Utils.numPisos),Utils.vRalph);
@@ -67,9 +67,13 @@ public class Ralph extends Chocable {
 					}
 				}else{
 					//super.setBaseImage("res/img/ralph/ralph.png");
-					if (Utils.randomBoolean(Utils.dificultar(Utils.probTirar,true))) {
-						super.requests.add(RALPH_SALTA);
-						//throw new Evento (EventoID.SALTA,saltar());
+					if (Utils.randomBoolean(Utils.dificultar(Utils.probTirar, true))) {
+						try{
+							throw new Evento (EventoID.SALTA,saltar());
+						}finally{
+							super.requests.add(RALPH_SALTA);
+							timerAccion=50;
+						}
 					}
 				}
 				timerAccion=50;
@@ -96,7 +100,6 @@ public class Ralph extends Chocable {
 		Posicion nueva = this.getPos().potencial(dir);
 		int x = nueva.inPx().getX();
 		int limite = (new Posicion(Utils.numCols-1,3)).inPx().getX();
-		System.out.println("nueva = "+x+", limite = "+limite);
 		if (x >= 0 && x < limite) {
 			try {
 				super.mover(dir);

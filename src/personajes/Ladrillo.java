@@ -14,7 +14,7 @@ import utils.Evento.EventoID;
  */
 public class Ladrillo extends Chocable {
 	public Ladrillo(Posicion pos) {
-		super(pos,Utils.vLadrillo);
+		super(pos,Utils.dificultar(Utils.vLadrillo,true));
 		super.agregarImagen("res/img/rocas/ladrillo1.png");
 		super.agregarImagen("res/img/rocas/ladrillo2.png");
 		super.subPosX = Utils.RANDOM.nextInt(21)-10;
