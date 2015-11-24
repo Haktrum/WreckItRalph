@@ -16,7 +16,7 @@ import utils.Utils;
 public class Ralph extends Chocable {
 	
 	/** Ladrillos iniciales que posee Ralph */
-	private int ladrillosRestantes = 30;
+	private int ladrillosRestantes;
 	
 	private final REQ RALPH = new REQ(0,5);
 	private final REQ RALPH_IZQ1 = new REQ(1,5);
@@ -26,7 +26,7 @@ public class Ralph extends Chocable {
 	private int movs=0;
 	public Ralph(){
 		super(new Posicion(0,Utils.numPisos),Utils.vRalph);
-		this.ladrillosRestantes = Utils.dificultar(this.ladrillosRestantes,true);
+		this.ladrillosRestantes = Utils.dificultar(Utils.ladrillosRalph,true);
 		super.agregarImagen("res/img/ralph/ralph.png");
 		super.agregarImagen("res/img/ralph/ralph_izq1.png");
 		super.agregarImagen("res/img/ralph/ralph_izq2.png");
@@ -54,11 +54,11 @@ public class Ralph extends Chocable {
 				super.requests.add(RALPH_IZQ2);
 				movs--;
 			}else{
-				super.requests.removeAll(requests);
+				super.requests.clear();
 				movs=0;
 			}
 		}else{
-			super.requests.removeAll(requests);
+			super.requests.clear();
 			if(timerAccion==0){
 				if (Utils.randomBoolean(50)) {
 					movs = Math.min(Utils.RANDOM.nextInt(Utils.cellWidth),30);

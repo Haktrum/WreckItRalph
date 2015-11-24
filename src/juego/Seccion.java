@@ -26,6 +26,9 @@ public class Seccion{
 	/** Mapa de las ventanas en la secci&oacute;n. (Piso,Ventana)  */
 	private Ventana[][] mapa;
 	
+	private boolean hayPajaro = false;
+	
+	private int proximoPastel = Utils.dificultar(Utils.proximoPastel, false);
 	/**
 	 * Crea una secci&oacute;n de ROWS pisos y COLS ventanas por piso
 	 */
@@ -144,5 +147,22 @@ public class Seccion{
 	}
 	public Ventana[][] getMapa(){
 		return this.mapa;
+	}
+	public boolean hayPajaro(){
+		return this.hayPajaro;
+	}
+	public void hayPajaro(boolean b){
+		this.hayPajaro = b;
+	}
+	public boolean puedoPastel(){
+		return this.proximoPastel==0;
+	}
+	public void nuevoPastel(){
+		this.proximoPastel=Utils.dificultar(Utils.proximoPastel, false);
+	}
+	protected void decProximoPastel(){
+		if(this.proximoPastel>0){
+			this.proximoPastel--;
+		}
 	}
 }

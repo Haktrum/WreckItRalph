@@ -52,7 +52,7 @@ public class Posicion {
 	
 	public Posicion inPx(){
 		// (padding edificio-mitad del ancho+x*60,altotoal-60-alto-y*70)
-		return new Posicion(25+x*Utils.cellWidth,360-Utils.cellHeight*(y+1));
+		return new Posicion(25+x*Utils.cellWidth,410-Utils.cellHeight*(y+1));
 	}
 	@Override
 	public String toString(){

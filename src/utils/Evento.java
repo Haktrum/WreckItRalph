@@ -14,7 +14,7 @@ public class Evento extends Exception{
 	}
 	
 	public enum EventoID{
-		OFF_SCREEN,TERMINAJUEGO,GANASECCION,GANANIVEL,SALTA,CHAU_PASTEL;
+		OFF_SCREEN,TERMINAJUEGO,GANASECCION,GANANIVEL,SALTA;
 	}
 	public EventoID getId(){
 		return this.id;

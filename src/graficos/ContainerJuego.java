@@ -1,5 +1,6 @@
 package graficos;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -29,7 +30,7 @@ public class ContainerJuego extends JPanel implements Actualizable{
 	public ContainerJuego(ArrayList<Chocable> lista,Ventana[][][] mapas){
 		super();
 		pasarInfo(lista,mapas);		
-		this.setBounds(100,20,360,380);
+		this.setBounds(100,20,360,430);
 		this.setBorder(new EmptyBorder(0,0,0,0));
 	}
 	public void pasarInfo(ArrayList<Chocable> lista,Ventana[][][] mapas){
@@ -42,7 +43,7 @@ public class ContainerJuego extends JPanel implements Actualizable{
 		File archivo = new File("res/img/edificio/edificio.png");
 		try {
 			BufferedImage fondo = ImageIO.read(archivo);
-			int y = visualOffset-548;
+			int y = visualOffset-498;
 			g.drawImage(fondo, 0, y, null);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -66,6 +67,9 @@ public class ContainerJuego extends JPanel implements Actualizable{
 				g.drawImage(c.getImage(),x, y, null);
 			}
 		}
+		//puntos vidas y nivel
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, 360, 50);
 	}
 	
 	private Posicion inPx(Posicion pos,int oWidth, int oHeight){

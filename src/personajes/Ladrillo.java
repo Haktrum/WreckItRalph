@@ -13,6 +13,8 @@ import utils.Evento.EventoID;
  *
  */
 public class Ladrillo extends Chocable {
+	private REQ LADRILLO1 = new REQ(0,3);
+	private REQ LADRILLO2 = new REQ(1,3);
 	public Ladrillo(Posicion pos) {
 		super(pos,Utils.dificultar(Utils.vLadrillo,true));
 		super.agregarImagen("res/img/rocas/ladrillo1.png");
@@ -25,7 +27,8 @@ public class Ladrillo extends Chocable {
 	@Override
 	public void actualizar() throws Evento{
 		super.refresh();
-		super.toggleREQ(new REQ(0,5),new REQ(1,5));
+		super.requests.add(LADRILLO1);
+		super.requests.add(LADRILLO2);
 		super.mover(Direccion.ABAJO);
 	}
 }

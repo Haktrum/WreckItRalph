@@ -1,11 +1,14 @@
 package juego;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import personajes.Chocable;
 import personajes.Felix;
 import personajes.Ladrillo;
+import personajes.Pajaro;
+import personajes.Pastel;
 import personajes.Ralph;
 import utils.Actualizable;
 import utils.Direccion;
@@ -27,20 +30,22 @@ public class Contexto implements Actualizable{
 	/** Puntaje inicial */
 	private int puntaje = 0;
 	/** Lista de objetos de car&acute;cter actualizable */
-	
 	private ArrayList<Chocable> chocables = new ArrayList<Chocable>(Utils.maxLista);
 	
 	/** Nivel */
 	private Nivel nivel = null;
 	
 	public Contexto(int lvl){
+		nivel = new Nivel(lvl);
+		this.reiniciar();
+	}
+	private void reiniciar(){
+		chocables.clear();
 		felix = new Felix();
 		ralph = new Ralph();
-		nivel = new Nivel(lvl);
 		chocables.add(felix);
 		chocables.add(ralph);
 	}
-	
 	/**
 	 * Finaliza el juego
 	 * @throws Evento 
@@ -105,11 +110,16 @@ public class Contexto implements Actualizable{
 				}else{
 					this.terminarJuego();
 				}
-				felix = new Felix();
-				ralph = new Ralph();
+				this.reiniciar();
 				throw new Evento(EventoID.GANANIVEL);
 			}else if(e.getId()==EventoID.GANASECCION){
 				felix.setPos(new Posicion(felix.getPos().getX(),0));
+				for(int i = 0;i<chocables.size();i++){
+					if(chocables.get(i) instanceof Pajaro){ 
+						chocables.remove(i);
+						break;
+					}
+				}
 				throw new Evento(EventoID.GANASECCION);
 			}
 		}
@@ -125,9 +135,6 @@ public class Contexto implements Actualizable{
 				}
 			}catch(Evento e){
 				switch(e.getId()){
-				case CHAU_PASTEL:
-					paraAgregar.add((Chocable) e.getParam());
-					break;
 				case TERMINAJUEGO:
 					this.terminarJuego();
 					break;
@@ -150,6 +157,17 @@ public class Contexto implements Actualizable{
 		}
 		for(Chocable nuevo : paraEliminar){
 			chocables.remove(nuevo);
+		}
+		if(Utils.randomBoolean(Utils.probPastel) && nivel.getSeccion().puedoPastel()){
+			int x = Utils.RANDOM.nextInt(Utils.numCols);
+			int y = Utils.RANDOM.nextInt(Utils.numPisos);
+			chocables.add(new Pastel(new Posicion(x,y)));
+			nivel.getSeccion().nuevoPastel();
+		}
+		if(Utils.randomBoolean(Utils.probPajaro) && !nivel.getSeccion().hayPajaro()){
+			int y = Utils.RANDOM.nextInt(Utils.numPisos-1)+1;
+			chocables.add(new Pajaro(new Posicion(Utils.numCols-1,y)));
+			nivel.getSeccion().hayPajaro(true);
 		}
 	}
 	public ArrayList<Chocable> getChocables(){

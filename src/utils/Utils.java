@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Utils {
 	/** Veolocidad inicial del pajaro */
-	public static final int vPajaro = 4;
+	public static final int vPajaro = 2;
 	/** Veolocidad inicial del ladrillo */
 	public static final int vLadrillo = 4;
 	/** Veolocidad inicial del ladrillo */
@@ -33,6 +33,8 @@ public class Utils {
 	public static final int puntajeArreglar = 500;
 	/** Tiempo que estar&aacute; un pastel sobre la ventana */
 	public static final int tiempoPastel = 60;
+	/** Tiempo m&iacute;nimo entre pastel y pastel */
+	public static final int proximoPastel = 300;
 	/** Cantidad de jugadores en el HighScore */
 	public static final int maxJugadores = 10;
 	/** Cantidad de vidas que tiene F&eacute;lix por nivel */
@@ -41,6 +43,10 @@ public class Utils {
 	public static final int tiempoInvulnerable = 100;
 	/** Probabilidad de que Ralph tire ladrillos */
 	public static final int probTirar = 60;
+	/** Probabilidad de que aparezca un pastel */
+	public static final int probPastel = 5;
+	/** Probabilidad de que aparezca un pajaro */
+	public static final int probPajaro = 1;
 	
 	public static final String BASE_IMG = "res/img/";
 	

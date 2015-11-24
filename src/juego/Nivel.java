@@ -86,6 +86,7 @@ public class Nivel{
 				throw new Evento(EventoID.GANASECCION);
 			}
 		}
+		this.secciones[nroSeccion].decProximoPastel();
 	}
 	public Ventana[][][] getMapas(){
 		Ventana[][][] mapas = new Ventana[Utils.maxSeccion][][];

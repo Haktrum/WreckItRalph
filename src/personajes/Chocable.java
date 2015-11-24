@@ -39,10 +39,14 @@ public abstract class Chocable implements Actualizable {
 	}
 	public Chocable(Posicion pos,int v) {
 		this.pos = pos;
-		this.velocidad = v;
+		this.velocidad = Utils.dificultar(v, true);
 	}
 	protected void agregarImagen(String url){
 		imagenes.add(setImage(url));
+	}
+	protected void agregarImagen(String url, int pos){
+		imagenes.remove(pos);
+		imagenes.add(pos, setImage(url));
 	}
 	/**
 	 * Mueve el objeto en cierta direcci&oacute;n.
@@ -73,7 +77,7 @@ public abstract class Chocable implements Actualizable {
 				subPosY+=velocidad;
 			}
 			if(pos.getY()<0){
-				this.requests.removeAll(requests);
+				this.requests.clear();
 				throw new Evento(EventoID.OFF_SCREEN,this);
 			}
 		}
@@ -146,5 +150,8 @@ public abstract class Chocable implements Actualizable {
 				return this.pos==((REQ) otro).pos;
 			return false;
 		}
+	}
+	public int getVelocidad(){
+		return this.velocidad;
 	}
 }
