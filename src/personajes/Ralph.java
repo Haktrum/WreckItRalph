@@ -1,64 +1,113 @@
 package personajes;
 
-import juego.Posicion;
 
 import java.util.Random;
+import utils.Direccion;
+import utils.Evento;
+import utils.Evento.EventoID;
+import utils.Posicion;
+import utils.Utils;
 
-import juego.Actualizable;
-import juego.Contexto;
-import juego.Direccion;
 
-public class Ralph implements Actualizable {
+
+/**
+ * Modela al personaje Ralph del juego
+ */
+public class Ralph extends Chocable {
 	
-	private Posicion pos;
-	private int ladrillosRestantes = 40;
+	/** Ladrillos iniciales que posee Ralph */
+	private int ladrillosRestantes;
+	
+	private final REQ RALPH = new REQ(0,5);
+	private final REQ RALPH_IZQ1 = new REQ(1,5);
+	private final REQ RALPH_IZQ2 = new REQ(2,5);
+	private final REQ RALPH_SALTA = new REQ(3,10);
+	private int timerAccion = 0;
+	private int movs=0;
 	public Ralph(){
-		Contexto.ctx.agregarActualizable(this);
-		empezar();
+		super(new Posicion(0,Utils.numPisos),Utils.vRalph);
+		this.ladrillosRestantes = Utils.dificultar(Utils.ladrillosRalph,true);
+		super.agregarImagen("res/img/ralph/ralph.png");
+		super.agregarImagen("res/img/ralph/ralph_izq1.png");
+		super.agregarImagen("res/img/ralph/ralph_izq2.png");
+		super.agregarImagen("res/img/ralph/ralph_salta.png");
 	}
-	private void empezar() {
-		pos = new Posicion(0, 3);
-		romperVentanas();
-	}
-	public void romperVentanas(){
-		Contexto.ctx.getSeccionActual().romperTodas();
-	}
+	
+	/**
+	 *  Actualiza su posici&oacute;n y tira ladrillos
+	 */
 	@Override
-	public void actualizar() {
-		if (Contexto.randomBoolean(30)) {
-			//mover();
-		}
-		if (Contexto.randomBoolean(30)) {
-			saltar();
-		}
-	}
-	private void saltar() {
-		System.out.print("Ralph salta... ");
-		Random rand = new Random();
-		if (ladrillosRestantes > 0) {
-			int ladrillos = rand.nextInt(ladrillosRestantes + 1);
-			ladrillosRestantes -= ladrillos;
-			System.out.println("y tira " + ladrillos + " ladrillos");
-			while (ladrillos-- > 0) {
-				new Ladrillo(pos);
+	public void actualizar() throws Evento{
+		super.refresh();
+		if(movs>0){
+			if(caminar(Direccion.DERECHA)){
+				super.requests.add(RALPH_IZQ1);
+				super.requests.add(RALPH_IZQ2);
+				movs--;
+			}else{
+				super.requests.removeAll(requests);
+				movs=0;
 			}
-		} else {
-			System.out.println("pero no tiene mas ladrillos");
+		}else if(movs<0){
+			if(caminar(Direccion.IZQUIERDA)){
+				super.requests.add(RALPH_IZQ1);
+				super.requests.add(RALPH_IZQ2);
+				movs--;
+			}else{
+				super.requests.clear();
+				movs=0;
+			}
+		}else{
+			super.requests.clear();
+			if(timerAccion==0){
+				if (Utils.randomBoolean(50)) {
+					movs = Math.min(Utils.RANDOM.nextInt(Utils.cellWidth),30);
+					if(Utils.randomBoolean(50)){
+						movs *= -1;
+					}
+				}else{
+					//super.setBaseImage("res/img/ralph/ralph.png");
+					if (Utils.randomBoolean(Utils.dificultar(Utils.probTirar, true))) {
+						try{
+							throw new Evento (EventoID.SALTA,saltar());
+						}finally{
+							super.requests.add(RALPH_SALTA);
+							timerAccion=50;
+						}
+					}
+				}
+				timerAccion=50;
+			}else{
+				timerAccion--;
+			}
 		}
 	}
-	private void mover() {
-		Random random = new Random();
-		Direccion dir;
-		if (random.nextBoolean()) {
-			dir = Direccion.IZQUIERDA;
-		} else {
-			dir = Direccion.DERECHA;
+	/**
+	 * Tira ladrillos
+	 */
+	private int saltar() {
+		if (ladrillosRestantes > 0) {
+			int ladrillos = Utils.RANDOM.nextInt(Math.min(ladrillosRestantes,3))+1;
+			ladrillosRestantes -= ladrillos;
+			return ladrillos;
 		}
-		Posicion nueva = pos.potencial(dir);
-		int x = nueva.getX();
-		int y = nueva.getY();
-		if (x >= 0 && x <= 4 && y >= 0 && y <= 2) {
-			pos.go(dir);
+		return 0;
+	}
+	/**
+	 * Se mueve
+	 */
+	private boolean caminar(Direccion dir) {
+		Posicion nueva = this.getPos().potencial(dir);
+		int x = nueva.inPx().getX();
+		int limite = (new Posicion(Utils.numCols-1,3)).inPx().getX();
+		if (x >= 0 && x < limite) {
+			try {
+				super.mover(dir);
+				return true;
+			} catch (Evento e) {
+				e.printStackTrace();
+			}
 		}
+		return false;
 	}
 }

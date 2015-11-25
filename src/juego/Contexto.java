@@ -1,110 +1,182 @@
 package juego;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import personajes.Chocable;
 import personajes.Felix;
+import personajes.Ladrillo;
+import personajes.Pajaro;
+import personajes.Pastel;
 import personajes.Ralph;
-import ambiente.Seccion;
+import utils.Actualizable;
+import utils.Direccion;
+import utils.Evento;
+import utils.Posicion;
+import utils.Utils;
+import utils.Evento.EventoID;
+/**
+ * Modela el conjunto de circustancias
+ * que rodean a los personajes
+ * 
+ */
+public class Contexto implements Actualizable{
 
-public class Contexto {
-
-	private Seccion seccionActual;
+	/** Personaje principal */
 	private Felix felix;
-	private int puntaje = 0;
-	private Lista<Actualizable> actualizables = new Lista<>(80);
-	private int cantActualizables = 0;
+	/** Villano */
 	private Ralph ralph;
-	public static int NIVEL = 1;
-	public static Contexto ctx;
+	/** Puntaje inicial */
+	private int puntaje = 0;
+	/** Lista de objetos de car&acute;cter actualizable */
+	private ArrayList<Chocable> chocables = new ArrayList<Chocable>(Utils.maxLista);
 	
-	public Contexto(){
-		ctx = this;
+	/** Nivel */
+	private Nivel nivel = null;
+	
+	public Contexto(int lvl){
+		nivel = new Nivel(lvl);
+		this.reiniciar();
 	}
-	public void empezarJuego() {
-		reiniciarNivel();
+	private void reiniciar(){
+		chocables.clear();
 		felix = new Felix();
 		ralph = new Ralph();
+		chocables.add(felix);
+		chocables.add(ralph);
 	}
-	public void ganarSeccion() {
-		int parte = this.seccionActual.getParte();
-		if (parte < 2) {
-			System.out.println("Ganaste la seccion!");
-			this.seccionActual = new Seccion(parte + 1);
-		} else {
-			System.out.println("Ganaste el nivel!");
-			ganarNivel();
-		}
+	/**
+	 * Finaliza el juego
+	 * @throws Evento 
+	 */
+	public void terminarJuego() throws Evento{
+		throw new Evento(EventoID.TERMINAJUEGO,new Integer(puntaje));
 	}
-	private void ganarNivel() {
-		
-	}
-	public void reiniciarNivel() {
-		seccionActual = new Seccion(1);
-	}
-	public Seccion getSeccionActual() {
-		return seccionActual;
-	}
-	public void setSeccionActual(Seccion seccion_actual) {
-		this.seccionActual = seccion_actual;
-	}
+	/**
+	 * Suma puntos al puntaje inicial
+	 * @param puntaje Cantidad de puntos a sumar
+	 */
 	public void agregarPuntos(int puntaje) {
 		this.puntaje += puntaje;
-		if (puntaje > 0) {
-			System.out.println("Puntaje: " + this.puntaje);
-		}
 	}
-	public static boolean randomBoolean(int p) { //probabilidad de true
-		Random gen = new Random();
-		int t = gen.nextInt(100);
-		return t <= (p * (1 + (NIVEL - 1) * .15));
-	}
-	public static int ponderar(int p1, int p2) {
-		Random gen = new Random();
-		int t = gen.nextInt(100);
-		p1 *= (1 + (NIVEL - 1) * .15);
-		p2 *= (1 + (NIVEL - 1) * .15);
-		if(t <= p1) return 0;
-		if(t <= p1 + p2) return 2;
-		return 4;
-	}
-	public void romper() {
-		seccionActual.romperTodas();
-	}
-	public static int randomInt(int paneles) {
-		Random random = new Random();
-		int r = random.nextInt(100);
-		double sum = 0;
-		for (int i = 0; i < paneles; i++) {
-			sum += 100D / Math.pow(2, i + 1) * (1 - (NIVEL - 1) * .15);
-			if (r < sum) {
-				return i;
-			}
-		}
-		return paneles;
-	}
+	
+	/**
+	 * Devuelve a F&eacute;lix
+	 */
 	public Felix getFelix() {
 		return felix;
 	}
+	/**
+	 * Devuelve a Ralph;
+	 */
 	public Ralph getRalph() {
 		return ralph;
 	}
+	/**
+	 * Devuelve el puntaje actual;
+	 */
 	public int getPuntaje() {
 		return puntaje;
 	}
-	public void agregarActualizable(Actualizable a) {
-		actualizables.agregar(a);
+	
+	/**
+	 * Recorre la lista de Actualizables y los actualiza.
+	 * Revisa tambi&eacute; los posibles choques de F&eacute;lix
+	 */
+	public void martillar(){
+		felix.martillar();
+		this.agregarPuntos(this.nivel.getSeccion().arreglarVentana(felix.getPos()));
 	}
-	public void eliminarActualizable(Actualizable a) {
-		actualizables.eliminar(a);
+	public void moverFelix(Direccion dir){
+		if(nivel.getSeccion().puedoIr(felix.getPos(), dir)){
+			nivel.getSeccion().ventanaEn(felix.getPos()).felixEsta(false);
+			felix.mover(dir);
+		}
+		nivel.getSeccion().ventanaEn(felix.getPos()).felixEsta(true);
 	}
-	public void actualizar() {
-		for (Actualizable a : actualizables) {
-			if (a == null) continue;
-			a.actualizar();
-			if (a instanceof Chocable) {
-				((Chocable) a).chequearChoque(felix);
+	//tira termina juego
+	@Override
+	public void actualizar() throws Evento{
+		try {
+			nivel.actualizar();
+		} catch (Evento e) {
+			if(e.getId()==EventoID.TERMINAJUEGO){
+				this.terminarJuego();
+			}else if(e.getId()==EventoID.GANANIVEL){
+				if(this.nivel.getNro()<10){
+					this.nivel = new Nivel(nivel.getNro()+1);
+					this.felix.setPos(new Posicion(0,0));
+				}else{
+					this.terminarJuego();
+				}
+				this.reiniciar();
+				throw new Evento(EventoID.GANANIVEL);
+			}else if(e.getId()==EventoID.GANASECCION){
+				felix.setPos(new Posicion(felix.getPos().getX(),0));
+				for(int i = 0;i<chocables.size();i++){
+					if(chocables.get(i) instanceof Pajaro){ 
+						chocables.remove(i);
+						break;
+					}
+				}
+				throw new Evento(EventoID.GANASECCION);
 			}
 		}
+		ArrayList<Chocable> paraAgregar = new ArrayList<Chocable>();
+		ArrayList<Chocable> paraEliminar = new ArrayList<Chocable>();
+		for(Chocable chocable: chocables){
+			try{
+				if(chocable!=null){
+					chocable.actualizar();
+					if(!(chocable instanceof Felix)){
+						felix.chequearChoque(chocable);
+					}
+				}
+			}catch(Evento e){
+				switch(e.getId()){
+				case TERMINAJUEGO:
+					this.terminarJuego();
+					break;
+				case OFF_SCREEN:
+					paraEliminar.add((Chocable) e.getParam());
+					break;
+				case SALTA:
+					Integer ladrillos = (Integer) e.getParam();
+					while(ladrillos-- >0){
+						paraAgregar.add(new Ladrillo(new Posicion(ralph.getPos().getX(),2)));
+					}
+					break;
+				default:
+					break;
+				}
+			}
+		}
+		for(Chocable nuevo : paraAgregar){
+			chocables.add(nuevo);
+		}
+		for(Chocable nuevo : paraEliminar){
+			chocables.remove(nuevo);
+		}
+		if(Utils.randomBoolean(Utils.probPastel) && nivel.getSeccion().puedoPastel()){
+			int x = Utils.RANDOM.nextInt(Utils.numCols);
+			int y = Utils.RANDOM.nextInt(Utils.numPisos);
+			chocables.add(new Pastel(new Posicion(x,y)));
+			nivel.getSeccion().nuevoPastel();
+		}
+		if(Utils.randomBoolean(Utils.probPajaro) && !nivel.getSeccion().hayPajaro()){
+			int y = Utils.RANDOM.nextInt(Utils.numPisos-1)+1;
+			chocables.add(new Pajaro(new Posicion(Utils.numCols-1,y)));
+			nivel.getSeccion().hayPajaro(true);
+		}
+	}
+	public ArrayList<Chocable> getChocables(){
+		return chocables;
+	}
+	public void setNivel(int n){
+		this.nivel.setNivel(n);
+	}
+	public Ventana[][][] getMapas(){
+		return nivel.getMapas();
 	}
 }
