@@ -3,22 +3,19 @@ package graficos;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import utils.Evento;
-import utils.Evento.EventoID;
-
+@SuppressWarnings("serial")
 public class ContainerReglas extends JPanel {
-	public ContainerReglas(){
+	public ContainerReglas() {
 		this.setBackground(Color.BLACK);
-		this.setBounds(0,0,570, 421);
+		this.setBounds(0, 0, 570, 421);
 	}
+
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

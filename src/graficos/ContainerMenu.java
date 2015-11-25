@@ -12,45 +12,44 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-
-public class ContainerMenu extends JPanel{
+@SuppressWarnings("serial")
+public class ContainerMenu extends JPanel {
 	private int selected;
 	private MenuItem[] items = new MenuItem[4];
-	
-	public ContainerMenu(){
+
+	public ContainerMenu() {
 		this.setBackground(Color.BLACK);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] {20,260,20,260,20,260,20};
-		gridBagLayout.rowHeights = new int[] {20,84,152,134};
+		gridBagLayout.columnWidths = new int[] { 20, 260, 20, 260, 20, 260, 20 };
+		gridBagLayout.rowHeights = new int[] { 20, 84, 152, 134 };
 		this.setLayout(gridBagLayout);
 		this.selected = 1;
-		
-		
-		//Boton Config
-		MenuItem config = new MenuItem(NombreBoton.CONFIG,3,1);
+
+		// Boton Config
+		MenuItem config = new MenuItem(NombreBoton.CONFIG, 3, 1);
 		this.add(config, config.getGBC());
 		items[3] = config;
-		
-		//Boton reglas
-		MenuItem reglas = new MenuItem(NombreBoton.REGLAS,1,2);
+
+		// Boton reglas
+		MenuItem reglas = new MenuItem(NombreBoton.REGLAS, 1, 2);
 		this.add(reglas, reglas.getGBC());
 		items[0] = reglas;
-				
-		//Boton Jugar
-		MenuItem jugar = new MenuItem(NombreBoton.JUGAR,3,2);
+
+		// Boton Jugar
+		MenuItem jugar = new MenuItem(NombreBoton.JUGAR, 3, 2);
 		this.add(jugar, jugar.getGBC());
 		jugar.setSelected(true);
 		items[1] = jugar;
-		
-		//Boton top
-		MenuItem top = new MenuItem(NombreBoton.TOP,5,2);
+
+		// Boton top
+		MenuItem top = new MenuItem(NombreBoton.TOP, 5, 2);
 		this.add(top, top.getGBC());
 		items[2] = top;
-		
-		//otra config
-		this.setBounds(0,0,860,400);
+
+		// otra config
+		this.setBounds(0, 0, 860, 400);
 	}
-	
+
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -62,23 +61,24 @@ public class ContainerMenu extends JPanel{
 			e.printStackTrace();
 		}
 	}
-	
-	public NombreBoton getDestino(){
+
+	public NombreBoton getDestino() {
 		return items[selected].getNombre();
 	}
-	private void repintar(){
-		for(int i =0;i<items.length;i++)
-			items[i].setSelected(i==this.selected);
+
+	private void repintar() {
+		for (int i = 0; i < items.length; i++)
+			items[i].setSelected(i == this.selected);
 	}
 
 	public void flechaIzq() {
-		if(this.selected>0 && this.selected<3)
+		if (this.selected > 0 && this.selected < 3)
 			this.selected--;
 		repintar();
 	}
 
 	public void flechaDer() {
-		if(this.selected<2)
+		if (this.selected < 2)
 			this.selected++;
 		repintar();
 	}
@@ -89,8 +89,8 @@ public class ContainerMenu extends JPanel{
 	}
 
 	public void flechaAbajo() {
-		if(this.selected==3)
-			this.selected=1;
+		if (this.selected == 3)
+			this.selected = 1;
 		repintar();
 	}
 }

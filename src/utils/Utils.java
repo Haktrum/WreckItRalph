@@ -2,8 +2,6 @@ package utils;
 
 import java.util.Random;
 
-
-
 public class Utils {
 	/** Veolocidad inicial del pajaro */
 	public static final int vPajaro = 2;
@@ -21,7 +19,7 @@ public class Utils {
 	public static final int maxNivel = 10;
 	/** Cantidad de secciones */
 	public static final int maxSeccion = 3;
-	/** Cantidad de ventanas por piso. Preferentemente impar*/
+	/** Cantidad de ventanas por piso. Preferentemente impar */
 	public static final int numCols = 5;
 	/** Cantidad de pisos por secci&oacute;n */
 	public static final int numPisos = 3;
@@ -47,31 +45,34 @@ public class Utils {
 	public static final int probPastel = 5;
 	/** Probabilidad de que aparezca un pajaro */
 	public static final int probPajaro = 1;
-	
+
 	public static final String BASE_IMG = "res/img/";
-	
+
 	public static final int cellWidth = 62;
-	
+
 	public static final int cellHeight = 84;
-	
+
 	public static int nivelActual = 1;
-	
+
 	/**
-	 * Devuelve un boolean  al azar
-	 * con cierta probabilidad de true,
-	 * esta probabilidad var&iacute; con el nivel.
-	 * @param p probabilidad de true en el nivel 1
+	 * Devuelve un boolean al azar con cierta probabilidad de true, esta
+	 * probabilidad var&iacute; con el nivel.
+	 * 
+	 * @param p
+	 *            probabilidad de true en el nivel 1
 	 * @return boolean al azar
 	 */
 	public static Random RANDOM = new Random();
-	
-	public static int dificultar(int n,boolean inc){
-		if(inc)
-			return (int) (n*Math.floor(Math.pow(1+Utils.incDif,nivelActual-1)));
-		return (int) (n*Math.floor(Math.pow(1-Utils.incDif,nivelActual-1)));
+
+	public static int dificultar(int n, boolean inc) {
+		if (inc)
+			return (int) (n * Math.floor(Math.pow(1 + Utils.incDif, nivelActual - 1)));
+		return (int) (n * Math.floor(Math.pow(1 - Utils.incDif, nivelActual - 1)));
 	}
+
 	/**
 	 * Sabra dios que carajo hace esto
+	 * 
 	 * @param paneles
 	 * @return
 	 */
@@ -86,42 +87,52 @@ public class Utils {
 		}
 		return paneles;
 	}
+
 	/**
-	 * Devuelve 0, 2 o 4, segun las
-	 * probabilidades dadas. Estas probabilidades var&iacute;n con el nivel.
+	 * Devuelve 0, 2 o 4, segun las probabilidades dadas. Estas probabilidades
+	 * var&iacute;n con el nivel.
 	 * 
-	 * @param p1 probabilidad de 0 en el nivel 1
-	 * @param p2 probabilidad de 2 en el nivel 1
+	 * @param p1
+	 *            probabilidad de 0 en el nivel 1
+	 * @param p2
+	 *            probabilidad de 2 en el nivel 1
 	 * @return 0, 2 o 4. Al azar
 	 */
 	public static int ponderar(int p1, int p2) {
 		int t = RANDOM.nextInt(100);
-		p1 = Utils.dificultar(p1,true);
-		p2 = Utils.dificultar(p2,true);
-		//p1 *= (1 + (this.nivelActual() - 1) * .15);
-		//p2 *= (1 + (this.nivelActual() - 1) * .15);
-		if(t <= p1) return 0;
-		if(t <= p1 + p2) return 2;
+		p1 = Utils.dificultar(p1, true);
+		p2 = Utils.dificultar(p2, true);
+		// p1 *= (1 + (this.nivelActual() - 1) * .15);
+		// p2 *= (1 + (this.nivelActual() - 1) * .15);
+		if (t <= p1)
+			return 0;
+		if (t <= p1 + p2)
+			return 2;
 		return 4;
 	}
+
 	// p = probabiliadad de true
 	public static boolean randomBoolean(int p) {
-		int t = RANDOM.nextInt(100); 
+		int t = RANDOM.nextInt(100);
 		return t <= (p * (1 + (Utils.nivelActual - 1) * Utils.incDif));
 	}
-	
-	public static String urlVentanaComun(int i){
-		return BASE_IMG+"ventanas_y_panel/roto"+i+".png";
+
+	public static String urlVentanaComun(int i) {
+		return BASE_IMG + "ventanas_y_panel/roto" + i + ".png";
 	}
-	public static String urlVentanaDobleHoja(boolean izq,boolean der){
-		if(izq & der) return BASE_IMG+"ventanas_y_panel/doblehoja_abierta.png";
-		if(izq) return BASE_IMG+"ventanas_y_panel/doblehoja_izq.png";
-		if(der) return BASE_IMG+"ventanas_y_panel/doblehoja_der.png";
-		return BASE_IMG+"ventanas_y_panel/doblehoja_cerrada.png";	
+
+	public static String urlVentanaDobleHoja(boolean izq, boolean der) {
+		if (izq & der)
+			return BASE_IMG + "ventanas_y_panel/doblehoja_abierta.png";
+		if (izq)
+			return BASE_IMG + "ventanas_y_panel/doblehoja_izq.png";
+		if (der)
+			return BASE_IMG + "ventanas_y_panel/doblehoja_der.png";
+		return BASE_IMG + "ventanas_y_panel/doblehoja_cerrada.png";
 	}
-	public static String urlPuerta(int i){
-		return BASE_IMG+"semicirculares/puerta_roto"+i+".png";
+
+	public static String urlPuerta(int i) {
+		return BASE_IMG + "semicirculares/puerta_roto" + i + ".png";
 	}
 
 }
-

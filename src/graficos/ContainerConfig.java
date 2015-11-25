@@ -15,17 +15,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class ContainerConfig extends JPanel{
+@SuppressWarnings("serial")
+public class ContainerConfig extends JPanel {
 	private int nivel = 1;
 	private JLabel lbNivel;
-	public ContainerConfig(){
+
+	public ContainerConfig() {
 		this.setBackground(Color.BLACK);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] {330,60,80,60,330};
-		gridBagLayout.rowHeights = new int[] {70,50,70,190};
+		gridBagLayout.columnWidths = new int[] { 330, 60, 80, 60, 330 };
+		gridBagLayout.rowHeights = new int[] { 70, 50, 70, 190 };
 		this.setLayout(gridBagLayout);
 		GridBagConstraints c = new GridBagConstraints();
-		
+
 		JLabel titulo = new JLabel("NIVEL");
 		Font fuente = null;
 		try {
@@ -36,32 +38,35 @@ public class ContainerConfig extends JPanel{
 			e1.printStackTrace();
 		}
 		titulo.setForeground(Color.WHITE);
-		if(fuente!=null) titulo.setFont(fuente);
-		c.gridx=1;
-		c.gridy=1;
-		c.gridwidth=3;
-		this.add(titulo,c);
-		
+		if (fuente != null)
+			titulo.setFont(fuente);
+		c.gridx = 1;
+		c.gridy = 1;
+		c.gridwidth = 3;
+		this.add(titulo, c);
+
 		c.gridy++;
-		c.gridwidth=1;
-		
+		c.gridwidth = 1;
+
 		JLabel dec = new JLabel(new ImageIcon("res/ui/shift_lt.png"));
 		c.anchor = GridBagConstraints.SOUTH;
-		this.add(dec,c);
-		
+		this.add(dec, c);
+
 		c.gridx++;
 		lbNivel = new JLabel();
 		setearLb();
 		lbNivel.setForeground(Color.ORANGE);
-		if(fuente!=null) lbNivel.setFont(fuente);
-		this.add(lbNivel,c);
-		
+		if (fuente != null)
+			lbNivel.setFont(fuente);
+		this.add(lbNivel, c);
+
 		c.gridx++;
 		JLabel inc = new JLabel(new ImageIcon("res/ui/shift_rt.png"));
-				this.add(inc,c);
-		
-		this.setBounds(0,0,860,400);
+		this.add(inc, c);
+
+		this.setBounds(0, 0, 860, 400);
 	}
+
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -73,20 +78,23 @@ public class ContainerConfig extends JPanel{
 			e.printStackTrace();
 		}
 	}
-	private void setearLb(){
+
+	private void setearLb() {
 		lbNivel.setText(String.valueOf(nivel));
 	}
-	public void cambiarNivel(int i){
+
+	public void cambiarNivel(int i) {
 		nivel = nivel + i;
-		if(nivel>10){
+		if (nivel > 10) {
 			nivel--;
 		}
-		if(nivel<1){
+		if (nivel < 1) {
 			nivel++;
 		}
 		setearLb();
 	}
-	public int getNivel(){
+
+	public int getNivel() {
 		return this.nivel;
 	}
 }

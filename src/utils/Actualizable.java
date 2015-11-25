@@ -1,6 +1,6 @@
 package utils;
 
 public interface Actualizable {
-	public abstract void actualizar() throws Evento; 
-	
+	public abstract void actualizar() throws Evento;
+
 }
