@@ -28,7 +28,6 @@ public class ContainerJuego extends JPanel implements Actualizable{
 	private int offset = 0;
 	private int visualOffset = 0;
 	public ContainerJuego(ArrayList<Chocable> lista,Ventana[][][] mapas){
-		super();
 		pasarInfo(lista,mapas);		
 		this.setBounds(100,20,360,430);
 		this.setBorder(new EmptyBorder(0,0,0,0));

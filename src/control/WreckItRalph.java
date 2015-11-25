@@ -2,8 +2,6 @@ package control;
 
 import javax.swing.Timer;
 
-import utils.ListHeap;
-
 public class WreckItRalph {
 	private Highscore highscore = new Highscore();
 	private Jugador jugador;

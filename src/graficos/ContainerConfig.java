@@ -19,7 +19,6 @@ public class ContainerConfig extends JPanel{
 	private int nivel = 1;
 	private JLabel lbNivel;
 	public ContainerConfig(){
-		super();
 		this.setBackground(Color.BLACK);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {330,60,80,60,330};

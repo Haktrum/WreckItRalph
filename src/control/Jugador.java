@@ -1,12 +1,13 @@
 package control;
 
-import java.util.Scanner;
+import java.io.Serializable;
 /**
  * Modela un jugador del juego
  *
  */
-public class Jugador implements Comparable<Jugador> {
-	private final String nombre;
+public class Jugador implements Comparable<Jugador>, Serializable {
+	private static final long serialVersionUID = 4196508987432820781L;
+	private String nombre;
 	private int puntaje;
 	
 	public Jugador(String nombre) {
@@ -21,7 +22,7 @@ public class Jugador implements Comparable<Jugador> {
 	 */
 	@Override
 	public int compareTo(Jugador o) {
-		return puntaje - o.puntaje;
+		return o.puntaje - puntaje;
 	}
 	
 	@Override

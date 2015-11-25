@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 
 public class ContainerTop extends JPanel{
 	public ContainerTop(){
-		super();
 		this.setBackground(Color.BLACK);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {20,240,20,240,20,200,40,20};

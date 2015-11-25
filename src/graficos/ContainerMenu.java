@@ -18,7 +18,6 @@ public class ContainerMenu extends JPanel{
 	private MenuItem[] items = new MenuItem[4];
 	
 	public ContainerMenu(){
-		super();
 		this.setBackground(Color.BLACK);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {20,260,20,260,20,260,20};

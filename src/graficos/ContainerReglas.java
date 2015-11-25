@@ -16,7 +16,6 @@ import utils.Evento.EventoID;
 
 public class ContainerReglas extends JPanel {
 	public ContainerReglas(){
-		super();
 		this.setBackground(Color.BLACK);
 		this.setBounds(0,0,570, 421);
 	}
