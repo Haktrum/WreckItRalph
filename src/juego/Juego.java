@@ -24,7 +24,7 @@ import utils.Evento.EventoID;
  * Modela el conjunto de circustancias que rodean a los personajes
  * 
  */
-public class Contexto implements Modelo{
+public class Juego implements Modelo{
 
 	/** Personaje principal */
 	private Felix felix;
@@ -41,7 +41,7 @@ public class Contexto implements Modelo{
 	private int offset = 0;
 	private int visualOffset = 0;
 	private NombreBoton dest = null;
-	public Contexto(int lvl) {
+	public Juego(int lvl) {
 		nivel = new Nivel(lvl);
 		this.reiniciar();
 	}
@@ -114,10 +114,10 @@ public class Contexto implements Modelo{
 	}
 
 	@Override
-	public void keyPressed(KeyEvent arg0) {}
+	public void keyReleased(KeyEvent arg0) {}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
+	public void keyPressed(KeyEvent arg0) {
 		switch (arg0.getKeyCode()) {
 		case KeyEvent.VK_LEFT:
 			this.moverFelix(Direccion.IZQUIERDA);

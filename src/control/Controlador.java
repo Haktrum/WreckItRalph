@@ -21,7 +21,7 @@ import graficos.ContainerTop;
 import graficos.MainWindow;
 import graficos.MenuItem.NombreBoton;
 
-import juego.Contexto;
+import juego.Juego;
 
 public class Controlador implements ActionListener {
 	private MainWindow window = null;
@@ -67,7 +67,7 @@ public class Controlador implements ActionListener {
 				vista = new ContainerConfig();
 				break;
 			case JUGAR:
-				modelo = new Contexto(nivelInicial);
+				modelo = new Juego(nivelInicial);
 				vista = new ContainerJuego();
 				break;
 			case REGLAS:
