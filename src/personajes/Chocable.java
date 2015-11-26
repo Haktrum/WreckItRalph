@@ -22,8 +22,6 @@ import utils.Utils;
  */
 public abstract class Chocable implements Actualizable {
 	protected Posicion pos;
-	protected int subPosX = 0;
-	protected int subPosY = 0;
 	private int velocidad;
 	private int timerImagen = 0;
 
@@ -58,31 +56,10 @@ public abstract class Chocable implements Actualizable {
 	 *            Direcci&oacute;n a moverse
 	 */
 	protected void mover(Direccion dir) throws Evento {
-		if (dir == Direccion.DERECHA) {
-			if (subPosX >= Utils.cellWidth) {
-				pos.go(dir);
-				subPosX = subPosX - Utils.cellWidth;
-			} else {
-				subPosX += velocidad;
-			}
-		} else if (dir == Direccion.IZQUIERDA) {
-			if (subPosX <= 0) {
-				pos.go(dir);
-				subPosX = Utils.cellWidth + subPosX;
-			} else {
-				subPosX -= velocidad;
-			}
-		} else if (dir == Direccion.ABAJO) {
-			if (subPosY >= Utils.cellHeight) {
-				pos.go(dir);
-				subPosY = subPosY - Utils.cellHeight;
-			} else {
-				subPosY += velocidad;
-			}
-			if (pos.getY() < 0) {
-				this.requests.clear();
-				throw new Evento(EventoID.OFF_SCREEN, this);
-			}
+		pos.subGo(dir, velocidad);
+		if (pos.getY() < -1) {
+			this.requests.clear();
+			throw new Evento(EventoID.OFF_SCREEN, this);
 		}
 	}
 
@@ -108,16 +85,6 @@ public abstract class Chocable implements Actualizable {
 		return imagenes.get(imagenActual);
 	}
 
-	protected void toggleREQ(REQ r1, REQ r2) {
-		if (!requests.isEmpty()) {
-			if (requests.element().equals(r1)) {
-				requests.add(r2);
-			} else {
-				requests.add(r1);
-			}
-		}
-	}
-
 	protected void refresh() {
 		if (timerImagen == 0) {
 			REQ r = requests.poll();
@@ -130,14 +97,6 @@ public abstract class Chocable implements Actualizable {
 		} else {
 			timerImagen--;
 		}
-	}
-
-	public int getSubX() {
-		return this.subPosX;
-	}
-
-	public int getSubY() {
-		return this.subPosY;
 	}
 
 	protected class REQ {

@@ -2,6 +2,7 @@ package graficos;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -17,16 +18,15 @@ import personajes.Chocable;
 import utils.Actualizable;
 import utils.Posicion;
 import utils.Utils;
+import utils.Vista;
 
 @SuppressWarnings("serial")
-public class ContainerJuego extends JPanel implements Actualizable {
+public class ContainerJuego extends JPanel implements Vista{
 	private ArrayList<Chocable> lista;
 	private Ventana[][][] mapas;
-	private int offset = 0;
 	private int visualOffset = 0;
 
-	public ContainerJuego(ArrayList<Chocable> lista, Ventana[][][] mapas) {
-		pasarInfo(lista, mapas);
+	public ContainerJuego() {
 		this.setBounds(100, 20, 360, 430);
 		this.setBorder(new EmptyBorder(0, 0, 0, 0));
 	}
@@ -61,8 +61,8 @@ public class ContainerJuego extends JPanel implements Actualizable {
 		}
 		for (Chocable c : lista) {
 			if (c != null) {
-				int y = c.getPos().inPx().getY() + c.getSubY();
-				int x = c.getPos().inPx().getX() + c.getSubX();
+				int y = c.getPos().inPx().getY();
+				int x = c.getPos().inPx().getX();
 				g.drawImage(c.getImage(), x, y, null);
 			}
 		}
@@ -71,27 +71,16 @@ public class ContainerJuego extends JPanel implements Actualizable {
 		g.fillRect(0, 0, 360, 50);
 	}
 
-	@SuppressWarnings("unused")
-	private Posicion inPx(Posicion pos, int oWidth, int oHeight) {
-		int x = pos.getX();
-		int y = pos.getY();
-		return new Posicion(242 + 30 + 50 * x, 640 - 78 - 100 * y);
+	@SuppressWarnings("unchecked")
+	@Override
+	public void setInfo(Object[] args) {
+		lista = (ArrayList<Chocable>) args[0];
+		mapas = (Ventana[][][]) args[1];
+		visualOffset = (int) args[2];
 	}
 
 	@Override
-	public void actualizar() {
+	public void actionPerformed(ActionEvent e) {
 		this.repaint();
-		if (this.offset > this.visualOffset) {
-			this.visualOffset += 10;
-		}
-	}
-
-	public void incOffset() {
-		offset += 252;
-	}
-
-	public void reset() {
-		offset = 0;
-		visualOffset = 0;
 	}
 }

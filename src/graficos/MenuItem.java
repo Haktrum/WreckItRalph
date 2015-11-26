@@ -40,7 +40,7 @@ public class MenuItem extends JButton {
 	}
 
 	public enum NombreBoton {
-		CONFIG("bt_conf"), REGLAS("bt_reglas"), JUGAR("bt_jugar"), TOP("bt_top");
+		CONFIG("bt_conf"), REGLAS("bt_reglas"), JUGAR("bt_jugar"), TOP("bt_top"),MENU("");
 		private String url;
 
 		NombreBoton(String url) {

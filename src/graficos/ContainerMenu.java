@@ -6,16 +6,19 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import utils.Vista;
+
 @SuppressWarnings("serial")
-public class ContainerMenu extends JPanel {
-	private int selected;
+public class ContainerMenu extends JPanel implements Vista{
 	private MenuItem[] items = new MenuItem[4];
+	private int selected;
 
 	public ContainerMenu() {
 		this.setBackground(Color.BLACK);
@@ -23,7 +26,6 @@ public class ContainerMenu extends JPanel {
 		gridBagLayout.columnWidths = new int[] { 20, 260, 20, 260, 20, 260, 20 };
 		gridBagLayout.rowHeights = new int[] { 20, 84, 152, 134 };
 		this.setLayout(gridBagLayout);
-		this.selected = 1;
 
 		// Boton Config
 		MenuItem config = new MenuItem(NombreBoton.CONFIG, 3, 1);
@@ -62,35 +64,18 @@ public class ContainerMenu extends JPanel {
 		}
 	}
 
-	public NombreBoton getDestino() {
-		return items[selected].getNombre();
-	}
-
 	private void repintar() {
 		for (int i = 0; i < items.length; i++)
 			items[i].setSelected(i == this.selected);
 	}
 
-	public void flechaIzq() {
-		if (this.selected > 0 && this.selected < 3)
-			this.selected--;
-		repintar();
+	@Override
+	public void setInfo(Object[] args) {
+		selected = (int) args[0];
 	}
 
-	public void flechaDer() {
-		if (this.selected < 2)
-			this.selected++;
-		repintar();
-	}
-
-	public void flechaArriba() {
-		this.selected = 3;
-		repintar();
-	}
-
-	public void flechaAbajo() {
-		if (this.selected == 3)
-			this.selected = 1;
-		repintar();
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		this.repintar();
 	}
 }

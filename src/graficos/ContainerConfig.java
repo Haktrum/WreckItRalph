@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -15,8 +16,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import utils.Vista;
+
 @SuppressWarnings("serial")
-public class ContainerConfig extends JPanel {
+public class ContainerConfig extends JPanel implements Vista{
 	private int nivel = 1;
 	private JLabel lbNivel;
 
@@ -82,19 +85,12 @@ public class ContainerConfig extends JPanel {
 	private void setearLb() {
 		lbNivel.setText(String.valueOf(nivel));
 	}
-
-	public void cambiarNivel(int i) {
-		nivel = nivel + i;
-		if (nivel > 10) {
-			nivel--;
-		}
-		if (nivel < 1) {
-			nivel++;
-		}
-		setearLb();
+	@Override
+	public void setInfo(Object[] args) {
+		nivel = (int) args[0];
 	}
-
-	public int getNivel() {
-		return this.nivel;
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		this.setearLb();
 	}
 }

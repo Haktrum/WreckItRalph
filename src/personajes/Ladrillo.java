@@ -17,7 +17,7 @@ public class Ladrillo extends Chocable {
 		super(pos, Utils.dificultar(Utils.vLadrillo, true));
 		super.agregarImagen("res/img/rocas/ladrillo1.png");
 		super.agregarImagen("res/img/rocas/ladrillo2.png");
-		super.subPosX = Utils.RANDOM.nextInt(21) - 10;
+		super.pos.setSubX(Utils.RANDOM.nextInt(21) - 10);
 	}
 
 	/**

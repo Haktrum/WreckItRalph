@@ -1,5 +1,10 @@
 package juego;
 
+import graficos.MenuItem.NombreBoton;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import personajes.Chocable;
 import personajes.Felix;
@@ -10,6 +15,7 @@ import personajes.Ralph;
 import utils.Actualizable;
 import utils.Direccion;
 import utils.Evento;
+import utils.Modelo;
 import utils.Posicion;
 import utils.Utils;
 import utils.Evento.EventoID;
@@ -18,7 +24,7 @@ import utils.Evento.EventoID;
  * Modela el conjunto de circustancias que rodean a los personajes
  * 
  */
-public class Contexto implements Actualizable {
+public class Contexto implements Modelo{
 
 	/** Personaje principal */
 	private Felix felix;
@@ -32,6 +38,9 @@ public class Contexto implements Actualizable {
 	/** Nivel */
 	private Nivel nivel = null;
 
+	private int offset = 0;
+	private int visualOffset = 0;
+	private NombreBoton dest = null;
 	public Contexto(int lvl) {
 		nivel = new Nivel(lvl);
 		this.reiniciar();
@@ -43,6 +52,8 @@ public class Contexto implements Actualizable {
 		ralph = new Ralph();
 		chocables.add(felix);
 		chocables.add(ralph);
+		offset = 0;
+		visualOffset = 0;
 	}
 
 	/**
@@ -50,10 +61,12 @@ public class Contexto implements Actualizable {
 	 * 
 	 * @throws Evento
 	 */
-	public void terminarJuego() throws Evento {
-		throw new Evento(EventoID.TERMINAJUEGO, new Integer(puntaje));
+	private void terminarJuego()  {
+		dest = NombreBoton.MENU;
 	}
-
+	private void ganaSeccion(){
+		offset += 252;
+	}
 	/**
 	 * Suma puntos al puntaje inicial
 	 * 
@@ -63,7 +76,6 @@ public class Contexto implements Actualizable {
 	public void agregarPuntos(int puntaje) {
 		this.puntaje += puntaje;
 	}
-
 	/**
 	 * Devuelve a F&eacute;lix
 	 */
@@ -77,7 +89,6 @@ public class Contexto implements Actualizable {
 	public Ralph getRalph() {
 		return ralph;
 	}
-
 	/**
 	 * Devuelve el puntaje actual;
 	 */
@@ -89,12 +100,12 @@ public class Contexto implements Actualizable {
 	 * Recorre la lista de Actualizables y los actualiza. Revisa tambi&eacute;
 	 * los posibles choques de F&eacute;lix
 	 */
-	public void martillar() {
+	private void martillar() {
 		felix.martillar();
 		this.agregarPuntos(this.nivel.getSeccion().arreglarVentana(felix.getPos()));
 	}
 
-	public void moverFelix(Direccion dir) {
+	private void moverFelix(Direccion dir) {
 		if (nivel.getSeccion().puedoIr(felix.getPos(), dir)) {
 			nivel.getSeccion().ventanaEn(felix.getPos()).felixEsta(false);
 			felix.mover(dir);
@@ -102,9 +113,43 @@ public class Contexto implements Actualizable {
 		nivel.getSeccion().ventanaEn(felix.getPos()).felixEsta(true);
 	}
 
-	// tira termina juego
 	@Override
-	public void actualizar() throws Evento {
+	public void keyPressed(KeyEvent arg0) {}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		switch (arg0.getKeyCode()) {
+		case KeyEvent.VK_LEFT:
+			this.moverFelix(Direccion.IZQUIERDA);
+			break;
+		case KeyEvent.VK_RIGHT:
+			this.moverFelix(Direccion.DERECHA);
+			break;
+		case KeyEvent.VK_UP:
+			this.moverFelix(Direccion.ARRIBA);
+			break;
+		case KeyEvent.VK_DOWN:
+			this.moverFelix(Direccion.ABAJO);
+			break;
+		case KeyEvent.VK_ESCAPE:
+			this.terminarJuego();
+		case KeyEvent.VK_SPACE:
+			this.martillar();
+			break;
+		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {}
+
+	@Override
+	public Object[] getInfo() {
+		Object[] res = {chocables,nivel.getMapas(),visualOffset};
+		return res;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent actEv) {
 		try {
 			nivel.actualizar();
 		} catch (Evento e) {
@@ -118,7 +163,6 @@ public class Contexto implements Actualizable {
 					this.terminarJuego();
 				}
 				this.reiniciar();
-				throw new Evento(EventoID.GANANIVEL);
 			} else if (e.getId() == EventoID.GANASECCION) {
 				felix.setPos(new Posicion(felix.getPos().getX(), 0));
 				for (int i = 0; i < chocables.size(); i++) {
@@ -127,7 +171,7 @@ public class Contexto implements Actualizable {
 						break;
 					}
 				}
-				throw new Evento(EventoID.GANASECCION);
+				this.ganaSeccion();
 			}
 		}
 		ArrayList<Chocable> paraAgregar = new ArrayList<Chocable>();
@@ -165,28 +209,24 @@ public class Contexto implements Actualizable {
 		for (Chocable nuevo : paraEliminar) {
 			chocables.remove(nuevo);
 		}
-		if (Utils.randomBoolean(Utils.probPastel) && nivel.getSeccion().puedoPastel()) {
+		if (Utils.randomBoolean(Utils.dificultar(Utils.probPastel,false)) && nivel.getSeccion().puedoPastel()) {
 			int x = Utils.RANDOM.nextInt(Utils.numCols);
 			int y = Utils.RANDOM.nextInt(Utils.numPisos);
 			chocables.add(new Pastel(new Posicion(x, y)));
 			nivel.getSeccion().nuevoPastel();
 		}
-		if (Utils.randomBoolean(Utils.probPajaro) && !nivel.getSeccion().hayPajaro()) {
+		if (Utils.randomBoolean(Utils.dificultar(Utils.probPajaro,false)) && !nivel.getSeccion().hayPajaro()) {
 			int y = Utils.RANDOM.nextInt(Utils.numPisos - 1) + 1;
 			chocables.add(new Pajaro(new Posicion(Utils.numCols - 1, y)));
 			nivel.getSeccion().hayPajaro(true);
 		}
+		if(offset>visualOffset){
+			visualOffset+=10;
+		}
 	}
 
-	public ArrayList<Chocable> getChocables() {
-		return chocables;
-	}
-
-	public void setNivel(int n) {
-		this.nivel.setNivel(n);
-	}
-
-	public Ventana[][][] getMapas() {
-		return nivel.getMapas();
+	@Override
+	public NombreBoton getDestino() {
+		return dest;
 	}
 }

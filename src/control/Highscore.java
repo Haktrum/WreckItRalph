@@ -1,5 +1,9 @@
 package control;
 
+import graficos.MenuItem.NombreBoton;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -10,16 +14,21 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.TreeSet;
 
+import utils.Evento;
+import utils.Evento.EventoID;
+import utils.Modelo;
+
 /**
  * Maneja los 10 puntajes m&aacute;s altos obtenidos en el juego
  */
-public class Highscore implements Serializable {
+public class Highscore implements Serializable,Modelo {
 	private static final long serialVersionUID = 9032587643779204001L;
 	private static String archivo = "res/top5.bin";
 	/** Arreglo de jugadores con puntaje */
 	private TreeSet<Jugador> jugadores;
 	/** Cantidad de jugadores inicial */
 	private final int cantMaxJugadores = 5;
+	private NombreBoton dest = null;
 
 	/**
 	 * Agrega un jugador al arreglo, ordenado por su puntaje
@@ -101,6 +110,34 @@ public class Highscore implements Serializable {
 			}
 		}
 		return stringBuilder.toString();
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		if(e.getKeyCode()==KeyEvent.VK_ESCAPE){
+			dest = NombreBoton.MENU;
+		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {}
+
+	@Override
+	public Object[] getInfo() {
+		return null;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+	}
+
+	@Override
+	public NombreBoton getDestino() {
+		return dest;
 	}
 
 }
