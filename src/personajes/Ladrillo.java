@@ -1,5 +1,7 @@
 package personajes;
 
+import java.awt.Insets;
+
 import utils.Direccion;
 import utils.Evento;
 import utils.Posicion;
@@ -29,5 +31,9 @@ public class Ladrillo extends Chocable {
 		super.requests.add(LADRILLO1);
 		super.requests.add(LADRILLO2);
 		super.mover(Direccion.ABAJO);
+	}
+	@Override
+	public Insets getMargenes(){
+		return new Insets(0,0,0,0);
 	}
 }

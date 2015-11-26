@@ -1,5 +1,7 @@
 package personajes;
 
+import java.awt.Insets;
+
 import utils.Direccion;
 import utils.Evento;
 import utils.Evento.EventoID;
@@ -97,13 +99,16 @@ public class Felix extends Chocable {
 	 *            objeto a chocar
 	 */
 	public void chequearChoque(Chocable c) throws Evento {
-		// boolean subx = Math.abs(c.getSubX()-Utils.cellWidth/2)<
-		// c.getVelocidad();
-		// boolean suby =
-		// Math.abs(c.getSubY()-Utils.cellHeight/2)<c.getVelocidad();
-		boolean subx = true;
-		boolean suby = true;
-		if (pos.equals(c.getPos()) && (subx || suby)) {
+		Posicion pf = pos.inPx();
+		int xFelix1 = pos.inPx().getX();
+		int xFelix2 = xFelix1+this.getImage().getWidth();
+		int yFelix1 = pos.inPx().getY()+10;
+		int yFelix2 = yFelix1+this.getImage().getHeight()-10;
+		int xCho1 = c.getPos().inPx().getX();
+		int xCho2 = xCho1+c.getImage().getWidth();
+		int yCho1 = c.getPos().inPx().getY();
+		int yCho2 = yCho1+c.getImage().getHeight();
+		if(!(xFelix2<xCho1 || xCho2<xFelix1 || yFelix2<yCho1 || yCho2<yFelix1)){
 			this.chocar(c);
 		}
 	}
@@ -150,6 +155,11 @@ public class Felix extends Chocable {
 				super.requests.add(FELIX_COME);
 			}
 		}
+	}
+	@Override
+	public Insets getMargenes(){
+		if(super.imagenActual==3) return new Insets(-5,15,0,0);
+		return super.getMargenes();
 	}
 
 }

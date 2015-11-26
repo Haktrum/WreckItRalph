@@ -1,5 +1,6 @@
 package personajes;
 
+import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -24,14 +25,17 @@ public abstract class Chocable implements Actualizable {
 	protected Posicion pos;
 	private int velocidad;
 	private int timerImagen = 0;
+	
+	private Insets margenes;
 
 	protected ArrayList<BufferedImage> imagenes = new ArrayList<BufferedImage>();
 	protected Queue<REQ> requests = new LinkedList<REQ>();
-	private int imagenActual = 0;
+	protected int imagenActual = 0;
 
 	public Chocable(Posicion pos) {
 		this.pos = pos;
 		this.velocidad = 0;
+		
 	}
 
 	public Chocable(Posicion pos, int v) {
@@ -84,7 +88,12 @@ public abstract class Chocable implements Actualizable {
 	public BufferedImage getImage() {
 		return imagenes.get(imagenActual);
 	}
-
+	
+	public Insets getMargenes(){
+		int top = (Utils.cellHeight-imagenes.get(imagenActual).getHeight())/2;
+		int left = (Utils.cellWidth-imagenes.get(imagenActual).getWidth())/2;
+		return new Insets(top,left,Utils.cellWidth-left,Utils.cellHeight-top);
+	}
 	protected void refresh() {
 		if (timerImagen == 0) {
 			REQ r = requests.poll();

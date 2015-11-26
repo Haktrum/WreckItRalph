@@ -1,5 +1,7 @@
 package personajes;
 
+import java.awt.Insets;
+
 import utils.Direccion;
 import utils.Evento;
 import utils.Posicion;
@@ -35,6 +37,7 @@ public class Pajaro extends Chocable {
 	 */
 	@Override
 	public void actualizar() throws Evento {
+		super.refresh();
 		Posicion pos = super.getPos().potencial(dir);
 		int x = pos.getX();
 		int y = pos.getY();

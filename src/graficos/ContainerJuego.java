@@ -61,8 +61,8 @@ public class ContainerJuego extends JPanel implements Vista{
 		}
 		for (Chocable c : lista) {
 			if (c != null) {
-				int y = c.getPos().inPx().getY();
-				int x = c.getPos().inPx().getX();
+				int y = c.getPos().inPx().getY() + c.getMargenes().top;
+				int x = c.getPos().inPx().getX() + c.getMargenes().left;
 				g.drawImage(c.getImage(), x, y, null);
 			}
 		}
