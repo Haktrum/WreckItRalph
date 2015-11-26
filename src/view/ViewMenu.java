@@ -1,8 +1,7 @@
-package graficos;
-
-import graficos.MenuItem.NombreBoton;
+package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -12,12 +11,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import view.MenuItem.NombreBoton;
+
 @SuppressWarnings("serial")
-public class ContainerMenu extends JPanel {
+public class ViewMenu extends JPanel {
 	private int selected;
 	private MenuItem[] items = new MenuItem[4];
 
-	public ContainerMenu() {
+	public ViewMenu() {
 		this.setBackground(Color.BLACK);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 20, 260, 20, 260, 20, 260, 20 };
@@ -47,7 +48,7 @@ public class ContainerMenu extends JPanel {
 		items[2] = top;
 
 		// otra config
-		this.setBounds(0, 0, 860, 400);
+		this.setPreferredSize(new Dimension(860, 400));
 	}
 
 	@Override

@@ -1,6 +1,7 @@
-package graficos;
+package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -19,15 +20,16 @@ import utils.Posicion;
 import utils.Utils;
 
 @SuppressWarnings("serial")
-public class ContainerJuego extends JPanel implements Actualizable {
+public class ViewJuego extends JPanel implements Actualizable {
 	private ArrayList<Chocable> lista;
 	private Ventana[][][] mapas;
 	private int offset = 0;
 	private int visualOffset = 0;
 
-	public ContainerJuego(ArrayList<Chocable> lista, Ventana[][][] mapas) {
+	public ViewJuego(ArrayList<Chocable> lista, Ventana[][][] mapas) {
 		pasarInfo(lista, mapas);
-		this.setBounds(100, 20, 360, 430);
+		this.setPreferredSize(new Dimension(260, 410));
+		//this.setBounds(100, 20, 360, 430);
 		this.setBorder(new EmptyBorder(0, 0, 0, 0));
 	}
 

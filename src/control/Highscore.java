@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.TreeSet;
 
 /**
- * Maneja los 10 puntajes m&aacute;s altos obtenidos en el juego
+ * Maneja los 5 puntajes m&aacute;s altos obtenidos en el juego
  */
 public class Highscore implements Serializable {
 	private static final long serialVersionUID = 9032587643779204001L;
@@ -21,12 +21,42 @@ public class Highscore implements Serializable {
 	/** Cantidad de jugadores inicial */
 	private final int cantMaxJugadores = 5;
 
+	public Highscore() {
+		jugadores = new TreeSet<>();
+	}
+
 	/**
 	 * Agrega un jugador al arreglo, ordenado por su puntaje
 	 * 
 	 * @param jugador
 	 *            Jugador con alg&uacute;n puntaje
 	 */
+	public void agregarJugador(Jugador jugador) {
+		if (jugadores.size() == cantMaxJugadores) {
+			jugadores.remove(jugadores.last());
+		}
+		jugadores.add(jugador);
+		escribir(this);
+	}
+
+	public TreeSet<Jugador> getJugadores() {
+		return jugadores;
+	}
+
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		Iterator<Jugador> iterator = jugadores.iterator();
+		for (int i = 0; i < cantMaxJugadores; i++) {
+			stringBuilder.append(i + " ");
+			if (iterator.hasNext()) {
+				stringBuilder.append("- " + iterator.next() + "\n");
+			} else {
+				stringBuilder.append("-----\n");
+			}
+		}
+		return stringBuilder.toString();
+	}
+
 	public static Highscore leer() {
 		ObjectInputStream objectInputStream = null;
 		Highscore highscore = null;
@@ -70,37 +100,6 @@ public class Highscore implements Serializable {
 				e.printStackTrace();
 			}
 		}
-	}
-
-	public Highscore() {
-		jugadores = new TreeSet<>();
-	}
-
-	public void agregarJugador(Jugador jugador) {
-		if (jugadores.size() == cantMaxJugadores) {
-			jugadores.remove(jugadores.last());
-		}
-		jugadores.add(jugador);
-		escribir(this);
-		;
-	}
-
-	public TreeSet<Jugador> getJugadores() {
-		return jugadores;
-	}
-
-	public String toString() {
-		StringBuilder stringBuilder = new StringBuilder();
-		Iterator<Jugador> iterator = jugadores.iterator();
-		for (int i = 0; i < cantMaxJugadores; i++) {
-			stringBuilder.append(i + " ");
-			if (iterator.hasNext()) {
-				stringBuilder.append("- " + iterator.next() + "\n");
-			} else {
-				stringBuilder.append("-----\n");
-			}
-		}
-		return stringBuilder.toString();
 	}
 
 }

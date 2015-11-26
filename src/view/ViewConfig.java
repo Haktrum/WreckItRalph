@@ -1,6 +1,7 @@
-package graficos;
+package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics;
@@ -16,11 +17,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class ContainerConfig extends JPanel {
+public class ViewConfig extends JPanel {
 	private int nivel = 1;
 	private JLabel lbNivel;
 
-	public ContainerConfig() {
+	public ViewConfig() {
 		this.setBackground(Color.BLACK);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 330, 60, 80, 60, 330 };
@@ -64,7 +65,7 @@ public class ContainerConfig extends JPanel {
 		JLabel inc = new JLabel(new ImageIcon("res/ui/shift_rt.png"));
 		this.add(inc, c);
 
-		this.setBounds(0, 0, 860, 400);
+		this.setPreferredSize(new Dimension(860, 400));
 	}
 
 	@Override

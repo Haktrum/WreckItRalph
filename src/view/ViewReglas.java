@@ -1,4 +1,4 @@
-package graficos;
+package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -10,8 +10,8 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class ContainerReglas extends JPanel {
-	public ContainerReglas() {
+public class ViewReglas extends JPanel {
+	public ViewReglas() {
 		this.setBackground(Color.BLACK);
 		this.setBounds(0, 0, 570, 421);
 	}

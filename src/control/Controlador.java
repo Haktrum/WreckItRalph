@@ -8,21 +8,20 @@ import utils.Direccion;
 import utils.Evento;
 import utils.Utils;
 import utils.Evento.EventoID;
-import graficos.ContainerConfig;
-import graficos.ContainerJuego;
-import graficos.ContainerMenu;
-import graficos.ContainerReglas;
-import graficos.ContainerTop;
-import graficos.MainWindow;
-import graficos.MenuItem.NombreBoton;
-
+import view.MainWindow;
+import view.ViewConfig;
+import view.ViewJuego;
+import view.ViewMenu;
+import view.ViewReglas;
+import view.ViewTop;
+import view.MenuItem.NombreBoton;
 import juego.Contexto;
 
 public class Controlador implements ActionListener {
 	private MainWindow window = null;
 	private boolean corriendo = false;
 	private Contexto ctx = null;
-	private ContainerJuego panelJuego = null;
+	private ViewJuego panelJuego = null;
 	private int nivelInicial = 1;
 
 	public Controlador() {
@@ -72,23 +71,23 @@ public class Controlador implements ActionListener {
 		Object res = window.enter();
 		if (res instanceof Integer) {
 			this.nivelInicial = (int) res;
-			window.setContentPane(new ContainerMenu());
+			window.setContentPane(new ViewMenu());
 			// System.out.println(nivelInicial);
 		} else if (res instanceof NombreBoton) {
 			switch (((NombreBoton) res)) {
 			case CONFIG:
-				window.setContentPane(new ContainerConfig());
+				window.setContentPane(new ViewConfig());
 				break;
 			case JUGAR:
 				ctx = new Contexto(nivelInicial);
-				panelJuego = new ContainerJuego(ctx.getChocables(), ctx.getMapas());
+				panelJuego = new ViewJuego(ctx.getChocables(), ctx.getMapas());
 				window.setContentPane(panelJuego);
 				break;
 			case REGLAS:
-				window.setContentPane(new ContainerReglas());
+				window.setContentPane(new ViewReglas());
 				break;
 			case TOP:
-				window.setContentPane(new ContainerTop());
+				window.setContentPane(new ViewTop());
 				break;
 			}
 		}
@@ -117,7 +116,7 @@ public class Controlador implements ActionListener {
 					window.setTitulo("Wreck It Ralph - Nivel " + Utils.nivelActual);
 				} else if (ex.getId() == EventoID.TERMINAJUEGO) {
 					ctx = null;
-					window.setContentPane(new ContainerMenu());
+					window.setContentPane(new ViewMenu());
 				}
 			}
 		}
@@ -148,6 +147,7 @@ public class Controlador implements ActionListener {
 				break;
 			case KeyEvent.VK_ESCAPE:
 				escape();
+				break;
 			case KeyEvent.VK_SPACE:
 				space();
 				break;
