@@ -1,17 +1,17 @@
 package view;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Set;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import juego.Modelo;
 import juego.Ventana;
 
 import personajes.Chocable;
@@ -20,35 +20,35 @@ import utils.Posicion;
 import utils.Utils;
 
 @SuppressWarnings("serial")
-public class ViewJuego extends JPanel implements Actualizable {
-	private ArrayList<Chocable> lista;
+public class ViewJuego extends View implements Actualizable {
 	private Ventana[][][] mapas;
 	private int offset = 0;
 	private int visualOffset = 0;
+	private BufferedImage edificio;
 
-	public ViewJuego(ArrayList<Chocable> lista, Ventana[][][] mapas) {
-		pasarInfo(lista, mapas);
-		this.setPreferredSize(new Dimension(260, 410));
-		//this.setBounds(100, 20, 360, 430);
+	public ViewJuego(Modelo modelo) {
+		super(modelo);
+		modelo.init();
+		actualizarMapas();
+		//this.setPreferredSize(new Dimension(260, 410));
+		this.setBounds(100, 20, 360, 430);
 		this.setBorder(new EmptyBorder(0, 0, 0, 0));
+		File file = new File("res/img/edificio/edificio.png");
+		try {
+			edificio = ImageIO.read(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void pasarInfo(ArrayList<Chocable> lista, Ventana[][][] mapas) {
-		this.lista = lista;
-		this.mapas = mapas;
+	public void actualizarMapas() {
+		this.mapas = getModelo().getMapas();
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		File archivo = new File("res/img/edificio/edificio.png");
-		try {
-			BufferedImage fondo = ImageIO.read(archivo);
-			int y = visualOffset - 498;
-			g.drawImage(fondo, 0, y, null);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		g.drawImage(edificio, 0, visualOffset - 498, null);
 		for (int k = 0; k < mapas.length; k++) {
 			for (int j = 0; j < Utils.numPisos; j++) {
 				for (int i = 0; i < Utils.numCols; i++) {
@@ -61,11 +61,12 @@ public class ViewJuego extends JPanel implements Actualizable {
 				}
 			}
 		}
-		for (Chocable c : lista) {
+		for (Chocable c : getModelo().getChocables()) {
 			if (c != null) {
-				int y = c.getPos().inPx().getY() + c.getSubY();
+				c.paintComponent(g);
+				/*int y = c.getPos().inPx().getY() + c.getSubY();
 				int x = c.getPos().inPx().getX() + c.getSubX();
-				g.drawImage(c.getImage(), x, y, null);
+				g.drawImage(c.getImage(), x, y, null);*/
 			}
 		}
 		// puntos vidas y nivel
@@ -95,5 +96,11 @@ public class ViewJuego extends JPanel implements Actualizable {
 	public void reset() {
 		offset = 0;
 		visualOffset = 0;
+	}
+
+	@Override
+	public void actualizarVista() {
+		// TODO Auto-generated method stub
+		
 	}
 }

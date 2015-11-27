@@ -6,11 +6,14 @@ import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import control.Highscore;
+import juego.Modelo;
 
-public class ViewTop extends JPanel {
+public class ViewTop extends View {
+	private static final long serialVersionUID = 6259571743885667200L;
 	private JTextArea jTextArea = new JTextArea();
-	public ViewTop() {
+	
+	public ViewTop(Modelo modelo) {
+		super(modelo);
 		this.setBackground(Color.BLACK);
 		this.setLayout(new BorderLayout());
 
@@ -24,6 +27,12 @@ public class ViewTop extends JPanel {
 	}
 	
 	public void actualizar() {
-		jTextArea.setText(Highscore.leer().toString());
+		jTextArea.setText(getModelo().getHighscore().toString());
+	}
+
+	@Override
+	public void actualizarVista() {
+		// TODO Auto-generated method stub
+		
 	}
 }

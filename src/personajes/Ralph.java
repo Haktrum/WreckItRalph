@@ -1,15 +1,21 @@
 package personajes;
 
+import java.awt.Rectangle;
+
 import utils.Direccion;
-import utils.Evento;
-import utils.Evento.EventoID;
 import utils.Posicion;
 import utils.Utils;
+import utils.eventos.Evento;
 
 /**
  * Modela al personaje Ralph del juego
  */
 public class Ralph extends Chocable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9035188076154387179L;
 
 	/** Ladrillos iniciales que posee Ralph */
 	private int ladrillosRestantes;
@@ -23,7 +29,7 @@ public class Ralph extends Chocable {
 	private int movs = 0;
 
 	public Ralph() {
-		super(new Posicion(0, Utils.numPisos), Utils.vRalph);
+		super(new Posicion(0, Utils.numPisos), Utils.vRalph, new Rectangle(69, 82));
 		this.ladrillosRestantes = Utils.dificultar(Utils.ladrillosRalph, true);
 		super.agregarImagen("res/img/ralph/ralph.png");
 		super.agregarImagen("res/img/ralph/ralph_izq1.png");
@@ -35,7 +41,7 @@ public class Ralph extends Chocable {
 	 * Actualiza su posici&oacute;n y tira ladrillos
 	 */
 	@Override
-	public void actualizar() throws Evento {
+	public void actualizar() {
 		super.refresh();
 		if (movs > 0) {
 			if (caminar(Direccion.DERECHA)) {
@@ -66,12 +72,9 @@ public class Ralph extends Chocable {
 				} else {
 					// super.setBaseImage("res/img/ralph/ralph.png");
 					if (Utils.randomBoolean(Utils.dificultar(Utils.probTirar, true))) {
-						try {
-							throw new Evento(EventoID.SALTA, saltar());
-						} finally {
-							super.requests.add(RALPH_SALTA);
-							timerAccion = 50;
-						}
+						saltar();
+						super.requests.add(RALPH_SALTA);
+						timerAccion = 50;
 					}
 				}
 				timerAccion = 50;
@@ -88,6 +91,7 @@ public class Ralph extends Chocable {
 		if (ladrillosRestantes > 0) {
 			int ladrillos = Utils.RANDOM.nextInt(Math.min(ladrillosRestantes, 3)) + 1;
 			ladrillosRestantes -= ladrillos;
+			
 			return ladrillos;
 		}
 		return 0;

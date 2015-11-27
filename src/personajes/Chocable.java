@@ -1,5 +1,7 @@
 package personajes;
 
+import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -8,13 +10,11 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import javax.imageio.ImageIO;
-
 import utils.Actualizable;
 import utils.Direccion;
-import utils.Evento;
-import utils.Evento.EventoID;
 import utils.Posicion;
 import utils.Utils;
+import utils.eventos.EventoOffScreen;
 
 /**
  * Modela los atributos y comportamientos que requiere un objeto Chocable
@@ -24,6 +24,7 @@ public abstract class Chocable implements Actualizable {
 	protected Posicion pos;
 	protected int subPosX = 0;
 	protected int subPosY = 0;
+	private final Rectangle size;
 	private int velocidad;
 	private int timerImagen = 0;
 
@@ -31,14 +32,14 @@ public abstract class Chocable implements Actualizable {
 	protected Queue<REQ> requests = new LinkedList<REQ>();
 	private int imagenActual = 0;
 
-	public Chocable(Posicion pos) {
-		this.pos = pos;
-		this.velocidad = 0;
+	public Chocable(Posicion pos, Rectangle size) {
+		this(pos, 0, size);
 	}
 
-	public Chocable(Posicion pos, int v) {
+	public Chocable(Posicion pos, int v, Rectangle size) {
 		this.pos = pos;
 		this.velocidad = Utils.dificultar(v, true);
+		this.size = size;
 	}
 
 	protected void agregarImagen(String url) {
@@ -57,7 +58,7 @@ public abstract class Chocable implements Actualizable {
 	 * @param dir
 	 *            Direcci&oacute;n a moverse
 	 */
-	protected void mover(Direccion dir) throws Evento {
+	protected void mover(Direccion dir) throws EventoOffScreen {
 		if (dir == Direccion.DERECHA) {
 			if (subPosX >= Utils.cellWidth) {
 				pos.go(dir);
@@ -81,7 +82,7 @@ public abstract class Chocable implements Actualizable {
 			}
 			if (pos.getY() < 0) {
 				this.requests.clear();
-				throw new Evento(EventoID.OFF_SCREEN, this);
+				throw new EventoOffScreen();
 			}
 		}
 	}
@@ -118,7 +119,12 @@ public abstract class Chocable implements Actualizable {
 		}
 	}
 
+	protected boolean estaChocando(Chocable c) {
+		return size.intersects(c.size);
+	}
+	
 	protected void refresh() {
+		size.setLocation(pos.getX(), pos.getY());
 		if (timerImagen == 0) {
 			REQ r = requests.poll();
 			if (r != null) {
@@ -140,6 +146,12 @@ public abstract class Chocable implements Actualizable {
 		return this.subPosY;
 	}
 
+	public void paintComponent(Graphics g) {
+		int y = getPos().inPx().getY() + getSubY();
+		int x = getPos().inPx().getX() + getSubX();
+		g.drawImage(getImage(), x, y, null);
+	}
+	
 	protected class REQ {
 		private int pos;
 		private int tiempo;

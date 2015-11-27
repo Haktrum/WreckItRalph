@@ -1,10 +1,11 @@
 package personajes;
 
+import java.awt.Rectangle;
+
 import utils.Direccion;
-import utils.Evento;
-import utils.Evento.EventoID;
 import utils.Posicion;
 import utils.Utils;
+import utils.eventos.EventoOffScreen;
 
 /**
  * Modela al personaje F&eacute;lix del juego
@@ -26,14 +27,14 @@ public class Felix extends Chocable {
 	private final REQ FELIX_COME = new REQ(6, 3);
 
 	public Felix() {
-		super(new Posicion(0, 0));
-		super.agregarImagen("res/img/felix/felix.png");
-		super.agregarImagen("res/img/felix/felix_izq.png");
-		super.agregarImagen("res/img/felix/felix_der.png");
-		super.agregarImagen("res/img/felix/felix_martilla.png");
-		super.agregarImagen("res/img/felix/felix_golpeado.png");
-		super.agregarImagen("res/img/felix/felix_muerto.png");
-		super.agregarImagen("res/img/felix/felix_pastel.png");
+		super(new Posicion(0, 0), new Rectangle(24, 51));
+		agregarImagen("res/img/felix/felix.png");
+		agregarImagen("res/img/felix/felix_izq.png");
+		agregarImagen("res/img/felix/felix_der.png");
+		agregarImagen("res/img/felix/felix_martilla.png");
+		agregarImagen("res/img/felix/felix_golpeado.png");
+		agregarImagen("res/img/felix/felix_muerto.png");
+		agregarImagen("res/img/felix/felix_pastel.png");
 	}
 
 	/**
@@ -45,12 +46,12 @@ public class Felix extends Chocable {
 	@Override
 	public void mover(Direccion dir) {
 		if (dir == Direccion.IZQUIERDA || dir == Direccion.ABAJO) {
-			super.requests.add(FELIX_IZQ);
+			requests.add(FELIX_IZQ);
 		}
 		if (dir == Direccion.DERECHA || dir == Direccion.ARRIBA) {
-			super.requests.add(FELIX_DER);
+			requests.add(FELIX_DER);
 		}
-		super.pos.go(dir);
+		pos.go(dir);
 	}
 
 	/**
@@ -61,10 +62,9 @@ public class Felix extends Chocable {
 		super.refresh();
 		if (timerInvulnerable > 0) {
 			timerInvulnerable--;
-			if (timerInvulnerable == 0) {
-				super.requests.clear();
-				super.agregarImagen("res/img/felix/felix.png", 0);
-			}
+		} else {
+			requests.clear();
+			agregarImagen("res/img/felix/felix.png", 0);
 		}
 	}
 
@@ -73,7 +73,7 @@ public class Felix extends Chocable {
 	 */
 	private void hacerInvulnerable() {
 		timerInvulnerable = Utils.tiempoInvulnerable;
-		super.agregarImagen("res/img/felix/felix_invensible.png", 0);
+		agregarImagen("res/img/felix/felix_invensible.png", 0);
 	}
 
 	/**
@@ -86,8 +86,8 @@ public class Felix extends Chocable {
 	}
 
 	public void martillar() {
-		super.requests.add(FELIX_MARTILLA);
-		super.requests.add(FELIX);
+		requests.add(FELIX_MARTILLA);
+		requests.add(FELIX);
 	}
 
 	/**
@@ -96,15 +96,10 @@ public class Felix extends Chocable {
 	 * @param felix
 	 *            objeto a chocar
 	 */
-	public void chequearChoque(Chocable c) throws Evento {
-		// boolean subx = Math.abs(c.getSubX()-Utils.cellWidth/2)<
-		// c.getVelocidad();
-		// boolean suby =
-		// Math.abs(c.getSubY()-Utils.cellHeight/2)<c.getVelocidad();
-		boolean subx = true;
-		boolean suby = true;
-		if (pos.equals(c.getPos()) && (subx || suby)) {
-			this.chocar(c);
+	public void chequearChoque(Chocable c) throws EventoOffScreen {
+		if (estaChocando(c)) {
+			System.out.println("Choque");
+			chocar(c);
 		}
 	}
 
@@ -114,16 +109,16 @@ public class Felix extends Chocable {
 	 * @param c
 	 *            Objeto a chocar
 	 */
-	private void chocar(Chocable c) throws Evento {
+	private void chocar(Chocable c) throws EventoOffScreen {
 		if (!this.esInvulnerable()) {
 			if (c.getClass() == Ladrillo.class) {
 				vidas--;
-				super.requests.add(FELIX_GOLPEADO);
-				super.requests.add(FELIX);
-				super.requests.add(FELIX_GOLPEADO);
-				super.requests.add(FELIX);
+				requests.add(FELIX_GOLPEADO);
+				requests.add(FELIX);
+				requests.add(FELIX_GOLPEADO);
+				requests.add(FELIX);
 				if (vidas < 1) {
-					super.requests.add(FELIX_MUERTO);
+					requests.add(FELIX_MUERTO);
 					// throw new Evento(EventoID.TERMINAJUEGO);
 				}
 				this.setPos(new Posicion(0, 0));
@@ -131,12 +126,12 @@ public class Felix extends Chocable {
 			}
 			if (c.getClass() == Pajaro.class) {
 				vidas--;
-				super.requests.add(FELIX_GOLPEADO);
-				super.requests.add(FELIX);
-				super.requests.add(FELIX_GOLPEADO);
-				super.requests.add(FELIX);
+				requests.add(FELIX_GOLPEADO);
+				requests.add(FELIX);
+				requests.add(FELIX_GOLPEADO);
+				requests.add(FELIX);
 				if (vidas < 1) {
-					super.requests.add(FELIX_MUERTO);
+					requests.add(FELIX_MUERTO);
 					// throw new Evento(EventoID.TERMINAJUEGO);
 				}
 				timerInvulnerable = (int) Utils.cellWidth / c.getVelocidad();
@@ -145,9 +140,9 @@ public class Felix extends Chocable {
 		if (c.getClass() == Pastel.class) {
 			this.hacerInvulnerable();
 			try {
-				throw new Evento(EventoID.OFF_SCREEN, c);
+				throw new EventoOffScreen();
 			} finally {
-				super.requests.add(FELIX_COME);
+				requests.add(FELIX_COME);
 			}
 		}
 	}

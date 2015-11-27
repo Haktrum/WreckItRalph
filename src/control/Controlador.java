@@ -4,31 +4,43 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import javax.swing.Timer;
+
 import utils.Direccion;
-import utils.Evento;
 import utils.Utils;
-import utils.Evento.EventoID;
+import utils.eventos.EventoSeccionGanada;
+import utils.eventos.EventoJuegoTerminado;
+import utils.eventos.EventoNivelGanado;
 import view.MainWindow;
+import view.View;
 import view.ViewConfig;
 import view.ViewJuego;
 import view.ViewMenu;
 import view.ViewReglas;
 import view.ViewTop;
 import view.MenuItem.NombreBoton;
-import juego.Contexto;
+import juego.Modelo;
 
 public class Controlador implements ActionListener {
-	private MainWindow window = null;
+	private MainWindow window;
 	private boolean corriendo = false;
-	private Contexto ctx = null;
+	private Modelo modelo;
 	private ViewJuego panelJuego = null;
 	private int nivelInicial = 1;
+	private View view;
+	private Timer timer;
 
-	public Controlador() {
+	public Controlador(Modelo modelo, View view) {
 		// this.irMenu();
+		this.modelo = modelo;
+		this.view = view;
 		KeyListener kl = new MiKeyListener();
-		window = new MainWindow(kl);
-		window.setTitulo("Wreck It Ralph");
+		/*window = new MainWindow();
+		window.addKeyListener(kl);
+		window.setTitulo("Wreck It Ralph");*/
+		timer = new Timer(40, this);
+		timer.start();
 	}
 
 	public void setCorriendo(boolean b) {
@@ -41,29 +53,29 @@ public class Controlador implements ActionListener {
 
 	private void flechaIzq() {
 		window.flechaIzq();
-		if (ctx != null) {
-			ctx.moverFelix(Direccion.IZQUIERDA);
+		if (modelo != null) {
+			modelo.moverFelix(Direccion.IZQUIERDA);
 		}
 	}
 
 	private void flechaDer() {
 		window.flechaDer();
-		if (ctx != null) {
-			ctx.moverFelix(Direccion.DERECHA);
+		if (modelo != null) {
+			modelo.moverFelix(Direccion.DERECHA);
 		}
 	}
 
 	private void flechaArriba() {
 		window.flechaArriba();
-		if (ctx != null) {
-			ctx.moverFelix(Direccion.ARRIBA);
+		if (modelo != null) {
+			modelo.moverFelix(Direccion.ARRIBA);
 		}
 	}
 
 	private void flechaAbajo() {
 		window.flechaAbajo();
-		if (ctx != null) {
-			ctx.moverFelix(Direccion.ABAJO);
+		if (modelo != null) {
+			modelo.moverFelix(Direccion.ABAJO);
 		}
 	}
 
@@ -71,23 +83,21 @@ public class Controlador implements ActionListener {
 		Object res = window.enter();
 		if (res instanceof Integer) {
 			this.nivelInicial = (int) res;
-			window.setContentPane(new ViewMenu());
+			window.setContentPane(new ViewMenu(modelo));
 			// System.out.println(nivelInicial);
 		} else if (res instanceof NombreBoton) {
 			switch (((NombreBoton) res)) {
 			case CONFIG:
-				window.setContentPane(new ViewConfig());
+				window.setContentPane(new ViewConfig(modelo));
 				break;
 			case JUGAR:
-				ctx = new Contexto(nivelInicial);
-				panelJuego = new ViewJuego(ctx.getChocables(), ctx.getMapas());
-				window.setContentPane(panelJuego);
+				window.setContentPane(new ViewJuego(modelo));
 				break;
 			case REGLAS:
-				window.setContentPane(new ViewReglas());
+				window.setContentPane(new ViewReglas(modelo));
 				break;
 			case TOP:
-				window.setContentPane(new ViewTop());
+				window.setContentPane(new ViewTop(modelo));
 				break;
 			}
 		}
@@ -95,35 +105,26 @@ public class Controlador implements ActionListener {
 
 	private void escape() {
 		window.escape();
-		ctx = null;
 		this.corriendo = false;
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (panelJuego != null) {
-			panelJuego.actualizar();
-		}
-		if (ctx != null) {
-			try {
-				ctx.actualizar();
-				panelJuego.pasarInfo(ctx.getChocables(), ctx.getMapas());
-			} catch (Evento ex) {
-				if (ex.getId() == EventoID.GANASECCION) {
-					panelJuego.incOffset();
-				} else if (ex.getId() == EventoID.GANANIVEL) {
-					panelJuego.reset();
-					window.setTitulo("Wreck It Ralph - Nivel " + Utils.nivelActual);
-				} else if (ex.getId() == EventoID.TERMINAJUEGO) {
-					ctx = null;
-					window.setContentPane(new ViewMenu());
-				}
-			}
+	public void actionPerformed(ActionEvent ae) {
+		try {
+			modelo.actualizar();
+		} catch (EventoSeccionGanada e) {
+			panelJuego.incOffset();
+		} catch (EventoNivelGanado e) {
+			panelJuego.reset();
+			window.setTitulo("Wreck It Ralph - Nivel " + Utils.nivelActual);
+		} catch (EventoJuegoTerminado e) {
+			modelo = null;
+			window.setContentPane(new ViewMenu(modelo));
 		}
 	}
 
 	private void space() {
-		ctx.martillar();
+		modelo.martillar();
 	}
 
 	private class MiKeyListener implements KeyListener {

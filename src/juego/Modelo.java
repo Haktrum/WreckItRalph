@@ -1,24 +1,35 @@
 package juego;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
+import control.Highscore;
 import personajes.Chocable;
 import personajes.Felix;
-import personajes.Ladrillo;
 import personajes.Pajaro;
 import personajes.Pastel;
 import personajes.Ralph;
 import utils.Actualizable;
 import utils.Direccion;
-import utils.Evento;
 import utils.Posicion;
 import utils.Utils;
-import utils.Evento.EventoID;
+import utils.eventos.EventoJuegoTerminado;
+import utils.eventos.EventoNivelGanado;
+import utils.eventos.EventoOffScreen;
+import utils.eventos.EventoSeccionGanada;
 
 /**
  * Modela el conjunto de circustancias que rodean a los personajes
  * 
  */
-public class Contexto implements Actualizable {
+public class Modelo implements Actualizable {
 
 	/** Personaje principal */
 	private Felix felix;
@@ -27,13 +38,24 @@ public class Contexto implements Actualizable {
 	/** Puntaje inicial */
 	private int puntaje = 0;
 	/** Lista de objetos de car&acute;cter actualizable */
-	private ArrayList<Chocable> chocables = new ArrayList<Chocable>(Utils.maxLista);
+	private Set<Chocable> chocables = new HashSet<>();
 
 	/** Nivel */
 	private Nivel nivel = null;
-
-	public Contexto(int lvl) {
-		nivel = new Nivel(lvl);
+	private Highscore highscore;
+	
+	public Modelo() {
+		highscore = new Highscore();
+		nivel = new Nivel(0);
+		try {
+			Font font = Font.createFont(Font.TRUETYPE_FONT, new File("res/ui/8-bit.ttf"));
+			GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(font);
+		} catch (FontFormatException e) {
+		} catch (IOException e) {
+		}
+	}
+	
+	public void init() {
 		this.reiniciar();
 	}
 
@@ -43,15 +65,6 @@ public class Contexto implements Actualizable {
 		ralph = new Ralph();
 		chocables.add(felix);
 		chocables.add(ralph);
-	}
-
-	/**
-	 * Finaliza el juego
-	 * 
-	 * @throws Evento
-	 */
-	public void terminarJuego() throws Evento {
-		throw new Evento(EventoID.TERMINAJUEGO, new Integer(puntaje));
 	}
 
 	/**
@@ -104,35 +117,32 @@ public class Contexto implements Actualizable {
 
 	// tira termina juego
 	@Override
-	public void actualizar() throws Evento {
+	public void actualizar() throws EventoNivelGanado, EventoSeccionGanada, EventoJuegoTerminado {
 		try {
 			nivel.actualizar();
-		} catch (Evento e) {
-			if (e.getId() == EventoID.TERMINAJUEGO) {
-				this.terminarJuego();
-			} else if (e.getId() == EventoID.GANANIVEL) {
-				if (this.nivel.getNro() < 10) {
-					this.nivel = new Nivel(nivel.getNro() + 1);
-					this.felix.setPos(new Posicion(0, 0));
-				} else {
-					this.terminarJuego();
-				}
+		} catch (EventoNivelGanado e) {
+			if (this.nivel.getNro() < 10) {
+				this.nivel = new Nivel(nivel.getNro() + 1);
+				this.felix.setPos(new Posicion(0, 0));
 				this.reiniciar();
-				throw new Evento(EventoID.GANANIVEL);
-			} else if (e.getId() == EventoID.GANASECCION) {
-				felix.setPos(new Posicion(felix.getPos().getX(), 0));
-				for (int i = 0; i < chocables.size(); i++) {
-					if (chocables.get(i) instanceof Pajaro) {
-						chocables.remove(i);
-						break;
-					}
-				}
-				throw new Evento(EventoID.GANASECCION);
+				throw e;
+			} else {
+				throw new EventoJuegoTerminado(puntaje);
 			}
+		} catch (EventoSeccionGanada e) {
+			felix.setPos(new Posicion(felix.getPos().getX(), 0));
+			for (Iterator<Chocable> iterator = chocables.iterator(); iterator.hasNext();) {
+				Chocable chocable = iterator.next();
+				if (chocable instanceof Pajaro) {
+					iterator.remove();
+				}
+			}
+			throw e;
 		}
 		ArrayList<Chocable> paraAgregar = new ArrayList<Chocable>();
 		ArrayList<Chocable> paraEliminar = new ArrayList<Chocable>();
-		for (Chocable chocable : chocables) {
+		for (Iterator<Chocable> iterator = chocables.iterator(); iterator.hasNext();) {
+			Chocable chocable = iterator.next();
 			try {
 				if (chocable != null) {
 					chocable.actualizar();
@@ -140,23 +150,10 @@ public class Contexto implements Actualizable {
 						felix.chequearChoque(chocable);
 					}
 				}
-			} catch (Evento e) {
-				switch (e.getId()) {
-				case TERMINAJUEGO:
-					this.terminarJuego();
-					break;
-				case OFF_SCREEN:
-					paraEliminar.add((Chocable) e.getParam());
-					break;
-				case SALTA:
-					Integer ladrillos = (Integer) e.getParam();
-					while (ladrillos-- > 0) {
-						paraAgregar.add(new Ladrillo(new Posicion(ralph.getPos().getX(), 2)));
-					}
-					break;
-				default:
-					break;
-				}
+			} catch (EventoJuegoTerminado e) {
+				throw e;
+			} catch (EventoOffScreen e) {
+				iterator.remove();
 			}
 		}
 		for (Chocable nuevo : paraAgregar) {
@@ -178,15 +175,24 @@ public class Contexto implements Actualizable {
 		}
 	}
 
-	public ArrayList<Chocable> getChocables() {
+	public Set<Chocable> getChocables() {
 		return chocables;
 	}
 
+	public int getNivel() {
+		return nivel.getNro();
+	}
+	
 	public void setNivel(int n) {
 		this.nivel.setNivel(n);
 	}
 
+	public Highscore getHighscore() {
+		return highscore;
+	}
+	
 	public Ventana[][][] getMapas() {
 		return nivel.getMapas();
 	}
+
 }

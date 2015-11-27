@@ -16,7 +16,7 @@ public class MenuItem extends JButton {
 		super(new ImageIcon("res/ui/" + nombre.url + "_hover.png"));
 		// this.setSelectedIcon(new
 		// ImageIcon("res/ui/"+nombre.url+"_hover.png"));
-		this.setEnabled(false);
+		//this.setEnabled(false);
 		this.setDisabledIcon(new ImageIcon("res/ui/" + nombre.url + ".png"));
 		this.setDisabledSelectedIcon(new ImageIcon("res/ui/" + nombre.url + "_hover.png"));
 		// this.setRolloverIcon(new ImageIcon("res/"+nombre.url+"_hover.png"));

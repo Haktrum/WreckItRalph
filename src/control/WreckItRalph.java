@@ -2,15 +2,23 @@ package control;
 
 import javax.swing.Timer;
 
+import controller.Controller;
+import controller.ControllerMenu;
+import juego.Modelo;
+import view.View;
+import view.ViewMenu;
+
 public class WreckItRalph {
 
 	public static void main(String[] args) {
 		// wreckItRalph = new WreckItRalph();
 		// Controlador.getCtrl().init();
-		Controlador c = new Controlador();
-		Timer timer = new Timer(40, c);
+		Modelo modelo = new Modelo();
+		View view = new ViewMenu(modelo);
+		Controller controlador = new ControllerMenu(modelo, view);
+		/*Timer timer = new Timer(40, controlador);
 		timer.setInitialDelay(0);
-		timer.start();
+		timer.start();*/
 		// Highscore h = new Highscore();
 		// h.agregarJugador(new Jugador("nuevo",300));
 		// ListHeap<Jugador> lista = h.getJugadores();

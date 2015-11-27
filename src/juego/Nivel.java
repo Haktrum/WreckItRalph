@@ -1,8 +1,9 @@
 package juego;
 
-import utils.Evento;
 import utils.Utils;
-import utils.Evento.EventoID;
+import utils.eventos.EventoJuegoTerminado;
+import utils.eventos.EventoNivelGanado;
+import utils.eventos.EventoSeccionGanada;
 
 /**
  * Modela el nivel actual del juego
@@ -59,12 +60,12 @@ public class Nivel {
 	 * Gana el nivel y pasa al siguiente. En caso de ser el &uacute;ltimo nivel,
 	 * termina el juego.
 	 */
-	public void ganarNivel() throws Evento {
+	public void ganarNivel() throws EventoJuegoTerminado, EventoNivelGanado {
 		if (this.nroNivel == 10) {
-			throw new Evento(EventoID.TERMINAJUEGO);
+			throw new EventoJuegoTerminado();
 		} else {
 			this.nroNivel++;
-			throw new Evento(EventoID.GANANIVEL);
+			throw new EventoNivelGanado();
 		}
 	}
 
@@ -81,16 +82,16 @@ public class Nivel {
 		this.nroNivel = n;
 	}
 
-	public void actualizar() throws Evento {
+	public void actualizar() throws EventoNivelGanado, EventoSeccionGanada {
 		if (this.secciones[nroSeccion].getVentanasRotas() == 0) {
 			if (this.nroSeccion == Utils.maxSeccion - 1) {
-				throw new Evento(EventoID.GANANIVEL);
+				throw new EventoNivelGanado();
 			} else {
 				this.nroSeccion++;
 				while (this.secciones[nroSeccion].getVentanasRotas() == 0) {
 					this.secciones[nroSeccion].romperTodas();
 				}
-				throw new Evento(EventoID.GANASECCION);
+				throw new EventoSeccionGanada();
 			}
 		}
 		this.secciones[nroSeccion].decProximoPastel();

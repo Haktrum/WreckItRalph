@@ -1,9 +1,12 @@
 package personajes;
 
+import java.awt.Rectangle;
+
 import utils.Direccion;
-import utils.Evento;
 import utils.Posicion;
 import utils.Utils;
+import utils.eventos.Evento;
+import utils.eventos.EventoOffScreen;
 
 /**
  * Modela un p&aacute;jaro del juego
@@ -20,7 +23,7 @@ public class Pajaro extends Chocable {
 	private Direccion dir;
 
 	public Pajaro(Posicion pos) {
-		super(pos, Utils.vPajaro);
+		super(pos, Utils.vPajaro, new Rectangle(32, 20));
 		super.agregarImagen("res/img/pajaro/pajaro_izq1.png");
 		super.agregarImagen("res/img/pajaro/pajaro_izq2.png");
 		super.agregarImagen("res/img/pajaro/pajaro_der1.png");
@@ -30,11 +33,12 @@ public class Pajaro extends Chocable {
 
 	/**
 	 * Actualiza su posici&oacute;n
+	 * @throws EventoOffScreen 
 	 * 
 	 * @throws Evento
 	 */
 	@Override
-	public void actualizar() throws Evento {
+	public void actualizar() throws EventoOffScreen {
 		Posicion pos = super.getPos().potencial(dir);
 		int x = pos.getX();
 		int y = pos.getY();

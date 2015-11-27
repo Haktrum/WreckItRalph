@@ -1,10 +1,11 @@
 package juego;
 
 import utils.Direccion;
-import utils.Evento;
-import utils.Evento.EventoID;
 import utils.Posicion;
 import utils.Utils;
+import utils.eventos.Evento;
+import utils.eventos.EventoNivelGanado;
+import utils.eventos.EventoSeccionGanada;
 import juego.Ventana.Tipo;
 
 /**
@@ -151,10 +152,10 @@ public class Seccion {
 
 	public void ganarSeccion() throws Evento {
 		if (this.nroSeccion == Utils.maxSeccion) {
-			throw new Evento(EventoID.GANANIVEL);
+			throw new EventoNivelGanado();
 		} else {
 			this.nroSeccion++;
-			throw new Evento(EventoID.GANASECCION);
+			throw new EventoSeccionGanada();
 		}
 	}
 
