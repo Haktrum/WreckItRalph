@@ -16,11 +16,11 @@ import javax.swing.JPanel;
 import utils.Vista;
 
 @SuppressWarnings("serial")
-public class ContainerMenu extends JPanel implements Vista{
+public class ViewMenu extends JPanel implements Vista{
 	private MenuItem[] items = new MenuItem[4];
 	private int selected;
 
-	public ContainerMenu() {
+	public ViewMenu() {
 		this.setBackground(Color.BLACK);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 20, 260, 20, 260, 20, 260, 20 };

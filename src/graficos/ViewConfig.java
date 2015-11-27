@@ -19,11 +19,11 @@ import javax.swing.JPanel;
 import utils.Vista;
 
 @SuppressWarnings("serial")
-public class ContainerConfig extends JPanel implements Vista{
+public class ViewConfig extends JPanel implements Vista{
 	private int nivel = 1;
 	private JLabel lbNivel;
 
-	public ContainerConfig() {
+	public ViewConfig() {
 		this.setBackground(Color.BLACK);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 330, 60, 80, 60, 330 };

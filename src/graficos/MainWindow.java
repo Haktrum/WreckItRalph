@@ -17,7 +17,7 @@ public class MainWindow {
 		this.frame.setFocusable(true);
 		this.frame.requestFocusInWindow();
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setContentPane(new ContainerMenu());
+		this.setContentPane(new ViewMenu());
 	}
 
 	public void setContentPane(Vista vista) {
@@ -32,7 +32,7 @@ public class MainWindow {
 		frame.addKeyListener(nuevokl);
 	}
 	public void escape() {
-		this.setContentPane(new ContainerMenu());
+		this.setContentPane(new ViewMenu());
 	}
 
 	public void setTitulo(String titulo) {

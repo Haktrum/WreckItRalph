@@ -21,12 +21,12 @@ import utils.Utils;
 import utils.Vista;
 
 @SuppressWarnings("serial")
-public class ContainerJuego extends JPanel implements Vista{
+public class ViewJuego extends JPanel implements Vista{
 	private ArrayList<Chocable> lista;
 	private Ventana[][][] mapas;
 	private int visualOffset = 0;
 
-	public ContainerJuego() {
+	public ViewJuego() {
 		this.setBounds(100, 20, 360, 430);
 		this.setBorder(new EmptyBorder(0, 0, 0, 0));
 	}

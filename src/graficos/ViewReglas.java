@@ -13,8 +13,8 @@ import javax.swing.JPanel;
 import utils.Vista;
 
 @SuppressWarnings("serial")
-public class ContainerReglas extends JPanel implements Vista{
-	public ContainerReglas() {
+public class ViewReglas extends JPanel implements Vista{
+	public ViewReglas() {
 		this.setBackground(Color.BLACK);
 		this.setBounds(0, 0, 570, 421);
 	}

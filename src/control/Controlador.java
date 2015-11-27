@@ -13,11 +13,11 @@ import utils.Modelo;
 import utils.Utils;
 import utils.Evento.EventoID;
 import utils.Vista;
-import graficos.ContainerConfig;
-import graficos.ContainerJuego;
-import graficos.ContainerMenu;
-import graficos.ContainerReglas;
-import graficos.ContainerTop;
+import graficos.ViewConfig;
+import graficos.ViewJuego;
+import graficos.ViewMenu;
+import graficos.ViewReglas;
+import graficos.ViewTop;
 import graficos.MainWindow;
 import graficos.MenuItem.NombreBoton;
 
@@ -36,7 +36,7 @@ public class Controlador implements ActionListener {
 		window = new MainWindow();
 		window.setTitulo("Wreck It Ralph");
 		modelo = new Menu();
-		vista = new ContainerMenu();
+		vista = new ViewMenu();
 		setear();
 	}
 
@@ -64,26 +64,26 @@ public class Controlador implements ActionListener {
 			switch(dest){
 			case CONFIG:
 				modelo = new Configuracion();
-				vista = new ContainerConfig();
+				vista = new ViewConfig();
 				break;
 			case JUGAR:
 				modelo = new Juego(nivelInicial);
-				vista = new ContainerJuego();
+				vista = new ViewJuego();
 				break;
 			case REGLAS:
 				modelo = new Reglas();
-				vista = new ContainerReglas();
+				vista = new ViewReglas();
 				break;
 			case TOP:
 				modelo = new Highscore();
-				vista = new ContainerTop();
+				vista = new ViewTop();
 				break;
 			case MENU:
 				if(modelo instanceof Configuracion){
 					nivelInicial = ((Configuracion) modelo).getNivel();
 				}
 				modelo = new Menu();
-				vista = new ContainerMenu();
+				vista = new ViewMenu();
 				break;
 			}
 			setear();

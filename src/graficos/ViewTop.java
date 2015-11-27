@@ -14,8 +14,8 @@ import utils.Vista;
 
 import control.Highscore;
 
-public class ContainerTop extends JPanel implements Vista{
-	public ContainerTop() {
+public class ViewTop extends JPanel implements Vista{
+	public ViewTop() {
 		this.setBackground(Color.BLACK);
 		this.setLayout(new BorderLayout());
 
