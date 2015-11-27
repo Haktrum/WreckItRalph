@@ -8,10 +8,6 @@ import utils.eventos.EventoOffScreen;
 
 public class Pastel extends Chocable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2875871931449135087L;
 	private int timer = Utils.tiempoPastel;
 	private REQ PASTEL1 = new REQ(0, 2);
 	private REQ PASTEL2 = new REQ(1, 2);

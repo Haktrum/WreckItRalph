@@ -1,11 +1,5 @@
 package juego;
 
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -134,8 +128,6 @@ public class Modelo implements Actualizable {
 			}
 			throw e;
 		}
-		ArrayList<Chocable> paraAgregar = new ArrayList<Chocable>();
-		ArrayList<Chocable> paraEliminar = new ArrayList<Chocable>();
 		for (Iterator<Chocable> iterator = chocables.iterator(); iterator.hasNext();) {
 			Chocable chocable = iterator.next();
 			try {
@@ -150,12 +142,6 @@ public class Modelo implements Actualizable {
 			} catch (EventoOffScreen e) {
 				iterator.remove();
 			}
-		}
-		for (Chocable nuevo : paraAgregar) {
-			chocables.add(nuevo);
-		}
-		for (Chocable nuevo : paraEliminar) {
-			chocables.remove(nuevo);
 		}
 		if (Utils.randomBoolean(Utils.probPastel) && nivel.getSeccion().puedoPastel()) {
 			int x = Utils.RANDOM.nextInt(Utils.numCols);

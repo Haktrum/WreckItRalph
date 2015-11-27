@@ -1,17 +1,15 @@
 package personajes;
 
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import javax.imageio.ImageIO;
 import utils.Actualizable;
 import utils.Direccion;
+import utils.Loader;
 import utils.Posicion;
 import utils.Utils;
 import utils.eventos.EventoOffScreen;
@@ -28,7 +26,7 @@ public abstract class Chocable implements Actualizable {
 	private int velocidad;
 	private int timerImagen = 0;
 
-	protected ArrayList<BufferedImage> imagenes = new ArrayList<BufferedImage>();
+	protected ArrayList<Image> imagenes = new ArrayList<>();
 	protected Queue<REQ> requests = new LinkedList<REQ>();
 	private int imagenActual = 0;
 
@@ -43,12 +41,12 @@ public abstract class Chocable implements Actualizable {
 	}
 
 	protected void agregarImagen(String url) {
-		imagenes.add(setImage(url));
+		imagenes.add(Loader.getImage(url));
 	}
 
 	protected void agregarImagen(String url, int pos) {
 		imagenes.remove(pos);
-		imagenes.add(pos, setImage(url));
+		imagenes.add(pos, Loader.getImage(url));
 	}
 
 	/**
@@ -95,17 +93,7 @@ public abstract class Chocable implements Actualizable {
 		this.pos = new Posicion(pos);
 	}
 
-	private BufferedImage setImage(String url) {
-		try {
-			BufferedImage i = ImageIO.read(new File(url));
-			return i;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	public BufferedImage getImage() {
+	public Image getImage() {
 		return imagenes.get(imagenActual);
 	}
 

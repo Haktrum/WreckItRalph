@@ -91,7 +91,6 @@ public class ViewJuego extends View implements Actualizable {
 
 	@Override
 	public void actualizarVista() {
-		// TODO Auto-generated method stub
-		
+		actualizar();
 	}
 }
