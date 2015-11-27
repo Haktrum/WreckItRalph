@@ -31,6 +31,7 @@ import utils.eventos.EventoSeccionGanada;
  */
 public class Modelo implements Actualizable {
 
+	private static Modelo instancia;
 	/** Personaje principal */
 	private Felix felix;
 	/** Villano */
@@ -44,15 +45,9 @@ public class Modelo implements Actualizable {
 	private Nivel nivel = null;
 	private Highscore highscore;
 	
-	public Modelo() {
+	private Modelo() {
 		highscore = new Highscore();
 		nivel = new Nivel(0);
-		try {
-			Font font = Font.createFont(Font.TRUETYPE_FONT, new File("res/ui/8-bit.ttf"));
-			GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(font);
-		} catch (FontFormatException e) {
-		} catch (IOException e) {
-		}
 	}
 	
 	public void init() {
@@ -193,6 +188,13 @@ public class Modelo implements Actualizable {
 	
 	public Ventana[][][] getMapas() {
 		return nivel.getMapas();
+	}
+
+	public static Modelo getInstancia() {
+		if (instancia == null) {
+			instancia = new Modelo();
+		}
+		return instancia;
 	}
 
 }

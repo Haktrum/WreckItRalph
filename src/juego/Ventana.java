@@ -163,7 +163,7 @@ public class Ventana implements Actualizable {
 		double sum = 0;
 		int i;
 		for (i = 0; i <= tipo.paneles; i++) {
-			sum += 100D / Math.pow(2, i + 1) * (Math.min(Utils.nivelActual, Utils.maxNivel * 0.7) * Utils.incDif);
+			sum += 100D / Math.pow(2, i + 1) * (1 - (Math.min(Utils.nivelActual, 7) - 1) * Utils.incDif);
 			if (r < sum) {
 				this.roto = i * 2;
 				break;

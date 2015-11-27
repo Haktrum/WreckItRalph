@@ -123,8 +123,14 @@ public abstract class Chocable implements Actualizable {
 		return size.intersects(c.size);
 	}
 	
+	private Posicion getPosGrafica() {
+		Posicion posInPx = pos.inPx();
+		return new Posicion(posInPx.getX() + getSubX(), posInPx.getY() + getSubY());
+	}
+	
 	protected void refresh() {
-		size.setLocation(pos.getX(), pos.getY());
+		Posicion posGrafica = getPosGrafica();
+		size.setLocation(posGrafica.getX(), posGrafica.getY());
 		if (timerImagen == 0) {
 			REQ r = requests.poll();
 			if (r != null) {
@@ -147,9 +153,8 @@ public abstract class Chocable implements Actualizable {
 	}
 
 	public void paintComponent(Graphics g) {
-		int y = getPos().inPx().getY() + getSubY();
-		int x = getPos().inPx().getX() + getSubX();
-		g.drawImage(getImage(), x, y, null);
+		Posicion posGrafica = getPosGrafica();
+		g.drawImage(getImage(), posGrafica.getX(), posGrafica.getY(), null);
 	}
 	
 	protected class REQ {
