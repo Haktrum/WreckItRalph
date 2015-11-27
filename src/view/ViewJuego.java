@@ -25,6 +25,8 @@ public class ViewJuego extends JPanel implements Vista{
 	private ArrayList<Chocable> lista;
 	private Ventana[][][] mapas;
 	private int visualOffset = 0;
+	private int vidas = 0;
+	private int puntaje = 0;
 
 	public ViewJuego() {
 		this.setBounds(100, 20, 360, 430);
@@ -69,6 +71,10 @@ public class ViewJuego extends JPanel implements Vista{
 		// puntos vidas y nivel
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 360, 50);
+		g.setFont(Utils.getFont(12));
+		g.setColor(Color.WHITE);
+		g.drawString("vidas*"+vidas, 10, 30);
+		g.drawString("puntos*"+puntaje, 200, 30);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -77,6 +83,8 @@ public class ViewJuego extends JPanel implements Vista{
 		lista = (ArrayList<Chocable>) args[0];
 		mapas = (Ventana[][][]) args[1];
 		visualOffset = (int) args[2];
+		vidas = (int) args[3];
+		puntaje = (int) args[4];
 	}
 
 	@Override

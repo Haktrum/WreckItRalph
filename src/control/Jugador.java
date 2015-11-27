@@ -10,7 +10,10 @@ public class Jugador implements Comparable<Jugador>, Serializable {
 	private static final long serialVersionUID = 4196508987432820781L;
 	private String nombre;
 	private int puntaje;
-
+	
+	public Jugador(){
+		
+	}
 	public Jugador(String nombre) {
 		this.nombre = nombre;
 	}
@@ -30,7 +33,7 @@ public class Jugador implements Comparable<Jugador>, Serializable {
 
 	@Override
 	public String toString() {
-		return nombre + " - " + puntaje;
+		return nombre + " * " + puntaje;
 	}
 
 	public void setPuntaje(int puntaje) {
@@ -43,5 +46,11 @@ public class Jugador implements Comparable<Jugador>, Serializable {
 
 	public String getNombre() {
 		return this.nombre;
+	}
+	@Override
+	public boolean equals(Object otro){
+		if(otro instanceof Jugador)
+			return this.nombre.equals(((Jugador) otro).getNombre());
+		return false;
 	}
 }

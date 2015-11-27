@@ -208,8 +208,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="24" language="java" name="view.ViewTop" project="WreckItRalph" file="/WreckItRalph/src/view/ViewTop.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
+  <class id="24" language="java" name="view.ViewHighscore" project="WreckItRalph" 
+    file="/WreckItRalph/src/view/ViewHighscore.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="115" width="191" x="2646" y="156"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

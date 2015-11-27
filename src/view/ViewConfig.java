@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import utils.Utils;
 import utils.Vista;
 
 @SuppressWarnings("serial")
@@ -32,14 +33,7 @@ public class ViewConfig extends JPanel implements Vista{
 		GridBagConstraints c = new GridBagConstraints();
 
 		JLabel titulo = new JLabel("NIVEL");
-		Font fuente = null;
-		try {
-			fuente = Font.createFont(Font.TRUETYPE_FONT, new File("res/ui/8-bit.ttf")).deriveFont(Font.PLAIN, 40);
-		} catch (FontFormatException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+		Font fuente = Utils.getFont(40);
 		titulo.setForeground(Color.WHITE);
 		if (fuente != null)
 			titulo.setFont(fuente);

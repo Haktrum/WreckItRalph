@@ -13,9 +13,8 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.TreeSet;
 
-import utils.Evento;
-import utils.Evento.EventoID;
 import utils.Modelo;
+import utils.Utils;
 import view.MenuItem.NombreBoton;
 
 /**
@@ -27,8 +26,8 @@ public class Highscore implements Serializable,Modelo {
 	/** Arreglo de jugadores con puntaje */
 	private TreeSet<Jugador> jugadores;
 	/** Cantidad de jugadores inicial */
-	private final int cantMaxJugadores = 5;
 	private NombreBoton dest = null;
+	
 
 	/**
 	 * Agrega un jugador al arreglo, ordenado por su puntaje
@@ -36,16 +35,19 @@ public class Highscore implements Serializable,Modelo {
 	 * @param jugador
 	 *            Jugador con alg&uacute;n puntaje
 	 */
-	public static Highscore leer() {
+	@SuppressWarnings("unchecked")
+	private TreeSet<Jugador> leer() {
 		ObjectInputStream objectInputStream = null;
-		Highscore highscore = null;
+		jugadores = null;
 		try {
 			objectInputStream = new ObjectInputStream(new FileInputStream(archivo));
-			highscore = (Highscore) objectInputStream.readObject();
+			jugadores = (TreeSet<Jugador>) objectInputStream.readObject();
 		} catch (FileNotFoundException e) {
-			highscore = new Highscore();
-			escribir(highscore);
+			jugadores = new TreeSet<Jugador>();
+			escribir();
 		} catch (ClassNotFoundException e) {
+			jugadores = new TreeSet<Jugador>();
+			escribir();
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -58,14 +60,14 @@ public class Highscore implements Serializable,Modelo {
 				e.printStackTrace();
 			}
 		}
-		return highscore;
+		return jugadores;
 	}
 
-	public static void escribir(Highscore highscore) {
+	private void escribir() {
 		ObjectOutputStream objectOutputStream = null;
 		try {
 			objectOutputStream = new ObjectOutputStream(new FileOutputStream(archivo));
-			objectOutputStream.writeObject(highscore);
+			objectOutputStream.writeObject(jugadores);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -81,32 +83,57 @@ public class Highscore implements Serializable,Modelo {
 		}
 	}
 
-	public Highscore() {
-		jugadores = new TreeSet<>();
+	public Highscore(){
+		jugadores = leer();
+	}
+	public Highscore(Jugador nuevo) {
+		jugadores = leer();
+		this.agregarJugador(nuevo);
 	}
 
-	public void agregarJugador(Jugador jugador) {
-		if (jugadores.size() == cantMaxJugadores) {
+	private void agregarJugador(Jugador jugador) {
+		if(yaEsta(jugador.getNombre()))
+			eliminar(jugador);
+		jugadores.add(jugador);
+		if (jugadores.size() > Utils.maxJugadores) {
 			jugadores.remove(jugadores.last());
 		}
-		jugadores.add(jugador);
-		escribir(this);
-		;
+		escribir();
 	}
-
-	public TreeSet<Jugador> getJugadores() {
-		return jugadores;
+	private void eliminar(Jugador jugador){
+		Iterator<Jugador> iterator = jugadores.iterator();
+		while(iterator.hasNext()){
+			Jugador j = iterator.next();
+			if(j.equals(jugador)){
+				iterator.remove();
+				return;
+			}
+		}
 	}
-
+	public boolean yaEsta(String nombre){
+		Iterator<Jugador> iterator = jugadores.iterator();
+		while(iterator.hasNext()){
+			if(iterator.next().equals(new Jugador(nombre)))
+				return true;
+		}
+		return false;
+	}
+	public boolean hayLugar(int puntaje){
+		return puntaje>jugadores.last().getPuntaje() || jugadores.size()<Utils.maxJugadores;
+	}
+	
+	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
 		Iterator<Jugador> iterator = jugadores.iterator();
-		for (int i = 0; i < cantMaxJugadores; i++) {
-			stringBuilder.append(i + " ");
+		for (int i = 0; i < Utils.maxJugadores; i++) {
+			stringBuilder.append(i+1 + " ");
+			if(i==0)
+				stringBuilder.append(" ");
 			if (iterator.hasNext()) {
-				stringBuilder.append("- " + iterator.next() + "\n");
+				stringBuilder.append(iterator.next().toString() + "\n\n");
 			} else {
-				stringBuilder.append("-----\n");
+				stringBuilder.append("*****\n\n");
 			}
 		}
 		return stringBuilder.toString();
@@ -123,11 +150,14 @@ public class Highscore implements Serializable,Modelo {
 	}
 
 	@Override
-	public void keyTyped(KeyEvent e) {}
+	public void keyTyped(KeyEvent e) {
+		
+	}
 
 	@Override
 	public Object[] getInfo() {
-		return null;
+		Object[] res = {this.toString()};
+		return res;
 	}
 
 	@Override

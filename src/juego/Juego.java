@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+
+import control.Highscore;
 import personajes.Chocable;
 import personajes.Felix;
 import personajes.Ladrillo;
@@ -62,7 +64,12 @@ public class Juego implements Modelo{
 	 * @throws Evento
 	 */
 	private void terminarJuego()  {
-		dest = NombreBoton.MENU;
+		Highscore h = new Highscore();
+		if(h.hayLugar(puntaje) && puntaje>0){
+			dest = NombreBoton.AGREGAR_JUGADOR;
+		}else{
+			dest = NombreBoton.MENU;
+		}
 	}
 	private void ganaSeccion(){
 		offset += 252;
@@ -144,7 +151,7 @@ public class Juego implements Modelo{
 
 	@Override
 	public Object[] getInfo() {
-		Object[] res = {chocables,nivel.getMapas(),visualOffset};
+		Object[] res = {chocables,nivel.getMapas(),visualOffset,felix.getVidas(),puntaje};
 		return res;
 	}
 

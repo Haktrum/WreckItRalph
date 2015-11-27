@@ -13,12 +13,13 @@ import utils.Modelo;
 import utils.Utils;
 import utils.Evento.EventoID;
 import utils.Vista;
+import view.AgregarView;
 import view.MainWindow;
 import view.ViewConfig;
 import view.ViewJuego;
 import view.ViewMenu;
 import view.ViewReglas;
-import view.ViewTop;
+import view.ViewHighscore;
 import view.MenuItem.NombreBoton;
 
 import juego.Juego;
@@ -31,6 +32,7 @@ public class Controlador implements ActionListener {
 	private Timer timerModelo;
 	private Timer timerVista;
 	private int nivelInicial = 1;
+	private Jugador jugador;
 
 	public Controlador() {
 		window = new MainWindow();
@@ -75,8 +77,11 @@ public class Controlador implements ActionListener {
 				vista = new ViewReglas();
 				break;
 			case TOP:
-				modelo = new Highscore();
-				vista = new ViewTop();
+				if(modelo instanceof AgregarJugador)
+					modelo = new Highscore(((AgregarJugador) modelo).getJugador());
+				else
+					modelo = new Highscore();
+				vista = new ViewHighscore();
 				break;
 			case MENU:
 				if(modelo instanceof Configuracion){
@@ -84,6 +89,10 @@ public class Controlador implements ActionListener {
 				}
 				modelo = new Menu();
 				vista = new ViewMenu();
+				break;
+			case AGREGAR_JUGADOR:
+				modelo =  new AgregarJugador(((Juego) modelo).getPuntaje());
+				vista = new AgregarView();
 				break;
 			}
 			setear();

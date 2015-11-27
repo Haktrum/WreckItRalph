@@ -1,5 +1,9 @@
 package utils;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
 public class Utils {
@@ -34,7 +38,7 @@ public class Utils {
 	/** Tiempo m&iacute;nimo entre pastel y pastel */
 	public static final int proximoPastel = 300;
 	/** Cantidad de jugadores en el HighScore */
-	public static final int maxJugadores = 10;
+	public static final int maxJugadores = 5;
 	/** Cantidad de vidas que tiene F&eacute;lix por nivel */
 	public static final int vidasPorNivel = 3;
 	/** Tiempo de invulnerabilidad de F&eacute;lix */
@@ -53,6 +57,7 @@ public class Utils {
 	public static final int cellHeight = 84;
 
 	public static int nivelActual = 1;
+	
 
 	/**
 	 * Devuelve un boolean al azar con cierta probabilidad de true, esta
@@ -134,5 +139,15 @@ public class Utils {
 	public static String urlPuerta(int i) {
 		return BASE_IMG + "semicirculares/puerta_roto" + i + ".png";
 	}
-
+	
+	public static Font getFont(int size){
+		try {
+			return Font.createFont(Font.TRUETYPE_FONT, new File("res/ui/8-bit.ttf")).deriveFont(Font.PLAIN, size);
+		} catch (FontFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

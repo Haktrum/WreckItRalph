@@ -129,7 +129,7 @@ public class Felix extends Chocable {
 				super.requests.add(FELIX);
 				if (vidas < 1) {
 					super.requests.add(FELIX_MUERTO);
-					// throw new Evento(EventoID.TERMINAJUEGO);
+					throw new Evento(EventoID.TERMINAJUEGO);
 				}
 				this.setPos(new Posicion(0, 0));
 				timerInvulnerable = (int) Utils.cellHeight / c.getVelocidad();
@@ -142,7 +142,7 @@ public class Felix extends Chocable {
 				super.requests.add(FELIX);
 				if (vidas < 1) {
 					super.requests.add(FELIX_MUERTO);
-					// throw new Evento(EventoID.TERMINAJUEGO);
+					throw new Evento(EventoID.TERMINAJUEGO);
 				}
 				timerInvulnerable = (int) Utils.cellWidth / c.getVelocidad();
 			}
@@ -160,6 +160,9 @@ public class Felix extends Chocable {
 	public Insets getMargenes(){
 		if(super.imagenActual==3) return new Insets(-5,15,0,0);
 		return super.getMargenes();
+	}
+	public int getVidas(){
+		return this.vidas;
 	}
 
 }
