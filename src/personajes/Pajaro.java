@@ -1,7 +1,5 @@
 package personajes;
 
-import java.awt.Insets;
-
 import utils.Direccion;
 import utils.Evento;
 import utils.Posicion;

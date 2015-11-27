@@ -23,7 +23,7 @@ public class AgregarJugador implements Modelo{
 		if(nombre.length()<2)
 			throw new MalInput(ERR.CORTO);
 		Highscore h = new Highscore();
-		if(h.yaEsta(nombre.toString()) && !sobreEscribir){
+		if(h.yaEsta(new Jugador(nombre.toString())) && !sobreEscribir){
 			sobreEscribir = true;
 			throw new MalInput(ERR.YA_EXISTE);
 		}

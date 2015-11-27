@@ -28,6 +28,8 @@ public class Jugador implements Comparable<Jugador>, Serializable {
 	 */
 	@Override
 	public int compareTo(Jugador o) {
+		if(this.equals(o))
+			return 0;
 		return o.puntaje - puntaje;
 	}
 

@@ -3,9 +3,6 @@ package control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-
-import utils.Evento;
-import utils.Evento.EventoID;
 import utils.Modelo;
 import view.MenuItem.NombreBoton;
 

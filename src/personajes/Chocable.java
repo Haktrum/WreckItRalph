@@ -25,8 +25,6 @@ public abstract class Chocable implements Actualizable {
 	protected Posicion pos;
 	private int velocidad;
 	private int timerImagen = 0;
-	
-	private Insets margenes;
 
 	protected ArrayList<BufferedImage> imagenes = new ArrayList<BufferedImage>();
 	protected Queue<REQ> requests = new LinkedList<REQ>();

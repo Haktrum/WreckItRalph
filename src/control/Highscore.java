@@ -92,34 +92,21 @@ public class Highscore implements Serializable,Modelo {
 	}
 
 	private void agregarJugador(Jugador jugador) {
-		if(yaEsta(jugador.getNombre()))
-			eliminar(jugador);
+		if(jugadores.contains(jugador))
+			jugadores.remove(jugador);
 		jugadores.add(jugador);
 		if (jugadores.size() > Utils.maxJugadores) {
 			jugadores.remove(jugadores.last());
 		}
 		escribir();
 	}
-	private void eliminar(Jugador jugador){
-		Iterator<Jugador> iterator = jugadores.iterator();
-		while(iterator.hasNext()){
-			Jugador j = iterator.next();
-			if(j.equals(jugador)){
-				iterator.remove();
-				return;
-			}
-		}
-	}
-	public boolean yaEsta(String nombre){
-		Iterator<Jugador> iterator = jugadores.iterator();
-		while(iterator.hasNext()){
-			if(iterator.next().equals(new Jugador(nombre)))
-				return true;
-		}
-		return false;
+	public boolean yaEsta(Jugador jugador){
+		return jugadores.contains(jugador);
 	}
 	public boolean hayLugar(int puntaje){
-		return puntaje>jugadores.last().getPuntaje() || jugadores.size()<Utils.maxJugadores;
+		if(jugadores.size()<Utils.maxJugadores)
+			return true;
+		return puntaje>jugadores.last().getPuntaje();
 	}
 	
 	@Override

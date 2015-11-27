@@ -59,7 +59,7 @@ public class Felix extends Chocable {
 	 * Actualiza el tiempo de invulnerabilidad
 	 */
 	@Override
-	public void actualizar() {
+	public void actualizar() throws Evento{
 		super.refresh();
 		if (timerInvulnerable > 0) {
 			timerInvulnerable--;
@@ -67,6 +67,9 @@ public class Felix extends Chocable {
 				super.requests.clear();
 				super.agregarImagen("res/img/felix/felix.png", 0);
 			}
+		}
+		if(vidas<1 && !super.requests.contains(FELIX_MUERTO)){
+			throw new Evento(EventoID.TERMINAJUEGO);
 		}
 	}
 
@@ -99,7 +102,6 @@ public class Felix extends Chocable {
 	 *            objeto a chocar
 	 */
 	public void chequearChoque(Chocable c) throws Evento {
-		Posicion pf = pos.inPx();
 		int xFelix1 = pos.inPx().getX();
 		int xFelix2 = xFelix1+this.getImage().getWidth();
 		int yFelix1 = pos.inPx().getY()+10;
@@ -129,7 +131,7 @@ public class Felix extends Chocable {
 				super.requests.add(FELIX);
 				if (vidas < 1) {
 					super.requests.add(FELIX_MUERTO);
-					throw new Evento(EventoID.TERMINAJUEGO);
+					super.requests.add(FELIX_MUERTO);
 				}
 				this.setPos(new Posicion(0, 0));
 				timerInvulnerable = (int) Utils.cellHeight / c.getVelocidad();
@@ -142,7 +144,7 @@ public class Felix extends Chocable {
 				super.requests.add(FELIX);
 				if (vidas < 1) {
 					super.requests.add(FELIX_MUERTO);
-					throw new Evento(EventoID.TERMINAJUEGO);
+					super.requests.add(FELIX_MUERTO);
 				}
 				timerInvulnerable = (int) Utils.cellWidth / c.getVelocidad();
 			}

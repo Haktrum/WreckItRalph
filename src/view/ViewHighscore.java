@@ -1,29 +1,23 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
-import java.util.TreeSet;
 
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
 
 import utils.Utils;
 import utils.Vista;
 
-import control.Highscore;
-import control.Jugador;
-
 public class ViewHighscore extends JPanel implements Vista{
 	
-	private String texto = "";
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextArea jTextArea;
 	
 	public ViewHighscore() {

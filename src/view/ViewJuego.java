@@ -15,7 +15,6 @@ import javax.swing.border.EmptyBorder;
 import juego.Ventana;
 
 import personajes.Chocable;
-import utils.Actualizable;
 import utils.Posicion;
 import utils.Utils;
 import utils.Vista;

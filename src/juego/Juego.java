@@ -3,7 +3,6 @@ package juego;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import control.Highscore;
@@ -13,7 +12,6 @@ import personajes.Ladrillo;
 import personajes.Pajaro;
 import personajes.Pastel;
 import personajes.Ralph;
-import utils.Actualizable;
 import utils.Direccion;
 import utils.Evento;
 import utils.Modelo;

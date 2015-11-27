@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.event.KeyListener;
 import javax.swing.JFrame;

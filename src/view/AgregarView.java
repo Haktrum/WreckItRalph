@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import utils.Utils;
@@ -17,6 +16,10 @@ import utils.Vista;
 
 public class AgregarView extends JPanel implements Vista{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel input;
 	private JLabel error;
 	public AgregarView(){

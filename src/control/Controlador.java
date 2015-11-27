@@ -2,16 +2,10 @@ package control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.Timer;
 
-import utils.Direccion;
-import utils.Evento;
 import utils.Modelo;
-import utils.Utils;
-import utils.Evento.EventoID;
 import utils.Vista;
 import view.AgregarView;
 import view.MainWindow;
@@ -32,7 +26,6 @@ public class Controlador implements ActionListener {
 	private Timer timerModelo;
 	private Timer timerVista;
 	private int nivelInicial = 1;
-	private Jugador jugador;
 
 	public Controlador() {
 		window = new MainWindow();
