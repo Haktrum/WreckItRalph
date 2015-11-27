@@ -1,14 +1,10 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.Set;
-
-import javax.imageio.ImageIO;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import juego.Modelo;
@@ -16,6 +12,7 @@ import juego.Ventana;
 
 import personajes.Chocable;
 import utils.Actualizable;
+import utils.Loader;
 import utils.Posicion;
 import utils.Utils;
 
@@ -24,23 +21,17 @@ public class ViewJuego extends View implements Actualizable {
 	private Ventana[][][] mapas;
 	private int offset = 0;
 	private int visualOffset = 0;
-	private BufferedImage edificio;
+	private Image edificio = Loader.getImage("res/img/edificio/edificio.png");
 
 	public ViewJuego(Modelo modelo) {
 		super(modelo);
 		modelo.init();
 		actualizarMapas();
-		//this.setPreferredSize(new Dimension(260, 410));
+		this.setPreferredSize(new Dimension(460, 450));
 		this.setBounds(100, 20, 360, 430);
 		this.setBorder(new EmptyBorder(0, 0, 0, 0));
-		File file = new File("res/img/edificio/edificio.png");
-		try {
-			edificio = ImageIO.read(file);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
-
+	
 	public void actualizarMapas() {
 		this.mapas = getModelo().getMapas();
 	}
@@ -100,7 +91,6 @@ public class ViewJuego extends View implements Actualizable {
 
 	@Override
 	public void actualizarVista() {
-		// TODO Auto-generated method stub
-		
+		actualizar();
 	}
 }

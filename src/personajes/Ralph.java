@@ -12,11 +12,6 @@ import utils.eventos.Evento;
  */
 public class Ralph extends Chocable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 9035188076154387179L;
-
 	/** Ladrillos iniciales que posee Ralph */
 	private int ladrillosRestantes;
 

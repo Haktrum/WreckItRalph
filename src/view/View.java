@@ -9,6 +9,7 @@ public abstract class View extends JPanel {
 	private final Modelo modelo;
 	public View(Modelo modelo) {
 		this.modelo = modelo;
+		setFocusable(true);
 	}
 	public abstract void actualizarVista();
 	public Modelo getModelo() {

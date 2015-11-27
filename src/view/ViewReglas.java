@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -15,7 +16,7 @@ public class ViewReglas extends View {
 	public ViewReglas(Modelo modelo) {
 		super(modelo);
 		this.setBackground(Color.BLACK);
-		this.setBounds(0, 0, 570, 421);
+		this.setPreferredSize(new Dimension(570, 421));
 	}
 
 	@Override
@@ -26,7 +27,6 @@ public class ViewReglas extends View {
 		try {
 			fondo = ImageIO.read(archivo);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		g.drawImage(fondo, 0, 0, null);
@@ -34,7 +34,5 @@ public class ViewReglas extends View {
 
 	@Override
 	public void actualizarVista() {
-		// TODO Auto-generated method stub
-		
 	}
 }
