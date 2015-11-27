@@ -1,4 +1,4 @@
-package graficos;
+package view;
 
 import java.awt.Component;
 import java.awt.Container;

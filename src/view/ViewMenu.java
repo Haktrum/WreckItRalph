@@ -1,6 +1,5 @@
-package graficos;
+package view;
 
-import graficos.MenuItem.NombreBoton;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -14,6 +13,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import utils.Vista;
+import view.MenuItem.NombreBoton;
 
 @SuppressWarnings("serial")
 public class ViewMenu extends JPanel implements Vista{

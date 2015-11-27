@@ -1,6 +1,5 @@
 package control;
 
-import graficos.MenuItem.NombreBoton;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -17,6 +16,7 @@ import java.util.TreeSet;
 import utils.Evento;
 import utils.Evento.EventoID;
 import utils.Modelo;
+import view.MenuItem.NombreBoton;
 
 /**
  * Maneja los 10 puntajes m&aacute;s altos obtenidos en el juego

@@ -13,13 +13,13 @@ import utils.Modelo;
 import utils.Utils;
 import utils.Evento.EventoID;
 import utils.Vista;
-import graficos.ViewConfig;
-import graficos.ViewJuego;
-import graficos.ViewMenu;
-import graficos.ViewReglas;
-import graficos.ViewTop;
-import graficos.MainWindow;
-import graficos.MenuItem.NombreBoton;
+import view.MainWindow;
+import view.ViewConfig;
+import view.ViewJuego;
+import view.ViewMenu;
+import view.ViewReglas;
+import view.ViewTop;
+import view.MenuItem.NombreBoton;
 
 import juego.Juego;
 

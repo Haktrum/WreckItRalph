@@ -1,6 +1,5 @@
 package juego;
 
-import graficos.MenuItem.NombreBoton;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -19,6 +18,7 @@ import utils.Modelo;
 import utils.Posicion;
 import utils.Utils;
 import utils.Evento.EventoID;
+import view.MenuItem.NombreBoton;
 
 /**
  * Modela el conjunto de circustancias que rodean a los personajes

@@ -1,6 +1,5 @@
 package control;
 
-import graficos.MenuItem.NombreBoton;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -8,6 +7,7 @@ import java.awt.event.KeyEvent;
 import utils.Evento;
 import utils.Evento.EventoID;
 import utils.Modelo;
+import view.MenuItem.NombreBoton;
 
 public class Configuracion implements Modelo{
 
