@@ -1,25 +1,20 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GraphicsEnvironment;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
+import java.awt.event.MouseMotionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
-
 import juego.Modelo;
-import view.MenuItem.NombreBoton;
 
 @SuppressWarnings("serial")
 public class ViewMenu extends View {
@@ -40,25 +35,21 @@ public class ViewMenu extends View {
 		this.selected = 1;
 
 		// Boton Config
-		//config = new MenuItem(NombreBoton.CONFIG, 3, 1);
 		config = new Boton("Config", 3, 1);
 		this.add(config, config.getGBC());
 		items[3] = config;
 
 		// Boton reglas
-		//reglas = new MenuItem(NombreBoton.REGLAS, 1, 2);
 		reglas = new Boton("reglas", 1, 2);
 		this.add(reglas, reglas.getGBC());
 		items[0] = reglas;
 
 		// Boton Jugar
-		//jugar = new MenuItem(NombreBoton.JUGAR, 3, 2);
 		jugar = new Boton("jugar", 3, 2);
 		this.add(jugar, jugar.getGBC());
 		items[1] = jugar;
 
 		// Boton top
-		//top = new MenuItem(NombreBoton.TOP, 5, 2);
 		top = new Boton("top", 5, 2);
 		this.add(top, top.getGBC());
 		items[2] = top;
@@ -66,7 +57,12 @@ public class ViewMenu extends View {
 		// otra config
 		this.setPreferredSize(new Dimension(860, 400));
 	}
-
+	
+	@Override
+	public boolean requestFocusInWindow() {
+		return jugar.requestFocusInWindow();
+	}
+	
 	public void addConfigListener(ActionListener l) {
 		config.addActionListener(l);
 	}
@@ -77,16 +73,26 @@ public class ViewMenu extends View {
 	
 	public void addJugarListener(ActionListener l) {
 		jugar.addActionListener(l);
-		jugar.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				System.out.println(e.getKeyCode());
-			}
-		});
 	}
 	
 	public void addTopListener(ActionListener l) {
 		top.addActionListener(l);
+	}
+	
+	@Override
+	public synchronized void addKeyListener(KeyListener l) {
+		config.addKeyListener(l);
+		reglas.addKeyListener(l);
+		jugar.addKeyListener(l);
+		top.addKeyListener(l);
+	}
+	
+	@Override
+	public synchronized void addMouseMotionListener(MouseMotionListener l) {
+		config.addMouseMotionListener(l);
+		reglas.addMouseMotionListener(l);
+		jugar.addMouseMotionListener(l);
+		top.addMouseMotionListener(l);
 	}
 	
 	@Override
@@ -101,37 +107,32 @@ public class ViewMenu extends View {
 		}
 	}
 
-	public NombreBoton getDestino() {
-		return null;
-		//return items[selected].getNombre();
-	}
-
-	private void repintar() {
-		System.out.println("Repintando");
-		actualizarVista();
-	}
-
 	public void flechaIzq() {
-		if (this.selected > 0 && this.selected < 3)
+		if (this.selected > 0 && this.selected < 3) {
 			this.selected--;
-		repintar();
+			actualizarVista();
+		}
 	}
 
 	public void flechaDer() {
-		if (this.selected < 2)
+		if (this.selected < 2) {
 			this.selected++;
-		repintar();
+			actualizarVista();
+		}
 	}
 
 	public void flechaArriba() {
-		this.selected = 3;
-		repintar();
+		if (this.selected != 3) {
+			this.selected = 3;
+			actualizarVista();
+		}
 	}
 
 	public void flechaAbajo() {
-		if (this.selected == 3)
+		if (this.selected == 3) {
 			this.selected = 1;
-		repintar();
+			actualizarVista();
+		}
 	}
 
 	@Override
@@ -140,5 +141,14 @@ public class ViewMenu extends View {
 		for (int i = 0; i < items.length; i++) {
 			items[i].setBorderPainted(i == this.selected);
 		}
+	}
+
+	public void enter() {
+		items[this.selected].doClick();
+	}
+
+	public void seleccionar(Component component) {
+		this.selected = Arrays.asList(items).indexOf(component);
+		actualizarVista();
 	}
 }

@@ -4,27 +4,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
-import javax.swing.Timer;
-
-import control.Controlador;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import control.WreckItRalph;
 import juego.Modelo;
-import view.MainWindow;
-import view.View;
-import view.ViewConfig;
-import view.ViewJuego;
 import view.ViewMenu;
-import view.ViewReglas;
-import view.ViewTop;
 
 public class ControllerMenu extends Controller {
 
-	public ControllerMenu(Modelo modelo, View view) {
+	public ControllerMenu(Modelo modelo, ViewMenu view) {
 		super(modelo, view);
-		if (!(view instanceof ViewMenu)) {
-			throw new IllegalArgumentException();
-		}
-		
 		addListeners();
 	}
 	
@@ -37,9 +26,7 @@ public class ControllerMenu extends Controller {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ViewConfig view = new ViewConfig(getModelo());
-				MainWindow.getInstancia().setView(view);
-				new ControllerConfig(getModelo(), view);
+				WreckItRalph.getInstancia().crearConfig();
 			}
 		});
 		
@@ -47,9 +34,7 @@ public class ControllerMenu extends Controller {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ViewJuego view = new ViewJuego(getModelo());
-				MainWindow.getInstancia().setView(view);
-				Controlador controlador = new Controlador(getModelo(), view);
+				WreckItRalph.getInstancia().crearJuego();
 			}
 		});
 		
@@ -57,7 +42,7 @@ public class ControllerMenu extends Controller {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainWindow.getInstancia().setView(new ViewReglas(getModelo()));
+				WreckItRalph.getInstancia().crearReglas();
 			}
 		});
 		
@@ -65,7 +50,14 @@ public class ControllerMenu extends Controller {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainWindow.getInstancia().setView(new ViewTop(getModelo()));
+				WreckItRalph.getInstancia().crearTop();
+			}
+		});
+		
+		viewMenu.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				viewMenu.seleccionar(e.getComponent());
 			}
 		});
 	}
@@ -80,7 +72,6 @@ public class ControllerMenu extends Controller {
 		
 		@Override
 		public void keyPressed(KeyEvent e) {
-			System.out.println(e.getKeyCode() + ".");
 			switch (e.getKeyCode()) {
 			case KeyEvent.VK_UP:
 				viewMenu.flechaArriba();
@@ -94,16 +85,12 @@ public class ControllerMenu extends Controller {
 			case KeyEvent.VK_RIGHT:
 				viewMenu.flechaDer();
 				break;
+			case KeyEvent.VK_ENTER:
+				viewMenu.enter();
+				break;
+			case KeyEvent.VK_ESCAPE:
+				System.exit(0);
 			}
 		}
-	}
-	public static void main(String[] args) {
-		Modelo modelo = new Modelo();
-		View view = new ViewMenu(modelo);
-		@SuppressWarnings("unused")
-		Controller controlador = new ControllerMenu(modelo, view);
-		MainWindow mainWindow = MainWindow.getInstancia();
-		mainWindow.setView(view);
-		view.actualizarVista();
 	}
 }

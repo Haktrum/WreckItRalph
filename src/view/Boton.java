@@ -1,22 +1,22 @@
 package view;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
+import utils.Loader;
+
 @SuppressWarnings("serial")
 public class Boton extends JButton {
 	
 	private GridBagConstraints gConstraints;
-	private Font font = new Font("8BIT WONDER", Font.BOLD, 25);
 	
 	public Boton(String text, int gx, int gy) {
 		super(text);
-		setFont(font);
+		setFont(Loader.getFont());
 		//setEnabled(false);
 		setBackground(Color.BLACK);
 		setForeground(Color.RED);

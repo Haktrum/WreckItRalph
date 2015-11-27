@@ -4,24 +4,19 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import juego.Modelo;
-import view.View;
 import view.ViewConfig;
 
 public class ControllerConfig extends Controller {
 
-	public ControllerConfig(Modelo modelo, View view) {
+	public ControllerConfig(Modelo modelo, ViewConfig view) {
 		super(modelo, view);
-		if (!(view instanceof ViewConfig)) {
-			throw new IllegalArgumentException();
-		}
-		
 		addListeners();
-		
-		view.actualizarVista();
 	}
 
-	private void addListeners() {
+	public void addListeners() {
 		final ViewConfig viewConfig = (ViewConfig) getView();
+		
+		viewConfig.addKeyListener(new BackKeyListener());
 		
 		viewConfig.addIncListener(new MouseAdapter() {
 			@Override
@@ -31,11 +26,6 @@ public class ControllerConfig extends Controller {
 					getModelo().setNivel(nivel + 1);
 					viewConfig.actualizarVista();
 				}
-			}
-			
-			@Override
-			public void mouseMoved(MouseEvent e) {
-				viewConfig.setIncFocused();
 			}
 		});
 		
@@ -48,12 +38,6 @@ public class ControllerConfig extends Controller {
 					viewConfig.actualizarVista();
 				}
 			}
-			
-			@Override
-			public void mouseMoved(MouseEvent e) {
-				viewConfig.setDecFocused();
-			}
 		});
 	}
-
 }

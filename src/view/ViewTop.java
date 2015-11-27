@@ -2,11 +2,13 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
-import javax.swing.JPanel;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.event.KeyListener;
 import javax.swing.JTextArea;
 
 import juego.Modelo;
+import utils.Loader;
 
 public class ViewTop extends View {
 	private static final long serialVersionUID = 6259571743885667200L;
@@ -17,22 +19,27 @@ public class ViewTop extends View {
 		this.setBackground(Color.BLACK);
 		this.setLayout(new BorderLayout());
 
-		actualizar();
 		jTextArea.setEditable(false);
-		jTextArea.setFont(new Font("Comic Sans", Font.BOLD, 22));
+		jTextArea.setFont(Loader.getFont());
 		jTextArea.setBackground(Color.BLACK);
 		jTextArea.setForeground(Color.RED);
 		this.add(jTextArea, BorderLayout.CENTER);
-		this.setPreferredSize(jTextArea.getSize());
+		this.setPreferredSize(new Dimension(860, 400));
 	}
 	
-	public void actualizar() {
-		jTextArea.setText(getModelo().getHighscore().toString());
+	@Override
+	public synchronized void addKeyListener(KeyListener l) {
+		super.addKeyListener(l);
 	}
-
+	
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(Loader.getFondo(), 0, 0, null);
+	}
+	
 	@Override
 	public void actualizarVista() {
-		// TODO Auto-generated method stub
-		
+		jTextArea.setText(getModelo().getHighscore().toString());
 	}
 }
