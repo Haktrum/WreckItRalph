@@ -172,9 +172,6 @@ public class Ventana implements Actualizable {
 		if (i == tipo.paneles)
 			roto = i * 2;
 		this.actualizar();
-		if (tipo == Tipo.SEMICIRCULAR) {
-			roto = 0;
-		}
 		return roto > 0 ? 1 : 0;
 	}
 

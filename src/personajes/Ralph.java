@@ -110,7 +110,7 @@ public class Ralph extends Chocable {
 		Posicion nueva = this.getPos().potencial(dir);
 		int x = nueva.inPx().getX();
 		int limite = (new Posicion(Utils.numCols - 1, 3)).inPx().getX();
-		if (x >= 0 && x < limite) {
+		if (x >= Utils.margenIzq && x < limite) {
 			try {
 				super.mover(dir);
 				return true;

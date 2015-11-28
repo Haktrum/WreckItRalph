@@ -28,8 +28,7 @@ public class ViewJuego extends View implements Actualizable {
 		super(modelo);
 		modelo.init();
 		actualizarMapas();
-		this.setPreferredSize(new Dimension(460, 450));
-		this.setBounds(100, 20, 360, 430);
+		this.setPreferredSize(new Dimension(Utils.juegoWidth, Utils.juegoHeight));
 		this.setBorder(new EmptyBorder(0, 0, 0, 0));
 	}
 	
@@ -40,15 +39,13 @@ public class ViewJuego extends View implements Actualizable {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(edificio, 0, visualOffset - 498, null);
+		g.drawImage(edificio, 0, visualOffset - (edificio.getHeight()-Utils.juegoHeight), null);
 		for (int k = 0; k < mapas.length; k++) {
 			for (int j = 0; j < Utils.numPisos; j++) {
 				for (int i = 0; i < Utils.numCols; i++) {
 					Posicion aux = new Posicion(i, k * Utils.numPisos + j);
 					BufferedImage imagen = mapas[k][j][i].getImage();
 					int y = aux.inPx().getY() + visualOffset;
-					// if(k==0 && i==2 && j!=2)
-					// y+=15;
 					g.drawImage(imagen, aux.inPx().getX(), y, null);
 				}
 			}
@@ -56,14 +53,11 @@ public class ViewJuego extends View implements Actualizable {
 		for (Chocable c : ((ModeloJuego) getModelo()).getChocables()) {
 			if (c != null) {
 				c.paintComponent(g);
-				/*int y = c.getPos().inPx().getY() + c.getSubY();
-				int x = c.getPos().inPx().getX() + c.getSubX();
-				g.drawImage(c.getImage(), x, y, null);*/
 			}
 		}
 		// puntos vidas y nivel		
 		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, 360, 50);
+		g.fillRect(0, 0, Utils.juegoWidth, 50);
 		g.setFont(Loader.getFont(12));
 		g.setColor(Color.WHITE);
 		g.drawString("vidas*"+ModeloJuego.getInstancia().getFelix().getVidas(), 10, 30);

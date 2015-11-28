@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -55,12 +56,12 @@ public class ViewConfig extends View {
 		this.setPreferredSize(new Dimension(860, 400));
 	}
 	
-	public void addDecListener(MouseListener l) {
-		dec.addMouseListener(l);
+	public void addDecListener(KeyListener l) {
+		this.addKeyListener(l);
 	}
 	
-	public void addIncListener(MouseListener l) {
-		inc.addMouseListener(l);
+	public void addIncListener(KeyListener l) {
+		this.addKeyListener(l);
 	}
 
 	@Override

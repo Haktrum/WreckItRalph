@@ -84,7 +84,7 @@ public class Posicion {
 	}
 
 	public Posicion inPx() {
-		return new Posicion(25 + x * Utils.cellWidth+subx, 410 - (Utils.cellHeight * (y + 1)+suby));
+		return new Posicion(Utils.margenIzq+ x * Utils.cellWidth+subx, 410 - (Utils.cellHeight * (y + 1)+suby));
 	}
 
 	@Override

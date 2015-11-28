@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -19,24 +21,29 @@ public class ControllerConfig extends Controller {
 		
 		viewConfig.addKeyListener(new BackKeyListener());
 		
-		viewConfig.addIncListener(new MouseAdapter() {
+		viewConfig.addIncListener(new KeyAdapter() {
+			
 			@Override
-			public void mousePressed(MouseEvent e) {
-				int nivel = ((ModeloJuego) getModelo()).getNivel();
-				if (nivel < 10) {
-					((ModeloJuego) getModelo()).setNivel(nivel + 1);
-					viewConfig.actualizarVista();
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==KeyEvent.VK_RIGHT){
+					int nivel = ((ModeloJuego) getModelo()).getNivel();
+					if (nivel < 10) {
+						((ModeloJuego) getModelo()).setNivel(nivel + 1);
+						viewConfig.actualizarVista();
+					}
 				}
 			}
 		});
 		
-		viewConfig.addDecListener(new MouseAdapter() {
+		viewConfig.addDecListener(new KeyAdapter() {
 			@Override
-			public void mousePressed(MouseEvent e) {
-				int nivel = ((ModeloJuego) getModelo()).getNivel();
-				if (nivel > 0) {
-					((ModeloJuego) getModelo()).setNivel(nivel - 1);
-					viewConfig.actualizarVista();
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==KeyEvent.VK_LEFT){
+					int nivel = ((ModeloJuego) getModelo()).getNivel();
+					if (nivel > 1) {
+						((ModeloJuego) getModelo()).setNivel(nivel - 1);
+						viewConfig.actualizarVista();
+					}
 				}
 			}
 		});

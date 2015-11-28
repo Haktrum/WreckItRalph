@@ -52,6 +52,9 @@ public class Utils {
 
 	public static final int cellHeight = 84;
 
+	public static final int juegoWidth = 634;
+	public static final int juegoHeight = 430;
+	public static final int margenIzq = (Utils.juegoWidth - Utils.numCols*Utils.cellWidth) / 2;
 	public static int nivelActual = 1;
 
 	/**
