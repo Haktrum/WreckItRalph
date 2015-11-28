@@ -1,5 +1,6 @@
 package personajes;
 
+import java.awt.Insets;
 import java.awt.Rectangle;
 
 import utils.Direccion;
@@ -53,6 +54,12 @@ public class Felix extends Chocable {
 			requests.add(FELIX_DER);
 		}
 		pos.go(dir);
+	}
+
+	@Override
+	public Insets getMargenes(){
+		if(super.imagenActual==3) return new Insets(-5,15,0,0);
+		return super.getMargenes();
 	}
 
 	/**
@@ -147,6 +154,9 @@ public class Felix extends Chocable {
 				requests.add(FELIX_COME);
 			}
 		}
+	}
+	public int getVidas(){
+		return vidas;
 	}
 
 }

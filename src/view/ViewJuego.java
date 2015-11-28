@@ -22,7 +22,7 @@ public class ViewJuego extends View implements Actualizable {
 	private Ventana[][][] mapas;
 	private int offset = 0;
 	private int visualOffset = 0;
-	private Image edificio = Loader.getImage("res/img/edificio/edificio.png");
+	private BufferedImage edificio = Loader.getImage("res/img/edificio/edificio.png");
 
 	public ViewJuego(ModeloJuego modelo) {
 		super(modelo);
@@ -61,16 +61,13 @@ public class ViewJuego extends View implements Actualizable {
 				g.drawImage(c.getImage(), x, y, null);*/
 			}
 		}
-		// puntos vidas y nivel
+		// puntos vidas y nivel		
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 360, 50);
-	}
-
-	@SuppressWarnings("unused")
-	private Posicion inPx(Posicion pos, int oWidth, int oHeight) {
-		int x = pos.getX();
-		int y = pos.getY();
-		return new Posicion(242 + 30 + 50 * x, 640 - 78 - 100 * y);
+		g.setFont(Loader.getFont(12));
+		g.setColor(Color.WHITE);
+		g.drawString("vidas*"+ModeloJuego.getInstancia().getFelix().getVidas(), 10, 30);
+		g.drawString("puntos*"+ModeloJuego.getInstancia().getPuntaje(), 200, 30);
 	}
 
 	@Override

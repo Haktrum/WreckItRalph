@@ -2,7 +2,9 @@ package personajes;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -20,15 +22,13 @@ import utils.eventos.EventoOffScreen;
  */
 public abstract class Chocable implements Actualizable {
 	protected Posicion pos;
-	protected int subPosX = 0;
-	protected int subPosY = 0;
 	private final Rectangle size;
 	private int velocidad;
 	private int timerImagen = 0;
 
-	protected ArrayList<Image> imagenes = new ArrayList<>();
+	protected ArrayList<BufferedImage> imagenes = new ArrayList<>();
 	protected Queue<REQ> requests = new LinkedList<REQ>();
-	private int imagenActual = 0;
+	protected int imagenActual = 0;
 
 	public Chocable(Posicion pos, Rectangle size) {
 		this(pos, 0, size);
@@ -76,7 +76,12 @@ public abstract class Chocable implements Actualizable {
 	public Image getImage() {
 		return imagenes.get(imagenActual);
 	}
-
+	public Insets getMargenes(){
+		int top = (Utils.cellHeight-imagenes.get(imagenActual).getHeight())/2;
+		int left = (Utils.cellWidth-imagenes.get(imagenActual).getWidth())/2;
+		return new Insets(top,left,0,0);
+	}
+	
 	protected boolean estaChocando(Chocable c) {
 		return size.intersects(c.size);
 	}
@@ -98,7 +103,7 @@ public abstract class Chocable implements Actualizable {
 	}
 	public void paintComponent(Graphics g) {
 		Posicion posGrafica = pos.inPx();
-		g.drawImage(getImage(), posGrafica.getX(), posGrafica.getY(), null);
+		g.drawImage(getImage(), posGrafica.getX()+this.getMargenes().left, posGrafica.getY()+this.getMargenes().top, null);
 	}
 	
 	protected class REQ {

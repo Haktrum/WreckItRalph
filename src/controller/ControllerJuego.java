@@ -15,6 +15,7 @@ import control.WreckItRalph;
 import utils.Direccion;
 import utils.Utils;
 import utils.eventos.EventoOffScreen;
+import utils.eventos.EventoRalphSalta;
 import utils.eventos.EventoSeccionGanada;
 import utils.eventos.EventoJuegoTerminado;
 import utils.eventos.EventoNivelGanado;
@@ -78,6 +79,8 @@ public class ControllerJuego extends Controller implements ActionListener {
 		} catch (EventoJuegoTerminado e) {
 			this.terminarJuego();
 		} catch (EventoOffScreen e) {
+			e.printStackTrace();
+		} catch (EventoRalphSalta e) {
 			e.printStackTrace();
 		}
 	}

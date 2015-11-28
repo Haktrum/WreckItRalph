@@ -214,7 +214,7 @@ public class Ventana implements Actualizable {
 			url = Utils.urlPuerta(roto);
 			break;
 		case SEMICIRCULAR:
-			url = "res/img/semicirculares/semicircular.png";
+			url = Utils.urlSemicirc(roto);
 			break;
 		default:
 			url = Utils.urlPuerta(roto);

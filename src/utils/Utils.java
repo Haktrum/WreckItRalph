@@ -135,4 +135,11 @@ public class Utils {
 		return BASE_IMG + "semicirculares/puerta_roto" + i + ".png";
 	}
 
+	public static String urlSemicirc(int roto) {
+		if(roto>2){
+			roto = 2;
+		}
+		return BASE_IMG + "semicirculares/semicircular_roto" + roto + ".png";
+	}
+
 }

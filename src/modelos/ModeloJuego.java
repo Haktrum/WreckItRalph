@@ -2,11 +2,13 @@ package modelos;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.Set;
 
 import control.Highscore;
 import personajes.Chocable;
 import personajes.Felix;
+import personajes.Ladrillo;
 import personajes.Pajaro;
 import personajes.Pastel;
 import personajes.Ralph;
@@ -17,6 +19,7 @@ import utils.Utils;
 import utils.eventos.EventoJuegoTerminado;
 import utils.eventos.EventoNivelGanado;
 import utils.eventos.EventoOffScreen;
+import utils.eventos.EventoRalphSalta;
 import utils.eventos.EventoSeccionGanada;
 
 /**
@@ -34,12 +37,13 @@ public class ModeloJuego extends Modelo {
 	private int puntaje = 0;
 	/** Lista de objetos de car&acute;cter actualizable */
 	private Set<Chocable> chocables = new HashSet<>();
+	//private ArrayList<Chocable> chocables = new ArrayList<Chocable>();
 
 	/** Nivel */
 	private Nivel nivel = null;
 	
 	private ModeloJuego() {
-		nivel = new Nivel(0);
+		nivel = new Nivel(1);
 	}
 	
 	public void init() {
@@ -103,6 +107,7 @@ public class ModeloJuego extends Modelo {
 	}
 
 	// tira termina juego
+	@SuppressWarnings("unchecked")
 	@Override
 	public void actualizar() throws EventoNivelGanado, EventoSeccionGanada, EventoJuegoTerminado {
 		try {
@@ -126,7 +131,9 @@ public class ModeloJuego extends Modelo {
 			}
 			throw e;
 		}
-		for (Iterator<Chocable> iterator = chocables.iterator(); iterator.hasNext();) {
+		Set<Chocable> paraAgregar = new HashSet<Chocable>();
+		Iterator<Chocable> iterator = chocables.iterator();
+		while(iterator.hasNext()) {
 			Chocable chocable = iterator.next();
 			try {
 				if (chocable != null) {
@@ -139,8 +146,14 @@ public class ModeloJuego extends Modelo {
 				throw e;
 			} catch (EventoOffScreen e) {
 				iterator.remove();
+			} catch (EventoRalphSalta e) {
+				Integer ladrillos = (Integer) e.getParam();
+				while (ladrillos-- > 0) {
+					paraAgregar.add(new Ladrillo(new Posicion(ralph.getPos().getX(), 2)));
+				}
 			}
 		}
+		chocables.addAll(paraAgregar);
 		if (Utils.randomBoolean(Utils.probPastel) && nivel.getSeccion().puedoPastel()) {
 			int x = Utils.RANDOM.nextInt(Utils.numCols);
 			int y = Utils.RANDOM.nextInt(Utils.numPisos);
@@ -163,7 +176,7 @@ public class ModeloJuego extends Modelo {
 	}
 	
 	public void setNivel(int n) {
-		this.nivel.setNivel(n);
+		this.nivel = new Nivel(n);
 	}
 	
 	public Ventana[][][] getMapas() {
