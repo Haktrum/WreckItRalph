@@ -1,11 +1,11 @@
 package controller;
 
-import juego.Modelo;
+import modelos.ModeloJuego;
 import view.ViewReglas;
 
 public class ControllerReglas extends Controller {
 
-	public ControllerReglas(Modelo modelo, ViewReglas view) {
+	public ControllerReglas(ModeloJuego modelo, ViewReglas view) {
 		super(modelo, view);
 		addListeners();
 	}

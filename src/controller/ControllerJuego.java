@@ -8,21 +8,24 @@ import java.awt.event.KeyListener;
 
 import javax.swing.Timer;
 
+import modelos.ModeloJuego;
+
+import control.Highscore;
 import control.WreckItRalph;
 import utils.Direccion;
 import utils.Utils;
+import utils.eventos.EventoOffScreen;
 import utils.eventos.EventoSeccionGanada;
 import utils.eventos.EventoJuegoTerminado;
 import utils.eventos.EventoNivelGanado;
 import view.MainWindow;
 import view.ViewJuego;
-import juego.Modelo;
 
 public class ControllerJuego extends Controller implements ActionListener {
 	private boolean corriendo = false;
 	private Timer timer;
 
-	public ControllerJuego(Modelo modelo, ViewJuego view) {
+	public ControllerJuego(ModeloJuego modelo, ViewJuego view) {
 		super(modelo, view);
 		addListeners();
 		timer = new Timer(40, this);
@@ -44,15 +47,21 @@ public class ControllerJuego extends Controller implements ActionListener {
 	}
 
 	private void moverFelix(Direccion d) {
-		getModelo().moverFelix(d);
+		((ModeloJuego) getModelo()).moverFelix(d);
 	}
 	
-	private void escape() {
-		this.corriendo = false;
+	private void terminarJuego() {
+		timer.stop();
+		Highscore h = new Highscore();
+		int puntos = ModeloJuego.getInstancia().getPuntaje();
+		if(h.hayLugar(puntos) && puntos>0)
+			WreckItRalph.getInstancia().crearAgregarJugador(puntos);
+		else
+			WreckItRalph.getInstancia().crearMenu();
 	}
 
 	private void space() {
-		getModelo().martillar();
+		((ModeloJuego) getModelo()).martillar();
 	}
 
 	@Override
@@ -67,7 +76,9 @@ public class ControllerJuego extends Controller implements ActionListener {
 			viewJuego.reset();
 			MainWindow.getInstancia().setTitulo("Wreck It Ralph - Nivel " + Utils.nivelActual);
 		} catch (EventoJuegoTerminado e) {
-			WreckItRalph.getInstancia().crearMenu();
+			this.terminarJuego();
+		} catch (EventoOffScreen e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -88,7 +99,7 @@ public class ControllerJuego extends Controller implements ActionListener {
 				moverFelix(Direccion.ABAJO);
 				break;
 			case KeyEvent.VK_ESCAPE:
-				escape();
+				terminarJuego();
 				break;
 			case KeyEvent.VK_SPACE:
 				space();

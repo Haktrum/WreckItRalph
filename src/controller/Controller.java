@@ -3,8 +3,10 @@ package controller;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import modelos.Modelo;
+import modelos.ModeloJuego;
+
 import control.WreckItRalph;
-import juego.Modelo;
 import view.MainWindow;
 import view.View;
 

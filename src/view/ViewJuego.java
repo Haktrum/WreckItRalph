@@ -7,8 +7,9 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import javax.swing.border.EmptyBorder;
 
-import juego.Modelo;
-import juego.Ventana;
+import modelos.ModeloJuego;
+import modelos.Ventana;
+
 
 import personajes.Chocable;
 import utils.Actualizable;
@@ -23,7 +24,7 @@ public class ViewJuego extends View implements Actualizable {
 	private int visualOffset = 0;
 	private Image edificio = Loader.getImage("res/img/edificio/edificio.png");
 
-	public ViewJuego(Modelo modelo) {
+	public ViewJuego(ModeloJuego modelo) {
 		super(modelo);
 		modelo.init();
 		actualizarMapas();
@@ -33,7 +34,7 @@ public class ViewJuego extends View implements Actualizable {
 	}
 	
 	public void actualizarMapas() {
-		this.mapas = getModelo().getMapas();
+		this.mapas = ((ModeloJuego) getModelo()).getMapas();
 	}
 
 	@Override
@@ -52,7 +53,7 @@ public class ViewJuego extends View implements Actualizable {
 				}
 			}
 		}
-		for (Chocable c : getModelo().getChocables()) {
+		for (Chocable c : ((ModeloJuego) getModelo()).getChocables()) {
 			if (c != null) {
 				c.paintComponent(g);
 				/*int y = c.getPos().inPx().getY() + c.getSubY();

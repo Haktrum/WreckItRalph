@@ -39,6 +39,7 @@ public class Pajaro extends Chocable {
 	 */
 	@Override
 	public void actualizar() throws EventoOffScreen {
+		super.refresh();
 		Posicion pos = super.getPos().potencial(dir);
 		int x = pos.getX();
 		int y = pos.getY();

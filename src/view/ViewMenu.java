@@ -14,7 +14,8 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import javax.imageio.ImageIO;
-import juego.Modelo;
+
+import modelos.ModeloJuego;
 
 @SuppressWarnings("serial")
 public class ViewMenu extends View {
@@ -25,7 +26,7 @@ public class ViewMenu extends View {
 	private Boton jugar;
 	private Boton top;
 
-	public ViewMenu(Modelo modelo) {
+	public ViewMenu(ModeloJuego modelo) {
 		super(modelo);
 		this.setBackground(Color.BLACK);
 		GridBagLayout gridBagLayout = new GridBagLayout();

@@ -7,8 +7,8 @@ import control.Jugador;
 public class HighscoreTest {
 
 	public static void main(String[] args) {
-		Highscore highscore = Highscore.leer();
-		System.out.println(highscore.toString());
+		//Highscore highscore = Highscore.leer();
+		//System.out.println(highscore.toString());
 		/*
 		 * highscore.agregarJugador(new Jugador("jugador1", 100));
 		 * highscore.agregarJugador(new Jugador("jugador2", 300));

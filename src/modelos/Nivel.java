@@ -1,4 +1,4 @@
-package juego;
+package modelos;
 
 import utils.Utils;
 import utils.eventos.EventoJuegoTerminado;

@@ -16,17 +16,27 @@ public class Loader {
 	private static Image reglas = null;
 	private static HashMap<String, Image> imagenes = new HashMap<>();
 	
-	public static Font getFont() {
-		if (font == null) {
-			try {
-				Font font = Font.createFont(Font.TRUETYPE_FONT, new File("res/ui/8-bit.ttf"));
-				GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(font);
-			} catch (FontFormatException e) {
-			} catch (IOException e) {
-			}
-			font = new Font("8BIT WONDER", Font.BOLD, 25);
+//	public static Font getFont(int size) {
+//		if (font == null) {
+//			try {
+//				Font font = Font.createFont(Font.TRUETYPE_FONT, new File("res/ui/8-bit.ttf"));
+//				GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(font);
+//			} catch (FontFormatException e) {
+//			} catch (IOException e) {
+//			}
+//			font = new Font("8BIT WONDER", Font.BOLD, size);
+//		}
+//		return font;
+//	}
+	public static Font getFont(int size){
+		try {
+			return Font.createFont(Font.TRUETYPE_FONT, new File("res/ui/8-bit.ttf")).deriveFont(Font.PLAIN, size);
+		} catch (FontFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		return font;
+		return null;
 	}
 	
 	public static Image getFondo() {

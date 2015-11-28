@@ -34,7 +34,7 @@ public class Utils {
 	/** Tiempo m&iacute;nimo entre pastel y pastel */
 	public static final int proximoPastel = 300;
 	/** Cantidad de jugadores en el HighScore */
-	public static final int maxJugadores = 10;
+	public static final int maxJugadores = 5;
 	/** Cantidad de vidas que tiene F&eacute;lix por nivel */
 	public static final int vidasPorNivel = 3;
 	/** Tiempo de invulnerabilidad de F&eacute;lix */

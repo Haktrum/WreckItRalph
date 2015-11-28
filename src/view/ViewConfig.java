@@ -8,7 +8,8 @@ import java.awt.GridBagLayout;
 import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import juego.Modelo;
+
+import modelos.ModeloJuego;
 import utils.Loader;
 
 @SuppressWarnings("serial")
@@ -17,7 +18,7 @@ public class ViewConfig extends View {
 	private JLabel dec;
 	private JLabel inc;
 	
-	public ViewConfig(Modelo modelo) {
+	public ViewConfig(ModeloJuego modelo) {
 		super(modelo);
 		this.setBackground(Color.BLACK);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -28,7 +29,7 @@ public class ViewConfig extends View {
 
 		JLabel titulo = new JLabel("NIVEL");
 		titulo.setForeground(Color.RED);
-		titulo.setFont(Loader.getFont());
+		titulo.setFont(Loader.getFont(40));
 		c.gridx = 1;
 		c.gridy = 1;
 		c.gridwidth = 3;
@@ -43,7 +44,7 @@ public class ViewConfig extends View {
 
 		c.gridx++;
 		lbNivel = new JLabel();
-		lbNivel.setFont(Loader.getFont());
+		lbNivel.setFont(Loader.getFont(30));
 		lbNivel.setForeground(Color.ORANGE);
 		this.add(lbNivel, c);
 
@@ -70,7 +71,7 @@ public class ViewConfig extends View {
 
 	@Override
 	public void actualizarVista() {
-		lbNivel.setText(String.valueOf(getModelo().getNivel()));
+		lbNivel.setText(String.valueOf(((ModeloJuego) getModelo()).getNivel()));
 	}
 
 }

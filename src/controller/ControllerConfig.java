@@ -3,12 +3,13 @@ package controller;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import juego.Modelo;
+import modelos.ModeloJuego;
+
 import view.ViewConfig;
 
 public class ControllerConfig extends Controller {
 
-	public ControllerConfig(Modelo modelo, ViewConfig view) {
+	public ControllerConfig(ModeloJuego modelo, ViewConfig view) {
 		super(modelo, view);
 		addListeners();
 	}
@@ -21,9 +22,9 @@ public class ControllerConfig extends Controller {
 		viewConfig.addIncListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				int nivel = getModelo().getNivel();
+				int nivel = ((ModeloJuego) getModelo()).getNivel();
 				if (nivel < 10) {
-					getModelo().setNivel(nivel + 1);
+					((ModeloJuego) getModelo()).setNivel(nivel + 1);
 					viewConfig.actualizarVista();
 				}
 			}
@@ -32,9 +33,9 @@ public class ControllerConfig extends Controller {
 		viewConfig.addDecListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				int nivel = getModelo().getNivel();
+				int nivel = ((ModeloJuego) getModelo()).getNivel();
 				if (nivel > 0) {
-					getModelo().setNivel(nivel - 1);
+					((ModeloJuego) getModelo()).setNivel(nivel - 1);
 					viewConfig.actualizarVista();
 				}
 			}

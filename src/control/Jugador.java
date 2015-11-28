@@ -7,6 +7,9 @@ import java.io.Serializable;
  *
  */
 public class Jugador implements Comparable<Jugador>, Serializable {
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 4196508987432820781L;
 	private String nombre;
 	private int puntaje;
@@ -25,12 +28,17 @@ public class Jugador implements Comparable<Jugador>, Serializable {
 	 */
 	@Override
 	public int compareTo(Jugador o) {
+		if(this.equals(o)) 
+			return 0;
+		else
+			if(o.puntaje-puntaje==0)
+				return 1;
 		return o.puntaje - puntaje;
 	}
 
 	@Override
 	public String toString() {
-		return nombre + " - " + puntaje;
+		return nombre + "*" + puntaje;
 	}
 
 	public void setPuntaje(int puntaje) {
@@ -43,5 +51,11 @@ public class Jugador implements Comparable<Jugador>, Serializable {
 
 	public String getNombre() {
 		return this.nombre;
+	}
+	@Override
+	public boolean equals(Object o){
+		if(o instanceof Jugador)
+			return this.nombre.equals(((Jugador) o).getNombre());
+		return false;
 	}
 }

@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import utils.Direccion;
 import utils.Posicion;
 import utils.Utils;
+import utils.eventos.EventoJuegoTerminado;
 import utils.eventos.EventoOffScreen;
 
 /**
@@ -56,15 +57,19 @@ public class Felix extends Chocable {
 
 	/**
 	 * Actualiza el tiempo de invulnerabilidad
+	 * @throws EventoJuegoTerminado 
 	 */
 	@Override
-	public void actualizar() {
+	public void actualizar() throws EventoJuegoTerminado {
 		super.refresh();
 		if (timerInvulnerable > 0) {
 			timerInvulnerable--;
 		} else {
 			requests.clear();
 			agregarImagen("res/img/felix/felix.png", 0);
+		}
+		if(vidas<1 && !super.requests.contains(FELIX_MUERTO)){
+			throw new EventoJuegoTerminado();
 		}
 	}
 
@@ -98,7 +103,6 @@ public class Felix extends Chocable {
 	 */
 	public void chequearChoque(Chocable c) throws EventoOffScreen {
 		if (estaChocando(c)) {
-			System.out.println("Choque");
 			chocar(c);
 		}
 	}
@@ -119,7 +123,6 @@ public class Felix extends Chocable {
 				requests.add(FELIX);
 				if (vidas < 1) {
 					requests.add(FELIX_MUERTO);
-					// throw new Evento(EventoID.TERMINAJUEGO);
 				}
 				this.setPos(new Posicion(0, 0));
 				timerInvulnerable = (int) Utils.cellHeight / c.getVelocidad();
@@ -132,7 +135,6 @@ public class Felix extends Chocable {
 				requests.add(FELIX);
 				if (vidas < 1) {
 					requests.add(FELIX_MUERTO);
-					// throw new Evento(EventoID.TERMINAJUEGO);
 				}
 				timerInvulnerable = (int) Utils.cellWidth / c.getVelocidad();
 			}

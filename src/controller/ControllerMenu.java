@@ -6,13 +6,14 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+
+import modelos.ModeloJuego;
 import control.WreckItRalph;
-import juego.Modelo;
 import view.ViewMenu;
 
 public class ControllerMenu extends Controller {
 
-	public ControllerMenu(Modelo modelo, ViewMenu view) {
+	public ControllerMenu(ModeloJuego modelo, ViewMenu view) {
 		super(modelo, view);
 		addListeners();
 	}

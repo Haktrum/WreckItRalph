@@ -1,12 +1,12 @@
-package juego;
+package modelos;
 
+import modelos.Ventana.Tipo;
 import utils.Direccion;
 import utils.Posicion;
 import utils.Utils;
 import utils.eventos.Evento;
 import utils.eventos.EventoNivelGanado;
 import utils.eventos.EventoSeccionGanada;
-import juego.Ventana.Tipo;
 
 /**
  * Modela una secci&oacute;n del juego

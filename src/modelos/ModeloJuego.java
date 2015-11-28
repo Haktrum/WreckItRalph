@@ -1,4 +1,4 @@
-package juego;
+package modelos;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -23,9 +23,9 @@ import utils.eventos.EventoSeccionGanada;
  * Modela el conjunto de circustancias que rodean a los personajes
  * 
  */
-public class Modelo implements Actualizable {
+public class ModeloJuego extends Modelo {
 
-	private static Modelo instancia;
+	private static ModeloJuego instancia;
 	/** Personaje principal */
 	private Felix felix;
 	/** Villano */
@@ -37,10 +37,8 @@ public class Modelo implements Actualizable {
 
 	/** Nivel */
 	private Nivel nivel = null;
-	private Highscore highscore;
 	
-	private Modelo() {
-		highscore = new Highscore();
+	private ModeloJuego() {
 		nivel = new Nivel(0);
 	}
 	
@@ -167,20 +165,16 @@ public class Modelo implements Actualizable {
 	public void setNivel(int n) {
 		this.nivel.setNivel(n);
 	}
-
-	public Highscore getHighscore() {
-		return highscore;
-	}
 	
 	public Ventana[][][] getMapas() {
 		return nivel.getMapas();
 	}
 
-	public static Modelo getInstancia() {
+	public static ModeloJuego getInstancia() {
 		if (instancia == null) {
-			instancia = new Modelo();
+			instancia = new ModeloJuego();
 		}
 		return instancia;
 	}
-
+	
 }

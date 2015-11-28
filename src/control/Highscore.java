@@ -10,19 +10,24 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.TreeSet;
 
+import utils.Utils;
+
 /**
  * Maneja los 5 puntajes m&aacute;s altos obtenidos en el juego
  */
 public class Highscore implements Serializable {
-	private static final long serialVersionUID = 9032587643779204001L;
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7016790427904503366L;
 	private static String archivo = "res/top5.bin";
 	/** Arreglo de jugadores con puntaje */
 	private TreeSet<Jugador> jugadores;
 	/** Cantidad de jugadores inicial */
-	private final int cantMaxJugadores = 5;
 
-	public Highscore() {
-		jugadores = new TreeSet<>();
+	public Highscore(){
+		jugadores = leer();
 	}
 
 	/**
@@ -32,11 +37,13 @@ public class Highscore implements Serializable {
 	 *            Jugador con alg&uacute;n puntaje
 	 */
 	public void agregarJugador(Jugador jugador) {
-		if (jugadores.size() == cantMaxJugadores) {
+		if(jugadores.contains(jugador))
+			jugadores.remove(jugador);
+		jugadores.add(jugador);
+		if (jugadores.size() > Utils.maxJugadores) {
 			jugadores.remove(jugadores.last());
 		}
-		jugadores.add(jugador);
-		escribir(this);
+		escribir();
 	}
 
 	public TreeSet<Jugador> getJugadores() {
@@ -46,26 +53,29 @@ public class Highscore implements Serializable {
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
 		Iterator<Jugador> iterator = jugadores.iterator();
-		for (int i = 0; i < cantMaxJugadores; i++) {
-			stringBuilder.append(i + " ");
+		for (int i = 0; i < Utils.maxJugadores; i++) {
+			stringBuilder.append(i+1 + " ");
+			if(i==0)
+				stringBuilder.append(" ");
 			if (iterator.hasNext()) {
-				stringBuilder.append("- " + iterator.next() + "\n");
+				stringBuilder.append(iterator.next().toString() + "\n\n");
 			} else {
-				stringBuilder.append("-----\n");
+				stringBuilder.append("*****\n\n");
 			}
 		}
 		return stringBuilder.toString();
 	}
 
-	public static Highscore leer() {
+	@SuppressWarnings("unchecked")
+	private TreeSet<Jugador> leer() {
 		ObjectInputStream objectInputStream = null;
-		Highscore highscore = null;
+		jugadores = null;
 		try {
 			objectInputStream = new ObjectInputStream(new FileInputStream(archivo));
-			highscore = (Highscore) objectInputStream.readObject();
+			jugadores = (TreeSet<Jugador>) objectInputStream.readObject();
 		} catch (FileNotFoundException e) {
-			highscore = new Highscore();
-			escribir(highscore);
+			jugadores = new TreeSet<Jugador>();
+			escribir();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -79,14 +89,22 @@ public class Highscore implements Serializable {
 				e.printStackTrace();
 			}
 		}
-		return highscore;
+		return jugadores;
 	}
-
-	public static void escribir(Highscore highscore) {
+	public boolean yaEsta(Jugador jugador){
+		return jugadores.contains(jugador);
+	}
+	public boolean hayLugar(int puntos){
+		if(jugadores.size()<Utils.maxJugadores)
+			return true;
+		return jugadores.last().getPuntaje()<puntos;
+	}
+	
+	private void escribir() {
 		ObjectOutputStream objectOutputStream = null;
 		try {
 			objectOutputStream = new ObjectOutputStream(new FileOutputStream(archivo));
-			objectOutputStream.writeObject(highscore);
+			objectOutputStream.writeObject(jugadores);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

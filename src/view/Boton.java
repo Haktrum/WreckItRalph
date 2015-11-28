@@ -16,7 +16,7 @@ public class Boton extends JButton {
 	
 	public Boton(String text, int gx, int gy) {
 		super(text);
-		setFont(Loader.getFont());
+		setFont(Loader.getFont(30));
 		//setEnabled(false);
 		setBackground(Color.BLACK);
 		setForeground(Color.RED);

@@ -37,6 +37,7 @@ public abstract class Chocable implements Actualizable {
 	public Chocable(Posicion pos, int v, Rectangle size) {
 		this.pos = pos;
 		this.velocidad = Utils.dificultar(v, true);
+		this.velocidad = v;
 		this.size = size;
 	}
 
@@ -57,31 +58,10 @@ public abstract class Chocable implements Actualizable {
 	 *            Direcci&oacute;n a moverse
 	 */
 	protected void mover(Direccion dir) throws EventoOffScreen {
-		if (dir == Direccion.DERECHA) {
-			if (subPosX >= Utils.cellWidth) {
-				pos.go(dir);
-				subPosX = subPosX - Utils.cellWidth;
-			} else {
-				subPosX += velocidad;
-			}
-		} else if (dir == Direccion.IZQUIERDA) {
-			if (subPosX <= 0) {
-				pos.go(dir);
-				subPosX = Utils.cellWidth + subPosX;
-			} else {
-				subPosX -= velocidad;
-			}
-		} else if (dir == Direccion.ABAJO) {
-			if (subPosY >= Utils.cellHeight) {
-				pos.go(dir);
-				subPosY = subPosY - Utils.cellHeight;
-			} else {
-				subPosY += velocidad;
-			}
-			if (pos.getY() < 0) {
-				this.requests.clear();
-				throw new EventoOffScreen();
-			}
+		pos.subGo(dir, velocidad);
+		if (pos.getY() < -1) {
+			this.requests.clear();
+			throw new EventoOffScreen();
 		}
 	}
 
@@ -97,27 +77,12 @@ public abstract class Chocable implements Actualizable {
 		return imagenes.get(imagenActual);
 	}
 
-	protected void toggleREQ(REQ r1, REQ r2) {
-		if (!requests.isEmpty()) {
-			if (requests.element().equals(r1)) {
-				requests.add(r2);
-			} else {
-				requests.add(r1);
-			}
-		}
-	}
-
 	protected boolean estaChocando(Chocable c) {
 		return size.intersects(c.size);
 	}
 	
-	private Posicion getPosGrafica() {
-		Posicion posInPx = pos.inPx();
-		return new Posicion(posInPx.getX() + getSubX(), posInPx.getY() + getSubY());
-	}
-	
 	protected void refresh() {
-		Posicion posGrafica = getPosGrafica();
+		Posicion posGrafica = pos.inPx();
 		size.setLocation(posGrafica.getX(), posGrafica.getY());
 		if (timerImagen == 0) {
 			REQ r = requests.poll();
@@ -131,17 +96,8 @@ public abstract class Chocable implements Actualizable {
 			timerImagen--;
 		}
 	}
-
-	public int getSubX() {
-		return this.subPosX;
-	}
-
-	public int getSubY() {
-		return this.subPosY;
-	}
-
 	public void paintComponent(Graphics g) {
-		Posicion posGrafica = getPosGrafica();
+		Posicion posGrafica = pos.inPx();
 		g.drawImage(getImage(), posGrafica.getX(), posGrafica.getY(), null);
 	}
 	

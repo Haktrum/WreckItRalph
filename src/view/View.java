@@ -2,7 +2,9 @@ package view;
 
 import javax.swing.JPanel;
 
-import juego.Modelo;
+import modelos.Modelo;
+import modelos.ModeloJuego;
+
 
 @SuppressWarnings("serial")
 public abstract class View extends JPanel {

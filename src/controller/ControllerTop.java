@@ -1,11 +1,12 @@
 package controller;
 
-import juego.Modelo;
+import modelos.ModeloHighscore;
+import modelos.ModeloJuego;
 import view.ViewTop;
 
 public class ControllerTop extends Controller {
 
-	public ControllerTop(Modelo modelo, ViewTop view) {
+	public ControllerTop(ModeloHighscore modelo, ViewTop view) {
 		super(modelo, view);
 		addListeners();
 	}

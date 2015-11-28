@@ -8,12 +8,13 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import juego.Modelo;
+
+import modelos.ModeloJuego;
 
 @SuppressWarnings("serial")
 public class ViewReglas extends View {
 
-	public ViewReglas(Modelo modelo) {
+	public ViewReglas(ModeloJuego modelo) {
 		super(modelo);
 		this.setBackground(Color.BLACK);
 		this.setPreferredSize(new Dimension(570, 421));
