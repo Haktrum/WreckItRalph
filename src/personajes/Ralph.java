@@ -1,6 +1,9 @@
 package personajes;
 
 import java.awt.Rectangle;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 
 import modelos.ModeloJuego;
 
@@ -24,7 +27,8 @@ public class Ralph extends Chocable {
 	private final REQ RALPH_IZQ2 = new REQ(2, 5);
 	private final REQ RALPH_DER1 = new REQ(3,5);
 	private final REQ RALPH_DER2 = new REQ(4,5);
-	private final REQ RALPH_SALTA = new REQ(5, 10);
+	private final REQ RALPH_SALTA1 = new REQ(5, 5);
+	private final REQ RALPH_SALTA2 = new REQ(6, 5);
 	private int timerAccion = 0;
 	private int movs = 0;
 
@@ -37,7 +41,8 @@ public class Ralph extends Chocable {
 		super.agregarImagen("res/img/ralph/ralph_izq2.png");
 		super.agregarImagen("res/img/ralph/ralph_der1.png");
 		super.agregarImagen("res/img/ralph/ralph_der2.png");
-		super.agregarImagen("res/img/ralph/ralph_salta.png");
+		super.agregarImagen("res/img/ralph/ralph_salta1.png");
+		super.agregarImagen("res/img/ralph/ralph_salta2.png");
 	}
 
 	/**
@@ -66,7 +71,8 @@ public class Ralph extends Chocable {
 				movs = 0;
 			}
 		} else {
-			super.requests.clear();
+			super.requests.removeAll(Arrays.asList(RALPH,RALPH_IZQ1,RALPH_IZQ2,RALPH_DER1,RALPH_DER2));
+			
 			if (timerAccion == 0) {
 				if (Utils.randomBoolean(100-Utils.probTirar)) {
 					movs = Math.min(Utils.RANDOM.nextInt(Utils.cellWidth), 30);
@@ -76,10 +82,14 @@ public class Ralph extends Chocable {
 				} else {
 					// super.setBaseImage("res/img/ralph/ralph.png");
 					if (Utils.randomBoolean(Utils.dificultar(Utils.probTirar, true))) {
+						int lad = saltar();
 						try{
-							throw new EventoRalphSalta(saltar());
+							throw new EventoRalphSalta(lad);
 						}finally{
-							super.requests.add(RALPH_SALTA);
+							for(int i = 0;i<lad;i++){
+								super.requests.add(RALPH_SALTA1);
+								super.requests.add(RALPH_SALTA2);
+							}
 							timerAccion = 50;
 						}
 					}

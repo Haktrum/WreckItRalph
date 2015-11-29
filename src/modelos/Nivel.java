@@ -21,6 +21,7 @@ public class Nivel {
 	private int nroSeccion = 0;
 
 	public Nivel(int lvl) {
+		Utils.nivelActual = lvl;
 		for (int i = 0; i < secciones.length; i++) {
 			secciones[i] = new Seccion(i + 1);
 		}
@@ -29,7 +30,6 @@ public class Nivel {
 			this.secciones[nroSeccion].romperTodas();
 		}
 		this.nroNivel = lvl;
-		Utils.nivelActual = lvl;
 	}
 
 	/**
@@ -39,13 +39,6 @@ public class Nivel {
 	 */
 	public int getNro() {
 		return this.nroNivel;
-	}
-
-	/**
-	 * Reinicia el nivel
-	 */
-	public void reiniciar() {
-		this.nroSeccion = 0;
 	}
 
 	public Seccion getSeccion() {

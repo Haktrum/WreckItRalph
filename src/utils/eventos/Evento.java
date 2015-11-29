@@ -1,7 +1,7 @@
 package utils.eventos;
 
 @SuppressWarnings("serial")
-public class Evento extends Exception {
+public class Evento extends RuntimeException {
 
 	private Object param = null;
 

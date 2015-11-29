@@ -69,8 +69,8 @@ public class Utils {
 
 	public static int dificultar(int n, boolean inc) {
 		if (inc)
-			return (int) (n * Math.floor(Math.pow(1 + Utils.incDif, nivelActual - 1)));
-		return (int) (n * Math.floor(Math.pow(1 - Utils.incDif, nivelActual - 1)));
+			return (int) Math.round( n* Math.pow(1 + Utils.incDif, nivelActual - 1));
+		return (int) Math.round(n * Math.pow(1 - Utils.incDif, nivelActual - 1));
 	}
 
 	/**

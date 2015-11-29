@@ -73,7 +73,7 @@ public abstract class Chocable implements Actualizable {
 		this.pos = new Posicion(pos);
 	}
 
-	public Image getImage() {
+	public BufferedImage getImage() {
 		return imagenes.get(imagenActual);
 	}
 	public Insets getMargenes(){

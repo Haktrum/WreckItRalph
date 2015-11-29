@@ -1,18 +1,17 @@
 package modelos;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.ListIterator;
 import java.util.Set;
 
-import control.Highscore;
 import personajes.Chocable;
 import personajes.Felix;
 import personajes.Ladrillo;
 import personajes.Pajaro;
 import personajes.Pastel;
 import personajes.Ralph;
-import utils.Actualizable;
 import utils.Direccion;
 import utils.Posicion;
 import utils.Utils;
@@ -26,7 +25,7 @@ import utils.eventos.EventoSeccionGanada;
  * Modela el conjunto de circustancias que rodean a los personajes
  * 
  */
-public class ModeloJuego extends Modelo {
+public class ModeloJuego extends Modelo implements ActionListener{
 
 	private static ModeloJuego instancia;
 	/** Personaje principal */
@@ -44,6 +43,7 @@ public class ModeloJuego extends Modelo {
 	
 	private ModeloJuego() {
 		nivel = new Nivel(1);
+		this.init();
 	}
 	
 	public void init() {
@@ -105,9 +105,7 @@ public class ModeloJuego extends Modelo {
 		}
 		nivel.getSeccion().ventanaEn(felix.getPos()).felixEsta(true);
 	}
-
-	// tira termina juego
-	@SuppressWarnings("unchecked")
+	
 	@Override
 	public void actualizar() throws EventoNivelGanado, EventoSeccionGanada, EventoJuegoTerminado {
 		try {
@@ -115,7 +113,6 @@ public class ModeloJuego extends Modelo {
 		} catch (EventoNivelGanado e) {
 			if (this.nivel.getNro() < 10) {
 				this.nivel = new Nivel(nivel.getNro() + 1);
-				this.felix.setPos(new Posicion(0, 0));
 				this.reiniciar();
 				throw e;
 			} else {
@@ -125,7 +122,7 @@ public class ModeloJuego extends Modelo {
 			felix.setPos(new Posicion(felix.getPos().getX(), 0));
 			for (Iterator<Chocable> iterator = chocables.iterator(); iterator.hasNext();) {
 				Chocable chocable = iterator.next();
-				if (chocable instanceof Pajaro) {
+				if (chocable instanceof Pajaro || chocable instanceof Pastel) {
 					iterator.remove();
 				}
 			}
@@ -162,7 +159,7 @@ public class ModeloJuego extends Modelo {
 		}
 		if (Utils.randomBoolean(Utils.probPajaro) && !nivel.getSeccion().hayPajaro()) {
 			int y = Utils.RANDOM.nextInt(Utils.numPisos - 1) + 1;
-			chocables.add(new Pajaro(new Posicion(Utils.numCols - 1, y)));
+			chocables.add(new Pajaro(new Posicion(Utils.numCols+1, y)));
 			nivel.getSeccion().hayPajaro(true);
 		}
 	}
@@ -188,6 +185,11 @@ public class ModeloJuego extends Modelo {
 			instancia = new ModeloJuego();
 		}
 		return instancia;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		this.actualizar();
 	}
 	
 }

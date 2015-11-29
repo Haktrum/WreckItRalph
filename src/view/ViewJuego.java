@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import javax.swing.border.EmptyBorder;
 
@@ -18,7 +20,7 @@ import utils.Posicion;
 import utils.Utils;
 
 @SuppressWarnings("serial")
-public class ViewJuego extends View implements Actualizable {
+public class ViewJuego extends View implements ActionListener {
 	private Ventana[][][] mapas;
 	private int offset = 0;
 	private int visualOffset = 0;
@@ -64,14 +66,6 @@ public class ViewJuego extends View implements Actualizable {
 		g.drawString("puntos*"+ModeloJuego.getInstancia().getPuntaje(), 200, 30);
 	}
 
-	@Override
-	public void actualizar() {
-		this.repaint();
-		if (this.offset > this.visualOffset) {
-			this.visualOffset += 10;
-		}
-	}
-
 	public void incOffset() {
 		offset += 252;
 	}
@@ -79,10 +73,19 @@ public class ViewJuego extends View implements Actualizable {
 	public void reset() {
 		offset = 0;
 		visualOffset = 0;
+		this.actualizarMapas();
 	}
 
 	@Override
 	public void actualizarVista() {
-		actualizar();
+		this.repaint();
+		if (this.offset > this.visualOffset) {
+			this.visualOffset += 10;
+		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		this.actualizarVista();
 	}
 }

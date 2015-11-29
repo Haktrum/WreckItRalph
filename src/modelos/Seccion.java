@@ -28,7 +28,7 @@ public class Seccion {
 
 	private boolean hayPajaro = false;
 
-	private int proximoPastel = Utils.dificultar(Utils.proximoPastel, false);
+	private int proximoPastel = Utils.dificultar(Utils.proximoPastel, true);
 	/**
 	 * Crea una secci&oacute;n de ROWS pisos y COLS ventanas por piso
 	 */

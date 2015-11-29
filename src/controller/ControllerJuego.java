@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.lang.Thread.UncaughtExceptionHandler;
 
 import javax.swing.Timer;
 
@@ -22,15 +23,24 @@ import utils.eventos.EventoNivelGanado;
 import view.MainWindow;
 import view.ViewJuego;
 
-public class ControllerJuego extends Controller implements ActionListener {
+public class ControllerJuego extends Controller implements ActionListener{
 	private boolean corriendo = false;
-	private Timer timer;
+	private Timer timerModelo;
+	private Timer timerView;
 
 	public ControllerJuego(ModeloJuego modelo, ViewJuego view) {
 		super(modelo, view);
 		addListeners();
-		timer = new Timer(40, this);
-		timer.start();
+		timerModelo = new Timer(40, this);
+		timerView = new Timer(40, view);
+		timerView.start();
+//		Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler(){
+//			@Override
+//			public void uncaughtException(Thread arg0, Throwable arg1) {
+//				excepciones((Evento) arg1);
+//			}
+//		});
+		timerModelo.start();
 	}
 	
 	@Override
@@ -52,7 +62,8 @@ public class ControllerJuego extends Controller implements ActionListener {
 	}
 	
 	private void terminarJuego() {
-		timer.stop();
+		timerModelo.stop();
+		timerView.stop();
 		Highscore h = new Highscore();
 		int puntos = ModeloJuego.getInstancia().getPuntaje();
 		if(h.hayLugar(puntos) && puntos>0)
@@ -65,25 +76,23 @@ public class ControllerJuego extends Controller implements ActionListener {
 		((ModeloJuego) getModelo()).martillar();
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent ae) {
-		ViewJuego viewJuego = (ViewJuego) getView();
-		try {
-			getModelo().actualizar();
-			viewJuego.actualizarVista();
-		} catch (EventoSeccionGanada e) {
-			viewJuego.incOffset();
-		} catch (EventoNivelGanado e) {
-			viewJuego.reset();
-			MainWindow.getInstancia().setTitulo("Wreck It Ralph - Nivel " + Utils.nivelActual);
-		} catch (EventoJuegoTerminado e) {
-			this.terminarJuego();
-		} catch (EventoOffScreen e) {
-			e.printStackTrace();
-		} catch (EventoRalphSalta e) {
-			e.printStackTrace();
-		}
-	}
+//	private void excepciones(Evento ex) {
+//		ViewJuego viewJuego = (ViewJuego) getView();
+//		try {
+//			throw ex;
+//		} catch (EventoSeccionGanada e) {
+//			viewJuego.incOffset();
+//		} catch (EventoNivelGanado e) {
+//			viewJuego.reset();
+//			MainWindow.getInstancia().setTitulo("Wreck It Ralph - Nivel " + Utils.nivelActual);
+//		} catch (EventoJuegoTerminado e) {
+//			this.terminarJuego();
+//		} catch (EventoOffScreen e) {
+//			e.printStackTrace();
+//		} catch (EventoRalphSalta e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	private class MiKeyListener extends KeyAdapter {
 		@Override
@@ -109,5 +118,25 @@ public class ControllerJuego extends Controller implements ActionListener {
 				break;
 			}
 		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		ViewJuego viewJuego = (ViewJuego) getView();
+		try {
+			((ModeloJuego) getModelo()).actualizar();
+		} catch (EventoSeccionGanada e) {
+			viewJuego.incOffset();
+		} catch (EventoNivelGanado e) {
+			viewJuego.reset();
+			MainWindow.getInstancia().setTitulo("Wreck It Ralph - Nivel " + Utils.nivelActual);
+		} catch (EventoJuegoTerminado e) {
+			this.terminarJuego();
+		} catch (EventoOffScreen e) {
+			e.printStackTrace();
+		} catch (EventoRalphSalta e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

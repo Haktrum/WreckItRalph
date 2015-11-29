@@ -41,9 +41,9 @@ public class Pajaro extends Chocable {
 	public void actualizar() throws EventoOffScreen {
 		super.refresh();
 		Posicion pos = super.getPos().potencial(dir);
-		int x = pos.getX();
-		int y = pos.getY();
-		if (x < -1 || x > Utils.numCols || y < -1 || y > Utils.numPisos) {
+		int x = pos.inPx().getX();
+		int limite  = -(Utils.margenIzq-this.getImage().getWidth()); 
+		if (x<=limite || x >= Utils.juegoWidth) {
 			dir = dir.opuesta();
 			super.requests.clear();
 		}
