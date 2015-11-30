@@ -1,5 +1,6 @@
 package modelos;
 
+import utils.Loader;
 import utils.Utils;
 import utils.eventos.EventoJuegoTerminado;
 import utils.eventos.EventoNivelGanado;
@@ -83,8 +84,10 @@ public class Nivel {
 
 	public void actualizar() throws EventoNivelGanado, EventoSeccionGanada {
 		if(this.pasandoSeccion>0){
-			if(this.pasandoSeccion==1)
+			if(this.pasandoSeccion==1){
 				this.romperVentanas();
+				Loader.getSonido("ralph/ralph_rompe.wav").start();
+			}
 			this.pasandoSeccion--;
 		}
 		try{

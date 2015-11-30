@@ -3,6 +3,7 @@ package modelos;
 import modelos.Ventana.Tipo;
 import utils.Actualizable;
 import utils.Direccion;
+import utils.Loader;
 import utils.Posicion;
 import utils.Utils;
 import utils.eventos.Evento;

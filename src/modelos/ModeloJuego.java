@@ -14,6 +14,7 @@ import personajes.Pastel;
 import personajes.Ralph;
 import utils.Direccion;
 import utils.Posicion;
+import utils.Sonido;
 import utils.Utils;
 import utils.eventos.EventoJuegoTerminado;
 import utils.eventos.EventoNivelGanado;
@@ -37,6 +38,7 @@ public class ModeloJuego extends Modelo implements ActionListener{
 	/** Lista de objetos de car&acute;cter actualizable */
 	private Set<Chocable> chocables = new HashSet<>();
 	//private ArrayList<Chocable> chocables = new ArrayList<Chocable>();
+	
 
 	/** Nivel */
 	private Nivel nivel = null;

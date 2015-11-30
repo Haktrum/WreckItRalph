@@ -5,11 +5,18 @@ import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
 
 public class Loader {
 	private static Font font = null;
@@ -74,5 +81,22 @@ public class Loader {
 			}
 		}
 		return imagenes.get(ruta);
+	}
+	public static synchronized Thread getSonido(final String url){
+		return  new Thread(new Runnable() {
+			Clip clip;
+			public void run() {
+				try {
+					InputStream is = new BufferedInputStream(new FileInputStream("res/sounds/"+url));
+					AudioInputStream inputStream = AudioSystem.getAudioInputStream(is);
+					DataLine.Info info = new DataLine.Info(Clip.class, inputStream.getFormat());
+					clip = (Clip) AudioSystem.getLine(info);
+					clip.open(inputStream);
+					clip.start();
+				} catch (Exception e) {
+					System.err.println(e.getMessage());
+				}
+			}
+		});
 	}
 }

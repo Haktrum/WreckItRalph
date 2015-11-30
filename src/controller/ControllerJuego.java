@@ -14,6 +14,8 @@ import modelos.ModeloJuego;
 import control.Highscore;
 import control.WreckItRalph;
 import utils.Direccion;
+import utils.Loader;
+import utils.Sonido;
 import utils.Utils;
 import utils.eventos.EventoOffScreen;
 import utils.eventos.EventoRalphSalta;
@@ -28,6 +30,7 @@ public class ControllerJuego extends Controller implements ActionListener{
 	private Timer timerModelo;
 	private Timer timerView;
 
+	
 	public ControllerJuego(ModeloJuego modelo, ViewJuego view) {
 		super(modelo, view);
 		addListeners();

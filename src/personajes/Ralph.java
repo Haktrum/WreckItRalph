@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.util.Arrays;
 
 import utils.Direccion;
+import utils.Loader;
 import utils.Posicion;
 import utils.Utils;
 import utils.eventos.Evento;

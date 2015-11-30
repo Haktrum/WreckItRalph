@@ -4,6 +4,7 @@ import java.awt.Insets;
 import java.awt.Rectangle;
 
 import utils.Direccion;
+import utils.Loader;
 import utils.Posicion;
 import utils.Utils;
 import utils.eventos.EventoJuegoTerminado;
@@ -129,8 +130,10 @@ public class Felix extends Chocable {
 				requests.add(FELIX);
 				requests.add(FELIX_GOLPEADO);
 				requests.add(FELIX);
+				Loader.getSonido("felix/choque.wav").start();
 				if (vidas < 1) {
 					requests.add(FELIX_MUERTO);
+					Loader.getSonido("felix/felix_muere.wav").start();
 				}
 				this.setPos(new Posicion(0, 0));
 				timerInvulnerable = (int) Utils.cellHeight / c.getVelocidad();
@@ -141,8 +144,10 @@ public class Felix extends Chocable {
 				requests.add(FELIX);
 				requests.add(FELIX_GOLPEADO);
 				requests.add(FELIX);
+				Loader.getSonido("felix/choque.wav").start();
 				if (vidas < 1) {
 					requests.add(FELIX_MUERTO);
+					Loader.getSonido("felix/felix_muere.wav").start();
 				}
 				timerInvulnerable = (int) Utils.cellWidth / c.getVelocidad();
 			}
@@ -153,6 +158,7 @@ public class Felix extends Chocable {
 				throw new EventoOffScreen();
 			} finally {
 				requests.add(FELIX_COME);
+				Loader.getSonido("felix/come_pastel.wav").start();
 			}
 		}
 	}

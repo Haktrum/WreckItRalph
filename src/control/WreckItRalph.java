@@ -1,5 +1,10 @@
 package control;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Timer;
+
 import modelos.Modelo;
 import modelos.ModeloHighscore;
 import modelos.ModeloJuego;
@@ -10,6 +15,8 @@ import controller.ControllerJuego;
 import controller.ControllerMenu;
 import controller.ControllerReglas;
 import controller.ControllerTop;
+import utils.Loader;
+import utils.Sonido;
 import view.View;
 import view.ViewAgregar;
 import view.ViewConfig;
@@ -23,11 +30,15 @@ public class WreckItRalph {
 	private View view;
 	private Controller controller;
 	private static WreckItRalph wreckItRalph = WreckItRalph.getInstancia();
+	
 
 	public static void main(String[] args) {
 		wreckItRalph.crearMenu();
 	}
 	
+	private WreckItRalph(){
+		
+	}
 	public static WreckItRalph getInstancia() {
 		if (wreckItRalph == null) {
 			wreckItRalph = new WreckItRalph();

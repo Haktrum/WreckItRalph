@@ -4,14 +4,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
+
+import javax.swing.Timer;
 
 import modelos.ModeloJuego;
 import control.WreckItRalph;
+import utils.Sonido;
 import view.ViewMenu;
 
-public class ControllerMenu extends Controller {
+public class ControllerMenu extends Controller{
+	
 
 	public ControllerMenu(ModeloJuego modelo, ViewMenu view) {
 		super(modelo, view);

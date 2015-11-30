@@ -3,6 +3,7 @@ package personajes;
 import java.awt.Rectangle;
 
 import utils.Direccion;
+import utils.Loader;
 import utils.Posicion;
 import utils.Utils;
 import utils.eventos.EventoOffScreen;
@@ -20,6 +21,7 @@ public class Ladrillo extends Chocable {
 		super.agregarImagen("res/img/rocas/ladrillo1.png");
 		super.agregarImagen("res/img/rocas/ladrillo2.png");
 		super.pos.setSubX(Utils.RANDOM.nextInt(21) - 10);
+		Loader.getSonido("ralph/ralph_tira.wav").start();
 	}
 
 	/**
