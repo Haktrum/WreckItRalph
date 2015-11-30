@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 
 import utils.Actualizable;
 import utils.Direccion;
+import utils.Loader;
 import utils.Utils;
 
 /**
@@ -20,7 +21,7 @@ import utils.Utils;
 public class Ventana implements Actualizable {
 
 	/** N&uacute;mero de golpes restantes para arreglar la ventana */
-	private int roto;
+	private int roto = 0;
 	/** Indica si la ventana tiene moldura */
 	private final boolean MOLDURA;
 	/** Indica si la ventana tiene macetero */
@@ -37,6 +38,9 @@ public class Ventana implements Actualizable {
 	private int timerPastel = 0;
 
 	private BufferedImage img;
+	
+	private int timerPuntos = 0;
+	private int puntos = 0;
 
 	/**
 	 * Crea una ventana del Tipo tipo
@@ -109,6 +113,17 @@ public class Ventana implements Actualizable {
 	}
 
 	public BufferedImage getImage() {
+		if(timerPuntos>0 && (puntos==100 || puntos==500)){
+			BufferedImage aux = img;
+			int margen = (aux.getWidth()-16)/2;
+			Graphics2D g = (Graphics2D) aux.getGraphics();
+			g.drawImage(aux,0,0, null);
+			if(puntos==100)
+				g.drawImage(Loader.getImage("res/img/ventanas_y_panel/100puntos.png"),margen,timerPuntos, null);
+			else
+				g.drawImage(Loader.getImage("res/img/ventanas_y_panel/500puntos.png"),margen,timerPuntos, null);
+			return aux;
+		}
 		return img;
 	}
 
@@ -118,15 +133,22 @@ public class Ventana implements Actualizable {
 	 * @return el puntaje obtenido por ese martillazo
 	 */
 	public int arreglar() {
-		if (this.roto == 0)
+		if (this.roto == 0){
+			puntos  = 0;
 			return 0;
+		}
 		this.roto--;
 		if (this.roto == 0) {
+			timerPuntos=20;
+			puntos = Utils.puntajeArreglar;
 			return Utils.puntajeArreglar;
 		}
 		if ((this.roto % 2) == 0) {
+			timerPuntos=20;
+			puntos = Utils.puntajeArreglarPanel;
 			return Utils.puntajeArreglarPanel;
 		}
+		puntos = 0;
 		return 0;
 	}
 
@@ -171,7 +193,6 @@ public class Ventana implements Actualizable {
 		}
 		if (i == tipo.paneles)
 			roto = i * 2;
-		this.actualizar();
 		return roto > 0 ? 1 : 0;
 	}
 
@@ -199,6 +220,8 @@ public class Ventana implements Actualizable {
 
 	@Override
 	public void actualizar() {
+		if(timerPuntos>0)
+			timerPuntos--;
 		String url = "";
 		switch (tipo) {
 		case COMUN:

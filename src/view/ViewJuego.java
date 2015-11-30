@@ -62,8 +62,8 @@ public class ViewJuego extends View implements ActionListener {
 		g.fillRect(0, 0, Utils.juegoWidth, 50);
 		g.setFont(Loader.getFont(12));
 		g.setColor(Color.WHITE);
-		g.drawString("vidas*"+ModeloJuego.getInstancia().getFelix().getVidas(), 10, 30);
-		g.drawString("puntos*"+ModeloJuego.getInstancia().getPuntaje(), 200, 30);
+		g.drawString("vidas*"+ModeloJuego.getInstancia().getFelix().getVidas(), Utils.margenIzq, 30);
+		g.drawString("puntos*"+ModeloJuego.getInstancia().getPuntaje(), Utils.margenIzq+200, 30);
 	}
 
 	public void incOffset() {

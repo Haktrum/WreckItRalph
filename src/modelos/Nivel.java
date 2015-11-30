@@ -18,6 +18,8 @@ public class Nivel {
 	/** La secci&oacute;n pr&oacute;xima a la actual */
 	private Seccion[] secciones = new Seccion[Utils.maxSeccion];
 
+	private int pasandoSeccion = 0;
+	
 	private int nroSeccion = 0;
 
 	public Nivel(int lvl) {
@@ -26,9 +28,7 @@ public class Nivel {
 			secciones[i] = new Seccion(i + 1);
 		}
 		this.secciones[nroSeccion].puertaYBalcon();
-		while (this.secciones[nroSeccion].getVentanasRotas() == 0) {
-			this.secciones[nroSeccion].romperTodas();
-		}
+		this.romperVentanas();
 		this.nroNivel = lvl;
 	}
 
@@ -47,6 +47,12 @@ public class Nivel {
 
 	public void setSeccion(int nro) {
 		this.nroSeccion = nro;
+	}
+	public void pasarSeccion(){
+		this.pasandoSeccion = 41;
+	}
+	public boolean estaPasando(){
+		return pasandoSeccion>0;
 	}
 
 	/**
@@ -76,20 +82,32 @@ public class Nivel {
 	}
 
 	public void actualizar() throws EventoNivelGanado, EventoSeccionGanada {
-		if (this.secciones[nroSeccion].getVentanasRotas() == 0) {
-			if (this.nroSeccion == Utils.maxSeccion - 1) {
-				throw new EventoNivelGanado();
-			} else {
-				this.nroSeccion++;
-				while (this.secciones[nroSeccion].getVentanasRotas() == 0) {
-					this.secciones[nroSeccion].romperTodas();
-				}
-				throw new EventoSeccionGanada();
+		if(this.pasandoSeccion>0){
+			if(this.pasandoSeccion==1)
+				this.romperVentanas();
+			this.pasandoSeccion--;
+		}
+		try{
+			if(!this.estaPasando()){
+				secciones[nroSeccion].actualizar();
 			}
+		}catch(EventoSeccionGanada e){
+			this.pasarSeccion();
+			if(this.nroSeccion==Utils.maxSeccion - 1){
+				throw new EventoNivelGanado();
+			}else{
+				this.nroSeccion++;
+			}
+			throw new EventoSeccionGanada();
 		}
 		this.secciones[nroSeccion].decProximoPastel();
 	}
 
+	private void romperVentanas(){
+		while (this.secciones[nroSeccion].getVentanasRotas() == 0) {
+			this.secciones[nroSeccion].romperTodas();
+		}
+	}
 	public Ventana[][][] getMapas() {
 		Ventana[][][] mapas = new Ventana[Utils.maxSeccion][][];
 		for (int i = 0; i < mapas.length; i++) {

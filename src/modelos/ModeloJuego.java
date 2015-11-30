@@ -99,7 +99,7 @@ public class ModeloJuego extends Modelo implements ActionListener{
 	}
 
 	public void moverFelix(Direccion dir) {
-		if (nivel.getSeccion().puedoIr(felix.getPos(), dir)) {
+		if (nivel.getSeccion().puedoIr(felix.getPos(), dir) && !nivel.estaPasando()) {
 			nivel.getSeccion().ventanaEn(felix.getPos()).felixEsta(false);
 			felix.mover(dir);
 		}
@@ -120,6 +120,7 @@ public class ModeloJuego extends Modelo implements ActionListener{
 			}
 		} catch (EventoSeccionGanada e) {
 			felix.setPos(new Posicion(felix.getPos().getX(), 0));
+			ralph.pasarSeccion();
 			for (Iterator<Chocable> iterator = chocables.iterator(); iterator.hasNext();) {
 				Chocable chocable = iterator.next();
 				if (chocable instanceof Pajaro || chocable instanceof Pastel) {
@@ -191,5 +192,4 @@ public class ModeloJuego extends Modelo implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		this.actualizar();
 	}
-	
 }

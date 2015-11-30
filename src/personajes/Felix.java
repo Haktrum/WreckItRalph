@@ -27,6 +27,7 @@ public class Felix extends Chocable {
 	private final REQ FELIX_GOLPEADO = new REQ(4, 3);
 	private final REQ FELIX_MUERTO = new REQ(5, 10);
 	private final REQ FELIX_COME = new REQ(6, 3);
+	
 
 	public Felix() {
 		super(new Posicion(0, 0), new Rectangle(24, 51));

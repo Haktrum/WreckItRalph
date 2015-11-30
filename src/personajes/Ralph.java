@@ -2,10 +2,6 @@ package personajes;
 
 import java.awt.Rectangle;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-
-import modelos.ModeloJuego;
 
 import utils.Direccion;
 import utils.Posicion;
@@ -21,7 +17,6 @@ public class Ralph extends Chocable {
 	/** Ladrillos iniciales que posee Ralph */
 	private int ladrillosRestantes;
 
-	@SuppressWarnings("unused")
 	private final REQ RALPH = new REQ(0, 5);
 	private final REQ RALPH_IZQ1 = new REQ(1, 5);
 	private final REQ RALPH_IZQ2 = new REQ(2, 5);
@@ -29,8 +24,11 @@ public class Ralph extends Chocable {
 	private final REQ RALPH_DER2 = new REQ(4,5);
 	private final REQ RALPH_SALTA1 = new REQ(5, 5);
 	private final REQ RALPH_SALTA2 = new REQ(6, 5);
+	private final REQ RALPH_SUBE1 = new REQ(7,5);
+	private final REQ RALPH_SUBE2 = new REQ(8,5);
 	private int timerAccion = 0;
 	private int movs = 0;
+	
 
 	public Ralph() {
 		super(new Posicion(0, Utils.numPisos), Utils.vRalph, new Rectangle(69, 82));
@@ -43,6 +41,8 @@ public class Ralph extends Chocable {
 		super.agregarImagen("res/img/ralph/ralph_der2.png");
 		super.agregarImagen("res/img/ralph/ralph_salta1.png");
 		super.agregarImagen("res/img/ralph/ralph_salta2.png");
+		super.agregarImagen("res/img/ralph/ralph_sube1.png");
+		super.agregarImagen("res/img/ralph/ralph_sube2.png");
 	}
 
 	/**
@@ -129,5 +129,16 @@ public class Ralph extends Chocable {
 			}
 		}
 		return false;
+	}
+	public void pasarSeccion(){
+		this.requests.clear();
+		this.requests.add(RALPH_SUBE1);
+		this.requests.add(RALPH_SUBE2);
+		this.requests.add(RALPH_SUBE1);
+		this.requests.add(RALPH_SUBE2);
+		this.requests.add(RALPH_SUBE1);
+		this.requests.add(RALPH);
+		this.requests.add(RALPH_SALTA1);
+		this.requests.add(RALPH_SALTA2);
 	}
 }

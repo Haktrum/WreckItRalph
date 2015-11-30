@@ -1,6 +1,7 @@
 package modelos;
 
 import modelos.Ventana.Tipo;
+import utils.Actualizable;
 import utils.Direccion;
 import utils.Posicion;
 import utils.Utils;
@@ -12,7 +13,7 @@ import utils.eventos.EventoSeccionGanada;
  * Modela una secci&oacute;n del juego
  *
  */
-public class Seccion {
+public class Seccion implements Actualizable{
 
 	/** N&uacute;mero de ventanas en un piso */
 	private final int COLS = Utils.numCols;
@@ -187,5 +188,15 @@ public class Seccion {
 		if (this.proximoPastel > 0) {
 			this.proximoPastel--;
 		}
+	}
+
+	@Override
+	public void actualizar() throws EventoSeccionGanada {
+		for (int j = 0; j < ROWS; j++) {
+			for (int i = 0; i < COLS; i++) {
+				ventanaEn(i, j).actualizar();
+			}
+		}
+		if(this.ventRotas==0) throw new EventoSeccionGanada();
 	}
 }
