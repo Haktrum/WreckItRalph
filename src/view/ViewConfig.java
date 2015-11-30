@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 

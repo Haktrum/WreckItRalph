@@ -86,7 +86,7 @@ public class Nivel {
 		if(this.pasandoSeccion>0){
 			if(this.pasandoSeccion==1){
 				this.romperVentanas();
-				Loader.getSonido("ralph/ralph_rompe.wav").start();
+				Loader.playSonido("ralph/ralph_rompe.wav").start();
 			}
 			this.pasandoSeccion--;
 		}

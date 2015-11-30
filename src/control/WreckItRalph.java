@@ -1,10 +1,5 @@
 package control;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.Timer;
-
 import modelos.Modelo;
 import modelos.ModeloHighscore;
 import modelos.ModeloJuego;
@@ -16,7 +11,6 @@ import controller.ControllerMenu;
 import controller.ControllerReglas;
 import controller.ControllerTop;
 import utils.Loader;
-import utils.Sonido;
 import view.View;
 import view.ViewAgregar;
 import view.ViewConfig;
@@ -37,7 +31,6 @@ public class WreckItRalph {
 	}
 	
 	private WreckItRalph(){
-		
 	}
 	public static WreckItRalph getInstancia() {
 		if (wreckItRalph == null) {
@@ -47,12 +40,14 @@ public class WreckItRalph {
 	}
 	
 	public void crearMenu() {
+		Loader.playBgSonido("juego/menu_bg.wav").start();
 		modelo = ModeloJuego.getInstancia();
 		view = new ViewMenu((ModeloJuego) modelo);
 		controller = new ControllerMenu((ModeloJuego) modelo, (ViewMenu) view);
 	}
 	
 	public void crearJuego() {
+		Loader.playBgSonido("juego/juego_bg.wav").start();
 		modelo = ModeloJuego.getInstancia();
 		view = new ViewJuego((ModeloJuego) modelo);
 		controller = new ControllerJuego((ModeloJuego) modelo, (ViewJuego) view);
@@ -75,6 +70,7 @@ public class WreckItRalph {
 		controller = new ControllerTop((ModeloHighscore) modelo, (ViewTop) view);
 	}
 	public void crearAgregarJugador(int puntos){
+		Loader.playBgSonido("juego/menu_bg.wav");
 		modelo = ModeloHighscore.getInstancia();
 		view = new ViewAgregar((ModeloHighscore) modelo);
 		controller = new ControllerAgregar((ModeloHighscore) modelo,(ViewAgregar) view,puntos);

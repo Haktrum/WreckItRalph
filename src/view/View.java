@@ -1,7 +1,7 @@
 package view;
 
-import javax.swing.JPanel;
 
+import javax.swing.JPanel;
 import modelos.Modelo;
 
 

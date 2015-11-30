@@ -5,11 +5,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import javax.swing.Timer;
 
 import modelos.ModeloJuego;
 import control.WreckItRalph;
-import utils.Sonido;
 import view.ViewMenu;
 
 public class ControllerMenu extends Controller{

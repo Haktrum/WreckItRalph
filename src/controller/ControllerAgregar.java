@@ -6,13 +6,8 @@ import java.awt.event.KeyEvent;
 import control.WreckItRalph;
 
 import modelos.ModeloHighscore;
-import modelos.ModeloJuego;
 
 import utils.exceptions.BadInput;
-import utils.exceptions.NombreConEspacios;
-import utils.exceptions.NombreCorto;
-import utils.exceptions.NombreYaExiste;
-import view.View;
 import view.ViewAgregar;
 
 public class ControllerAgregar extends Controller{

@@ -1,7 +1,6 @@
 package controller;
 
 import modelos.ModeloHighscore;
-import modelos.ModeloJuego;
 import view.ViewTop;
 
 public class ControllerTop extends Controller {

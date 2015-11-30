@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.lang.Thread.UncaughtExceptionHandler;
 
 import javax.swing.Timer;
 
@@ -14,8 +13,6 @@ import modelos.ModeloJuego;
 import control.Highscore;
 import control.WreckItRalph;
 import utils.Direccion;
-import utils.Loader;
-import utils.Sonido;
 import utils.Utils;
 import utils.eventos.EventoOffScreen;
 import utils.eventos.EventoRalphSalta;

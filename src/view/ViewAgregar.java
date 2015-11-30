@@ -4,28 +4,16 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.ContainerAdapter;
-import java.awt.event.ContainerEvent;
-import java.awt.event.ContainerListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 
-import modelos.Modelo;
 import modelos.ModeloHighscore;
 
 
 import utils.Loader;
-import utils.Utils;
 
 public class ViewAgregar extends View{
 	
@@ -70,13 +58,11 @@ public class ViewAgregar extends View{
 		c.gridy++;
 		this.add(error,c);
 		this.setBounds(50, 100, 600, 500);
-		SwingUtilities.invokeLater( new Runnable() { 
-			public void run() { 
-				input.requestFocus(); 
-			} 
-		});
 	}
-
+	@Override
+	public boolean requestFocusInWindow() {
+		return input.requestFocusInWindow();
+	}
 	public String getInputText(){
 		return this.input.getText();
 	}

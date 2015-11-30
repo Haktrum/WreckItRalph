@@ -3,7 +3,6 @@ package view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -14,7 +13,6 @@ import modelos.Ventana;
 
 
 import personajes.Chocable;
-import utils.Actualizable;
 import utils.Loader;
 import utils.Posicion;
 import utils.Utils;
@@ -64,6 +62,7 @@ public class ViewJuego extends View implements ActionListener {
 		g.setColor(Color.WHITE);
 		g.drawString("vidas*"+ModeloJuego.getInstancia().getFelix().getVidas(), Utils.margenIzq, 30);
 		g.drawString("puntos*"+ModeloJuego.getInstancia().getPuntaje(), Utils.margenIzq+200, 30);
+		
 	}
 
 	public void incOffset() {

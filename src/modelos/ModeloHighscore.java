@@ -1,7 +1,5 @@
 package modelos;
 
-import java.io.Serializable;
-import java.util.TreeSet;
 
 import utils.exceptions.BadInput;
 import utils.exceptions.NombreCorto;

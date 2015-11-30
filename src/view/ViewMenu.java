@@ -54,6 +54,7 @@ public class ViewMenu extends View {
 		top = new Boton("top", 5, 2);
 		this.add(top, top.getGBC());
 		items[2] = top;
+		
 
 		// otra config
 		this.setPreferredSize(new Dimension(860, 400));

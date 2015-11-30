@@ -56,7 +56,6 @@ public class Utils {
 	public static final int juegoHeight = 430;
 	public static final int margenIzq = (Utils.juegoWidth - Utils.numCols*Utils.cellWidth) / 2;
 	public static int nivelActual = 1;
-
 	/**
 	 * Devuelve un boolean al azar con cierta probabilidad de true, esta
 	 * probabilidad var&iacute; con el nivel.

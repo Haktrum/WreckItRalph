@@ -14,7 +14,6 @@ import personajes.Pastel;
 import personajes.Ralph;
 import utils.Direccion;
 import utils.Posicion;
-import utils.Sonido;
 import utils.Utils;
 import utils.eventos.EventoJuegoTerminado;
 import utils.eventos.EventoNivelGanado;

@@ -12,7 +12,6 @@ import javax.swing.JTextArea;
 import control.Highscore;
 
 import modelos.ModeloHighscore;
-import modelos.ModeloJuego;
 
 import utils.Loader;
 

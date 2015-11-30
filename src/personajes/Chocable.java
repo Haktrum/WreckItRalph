@@ -1,7 +1,6 @@
 package personajes;
 
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
