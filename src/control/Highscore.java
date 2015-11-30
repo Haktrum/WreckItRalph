@@ -1,6 +1,5 @@
 package control;
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
@@ -13,6 +12,7 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.TreeSet;
 
+import modelo.Jugador;
 import utils.Modelo;
 import utils.Utils;
 import view.MenuItem.NombreBoton;
@@ -20,14 +20,13 @@ import view.MenuItem.NombreBoton;
 /**
  * Maneja los 10 puntajes m&aacute;s altos obtenidos en el juego
  */
-public class Highscore implements Serializable,Modelo {
+public class Highscore implements Serializable, Modelo {
 	private static final long serialVersionUID = 9032587643779204001L;
 	private static String archivo = "res/top5.bin";
 	/** Arreglo de jugadores con puntaje */
 	private TreeSet<Jugador> jugadores;
 	/** Cantidad de jugadores inicial */
 	private NombreBoton dest = null;
-	
 
 	/**
 	 * Agrega un jugador al arreglo, ordenado por su puntaje
@@ -83,16 +82,17 @@ public class Highscore implements Serializable,Modelo {
 		}
 	}
 
-	public Highscore(){
+	public Highscore() {
 		jugadores = leer();
 	}
+
 	public Highscore(Jugador nuevo) {
 		jugadores = leer();
 		this.agregarJugador(nuevo);
 	}
 
 	private void agregarJugador(Jugador jugador) {
-		if(jugadores.contains(jugador))
+		if (jugadores.contains(jugador))
 			jugadores.remove(jugador);
 		jugadores.add(jugador);
 		if (jugadores.size() > Utils.maxJugadores) {
@@ -100,22 +100,24 @@ public class Highscore implements Serializable,Modelo {
 		}
 		escribir();
 	}
-	public boolean yaEsta(Jugador jugador){
+
+	public boolean yaEsta(Jugador jugador) {
 		return jugadores.contains(jugador);
 	}
-	public boolean hayLugar(int puntaje){
-		if(jugadores.size()<Utils.maxJugadores)
+
+	public boolean hayLugar(int puntaje) {
+		if (jugadores.size() < Utils.maxJugadores)
 			return true;
-		return puntaje>jugadores.last().getPuntaje();
+		return puntaje > jugadores.last().getPuntaje();
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
 		Iterator<Jugador> iterator = jugadores.iterator();
 		for (int i = 0; i < Utils.maxJugadores; i++) {
-			stringBuilder.append(i+1 + " ");
-			if(i==0)
+			stringBuilder.append(i + 1 + " ");
+			if (i == 0)
 				stringBuilder.append(" ");
 			if (iterator.hasNext()) {
 				stringBuilder.append(iterator.next().toString() + "\n\n");
@@ -127,29 +129,30 @@ public class Highscore implements Serializable,Modelo {
 	}
 
 	@Override
-	public void keyPressed(KeyEvent e) {}
+	public void keyPressed(KeyEvent e) {
+	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if(e.getKeyCode()==KeyEvent.VK_ESCAPE){
+		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 			dest = NombreBoton.MENU;
 		}
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		
+
 	}
 
 	@Override
 	public Object[] getInfo() {
-		Object[] res = {this.toString()};
+		Object[] res = { this.toString() };
 		return res;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 	}
 
 	@Override

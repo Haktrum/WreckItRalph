@@ -1,37 +1,37 @@
 package control;
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import utils.Modelo;
 import view.MenuItem.NombreBoton;
 
-public class Reglas implements Modelo{
+public class Reglas implements Modelo {
 
 	private NombreBoton dest = null;
-	
+
 	@Override
-	public void keyPressed(KeyEvent e) {}
+	public void keyPressed(KeyEvent e) {
+	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if(e.getKeyCode()==KeyEvent.VK_ESCAPE){
-			dest= NombreBoton.MENU;
+		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+			dest = NombreBoton.MENU;
 		}
 	}
 
 	@Override
-	public void keyTyped(KeyEvent e) {}
+	public void keyTyped(KeyEvent e) {
+	}
 
 	@Override
 	public Object[] getInfo() {
 		return null;
 	}
 
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 	}
 
 	@Override

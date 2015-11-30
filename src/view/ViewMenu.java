@@ -1,6 +1,5 @@
 package view;
 
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
@@ -16,7 +15,7 @@ import utils.Vista;
 import view.MenuItem.NombreBoton;
 
 @SuppressWarnings("serial")
-public class ViewMenu extends JPanel implements Vista{
+public class ViewMenu extends JPanel implements Vista {
 	private MenuItem[] items = new MenuItem[4];
 	private int selected;
 

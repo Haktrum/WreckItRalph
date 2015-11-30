@@ -57,7 +57,6 @@ public class Utils {
 	public static final int cellHeight = 84;
 
 	public static int nivelActual = 1;
-	
 
 	/**
 	 * Devuelve un boolean al azar con cierta probabilidad de true, esta
@@ -139,8 +138,8 @@ public class Utils {
 	public static String urlPuerta(int i) {
 		return BASE_IMG + "semicirculares/puerta_roto" + i + ".png";
 	}
-	
-	public static Font getFont(int size){
+
+	public static Font getFont(int size) {
 		try {
 			return Font.createFont(Font.TRUETYPE_FONT, new File("res/ui/8-bit.ttf")).deriveFont(Font.PLAIN, size);
 		} catch (FontFormatException e) {

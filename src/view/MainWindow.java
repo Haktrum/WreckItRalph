@@ -25,11 +25,13 @@ public class MainWindow {
 		this.frame.setContentPane(c);
 		this.frame.setBounds(0, 0, c.getWidth(), c.getHeight());
 	}
-	public void setKeyListener(KeyListener nuevokl){
-		for(KeyListener kl : frame.getKeyListeners())
+
+	public void setKeyListener(KeyListener nuevokl) {
+		for (KeyListener kl : frame.getKeyListeners())
 			this.frame.removeKeyListener(kl);
 		frame.addKeyListener(nuevokl);
 	}
+
 	public void escape() {
 		this.setContentPane(new ViewMenu());
 	}

@@ -59,7 +59,7 @@ public class Felix extends Chocable {
 	 * Actualiza el tiempo de invulnerabilidad
 	 */
 	@Override
-	public void actualizar() throws Evento{
+	public void actualizar() throws Evento {
 		super.refresh();
 		if (timerInvulnerable > 0) {
 			timerInvulnerable--;
@@ -68,7 +68,7 @@ public class Felix extends Chocable {
 				super.agregarImagen("res/img/felix/felix.png", 0);
 			}
 		}
-		if(vidas<1 && !super.requests.contains(FELIX_MUERTO)){
+		if (vidas < 1 && !super.requests.contains(FELIX_MUERTO)) {
 			throw new Evento(EventoID.TERMINAJUEGO);
 		}
 	}
@@ -103,14 +103,14 @@ public class Felix extends Chocable {
 	 */
 	public void chequearChoque(Chocable c) throws Evento {
 		int xFelix1 = pos.inPx().getX();
-		int xFelix2 = xFelix1+this.getImage().getWidth();
-		int yFelix1 = pos.inPx().getY()+10;
-		int yFelix2 = yFelix1+this.getImage().getHeight()-10;
+		int xFelix2 = xFelix1 + this.getImage().getWidth();
+		int yFelix1 = pos.inPx().getY() + 10;
+		int yFelix2 = yFelix1 + this.getImage().getHeight() - 10;
 		int xCho1 = c.getPos().inPx().getX();
-		int xCho2 = xCho1+c.getImage().getWidth();
+		int xCho2 = xCho1 + c.getImage().getWidth();
 		int yCho1 = c.getPos().inPx().getY();
-		int yCho2 = yCho1+c.getImage().getHeight();
-		if(!(xFelix2<xCho1 || xCho2<xFelix1 || yFelix2<yCho1 || yCho2<yFelix1)){
+		int yCho2 = yCho1 + c.getImage().getHeight();
+		if (!(xFelix2 < xCho1 || xCho2 < xFelix1 || yFelix2 < yCho1 || yCho2 < yFelix1)) {
 			this.chocar(c);
 		}
 	}
@@ -158,12 +158,15 @@ public class Felix extends Chocable {
 			}
 		}
 	}
+
 	@Override
-	public Insets getMargenes(){
-		if(super.imagenActual==3) return new Insets(-5,15,0,0);
+	public Insets getMargenes() {
+		if (super.imagenActual == 3)
+			return new Insets(-5, 15, 0, 0);
 		return super.getMargenes();
 	}
-	public int getVidas(){
+
+	public int getVidas() {
 		return this.vidas;
 	}
 

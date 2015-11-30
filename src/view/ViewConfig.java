@@ -19,7 +19,7 @@ import utils.Utils;
 import utils.Vista;
 
 @SuppressWarnings("serial")
-public class ViewConfig extends JPanel implements Vista{
+public class ViewConfig extends JPanel implements Vista {
 	private int nivel = 1;
 	private JLabel lbNivel;
 
@@ -78,10 +78,12 @@ public class ViewConfig extends JPanel implements Vista{
 	private void setearLb() {
 		lbNivel.setText(String.valueOf(nivel));
 	}
+
 	@Override
 	public void setInfo(Object[] args) {
 		nivel = (int) args[0];
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		this.setearLb();

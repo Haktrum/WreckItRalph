@@ -12,15 +12,14 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import juego.Ventana;
-
+import modelo.Ventana;
 import personajes.Chocable;
 import utils.Posicion;
 import utils.Utils;
 import utils.Vista;
 
 @SuppressWarnings("serial")
-public class ViewJuego extends JPanel implements Vista{
+public class ViewJuego extends JPanel implements Vista {
 	private ArrayList<Chocable> lista;
 	private Ventana[][][] mapas;
 	private int visualOffset = 0;
@@ -72,8 +71,8 @@ public class ViewJuego extends JPanel implements Vista{
 		g.fillRect(0, 0, 360, 50);
 		g.setFont(Utils.getFont(12));
 		g.setColor(Color.WHITE);
-		g.drawString("vidas*"+vidas, 10, 30);
-		g.drawString("puntos*"+puntaje, 200, 30);
+		g.drawString("vidas*" + vidas, 10, 30);
+		g.drawString("puntos*" + puntaje, 200, 30);
 	}
 
 	@SuppressWarnings("unchecked")

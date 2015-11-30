@@ -16,24 +16,26 @@ public class Posicion {
 		this.subx = 0;
 		this.suby = 0;
 	}
-	public void subGo(Direccion dir,int vel){
-		this.subx+=dir.getX()*vel;
-		if(subx>=Utils.cellWidth){
-			x+=dir.getX();
+
+	public void subGo(Direccion dir, int vel) {
+		this.subx += dir.getX() * vel;
+		if (subx >= Utils.cellWidth) {
+			x += dir.getX();
 			subx -= Utils.cellWidth;
-		}else if(subx<0){
-			x+=dir.getX();
+		} else if (subx < 0) {
+			x += dir.getX();
 			subx += Utils.cellWidth;
 		}
-		this.suby+=dir.getY()*vel;
-		if(suby>=Utils.cellHeight){
-			y+=dir.getY();
+		this.suby += dir.getY() * vel;
+		if (suby >= Utils.cellHeight) {
+			y += dir.getY();
 			suby -= Utils.cellHeight;
-		}else if(suby<0){
-			y+=dir.getY();
+		} else if (suby < 0) {
+			y += dir.getY();
 			suby += Utils.cellHeight;
 		}
 	}
+
 	public int getX() {
 		return x;
 	}
@@ -42,26 +44,28 @@ public class Posicion {
 		return y;
 	}
 
-	public int getSubY(){
+	public int getSubY() {
 		return suby;
 	}
-	public int getSubX(){
+
+	public int getSubX() {
 		return subx;
 	}
-	public void setSubX(int x){
+
+	public void setSubX(int x) {
 		this.subx = x;
 	}
+
 	public Posicion(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.subx=0;
-		this.suby=0;
+		this.subx = 0;
+		this.suby = 0;
 	}
 
 	public Posicion(Posicion pos) {
 		this(pos.x, pos.y);
 	}
-	
 
 	/**
 	 * Da la posici&oacute;n resultante de moverse en una dada direcci&oacute;
@@ -84,11 +88,11 @@ public class Posicion {
 	}
 
 	public Posicion inPx() {
-		return new Posicion(25 + x * Utils.cellWidth+subx, 410 - (Utils.cellHeight * (y + 1)+suby));
+		return new Posicion(25 + x * Utils.cellWidth + subx, 410 - (Utils.cellHeight * (y + 1) + suby));
 	}
 
 	@Override
 	public String toString() {
-		return "(" + x + "," + y + ") - ("+subx+","+suby+")";
+		return "(" + x + "," + y + ") - (" + subx + "," + suby + ")";
 	}
 }

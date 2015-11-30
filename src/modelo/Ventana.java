@@ -1,4 +1,4 @@
-package juego;
+package modelo;
 
 import java.awt.Graphics2D;
 import java.awt.Image;

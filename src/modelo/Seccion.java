@@ -1,11 +1,11 @@
-package juego;
+package modelo;
 
+import modelo.Ventana.Tipo;
 import utils.Direccion;
 import utils.Evento;
 import utils.Evento.EventoID;
 import utils.Posicion;
 import utils.Utils;
-import juego.Ventana.Tipo;
 
 /**
  * Modela una secci&oacute;n del juego

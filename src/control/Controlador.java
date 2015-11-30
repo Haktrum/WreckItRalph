@@ -5,6 +5,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
+import modelo.AgregarJugador;
+import modelo.Configuracion;
+import modelo.Juego;
 import utils.Modelo;
 import utils.Vista;
 import view.AgregarView;
@@ -15,8 +18,6 @@ import view.ViewMenu;
 import view.ViewReglas;
 import view.ViewHighscore;
 import view.MenuItem.NombreBoton;
-
-import juego.Juego;
 
 public class Controlador implements ActionListener {
 	private MainWindow window = null;
@@ -42,21 +43,23 @@ public class Controlador implements ActionListener {
 	public boolean isCorriendo() {
 		return corriendo;
 	}
-	private void setear(){
+
+	private void setear() {
 		window.setContentPane(vista);
 		window.setKeyListener(modelo);
-		timerModelo = new Timer(40,modelo);
-		timerVista = new Timer(40,vista);
+		timerModelo = new Timer(40, modelo);
+		timerVista = new Timer(40, vista);
 		timerModelo.setInitialDelay(0);
 		timerVista.setInitialDelay(0);
 		timerModelo.start();
 		timerVista.start();
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		NombreBoton dest = modelo.getDestino();
-		if(dest!=null){
-			switch(dest){
+		if (dest != null) {
+			switch (dest) {
 			case CONFIG:
 				modelo = new Configuracion();
 				vista = new ViewConfig();
@@ -70,21 +73,21 @@ public class Controlador implements ActionListener {
 				vista = new ViewReglas();
 				break;
 			case TOP:
-				if(modelo instanceof AgregarJugador)
+				if (modelo instanceof AgregarJugador)
 					modelo = new Highscore(((AgregarJugador) modelo).getJugador());
 				else
 					modelo = new Highscore();
 				vista = new ViewHighscore();
 				break;
 			case MENU:
-				if(modelo instanceof Configuracion){
+				if (modelo instanceof Configuracion) {
 					nivelInicial = ((Configuracion) modelo).getNivel();
 				}
 				modelo = new Menu();
 				vista = new ViewMenu();
 				break;
 			case AGREGAR_JUGADOR:
-				modelo =  new AgregarJugador(((Juego) modelo).getPuntaje());
+				modelo = new AgregarJugador(((Juego) modelo).getPuntaje());
 				vista = new AgregarView();
 				break;
 			}

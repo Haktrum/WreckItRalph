@@ -32,8 +32,9 @@ public class Ladrillo extends Chocable {
 		super.requests.add(LADRILLO2);
 		super.mover(Direccion.ABAJO);
 	}
+
 	@Override
-	public Insets getMargenes(){
-		return new Insets(0,0,0,0);
+	public Insets getMargenes() {
+		return new Insets(0, 0, 0, 0);
 	}
 }

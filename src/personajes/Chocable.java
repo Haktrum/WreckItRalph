@@ -33,7 +33,7 @@ public abstract class Chocable implements Actualizable {
 	public Chocable(Posicion pos) {
 		this.pos = pos;
 		this.velocidad = 0;
-		
+
 	}
 
 	public Chocable(Posicion pos, int v) {
@@ -86,12 +86,13 @@ public abstract class Chocable implements Actualizable {
 	public BufferedImage getImage() {
 		return imagenes.get(imagenActual);
 	}
-	
-	public Insets getMargenes(){
-		int top = (Utils.cellHeight-imagenes.get(imagenActual).getHeight())/2;
-		int left = (Utils.cellWidth-imagenes.get(imagenActual).getWidth())/2;
-		return new Insets(top,left,Utils.cellWidth-left,Utils.cellHeight-top);
+
+	public Insets getMargenes() {
+		int top = (Utils.cellHeight - imagenes.get(imagenActual).getHeight()) / 2;
+		int left = (Utils.cellWidth - imagenes.get(imagenActual).getWidth()) / 2;
+		return new Insets(top, left, Utils.cellWidth - left, Utils.cellHeight - top);
 	}
+
 	protected void refresh() {
 		if (timerImagen == 0) {
 			REQ r = requests.poll();

@@ -1,5 +1,4 @@
-package juego;
-
+package modelo;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -24,7 +23,7 @@ import view.MenuItem.NombreBoton;
  * Modela el conjunto de circustancias que rodean a los personajes
  * 
  */
-public class Juego implements Modelo{
+public class Juego implements Modelo {
 
 	/** Personaje principal */
 	private Felix felix;
@@ -41,6 +40,7 @@ public class Juego implements Modelo{
 	private int offset = 0;
 	private int visualOffset = 0;
 	private NombreBoton dest = null;
+
 	public Juego(int lvl) {
 		nivel = new Nivel(lvl);
 		this.reiniciar();
@@ -61,17 +61,19 @@ public class Juego implements Modelo{
 	 * 
 	 * @throws Evento
 	 */
-	private void terminarJuego()  {
+	private void terminarJuego() {
 		Highscore h = new Highscore();
-		if(h.hayLugar(puntaje) && puntaje>0){
+		if (h.hayLugar(puntaje) && puntaje > 0) {
 			dest = NombreBoton.AGREGAR_JUGADOR;
-		}else{
+		} else {
 			dest = NombreBoton.MENU;
 		}
 	}
-	private void ganaSeccion(){
+
+	private void ganaSeccion() {
 		offset += 252;
 	}
+
 	/**
 	 * Suma puntos al puntaje inicial
 	 * 
@@ -81,6 +83,7 @@ public class Juego implements Modelo{
 	public void agregarPuntos(int puntaje) {
 		this.puntaje += puntaje;
 	}
+
 	/**
 	 * Devuelve a F&eacute;lix
 	 */
@@ -94,6 +97,7 @@ public class Juego implements Modelo{
 	public Ralph getRalph() {
 		return ralph;
 	}
+
 	/**
 	 * Devuelve el puntaje actual;
 	 */
@@ -119,7 +123,8 @@ public class Juego implements Modelo{
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {}
+	public void keyReleased(KeyEvent arg0) {
+	}
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
@@ -138,6 +143,7 @@ public class Juego implements Modelo{
 			break;
 		case KeyEvent.VK_ESCAPE:
 			this.terminarJuego();
+			break;
 		case KeyEvent.VK_SPACE:
 			this.martillar();
 			break;
@@ -145,11 +151,12 @@ public class Juego implements Modelo{
 	}
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {}
+	public void keyTyped(KeyEvent arg0) {
+	}
 
 	@Override
 	public Object[] getInfo() {
-		Object[] res = {chocables,nivel.getMapas(),visualOffset,felix.getVidas(),puntaje};
+		Object[] res = { chocables, nivel.getMapas(), visualOffset, felix.getVidas(), puntaje };
 		return res;
 	}
 
@@ -214,19 +221,19 @@ public class Juego implements Modelo{
 		for (Chocable nuevo : paraEliminar) {
 			chocables.remove(nuevo);
 		}
-		if (Utils.randomBoolean(Utils.dificultar(Utils.probPastel,false)) && nivel.getSeccion().puedoPastel()) {
+		if (Utils.randomBoolean(Utils.dificultar(Utils.probPastel, false)) && nivel.getSeccion().puedoPastel()) {
 			int x = Utils.RANDOM.nextInt(Utils.numCols);
 			int y = Utils.RANDOM.nextInt(Utils.numPisos);
 			chocables.add(new Pastel(new Posicion(x, y)));
 			nivel.getSeccion().nuevoPastel();
 		}
-		if (Utils.randomBoolean(Utils.dificultar(Utils.probPajaro,false)) && !nivel.getSeccion().hayPajaro()) {
+		if (Utils.randomBoolean(Utils.dificultar(Utils.probPajaro, false)) && !nivel.getSeccion().hayPajaro()) {
 			int y = Utils.RANDOM.nextInt(Utils.numPisos - 1) + 1;
 			chocables.add(new Pajaro(new Posicion(Utils.numCols - 1, y)));
 			nivel.getSeccion().hayPajaro(true);
 		}
-		if(offset>visualOffset){
-			visualOffset+=10;
+		if (offset > visualOffset) {
+			visualOffset += 10;
 		}
 	}
 

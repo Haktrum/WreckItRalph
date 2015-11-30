@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import utils.Vista;
 
 @SuppressWarnings("serial")
-public class ViewReglas extends JPanel implements Vista{
+public class ViewReglas extends JPanel implements Vista {
 	public ViewReglas() {
 		this.setBackground(Color.BLACK);
 		this.setBounds(0, 0, 570, 421);
@@ -33,11 +33,11 @@ public class ViewReglas extends JPanel implements Vista{
 
 	@Override
 	public void setInfo(Object[] args) {
-		
+
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 	}
 }
