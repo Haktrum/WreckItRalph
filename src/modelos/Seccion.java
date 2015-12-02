@@ -26,13 +26,12 @@ public class Seccion implements Actualizable{
 
 	/** Mapa de las ventanas en la secci&oacute;n. (Piso,Ventana) */
 	private Ventana[][] mapa;
-
+	
+	/** Indica si hay un pajaro en la seccion */
 	private boolean hayPajaro = false;
-
+	
+	/** Indica el tiempo entre pastel y pastel */
 	private int proximoPastel = Utils.dificultar(Utils.proximoPastel, true);
-	/**
-	 * Crea una secci&oacute;n de ROWS pisos y COLS ventanas por piso
-	 */
 
 	private int nroSeccion;
 

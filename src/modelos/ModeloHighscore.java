@@ -14,8 +14,16 @@ public class ModeloHighscore extends Modelo{
 	
 	private static ModeloHighscore instancia;
 	private Highscore highscore = new Highscore();
+	/** Indica si hay o no que sobreescribir al jugador anterior */
 	private boolean sobreEscribir = false;
 	
+	/**
+	 * Agrega el jugador al top 5 si cumple con los requisitos
+	 * @param nombre nombre del jugador
+	 * @param puntos puntos del jugador
+	 * @throws BadInput NombreCorto si tiene menos de 2 caracteres, NombreConEspacios si tiene espacios, 
+	 * NombreYaExiste si el nombre ya existe y sobreEscribir esta en false
+	 */
 	public void submit(String nombre,int puntos) throws BadInput{
 		if(nombre.length()<2)
 			throw new NombreCorto();

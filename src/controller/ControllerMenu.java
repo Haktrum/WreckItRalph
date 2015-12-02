@@ -54,13 +54,7 @@ public class ControllerMenu extends Controller{
 				WreckItRalph.getInstancia().crearTop();
 			}
 		});
-		
-//		viewMenu.addMouseMotionListener(new MouseMotionAdapter() {
-//			@Override
-//			public void mouseMoved(MouseEvent e) {
-//				viewMenu.seleccionar(e.getComponent());
-//			}
-//		});
+
 	}
 
 	class MiKeyAdapter extends KeyAdapter {

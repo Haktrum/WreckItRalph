@@ -23,7 +23,6 @@ import view.MainWindow;
 import view.ViewJuego;
 
 public class ControllerJuego extends Controller implements ActionListener{
-	private boolean corriendo = false;
 	private Timer timerModelo;
 	private Timer timerView;
 
@@ -49,19 +48,18 @@ public class ControllerJuego extends Controller implements ActionListener{
 		KeyListener l = new MiKeyListener();
 		getView().addKeyListener(l); 
 	}
-	
-	public void setCorriendo(boolean b) {
-		corriendo = b;
-	}
-
-	public boolean isCorriendo() {
-		return corriendo;
-	}
-
+	/**
+	 * Mueve a felix
+	 * @param d direcci&oacute;n de movimiento
+	 */
 	private void moverFelix(Direccion d) {
 		((ModeloJuego) getModelo()).moverFelix(d);
 	}
 	
+	/**
+	 * Termina el juego y para los threads.
+	 * En caso de haber alcanzado un buen puntaje se agrega el jugador al top 5
+	 */
 	private void terminarJuego() {
 		timerModelo.stop();
 		timerView.stop();
@@ -73,28 +71,13 @@ public class ControllerJuego extends Controller implements ActionListener{
 		else
 			WreckItRalph.getInstancia().crearMenu();
 	}
-
+	
+	/**
+	 * Felix martilla
+	 */
 	private void space() {
 		((ModeloJuego) getModelo()).martillar();
 	}
-
-//	private void excepciones(Evento ex) {
-//		ViewJuego viewJuego = (ViewJuego) getView();
-//		try {
-//			throw ex;
-//		} catch (EventoSeccionGanada e) {
-//			viewJuego.incOffset();
-//		} catch (EventoNivelGanado e) {
-//			viewJuego.reset();
-//			MainWindow.getInstancia().setTitulo("Wreck It Ralph - Nivel " + Utils.nivelActual);
-//		} catch (EventoJuegoTerminado e) {
-//			this.terminarJuego();
-//		} catch (EventoOffScreen e) {
-//			e.printStackTrace();
-//		} catch (EventoRalphSalta e) {
-//			e.printStackTrace();
-//		}
-//	}
 
 	private class MiKeyListener extends KeyAdapter {
 		@Override

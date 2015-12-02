@@ -10,7 +10,9 @@ import view.MainWindow;
 import view.View;
 
 public abstract class Controller {
+	/** Vista */
 	private final View view;
+	/** Modelo */
 	private final Modelo modelo;
 
 	public Controller(Modelo modelo, View view) {
@@ -19,6 +21,7 @@ public abstract class Controller {
 		MainWindow.getInstancia().setContentPane(view);
 	}
 	
+	/** Agrega listeners */
 	public abstract void addListeners();
 	
 	protected View getView() {
@@ -29,6 +32,7 @@ public abstract class Controller {
 		return modelo;
 	}
 	
+	/** Vuelve al menu principal en caso de apretar ESC o ENTER */
 	protected class BackKeyListener extends KeyAdapter {
 		@Override
 		public void keyPressed(KeyEvent e) {

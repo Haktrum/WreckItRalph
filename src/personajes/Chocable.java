@@ -50,9 +50,7 @@ public abstract class Chocable implements Actualizable {
 	}
 
 	/**
-	 * Mueve el objeto en cierta direcci&oacute;n. Se divide cada posici&oacute;
-	 * en subposiciones para variar la velocidad de los objetos
-	 * 
+	 * Mueve el objeto en cierta direcci&oacute;n. 	 * 
 	 * @param dir
 	 *            Direcci&oacute;n a moverse
 	 */

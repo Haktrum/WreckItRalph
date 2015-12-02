@@ -48,12 +48,11 @@ public class ModeloJuego extends Modelo implements ActionListener{
 	}
 	
 	public void init() {
-		//nivel = new Nivel(1);
+		this.puntaje = 0;
 		this.reiniciar();
 	}
-
+	/** Setea todo como para empezar de vuelta */
 	private void reiniciar() {
-		this.puntaje = 0;
 		chocables.clear();
 		felix = new Felix();
 		ralph = new Ralph();
@@ -93,14 +92,16 @@ public class ModeloJuego extends Modelo implements ActionListener{
 	}
 
 	/**
-	 * Recorre la lista de Actualizables y los actualiza. Revisa tambi&eacute;
-	 * los posibles choques de F&eacute;lix
+	 * Felix martilla
 	 */
 	public void martillar() {
 		felix.martillar();
 		this.agregarPuntos(this.nivel.getSeccion().arreglarVentana(felix.getPos()));
 	}
-
+	/**
+	 * Felix se mueve
+	 * @param dir direcci&oacute;n de movimiento
+	 */
 	public void moverFelix(Direccion dir) {
 		if (nivel.getSeccion().puedoIr(felix.getPos(), dir) && !nivel.estaPasando()) {
 			nivel.getSeccion().ventanaEn(felix.getPos()).felixEsta(false);
@@ -109,6 +110,9 @@ public class ModeloJuego extends Modelo implements ActionListener{
 		nivel.getSeccion().ventanaEn(felix.getPos()).felixEsta(true);
 	}
 	
+	/**
+	 * Actualiza el modelo y sus variables
+	 */
 	@Override
 	public void actualizar() throws EventoNivelGanado, EventoSeccionGanada, EventoJuegoTerminado {
 		try {

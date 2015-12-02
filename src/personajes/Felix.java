@@ -42,7 +42,7 @@ public class Felix extends Chocable {
 	}
 
 	/**
-	 * Se mueve dentro de la secci&oacute;n si es posible
+	 * Se mueve dentro de la secci&oacute;n 
 	 * 
 	 * @param dir
 	 *            Direcci&oacute; de movimiento

@@ -13,7 +13,9 @@ import view.ViewAgregar;
 public class ControllerAgregar extends Controller{
 	
 	private String error = "";
+	/** Vista */
 	private ViewAgregar view = (ViewAgregar) super.getView();
+	/** Modelo */
 	private ModeloHighscore modelo = (ModeloHighscore) super.getModelo();
 	private final int puntaje;
 	
@@ -22,11 +24,12 @@ public class ControllerAgregar extends Controller{
 		addListeners();
 		this.puntaje = puntos;
 	}
-
+	
 	@Override
 	public void addListeners() {
 		view.getInput().addKeyListener(new MiKey());
 	}
+	/** Valida y env&iaacute; el nombre del jugador al apretar ENTER*/
 	private class MiKey extends KeyAdapter{
 		
 		@Override

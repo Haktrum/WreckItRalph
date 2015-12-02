@@ -17,14 +17,11 @@ import utils.Utils;
  */
 public class Highscore implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7016790427904503366L;
+	/** Ruta del archivo donde se guardan los puntajes */
 	private static String archivo = "res/top5.bin";
 	/** Arreglo de jugadores con puntaje */
 	private TreeSet<Jugador> jugadores;
-	/** Cantidad de jugadores inicial */
 
 	public Highscore(){
 		jugadores = leer();
@@ -33,8 +30,7 @@ public class Highscore implements Serializable {
 	/**
 	 * Agrega un jugador al arreglo, ordenado por su puntaje
 	 * 
-	 * @param jugador
-	 *            Jugador con alg&uacute;n puntaje
+	 * @param jugador Jugador con alg&uacute;n puntaje
 	 */
 	public void agregarJugador(Jugador jugador) {
 		if(jugadores.contains(jugador))
@@ -45,11 +41,16 @@ public class Highscore implements Serializable {
 		}
 		escribir();
 	}
-
+	/**
+	 * 
+	 * @return lista de Jugadores
+	 */
 	public TreeSet<Jugador> getJugadores() {
 		return jugadores;
 	}
-
+	/**
+	 * Vuelca la lista de jugadores a un string legible
+	 */
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
 		Iterator<Jugador> iterator = jugadores.iterator();
@@ -66,6 +67,10 @@ public class Highscore implements Serializable {
 		return stringBuilder.toString();
 	}
 
+	/**
+	 * Lee los jugadores y sus puntajes desde el archivo
+	 * @return la lista de jugadores
+	 */
 	@SuppressWarnings("unchecked")
 	private TreeSet<Jugador> leer() {
 		ObjectInputStream objectInputStream = null;
@@ -91,15 +96,27 @@ public class Highscore implements Serializable {
 		}
 		return jugadores;
 	}
+	/**
+	 * Indica si el jugador (por nombre) ya se encuentra en la lista
+	 * @param jugador jugador a buscar
+	 * @return true si ya est&aacute;
+	 */
 	public boolean yaEsta(Jugador jugador){
 		return jugadores.contains(jugador);
 	}
+	/** 
+	 * Se fija si hay lugar en la lista para un nuevo jugador
+	 * @param puntos puntaje del jugador a ingresar
+	 * @return true si hay lugar
+	 */
 	public boolean hayLugar(int puntos){
 		if(jugadores.size()<Utils.maxJugadores)
 			return true;
 		return jugadores.last().getPuntaje()<puntos;
 	}
-	
+	/**
+	 * Guarda la lista de jugadores en el archivo
+	 */
 	private void escribir() {
 		ObjectOutputStream objectOutputStream = null;
 		try {

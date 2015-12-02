@@ -12,8 +12,6 @@ import utils.eventos.EventoSeccionGanada;
  */
 public class Nivel {
 
-	/** Secci&oacute;n del nivel */
-	// private Seccion seccion;
 	/** N&uacute;mero de nivel */
 	private int nroNivel;
 	/** La secci&oacute;n pr&oacute;xima a la actual */
@@ -81,7 +79,11 @@ public class Nivel {
 	protected void setNivel(int n) {
 		this.nroNivel = n;
 	}
-
+	/**
+	 * Actualiza el nivel
+	 * @throws EventoNivelGanado si gana el nivel
+	 * @throws EventoSeccionGanada si gana la seccion
+	 */
 	public void actualizar() throws EventoNivelGanado, EventoSeccionGanada {
 		if(this.pasandoSeccion>0){
 			if(this.pasandoSeccion==1){
@@ -105,7 +107,10 @@ public class Nivel {
 		}
 		this.secciones[nroSeccion].decProximoPastel();
 	}
-
+	
+	/**
+	 * Rompe al menos una de las ventanas del seccion actual
+	 */
 	private void romperVentanas(){
 		while (this.secciones[nroSeccion].getVentanasRotas() == 0) {
 			this.secciones[nroSeccion].romperTodas();

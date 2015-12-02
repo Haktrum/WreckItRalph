@@ -45,17 +45,40 @@ public class Utils {
 	public static final int probPastel = 5;
 	/** Probabilidad de que aparezca un pajaro */
 	public static final int probPajaro = 1;
-
+	
+	/** Directorio base de las imagenes */
 	public static final String BASE_IMG = "res/img/";
 
+	/** Ancho de una celda donde se encuentran las ventanas */
 	public static final int cellWidth = 62;
-
+	/** Alto de una celda donde se encuentran las ventanas */
 	public static final int cellHeight = 84;
-
+	
+	/** Ancho de la ventana del juego*/
 	public static final int juegoWidth = 634;
+	/** Alto de la ventana del juego*/
 	public static final int juegoHeight = 430;
+	/** Espacio entre el extremo izquierdo y la grilla de ventanas */
 	public static final int margenIzq = (Utils.juegoWidth - Utils.numCols*Utils.cellWidth) / 2;
+	
+	/** Nivel de dificultad en el que se encuentra el juego */
 	public static int nivelActual = 1;
+	
+	
+	public static Random RANDOM = new Random();
+	
+	/**
+	 * Incrementa/decrementa un numero segun el nivel de dificultad, 15% por cada nivel.
+	 * @param n numero a modificar
+	 * @param inc incrementa si true, decrementa si false
+	 * @return valor modificado
+	 */
+	public static int dificultar(int n, boolean inc) {
+		if (inc)
+			return (int) Math.round( n* Math.pow(1 + Utils.incDif, nivelActual - 1));
+		return (int) Math.round(n * Math.pow(1 - Utils.incDif, nivelActual - 1));
+	}
+	
 	/**
 	 * Devuelve un boolean al azar con cierta probabilidad de true, esta
 	 * probabilidad var&iacute; con el nivel.
@@ -64,65 +87,26 @@ public class Utils {
 	 *            probabilidad de true en el nivel 1
 	 * @return boolean al azar
 	 */
-	public static Random RANDOM = new Random();
-
-	public static int dificultar(int n, boolean inc) {
-		if (inc)
-			return (int) Math.round( n* Math.pow(1 + Utils.incDif, nivelActual - 1));
-		return (int) Math.round(n * Math.pow(1 - Utils.incDif, nivelActual - 1));
-	}
-
-	/**
-	 * Sabra dios que carajo hace esto
-	 * 
-	 * @param paneles
-	 * @return
-	 */
-	public static int randomInt(int paneles) {
-		int r = RANDOM.nextInt(100);
-		double sum = 0;
-		for (int i = 0; i < paneles; i++) {
-			sum += 100D / Math.pow(2, i + 1) * (1 - (Utils.nivelActual - 1) * Utils.incDif);
-			if (r < sum) {
-				return i;
-			}
-		}
-		return paneles;
-	}
-
-	/**
-	 * Devuelve 0, 2 o 4, segun las probabilidades dadas. Estas probabilidades
-	 * var&iacute;n con el nivel.
-	 * 
-	 * @param p1
-	 *            probabilidad de 0 en el nivel 1
-	 * @param p2
-	 *            probabilidad de 2 en el nivel 1
-	 * @return 0, 2 o 4. Al azar
-	 */
-	public static int ponderar(int p1, int p2) {
-		int t = RANDOM.nextInt(100);
-		p1 = Utils.dificultar(p1, true);
-		p2 = Utils.dificultar(p2, true);
-		// p1 *= (1 + (this.nivelActual() - 1) * .15);
-		// p2 *= (1 + (this.nivelActual() - 1) * .15);
-		if (t <= p1)
-			return 0;
-		if (t <= p1 + p2)
-			return 2;
-		return 4;
-	}
-
-	// p = probabiliadad de true
 	public static boolean randomBoolean(int p) {
 		int t = RANDOM.nextInt(100);
 		return t <= (p * (1 + (Utils.nivelActual - 1) * Utils.incDif));
 	}
-
+	
+	/**
+	 * Devuele la url de una ventana com&uacute;n rota
+	 * @param i numero de paneles rotos
+	 * @return url
+	 */
 	public static String urlVentanaComun(int i) {
 		return BASE_IMG + "ventanas_y_panel/roto" + i + ".png";
 	}
 
+	/**
+	 * Devuele la url de una ventana doble hoja
+	 * @param izq determina si tiene panel izquierdo
+	 * @param der determina si tiene panel derecho
+	 * @return url
+	 */
 	public static String urlVentanaDobleHoja(boolean izq, boolean der) {
 		if (izq & der)
 			return BASE_IMG + "ventanas_y_panel/doblehoja_abierta.png";
@@ -133,10 +117,19 @@ public class Utils {
 		return BASE_IMG + "ventanas_y_panel/doblehoja_cerrada.png";
 	}
 
+	/**
+	 * Devuele la url de una puerta rota
+	 * @param i numero de paneles rotos
+	 * @return url
+	 */
 	public static String urlPuerta(int i) {
 		return BASE_IMG + "semicirculares/puerta_roto" + i + ".png";
 	}
-
+	/**
+	 * Devuele la url de una ventana semicircular rota
+	 * @param i numero de paneles rotos
+	 * @return url
+	 */
 	public static String urlSemicirc(int roto) {
 		if(roto>2){
 			roto = 2;
