@@ -18,6 +18,7 @@ public class ModeloHighscore implements Modelo {
 	private TreeSet<Jugador> jugadores;
 	private final String archivo = "res/top5.bin";
 	private int puntaje;
+	private String nombre;
 
 	public ModeloHighscore() {
 		leer();
@@ -76,8 +77,12 @@ public class ModeloHighscore implements Modelo {
 	}
 
 	public void agregarJugador(Jugador jugador) {
-		if (jugadores.contains(jugador))
-			jugadores.remove(jugador);
+		for (Iterator<Jugador> iterator = jugadores.iterator(); iterator.hasNext();) {
+			Jugador jugadorIt = (Jugador) iterator.next();
+			if (jugador.equals(jugadorIt)) {
+				iterator.remove();
+			}
+		}
 		jugadores.add(jugador);
 		if (jugadores.size() > Utils.maxJugadores) {
 			jugadores.remove(jugadores.last());
@@ -96,18 +101,22 @@ public class ModeloHighscore implements Modelo {
 	}
 
 	public void submit(String nombre) throws MalInput {
-		if (nombre.length() == 0) {
+		this.nombre = nombre;
+		if (this.nombre.length() == 0) {
 			throw new MalInput(ERR.CORTO);
 		}
-		if (nombre.contains(" ")) {
+		if (this.nombre.contains(" ")) {
 			throw new MalInput(ERR.ESPACIOS);
 		}
-		if (yaEsta(new Jugador(nombre.toString())) && !sobreEscribir) {
+		if (this.nombre.length() > 20)
+			this.nombre.substring(0, 19);
+		Jugador jugador = new Jugador(this.nombre);
+		if (yaEsta(jugador) && !sobreEscribir) {
 			sobreEscribir = true;
 			throw new MalInput(ERR.YA_EXISTE);
 		}
-		if (nombre.length() > 20)
-			nombre.substring(0, 19);
+		jugador.setPuntaje(puntaje);
+		agregarJugador(jugador);
 	}
 
 	@Override

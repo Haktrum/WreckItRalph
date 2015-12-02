@@ -27,8 +27,15 @@ public class MenuItem extends JButton {
 				BorderFactory.createLineBorder(Color.YELLOW, 5),
 				BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 		setMargin(new Insets(10, 10, 10, 10));
+		setBorderPainted(false);
 	}
 
+	@Override
+	public void setSelected(boolean b) {
+		super.setSelected(b);
+		setBorderPainted(b);
+	}
+	
 	public void setWidth(int gwidth) {
 		c.gridwidth = gwidth;
 	}

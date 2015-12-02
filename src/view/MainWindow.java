@@ -29,9 +29,9 @@ public class MainWindow {
 	public void setContentPane(Vista vista) {
 		this.frame.getContentPane().removeAll();
 		this.frame.setContentPane(vista);
-		this.frame.setBounds(0, 0, vista.getWidth(), vista.getHeight());
-		vista.requestFocusInWindow();
 		vista.actualizarVista();
+		vista.requestFocusInWindow();
+		this.frame.setBounds(0, 0, vista.getWidth(), vista.getHeight());
 	}
 
 	public void setKeyListener(KeyListener nuevokl) {

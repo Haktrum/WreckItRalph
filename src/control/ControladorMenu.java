@@ -4,9 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
 import utils.Modelo;
-import view.MainWindow;
 import view.ViewMenu;
 
 public class ControladorMenu extends Controlador {
@@ -15,8 +16,6 @@ public class ControladorMenu extends Controlador {
 		super(modelo, view);
 		addListeners();
 	}
-
-	private int selected = 1;
 
 	public void addListeners() {
 		final ViewMenu viewMenu = (ViewMenu) getView();
@@ -55,33 +54,36 @@ public class ControladorMenu extends Controlador {
 			}
 		});
 		
-		/*viewMenu.addMouseMotionListener(new MouseMotionAdapter() {
+		viewMenu.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				viewMenu.seleccionar(e.getComponent());
 			}
-		});*/
+		});
 	}
 
 	private class MiKeyAdapter extends KeyAdapter {
 		@Override
 		public void keyPressed(KeyEvent e) {
+			ViewMenu viewMenu = (ViewMenu) getView();
 			switch (e.getKeyCode()) {
-			case KeyEvent.VK_LEFT:
-				if (selected < 3 && selected > 0)
-					selected--;
-				break;
-			case KeyEvent.VK_RIGHT:
-				if (selected < 2)
-					selected++;
-				break;
 			case KeyEvent.VK_UP:
-				selected = 3;
+				viewMenu.flechaArriba();
 				break;
 			case KeyEvent.VK_DOWN:
-				if (selected == 3)
-					selected = 2;
+				viewMenu.flechaAbajo();
 				break;
+			case KeyEvent.VK_LEFT:
+				viewMenu.flechaIzq();
+				break;
+			case KeyEvent.VK_RIGHT:
+				viewMenu.flechaDer();
+				break;
+			case KeyEvent.VK_ENTER:
+				viewMenu.enter();
+				break;
+			case KeyEvent.VK_ESCAPE:
+				System.exit(0);
 			}
 		}
 	}

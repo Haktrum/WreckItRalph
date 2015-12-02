@@ -1,10 +1,14 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseMotionListener;
+import java.util.Arrays;
+
 import utils.Loader;
 import utils.Modelo;
 import utils.Vista;
@@ -16,7 +20,7 @@ public class ViewMenu extends Vista {
 	MenuItem reglas = null;
 	MenuItem jugar = null;
 	MenuItem top = null;
-	private int selected;
+	private int selected = 1;
 
 	public ViewMenu(Modelo modelo) {
 		super(modelo);
@@ -40,6 +44,7 @@ public class ViewMenu extends Vista {
 		jugar = new MenuItem("Jugar", 3, 2);
 		this.add(jugar, jugar.getGBC());
 		jugar.setSelected(true);
+		jugar.requestFocusInWindow();
 		items[1] = jugar;
 
 		// Boton top
@@ -51,11 +56,50 @@ public class ViewMenu extends Vista {
 		this.setBounds(0, 0, 860, 400);
 	}
 
-	public void agregarListenerKeys(KeyListener l) {
+	public void flechaIzq() {
+		if (this.selected > 0 && this.selected < 3) {
+			this.selected--;
+			actualizarVista();
+		}
+	}
+
+	public void flechaDer() {
+		if (this.selected < 2) {
+			this.selected++;
+			actualizarVista();
+		}
+	}
+
+	public void flechaArriba() {
+		if (this.selected != 3) {
+			this.selected = 3;
+			actualizarVista();
+		}
+	}
+
+	public void flechaAbajo() {
+		if (this.selected == 3) {
+			this.selected = 1;
+			actualizarVista();
+		}
+	}
+
+	
+	@Override
+	public void addKeyListener(KeyListener l) {
+		super.addKeyListener(l);
 		config.addKeyListener(l);
 		reglas.addKeyListener(l);
 		jugar.addKeyListener(l);
 		top.addKeyListener(l);
+	}
+	
+	@Override
+	public synchronized void addMouseMotionListener(MouseMotionListener l) {
+		config.addMouseMotionListener(l);
+		reglas.addMouseMotionListener(l);
+		jugar.addMouseMotionListener(l);
+		top.addMouseMotionListener(l);
 	}
 	
 	public void agregarListenerConfig(ActionListener l) {
@@ -80,8 +124,18 @@ public class ViewMenu extends Vista {
 		g.drawImage(Loader.getFondo(), 0, 0, null);
 	}
 
+	public void enter() {
+		items[selected].doClick();
+	}
+
+	public void seleccionar(Component component) {
+		this.selected = Arrays.asList(items).indexOf(component);
+		actualizarVista();
+	}
+
 	@Override
 	public void actualizarVista() {
+		items[selected].requestFocusInWindow();
 		for (int i = 0; i < items.length; i++) {
 			items[i].setSelected(i == this.selected);
 		}

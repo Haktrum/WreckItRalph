@@ -74,6 +74,8 @@ public class ControladorJuego extends Controlador {
 		ModeloJuego modeloJuego = (ModeloJuego) getModelo();
 		modeloJuego.run();
 		if (modeloJuego.getEstado() == Estado.TERMINADO) {
+			timerController.stop();
+			timerView.stop();
 			WreckItRalph.getInstancia().crearAgregarJugador(modeloJuego.getPuntaje());
 		}
 	}

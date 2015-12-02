@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
+import modelo.ModeloHighscore;
 import utils.Loader;
 import utils.Modelo;
 import utils.Vista;
@@ -45,6 +46,6 @@ public class ViewHighscore extends Vista {
 	
 	@Override
 	public void actualizarVista() {
-
+		jTextArea.setText(((ModeloHighscore) getModelo()).toString());
 	}
 }
