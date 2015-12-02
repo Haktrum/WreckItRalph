@@ -1,7 +1,16 @@
 package utils;
 
-import java.awt.event.ActionListener;
+import javax.swing.JPanel;
 
-public interface Vista extends ActionListener {
-	public void setInfo(Object[] args);
+@SuppressWarnings("serial")
+public abstract class Vista extends JPanel {
+	private final Modelo modelo;
+	public Vista(Modelo modelo) {
+		this.modelo = modelo;
+		setFocusable(true);
+	}
+	public abstract void actualizarVista();
+	public Modelo getModelo() {
+		return modelo;
+	}
 }

@@ -1,39 +1,32 @@
-package control;
+package modelo;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.Iterator;
 import java.util.TreeSet;
 
-import modelo.Jugador;
 import utils.Modelo;
 import utils.Utils;
-import view.MenuItem.NombreBoton;
 
-/**
- * Maneja los 10 puntajes m&aacute;s altos obtenidos en el juego
- */
-public class Highscore implements Serializable, Modelo {
-	private static final long serialVersionUID = 9032587643779204001L;
-	private static String archivo = "res/top5.bin";
-	/** Arreglo de jugadores con puntaje */
+public class ModeloHighscore implements Modelo {
+
+	private boolean sobreEscribir = false;
 	private TreeSet<Jugador> jugadores;
-	/** Cantidad de jugadores inicial */
-	private NombreBoton dest = null;
+	private final String archivo = "res/top5.bin";
+	private int puntaje;
 
-	/**
-	 * Agrega un jugador al arreglo, ordenado por su puntaje
-	 * 
-	 * @param jugador
-	 *            Jugador con alg&uacute;n puntaje
-	 */
+	public ModeloHighscore() {
+		leer();
+	}
+	
+	public void setPuntaje(int puntaje) {
+		this.puntaje = puntaje;
+	}
+
 	@SuppressWarnings("unchecked")
 	private TreeSet<Jugador> leer() {
 		ObjectInputStream objectInputStream = null;
@@ -82,16 +75,7 @@ public class Highscore implements Serializable, Modelo {
 		}
 	}
 
-	public Highscore() {
-		jugadores = leer();
-	}
-
-	public Highscore(Jugador nuevo) {
-		jugadores = leer();
-		this.agregarJugador(nuevo);
-	}
-
-	private void agregarJugador(Jugador jugador) {
+	public void agregarJugador(Jugador jugador) {
 		if (jugadores.contains(jugador))
 			jugadores.remove(jugador);
 		jugadores.add(jugador);
@@ -111,6 +95,21 @@ public class Highscore implements Serializable, Modelo {
 		return puntaje > jugadores.last().getPuntaje();
 	}
 
+	public void submit(String nombre) throws MalInput {
+		if (nombre.length() == 0) {
+			throw new MalInput(ERR.CORTO);
+		}
+		if (nombre.contains(" ")) {
+			throw new MalInput(ERR.ESPACIOS);
+		}
+		if (yaEsta(new Jugador(nombre.toString())) && !sobreEscribir) {
+			sobreEscribir = true;
+			throw new MalInput(ERR.YA_EXISTE);
+		}
+		if (nombre.length() > 20)
+			nombre.substring(0, 19);
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
@@ -128,36 +127,37 @@ public class Highscore implements Serializable, Modelo {
 		return stringBuilder.toString();
 	}
 
-	@Override
-	public void keyPressed(KeyEvent e) {
+	public Jugador getJugador(String nombre) {
+		return new Jugador(nombre.toString());
 	}
 
-	@Override
-	public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-			dest = NombreBoton.MENU;
+	enum ERR {
+		CORTO("Minimo dos caracteres"),
+		YA_EXISTE("El nombre ya existe * ENTER para sobreescribir"),
+		ESPACIOS("El nombre no puede conteres espacios");
+		private final String msj;
+
+		ERR(String msj) {
+			this.msj = msj;
+		}
+		
+		public String getMsj() {
+			return msj;
 		}
 	}
 
-	@Override
-	public void keyTyped(KeyEvent e) {
+	@SuppressWarnings("serial")
+	public class MalInput extends Exception {
+		private ERR id;
 
-	}
+		public MalInput(ERR id) {
+			super(id.msj);
+			this.id = id;
+		}
 
-	@Override
-	public Object[] getInfo() {
-		Object[] res = { this.toString() };
-		return res;
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-
-	}
-
-	@Override
-	public NombreBoton getDestino() {
-		return dest;
+		public ERR getID() {
+			return this.id;
+		}
 	}
 
 }

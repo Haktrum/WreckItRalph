@@ -11,10 +11,6 @@ public class Jugador implements Comparable<Jugador>, Serializable {
 	private String nombre;
 	private int puntaje;
 
-	public Jugador() {
-
-	}
-
 	public Jugador(String nombre) {
 		this.nombre = nombre;
 	}
@@ -29,8 +25,6 @@ public class Jugador implements Comparable<Jugador>, Serializable {
 	 */
 	@Override
 	public int compareTo(Jugador o) {
-		if (this.equals(o))
-			return 0;
 		return o.puntaje - puntaje;
 	}
 
@@ -54,7 +48,7 @@ public class Jugador implements Comparable<Jugador>, Serializable {
 	@Override
 	public boolean equals(Object otro) {
 		if (otro instanceof Jugador)
-			return this.nombre.equals(((Jugador) otro).getNombre());
+			return nombre.equals(((Jugador) otro).getNombre());
 		return false;
 	}
 }

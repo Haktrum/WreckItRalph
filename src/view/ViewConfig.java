@@ -6,24 +6,22 @@ import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-import utils.Utils;
+import modelo.ModeloConfig;
+import utils.Loader;
+import utils.Modelo;
 import utils.Vista;
 
 @SuppressWarnings("serial")
-public class ViewConfig extends JPanel implements Vista {
-	private int nivel = 1;
+public class ViewConfig extends Vista {
 	private JLabel lbNivel;
+	private Image fondo;
 
-	public ViewConfig() {
+	public ViewConfig(Modelo modelo) {
+		super(modelo);
+		fondo = Loader.getFondo();
 		this.setBackground(Color.BLACK);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 330, 60, 80, 60, 330 };
@@ -32,7 +30,7 @@ public class ViewConfig extends JPanel implements Vista {
 		GridBagConstraints c = new GridBagConstraints();
 
 		JLabel titulo = new JLabel("NIVEL");
-		Font fuente = Utils.getFont(40);
+		Font fuente = Loader.getFont(40);
 		titulo.setForeground(Color.WHITE);
 		if (fuente != null)
 			titulo.setFont(fuente);
@@ -50,7 +48,6 @@ public class ViewConfig extends JPanel implements Vista {
 
 		c.gridx++;
 		lbNivel = new JLabel();
-		setearLb();
 		lbNivel.setForeground(Color.ORANGE);
 		if (fuente != null)
 			lbNivel.setFont(fuente);
@@ -61,31 +58,17 @@ public class ViewConfig extends JPanel implements Vista {
 		this.add(inc, c);
 
 		this.setBounds(0, 0, 860, 400);
+		actualizarVista();
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		File archivo = new File("res/ui/fondo.png");
-		try {
-			Image fondo = ImageIO.read(archivo);
-			g.drawImage(fondo, 0, 0, null);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void setearLb() {
-		lbNivel.setText(String.valueOf(nivel));
+		g.drawImage(fondo, 0, 0, null);
 	}
 
 	@Override
-	public void setInfo(Object[] args) {
-		nivel = (int) args[0];
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		this.setearLb();
+	public void actualizarVista() {
+		lbNivel.setText(String.valueOf(((ModeloConfig) getModelo()).getNivel()));
 	}
 }

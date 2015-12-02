@@ -1,6 +1,8 @@
 package modelo;
 
 import modelo.Ventana.Tipo;
+import personajes.Pajaro;
+import personajes.Pastel;
 import utils.Direccion;
 import utils.Evento;
 import utils.Evento.EventoID;
@@ -187,4 +189,23 @@ public class Seccion {
 			this.proximoPastel--;
 		}
 	}
+
+	public Pastel crearPastel() {
+		for (int i = 0; i < mapa.length; i++) {
+			for (int j = 0; j < mapa[i].length; j++) {
+				Ventana ventana = mapa[i][j];
+				if (ventana.getRoto() > 0) {
+					return new Pastel(new Posicion(i, j));
+				}
+			}
+		}
+		return null;
+	}
+
+	public Pajaro crearPajaro() {
+		hayPajaro(true);
+		int y = Utils.RANDOM.nextInt(Utils.numPisos - 1) + 1;
+		return new Pajaro(new Posicion(Utils.numCols - 1, y));
+	}
+
 }

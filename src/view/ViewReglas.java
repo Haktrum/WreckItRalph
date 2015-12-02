@@ -10,11 +10,13 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import utils.Modelo;
 import utils.Vista;
 
 @SuppressWarnings("serial")
-public class ViewReglas extends JPanel implements Vista {
-	public ViewReglas() {
+public class ViewReglas extends Vista {
+	public ViewReglas(Modelo modelo) {
+		super(modelo);
 		this.setBackground(Color.BLACK);
 		this.setBounds(0, 0, 570, 421);
 	}
@@ -32,12 +34,7 @@ public class ViewReglas extends JPanel implements Vista {
 	}
 
 	@Override
-	public void setInfo(Object[] args) {
-
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-
+	public void actualizarVista() {
+		
 	}
 }

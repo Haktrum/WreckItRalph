@@ -4,26 +4,23 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import utils.Utils;
+import utils.Loader;
+import utils.Modelo;
 import utils.Vista;
 
-public class AgregarView extends JPanel implements Vista {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+@SuppressWarnings("serial")
+public class ViewAgregarJugador extends Vista {
 	private JLabel input;
 	private JLabel error;
 
-	public AgregarView() {
+	public ViewAgregarJugador(Modelo modelo) {
+		super(modelo);
 		this.setBackground(Color.BLACK);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 150, 300, 150 };
@@ -31,18 +28,19 @@ public class AgregarView extends JPanel implements Vista {
 		this.setLayout(gridBagLayout);
 
 		JLabel title = new JLabel("Ingresa tu nombre");
-		title.setFont(Utils.getFont(30));
+		title.setFont(Loader.getFont(30));
 		title.setForeground(Color.YELLOW);
 
 		input = new JLabel();
 		input.setMinimumSize(new Dimension(300, 50));
 		input.setHorizontalAlignment(SwingConstants.CENTER);
 		input.setBorder(BorderFactory.createLineBorder(Color.ORANGE, 1));
-		input.setFont(Utils.getFont(20));
+		input.setFont(Loader.getFont(20));
 		input.setForeground(Color.RED);
+		input.requestFocusInWindow();
 
 		error = new JLabel();
-		error.setFont(Utils.getFont(10));
+		error.setFont(Loader.getFont(10));
 		error.setForeground(Color.RED);
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 1;
@@ -54,16 +52,20 @@ public class AgregarView extends JPanel implements Vista {
 		this.add(error, c);
 		this.setBounds(50, 100, 600, 500);
 	}
+	
+	public void setError(String error) {
+		input.setText(error);
+	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-
+	public synchronized void addTextListener(KeyListener l) {
+		input.addKeyListener(l);
 	}
 
 	@Override
-	public void setInfo(Object[] args) {
-		input.setText((String) args[0]);
-		error.setText((String) args[1]);
+	public void actualizarVista() {
 	}
 
+	public String getNombre() {
+		return input.getText();
+	}
 }

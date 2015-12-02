@@ -138,15 +138,4 @@ public class Utils {
 	public static String urlPuerta(int i) {
 		return BASE_IMG + "semicirculares/puerta_roto" + i + ".png";
 	}
-
-	public static Font getFont(int size) {
-		try {
-			return Font.createFont(Font.TRUETYPE_FONT, new File("res/ui/8-bit.ttf")).deriveFont(Font.PLAIN, size);
-		} catch (FontFormatException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
 }

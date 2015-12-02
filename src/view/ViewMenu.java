@@ -3,23 +3,23 @@ package view;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.swing.JPanel;
-
+import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
+import utils.Loader;
+import utils.Modelo;
 import utils.Vista;
-import view.MenuItem.NombreBoton;
 
 @SuppressWarnings("serial")
-public class ViewMenu extends JPanel implements Vista {
+public class ViewMenu extends Vista {
 	private MenuItem[] items = new MenuItem[4];
+	MenuItem config = null;
+	MenuItem reglas = null;
+	MenuItem jugar = null;
+	MenuItem top = null;
 	private int selected;
 
-	public ViewMenu() {
+	public ViewMenu(Modelo modelo) {
+		super(modelo);
 		this.setBackground(Color.BLACK);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 20, 260, 20, 260, 20, 260, 20 };
@@ -27,23 +27,23 @@ public class ViewMenu extends JPanel implements Vista {
 		this.setLayout(gridBagLayout);
 
 		// Boton Config
-		MenuItem config = new MenuItem(NombreBoton.CONFIG, 3, 1);
+		config = new MenuItem("Config", 3, 1);
 		this.add(config, config.getGBC());
 		items[3] = config;
 
 		// Boton reglas
-		MenuItem reglas = new MenuItem(NombreBoton.REGLAS, 1, 2);
+		reglas = new MenuItem("Reglas", 1, 2);
 		this.add(reglas, reglas.getGBC());
 		items[0] = reglas;
 
 		// Boton Jugar
-		MenuItem jugar = new MenuItem(NombreBoton.JUGAR, 3, 2);
+		jugar = new MenuItem("Jugar", 3, 2);
 		this.add(jugar, jugar.getGBC());
 		jugar.setSelected(true);
 		items[1] = jugar;
 
 		// Boton top
-		MenuItem top = new MenuItem(NombreBoton.TOP, 5, 2);
+		top = new MenuItem("Top", 5, 2);
 		this.add(top, top.getGBC());
 		items[2] = top;
 
@@ -51,30 +51,39 @@ public class ViewMenu extends JPanel implements Vista {
 		this.setBounds(0, 0, 860, 400);
 	}
 
+	public void agregarListenerKeys(KeyListener l) {
+		config.addKeyListener(l);
+		reglas.addKeyListener(l);
+		jugar.addKeyListener(l);
+		top.addKeyListener(l);
+	}
+	
+	public void agregarListenerConfig(ActionListener l) {
+		config.addActionListener(l);
+	}
+	
+	public void agregarListenerReglas(ActionListener l) {
+		reglas.addActionListener(l);
+	}
+	
+	public void agregarListenerJugar(ActionListener l) {
+		jugar.addActionListener(l);
+	}
+	
+	public void agregarListenerTop(ActionListener l) {
+		top.addActionListener(l);
+	}
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		File archivo = new File("res/ui/fondo.png");
-		try {
-			Image fondo = ImageIO.read(archivo);
-			g.drawImage(fondo, 0, 0, null);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		g.drawImage(Loader.getFondo(), 0, 0, null);
 	}
 
-	private void repintar() {
-		for (int i = 0; i < items.length; i++)
+	@Override
+	public void actualizarVista() {
+		for (int i = 0; i < items.length; i++) {
 			items[i].setSelected(i == this.selected);
-	}
-
-	@Override
-	public void setInfo(Object[] args) {
-		selected = (int) args[0];
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		this.repintar();
+		}
 	}
 }

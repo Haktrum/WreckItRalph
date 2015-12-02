@@ -1,98 +1,41 @@
 package control;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
-import javax.swing.Timer;
-
-import modelo.AgregarJugador;
-import modelo.Configuracion;
-import modelo.Juego;
 import utils.Modelo;
 import utils.Vista;
-import view.AgregarView;
 import view.MainWindow;
-import view.ViewConfig;
-import view.ViewJuego;
-import view.ViewMenu;
-import view.ViewReglas;
-import view.ViewHighscore;
-import view.MenuItem.NombreBoton;
 
-public class Controlador implements ActionListener {
-	private MainWindow window = null;
-	private boolean corriendo = false;
-	private Vista vista;
-	private Modelo modelo;
-	private Timer timerModelo;
-	private Timer timerVista;
-	private int nivelInicial = 1;
+public abstract class Controlador implements ActionListener {
+	private final Vista view;
+	private final Modelo modelo;
+	
+	public Controlador(Modelo modelo, Vista view) {
+		this.modelo = modelo;
+		this.view = view;
+		MainWindow.getInstancia().setContentPane(view);
+	}
+	
+	public abstract void addListeners();
 
-	public Controlador() {
-		window = new MainWindow();
-		window.setTitulo("Wreck It Ralph");
-		modelo = new Menu();
-		vista = new ViewMenu();
-		setear();
+	protected Vista getView() {
+		return view;
+	}
+	
+	protected Modelo getModelo() {
+		return modelo;
 	}
 
-	public void setCorriendo(boolean b) {
-		corriendo = b;
-	}
-
-	public boolean isCorriendo() {
-		return corriendo;
-	}
-
-	private void setear() {
-		window.setContentPane(vista);
-		window.setKeyListener(modelo);
-		timerModelo = new Timer(40, modelo);
-		timerVista = new Timer(40, vista);
-		timerModelo.setInitialDelay(0);
-		timerVista.setInitialDelay(0);
-		timerModelo.start();
-		timerVista.start();
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		NombreBoton dest = modelo.getDestino();
-		if (dest != null) {
-			switch (dest) {
-			case CONFIG:
-				modelo = new Configuracion();
-				vista = new ViewConfig();
-				break;
-			case JUGAR:
-				modelo = new Juego(nivelInicial);
-				vista = new ViewJuego();
-				break;
-			case REGLAS:
-				modelo = new Reglas();
-				vista = new ViewReglas();
-				break;
-			case TOP:
-				if (modelo instanceof AgregarJugador)
-					modelo = new Highscore(((AgregarJugador) modelo).getJugador());
-				else
-					modelo = new Highscore();
-				vista = new ViewHighscore();
-				break;
-			case MENU:
-				if (modelo instanceof Configuracion) {
-					nivelInicial = ((Configuracion) modelo).getNivel();
-				}
-				modelo = new Menu();
-				vista = new ViewMenu();
-				break;
-			case AGREGAR_JUGADOR:
-				modelo = new AgregarJugador(((Juego) modelo).getPuntaje());
-				vista = new AgregarView();
+	class BackKeyListener extends KeyAdapter {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			switch (e.getKeyCode()) {
+			case KeyEvent.VK_ESCAPE:
+				WreckItRalph.getInstancia().crearMenu();
 				break;
 			}
-			setear();
 		}
-		vista.setInfo(modelo.getInfo());
 	}
 }

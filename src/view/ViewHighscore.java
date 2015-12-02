@@ -3,24 +3,19 @@ package view;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import utils.Utils;
+import utils.Loader;
+import utils.Modelo;
 import utils.Vista;
 
-public class ViewHighscore extends JPanel implements Vista {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+@SuppressWarnings("serial")
+public class ViewHighscore extends Vista {
 	private JTextArea jTextArea;
 
-	public ViewHighscore() {
+	public ViewHighscore(Modelo modelo) {
+		super(modelo);
 		this.setBackground(Color.BLACK);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 150, 300, 150 };
@@ -28,14 +23,14 @@ public class ViewHighscore extends JPanel implements Vista {
 		this.setLayout(gridBagLayout);
 
 		jTextArea = new JTextArea();
-		jTextArea.setFont(Utils.getFont(20));
+		jTextArea.setFont(Loader.getFont(20));
 		jTextArea.setBackground(Color.BLACK);
 		jTextArea.setForeground(Color.RED);
 		jTextArea.setEditable(false);
 		jTextArea.setFocusable(false);
 
 		JLabel title = new JLabel("Top 5 puntajes");
-		title.setFont(Utils.getFont(40));
+		title.setFont(Loader.getFont(40));
 		title.setForeground(Color.YELLOW);
 
 		GridBagConstraints c = new GridBagConstraints();
@@ -47,15 +42,9 @@ public class ViewHighscore extends JPanel implements Vista {
 		this.add(jTextArea, c);
 		this.setBounds(100, 50, 600, 400);
 	}
-
+	
 	@Override
-	public void setInfo(Object[] args) {
-		String texto = (String) args[0];
-		jTextArea.setText(texto);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actualizarVista() {
 
 	}
 }
