@@ -48,10 +48,12 @@ public class ModeloJuego extends Modelo implements ActionListener{
 	}
 	
 	public void init() {
+		//nivel = new Nivel(1);
 		this.reiniciar();
 	}
 
 	private void reiniciar() {
+		this.puntaje = 0;
 		chocables.clear();
 		felix = new Felix();
 		ralph = new Ralph();

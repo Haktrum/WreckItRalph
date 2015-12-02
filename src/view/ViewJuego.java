@@ -55,7 +55,9 @@ public class ViewJuego extends View implements ActionListener {
 				c.paintComponent(g);
 			}
 		}
-		// puntos vidas y nivel		
+		// puntos vidas y nivel	
+		g.setColor(Color.YELLOW);
+		g.fillRect(0, 0, Utils.juegoWidth, 55);
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, Utils.juegoWidth, 50);
 		g.setFont(Loader.getFont(12));

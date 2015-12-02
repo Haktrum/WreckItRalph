@@ -41,6 +41,7 @@ public class ControllerJuego extends Controller implements ActionListener{
 //			}
 //		});
 		timerModelo.start();
+		modelo.init();
 	}
 	
 	@Override
@@ -64,6 +65,7 @@ public class ControllerJuego extends Controller implements ActionListener{
 	private void terminarJuego() {
 		timerModelo.stop();
 		timerView.stop();
+		ModeloJuego.getInstancia().setNivel(1);
 		Highscore h = new Highscore();
 		int puntos = ModeloJuego.getInstancia().getPuntaje();
 		if(h.hayLugar(puntos) && puntos>0)

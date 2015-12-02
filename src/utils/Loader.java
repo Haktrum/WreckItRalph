@@ -109,6 +109,8 @@ public class Loader {
 					clip = (Clip) AudioSystem.getLine(info);
 					clip.open(inputStream);
 					clip.start();
+					if(clip.isOpen() && !clip.isActive())
+						clip.close();
 				} catch (Exception e) {
 					System.err.println(e.getMessage());
 				}
