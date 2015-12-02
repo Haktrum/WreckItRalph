@@ -66,16 +66,6 @@ public class Nivel {
 			throw new EventoNivelGanado();
 		}
 	}
-
-	/**
-	 * Incrementa/decrementa un valor seg&uacute; el nivel
-	 * 
-	 * @param n
-	 *            valor a incrementar
-	 * @param inc
-	 *            true si incrementa, false si decrementa
-	 * @return valor incrementado/decrementado
-	 */
 	protected void setNivel(int n) {
 		this.nroNivel = n;
 	}

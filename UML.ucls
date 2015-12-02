@@ -1,52 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.9" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
-  realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" language="java" name="personajes.Felix" project="WreckItRalph" 
-    file="/WreckItRalph/src/personajes/Felix.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="319" y="1268"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="2" language="java" name="modelos.Ventana" project="WreckItRalph" 
-    file="/WreckItRalph/src/modelos/Ventana.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="112" y="1666"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="3" language="java" name="juego.Contexto" project="WreckItRalph" 
-    file="/WreckItRalph/src/juego/Contexto.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="350" y="596"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="4" language="java" name="personajes.Ladrillo" project="WreckItRalph" 
-    file="/WreckItRalph/src/personajes/Ladrillo.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="784" y="1522"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="5" language="java" name="personajes.Pajaro" project="WreckItRalph" 
-    file="/WreckItRalph/src/personajes/Pajaro.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="639" y="1522"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <enumeration id="6" language="java" name="utils.Direccion" project="WreckItRalph" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <enumeration id="1" language="java" name="utils.Direccion" project="WreckItRalph" 
     file="/WreckItRalph/src/utils/Direccion.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="654" y="2037"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -55,16 +10,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="7" language="java" name="control.WreckItRalph" project="WreckItRalph" 
-    file="/WreckItRalph/src/control/WreckItRalph.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="606" y="63"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <enumeration id="8" language="java" name="modelos.Ventana.Tipo" project="WreckItRalph" 
+  <enumeration id="2" language="java" name="modelos.Ventana.Tipo" project="WreckItRalph" 
     file="/WreckItRalph/src/modelos/Ventana.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="103" y="2010"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -73,27 +19,81 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="9" language="java" name="modelos.Seccion" project="WreckItRalph" 
-    file="/WreckItRalph/src/modelos/Seccion.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="108" y="1286"/>    
+  <class id="3" language="java" name="controller.ControllerConfig" project="WreckItRalph" 
+    file="/WreckItRalph/src/controller/ControllerConfig.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="233" x="1803" y="976"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="personajes.Chocable" project="WreckItRalph" 
-    file="/WreckItRalph/src/personajes/Chocable.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="687" y="1223"/>    
+  <class id="4" language="java" name="personajes.Ladrillo" project="WreckItRalph" 
+    file="/WreckItRalph/src/personajes/Ladrillo.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="107" x="2285" y="2344"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="personajes.Ralph" project="WreckItRalph" 
-    file="/WreckItRalph/src/personajes/Ralph.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="499" y="1232"/>    
+  <class id="5" language="java" name="controller.Controller" project="WreckItRalph" 
+    file="/WreckItRalph/src/controller/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="133" width="142" x="2046" y="803"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="controller.ControllerAgregar.MiKey" project="WreckItRalph" 
+    file="/WreckItRalph/src/controller/ControllerAgregar.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="156" x="1500" y="1221"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="utils.exceptions.NombreCorto" project="WreckItRalph" 
+    file="/WreckItRalph/src/utils/exceptions/NombreCorto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="132" x="909" y="803"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="view.ViewJuego" project="WreckItRalph" 
+    file="/WreckItRalph/src/view/ViewJuego.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="241" width="191" x="2789" y="1221"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="9" language="java" name="utils.Actualizable" project="WreckItRalph" 
+    file="/WreckItRalph/src/utils/Actualizable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="79" width="101" x="1803" y="3374"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="10" language="java" name="view.View" project="WreckItRalph" file="/WreckItRalph/src/view/View.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="115" width="124" x="3082" y="976"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="control.WreckItRalph" project="WreckItRalph" 
+    file="/WreckItRalph/src/control/WreckItRalph.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="313" width="170" x="2046" y="54"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -102,173 +102,1003 @@
   </class>  
   <class id="12" language="java" name="modelos.Nivel" project="WreckItRalph" file="/WreckItRalph/src/modelos/Nivel.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="149" y="981"/>    
+    <position height="313" width="142" x="1859" y="1919"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="utils.Posicion" project="WreckItRalph" 
+  <class id="13" language="java" name="utils.eventos.EventoOffScreen" project="WreckItRalph" 
+    file="/WreckItRalph/src/utils/eventos/EventoOffScreen.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="132" x="2574" y="803"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="test.HighscoreTest" project="WreckItRalph" 
+    file="/WreckItRalph/src/test/HighscoreTest.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="113" x="836" y="54"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="utils.eventos.EventoJuegoTerminado" project="WreckItRalph" 
+    file="/WreckItRalph/src/utils/eventos/EventoJuegoTerminado.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="115" width="178" x="2746" y="803"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="modelos.Ventana" project="WreckItRalph" 
+    file="/WreckItRalph/src/modelos/Ventana.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="457" width="206" x="1913" y="2877"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="controller.ControllerJuego" project="WreckItRalph" 
+    file="/WreckItRalph/src/controller/ControllerJuego.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="205" width="229" x="1170" y="976"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="view.ViewReglas" project="WreckItRalph" 
+    file="/WreckItRalph/src/view/ViewReglas.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="115" width="177" x="3041" y="1221"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="modelos.ModeloHighscore" project="WreckItRalph" 
+    file="/WreckItRalph/src/modelos/ModeloHighscore.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="169" width="177" x="1460" y="1502"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="utils.exceptions.NombreConEspacios" project="WreckItRalph" 
+    file="/WreckItRalph/src/utils/exceptions/NombreConEspacios.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="146" x="1081" y="803"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="utils.Posicion" project="WreckItRalph" 
     file="/WreckItRalph/src/utils/Posicion.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="445" y="1585"/>    
+    <position height="367" width="162" x="2062" y="2344"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="control.Highscore" project="WreckItRalph" 
-    file="/WreckItRalph/src/control/Highscore.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="589" y="497"/>    
+  <class id="22" language="java" name="modelos.Modelo" project="WreckItRalph" 
+    file="/WreckItRalph/src/modelos/Modelo.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="79" width="85" x="1763" y="1221"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="control.Jugador" project="WreckItRalph" 
+  <class id="23" language="java" name="personajes.Pajaro" project="WreckItRalph" 
+    file="/WreckItRalph/src/personajes/Pajaro.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="104" x="2432" y="2344"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="view.ViewConfig" project="WreckItRalph" 
+    file="/WreckItRalph/src/view/ViewConfig.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="205" width="187" x="3258" y="1221"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="controller.ControllerMenu.MiKeyAdapter" project="WreckItRalph" 
+    file="/WreckItRalph/src/controller/ControllerMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="156" x="2593" y="1221"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="controller.Controller.BackKeyListener" project="WreckItRalph" 
+    file="/WreckItRalph/src/controller/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="156" x="2076" y="976"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="utils.exceptions.BadInput" project="WreckItRalph" 
+    file="/WreckItRalph/src/utils/exceptions/BadInput.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="79" width="105" x="1267" y="54"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="control.Jugador" project="WreckItRalph" 
     file="/WreckItRalph/src/control/Jugador.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="767" y="896"/>    
+    <position height="259" width="142" x="1460" y="2344"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="16" language="java" name="utils.Actualizable" project="WreckItRalph" 
-    file="/WreckItRalph/src/utils/Actualizable.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="307" y="1938"/>    
+  <class id="29" language="java" name="controller.ControllerTop" project="WreckItRalph" 
+    file="/WreckItRalph/src/controller/ControllerTop.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="228" x="2272" y="976"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
-  </interface>  
-  <class id="17" language="java" name="utils.Utils" project="WreckItRalph" file="/WreckItRalph/src/utils/Utils.java" 
+  </class>  
+  <class id="30" language="java" name="utils.eventos.EventoNivelGanado" project="WreckItRalph" 
+    file="/WreckItRalph/src/utils/eventos/EventoNivelGanado.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="137" x="2964" y="803"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="view.ViewMenu" project="WreckItRalph" file="/WreckItRalph/src/view/ViewMenu.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="202" y="198"/>    
+    <position height="367" width="278" x="3001" y="1502"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="18">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="19" name="tipo">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="20" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="21">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="22" name="nivel">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="23" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="24">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="25" name="pos">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="26" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="27">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="28" name="jugadores">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="29" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <nesting id="30">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="8"/>  
+  <class id="32" language="java" name="utils.eventos.EventoRalphSalta" project="WreckItRalph" 
+    file="/WreckItRalph/src/utils/eventos/EventoRalphSalta.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="153" x="3141" y="803"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="view.ViewAgregar" project="WreckItRalph" 
+    file="/WreckItRalph/src/view/ViewAgregar.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="223" width="187" x="2271" y="1221"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="controller.ControllerJuego.MiKeyListener" project="WreckItRalph" 
+    file="/WreckItRalph/src/controller/ControllerJuego.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="156" x="1170" y="1221"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="controller.ControllerReglas" project="WreckItRalph" 
+    file="/WreckItRalph/src/controller/ControllerReglas.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="237" x="2540" y="976"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="utils.exceptions.NombreYaExiste" project="WreckItRalph" 
+    file="/WreckItRalph/src/utils/exceptions/NombreYaExiste.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="132" x="1267" y="803"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="utils.eventos.Evento" project="WreckItRalph" 
+    file="/WreckItRalph/src/utils/eventos/Evento.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="133" width="114" x="3046" y="54"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="personajes.Chocable" project="WreckItRalph" 
+    file="/WreckItRalph/src/personajes/Chocable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="385" width="203" x="2536" y="1919"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="personajes.Ralph" project="WreckItRalph" 
+    file="/WreckItRalph/src/personajes/Ralph.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="205" width="157" x="2984" y="2344"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="utils.Loader" project="WreckItRalph" file="/WreckItRalph/src/utils/Loader.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="277" width="238" x="989" y="54"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="modelos.ModeloJuego" project="WreckItRalph" 
+    file="/WreckItRalph/src/modelos/ModeloJuego.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="367" width="191" x="2760" y="1502"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="42" language="java" name="personajes.Pastel" project="WreckItRalph" 
+    file="/WreckItRalph/src/personajes/Pastel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="115" width="102" x="2576" y="2344"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="43" language="java" name="view.Boton" project="WreckItRalph" file="/WreckItRalph/src/view/Boton.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="133" width="185" x="3001" y="1919"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="44" language="java" name="modelos.Seccion" project="WreckItRalph" 
+    file="/WreckItRalph/src/modelos/Seccion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="493" width="198" x="1803" y="2344"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="45" language="java" name="controller.ControllerAgregar" project="WreckItRalph" 
+    file="/WreckItRalph/src/controller/ControllerAgregar.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="151" width="282" x="1460" y="976"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="46" language="java" name="controller.ControllerMenu" project="WreckItRalph" 
+    file="/WreckItRalph/src/controller/ControllerMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="225" x="2817" y="976"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="47" language="java" name="personajes.Felix" project="WreckItRalph" 
+    file="/WreckItRalph/src/personajes/Felix.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="277" width="184" x="2760" y="2344"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="48" language="java" name="view.ViewTop" project="WreckItRalph" file="/WreckItRalph/src/view/ViewTop.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="169" width="186" x="3485" y="1221"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="49" language="java" name="utils.eventos.EventoJuegoGanado" project="WreckItRalph" 
+    file="/WreckItRalph/src/utils/eventos/EventoJuegoGanado.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="143" x="3334" y="803"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="50" language="java" name="utils.eventos.EventoSeccionGanada" project="WreckItRalph" 
+    file="/WreckItRalph/src/utils/eventos/EventoSeccionGanada.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="154" x="3517" y="803"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="51" language="java" name="view.MainWindow" project="WreckItRalph" 
+    file="/WreckItRalph/src/view/MainWindow.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="151" width="156" x="1459" y="54"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="52" language="java" name="control.Highscore" project="WreckItRalph" 
+    file="/WreckItRalph/src/control/Highscore.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="241" width="192" x="1460" y="1919"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="53" language="java" name="utils.Utils" project="WreckItRalph" file="/WreckItRalph/src/utils/Utils.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="709" width="246" x="1712" y="54"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="54" language="java" name="personajes.Chocable.REQ" project="WreckItRalph" 
+    file="/WreckItRalph/src/personajes/Chocable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="169" width="136" x="2760" y="2877"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <nesting id="55">    
+    <end type="SOURCE" refId="45"/>    
+    <end type="TARGET" refId="6"/>  
   </nesting>  
-  <generalization id="31">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="10"/>  
+  <generalization id="56">    
+    <end type="SOURCE" refId="46"/>    
+    <end type="TARGET" refId="5"/>  
   </generalization>  
-  <generalization id="32">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="10"/>  
-  </generalization>  
-  <association id="33">    
-    <bendpoint x="348" y="812"/>    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="34" name="ralph">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="35" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
+  <association id="57">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="58" name="modelo"/>      
+      <multiplicity id="59" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="60">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="61" name="wreckItRalph"/>      
+      <multiplicity id="62" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="11" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="36">    
-    <bendpoint x="256" y="812"/>    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="37" name="felix">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="38" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
+  <association id="63">    
+    <end type="SOURCE" refId="44" navigable="false">      
+      <attribute id="64" name="mapa"/>      
+      <multiplicity id="65" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
+    <end type="TARGET" refId="16" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="39">    
-    <bendpoint x="556" y="1474"/>    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="16"/>  
+  <association id="66">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="67" name="reglas"/>      
+      <multiplicity id="68" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="43" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="69">    
+    <end type="SOURCE" refId="47" navigable="false">      
+      <attribute id="70" name="FELIX_COME"/>      
+      <multiplicity id="71" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="72">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="2"/>  
+  </nesting>  
+  <association id="73">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="74" name="RALPH_DER2"/>      
+      <multiplicity id="75" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="76">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="77" name="RALPH"/>      
+      <multiplicity id="78" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="79">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <generalization id="80">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="38"/>  
+  </generalization>  
+  <generalization id="81">    
+    <bendpoint x="3010" y="1221"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <association id="82">    
+    <end type="SOURCE" refId="47" navigable="false">      
+      <attribute id="83" name="FELIX"/>      
+      <multiplicity id="84" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="85">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="86" name="highscore"/>      
+      <multiplicity id="87" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="52" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="88">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <generalization id="89">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <association id="90">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="91" name="PAJARO_DER2"/>      
+      <multiplicity id="92" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="93">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="37"/>  
+  </generalization>  
+  <generalization id="94">    
+    <end type="SOURCE" refId="50"/>    
+    <end type="TARGET" refId="37"/>  
+  </generalization>  
+  <association id="95">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="96" name="PAJARO_IZQ1"/>      
+      <multiplicity id="97" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="98">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="37"/>  
+  </generalization>  
+  <association id="99">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="100" name="LADRILLO1"/>      
+      <multiplicity id="101" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="102">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <association id="103">    
+    <bendpoint x="2543" y="803"/>    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="104" name="view"/>      
+      <multiplicity id="105" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="106">    
+    <end type="SOURCE" refId="42" navigable="false">      
+      <attribute id="107" name="PASTEL2"/>      
+      <multiplicity id="108" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="109">    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <association id="110">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="111" name="PAJARO_IZQ2"/>      
+      <multiplicity id="112" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="113">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="114" name="RALPH_DER1"/>      
+      <multiplicity id="115" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="116">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <association id="117">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="118" name="secciones"/>      
+      <multiplicity id="119" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="44" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="120">    
+    <bendpoint x="2031" y="1502"/>    
+    <bendpoint x="2031" y="1919"/>    
+    <bendpoint x="2031" y="2344"/>    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="121" name="mapas"/>      
+      <multiplicity id="122" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="123">    
+    <bendpoint x="1812" y="2877"/>    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="9"/>  
   </realization>  
-  <association id="40">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="41" name="dir">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="42" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
+  <association id="124">    
+    <end type="SOURCE" refId="41" navigable="false">      
+      <attribute id="125" name="instancia"/>      
+      <multiplicity id="126" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
+    <end type="TARGET" refId="41" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="43">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="44" name="mapa">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="45" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
+  <association id="127">    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="128" name="jugadores"/>      
+      <multiplicity id="129" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="130">    
+    <end type="SOURCE" refId="46"/>    
+    <end type="TARGET" refId="25"/>  
+  </nesting>  
+  <association id="131">    
+    <bendpoint x="1772" y="976"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="132" name="modelo"/>      
+      <multiplicity id="133" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="134">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="135" name="RALPH_SALTA2"/>      
+      <multiplicity id="136" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="137">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <association id="138">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="139" name="LADRILLO2"/>      
+      <multiplicity id="140" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="141">    
+    <end type="SOURCE" refId="47" navigable="false">      
+      <attribute id="142" name="FELIX_GOLPEADO"/>      
+      <multiplicity id="143" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="144">    
+    <bendpoint x="2254" y="2344"/>    
+    <bendpoint x="2254" y="2877"/>    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <association id="145">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="146" name="RALPH_IZQ1"/>      
+      <multiplicity id="147" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="148">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="149" name="items"/>      
+      <multiplicity id="150" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="43" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="151">    
+    <end type="SOURCE" refId="47" navigable="false">      
+      <attribute id="152" name="FELIX_MUERTO"/>      
+      <multiplicity id="153" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="154">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="155" name="controller"/>      
+      <multiplicity id="156" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="157">    
+    <end type="SOURCE" refId="45"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="158">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <association id="159">    
+    <end type="SOURCE" refId="42" navigable="false">      
+      <attribute id="160" name="PASTEL1"/>      
+      <multiplicity id="161" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="162">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="163" name="PAJARO_DER1"/>      
+      <multiplicity id="164" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="165">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="37"/>  
+  </generalization>  
+  <generalization id="166">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <association id="167">    
+    <end type="SOURCE" refId="47" navigable="false">      
+      <attribute id="168" name="FELIX_DER"/>      
+      <multiplicity id="169" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="170">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="171" name="tipo"/>      
+      <multiplicity id="172" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <realization id="173">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <association id="174">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="175" name="RALPH_SUBE2"/>      
+      <multiplicity id="176" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="177">    
+    <bendpoint x="1429" y="803"/>    
+    <bendpoint x="1429" y="976"/>    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="178" name="modelo"/>      
+      <multiplicity id="179" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="180">    
+    <bendpoint x="2769" y="1919"/>    
+    <end type="SOURCE" refId="41" navigable="false">      
+      <attribute id="181" name="felix"/>      
+      <multiplicity id="182" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="47" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="183">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="184" name="dir"/>      
+      <multiplicity id="185" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="186">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="187" name="view"/>      
+      <multiplicity id="188" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="189">    
+    <bendpoint x="2708" y="2344"/>    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="54"/>  
+  </nesting>  
+  <association id="190">    
+    <end type="SOURCE" refId="41" navigable="false">      
+      <attribute id="191" name="chocables"/>      
+      <multiplicity id="192" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="193">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="194" name="RALPH_SUBE1"/>      
+      <multiplicity id="195" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="196">    
+    <end type="SOURCE" refId="51" navigable="false">      
+      <attribute id="197" name="instancia"/>      
+      <multiplicity id="198" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="51" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="199">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="200" name="pos"/>      
+      <multiplicity id="201" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="202">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="203" name="config"/>      
+      <multiplicity id="204" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="43" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="205">    
+    <bendpoint x="2729" y="2344"/>    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="206" name="requests"/>      
+      <multiplicity id="207" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="208">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="34"/>  
+  </nesting>  
+  <association id="209">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="210" name="top"/>      
+      <multiplicity id="211" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="43" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="212">    
+    <end type="SOURCE" refId="47" navigable="false">      
+      <attribute id="213" name="FELIX_MARTILLA"/>      
+      <multiplicity id="214" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="215">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="216" name="RALPH_SALTA1"/>      
+      <multiplicity id="217" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="218">    
+    <end type="SOURCE" refId="48"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <association id="219">    
+    <bendpoint x="2881" y="1919"/>    
+    <end type="SOURCE" refId="41" navigable="false">      
+      <attribute id="220" name="ralph"/>      
+      <multiplicity id="221" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="39" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="222">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <generalization id="223">    
+    <end type="SOURCE" refId="42"/>    
+    <end type="TARGET" refId="38"/>  
+  </generalization>  
+  <association id="224">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="225" name="instancia"/>      
+      <multiplicity id="226" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="227">    
+    <bendpoint x="1469" y="1221"/>    
+    <end type="SOURCE" refId="45" navigable="false">      
+      <attribute id="228" name="modelo"/>      
+      <multiplicity id="229" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="230">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="231" name="viewMenu"/>      
+      <multiplicity id="232" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="233">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="26"/>  
+  </nesting>  
+  <association id="234">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="235" name="jugar"/>      
+      <multiplicity id="236" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="43" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="237">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="37"/>  
+  </generalization>  
+  <generalization id="238">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="38"/>  
+  </generalization>  
+  <generalization id="239">    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <association id="240">    
+    <end type="SOURCE" refId="45" navigable="false">      
+      <attribute id="241" name="view"/>      
+      <multiplicity id="242" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="243">    
+    <bendpoint x="1772" y="1502"/>    
+    <bendpoint x="1772" y="1919"/>    
+    <bendpoint x="1772" y="2344"/>    
+    <bendpoint x="1772" y="2877"/>    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <association id="244">    
+    <end type="SOURCE" refId="41" navigable="false">      
+      <attribute id="245" name="nivel"/>      
+      <multiplicity id="246" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="247">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="38"/>  
+  </generalization>  
+  <generalization id="248">    
+    <end type="SOURCE" refId="47"/>    
+    <end type="TARGET" refId="38"/>  
+  </generalization>  
+  <association id="249">    
+    <end type="SOURCE" refId="47" navigable="false">      
+      <attribute id="250" name="FELIX_IZQ"/>      
+      <multiplicity id="251" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="252">    
+    <end type="SOURCE" refId="49"/>    
+    <end type="TARGET" refId="37"/>  
+  </generalization>  
+  <generalization id="253">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="22"/>  
+  </generalization>  
+  <association id="254">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="255" name="RALPH_IZQ2"/>      
+      <multiplicity id="256" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="257">    
+    <end type="SOURCE" refId="41"/>    
+    <end type="TARGET" refId="22"/>  
+  </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

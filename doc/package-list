@@ -1,3 +1,9 @@
-ambiente
-juego
+control
+controller
+modelos
 personajes
+test
+utils
+utils.eventos
+utils.exceptions
+view

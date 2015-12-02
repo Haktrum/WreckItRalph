@@ -108,7 +108,7 @@ public class Felix extends Chocable {
 	/**
 	 * Verifica el choque de dos elementos
 	 * 
-	 * @param felix
+	 * @param c
 	 *            objeto a chocar
 	 */
 	public void chequearChoque(Chocable c) throws EventoOffScreen {

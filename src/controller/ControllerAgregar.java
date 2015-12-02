@@ -29,7 +29,7 @@ public class ControllerAgregar extends Controller{
 	public void addListeners() {
 		view.getInput().addKeyListener(new MiKey());
 	}
-	/** Valida y env&iaacute; el nombre del jugador al apretar ENTER*/
+	/** Valida y env&iacute; el nombre del jugador al apretar ENTER*/
 	private class MiKey extends KeyAdapter{
 		
 		@Override

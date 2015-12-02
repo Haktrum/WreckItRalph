@@ -127,7 +127,7 @@ public class Utils {
 	}
 	/**
 	 * Devuele la url de una ventana semicircular rota
-	 * @param i numero de paneles rotos
+	 * @param roto numero de paneles rotos
 	 * @return url
 	 */
 	public static String urlSemicirc(int roto) {
